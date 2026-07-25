@@ -1,0 +1,4 @@
+﻿src\modules\knowledge-builder\knowledge-builder.events.ts
+src\modules\knowledge-builder\knowledge-builder.types.ts
+src\modules\knowledge-builder\knowledge-builder.service.ts
+src\modules\knowledge-builder\knowledge-builder.detector.ts

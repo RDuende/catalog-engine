@@ -1,0 +1,11 @@
+﻿{
+    "release":  "0.2.2-a",
+    "installedAt":  "2026-07-25T19:45:07.0528487+02:00",
+    "created":  [
+
+                ],
+    "replaced":  [
+                     "src\\modules\\recommendation-engine",
+                     "src\\server.ts"
+                 ]
+}

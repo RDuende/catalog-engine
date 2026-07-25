@@ -1,0 +1,38 @@
+﻿[
+    {
+        "Path":  "src\\modules\\knowledge-builder\\index.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\modules\\knowledge-builder\\knowledge-builder.detector.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\modules\\knowledge-builder\\knowledge-builder.events.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\modules\\knowledge-builder\\knowledge-builder.jobs.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\modules\\knowledge-builder\\knowledge-builder.rules.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\modules\\knowledge-builder\\knowledge-builder.service.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\modules\\knowledge-builder\\knowledge-builder.types.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "src\\scripts\\build-knowledge.ts",
+        "Existed":  false
+    },
+    {
+        "Path":  "package.json",
+        "Existed":  true
+    }
+]

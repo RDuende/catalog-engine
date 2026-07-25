@@ -1,4 +1,43 @@
-﻿node_modules/
+# Node
+node_modules/
+
+# Build
+dist/
+build/
+coverage/
+reports/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.*
+
+!.env.example
+
+# Prisma
+prisma/dev.db
+prisma/*.db
+prisma/*.db-journal
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+temp/
+
+# Generated
+*.tsbuildinfo
+node_modules/
 dist/
 .env
 .env.*

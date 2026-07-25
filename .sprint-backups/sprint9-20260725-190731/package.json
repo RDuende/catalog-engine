@@ -1,8 +1,8 @@
 {
   "name": "catalog-engine",
-  "version": "0.9.0",
+  "version": "0.8.0",
   "private": true,
-  "description": "Motor de catÃƒÂ¡logo y recomendaciones de La Colorida",
+  "description": "Motor de catÃ¡logo y recomendaciones de La Colorida",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -20,17 +20,7 @@
     "knowledge:products": "tsx src/scripts/seed-education-products.ts",
     "knowledge:import": "tsx src/scripts/import-knowledge.ts",
     "knowledge:setup": "npm run knowledge:products && npm run knowledge:import",
-    "import:sample": "tsx src/scripts/import-sample.ts",
-    "knowledge:build": "tsx src/scripts/build-knowledge.ts",
-    "catalog:analyze": "tsx src/cli/analyze-catalog.ts",
-    "test:analyzer": "tsx --test src/modules/catalog-analyzer/*.test.ts",
-    "catalog:blocks": "tsx src/cli/detect-blocks.ts",
-    "test:block-detector": "tsx --test src/modules/block-detector/*.test.ts",
-    "catalog:interpret": "tsx src/cli/interpret-catalog.ts",
-    "test:pattern-engine": "tsx --test src/modules/pattern-engine/*.test.ts",
-    "test:ast-builder": "tsx --test src/modules/ast-builder/*.test.ts",
-    "test:interpreter": "tsx --test src/modules/catalog-interpreter/*.test.ts",
-    "test:catalog-intelligence": "npm run test:block-detector && npm run test:pattern-engine && npm run test:ast-builder && npm run test:interpreter"
+    "import:sample": "tsx src/scripts/import-sample.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",

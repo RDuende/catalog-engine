@@ -1,5 +1,4 @@
-﻿import { catalogStudioRoutes } from "./modules/catalog-studio/index.js";
-import "dotenv/config";
+﻿import "dotenv/config";
 import { buildApp } from "./app.js";
 import { env } from "./config/env.js";
 import { prisma } from "./lib/prisma.js";
@@ -11,10 +10,6 @@ async function start() {
   try {
     await prisma.$connect();
 await app.register(recommendationRoutes, { prefix: "/api/v1" });
-
-
-    await app.register(catalogStudioRoutes);
-
 
 
     await app.listen({
@@ -44,5 +39,4 @@ process.on("SIGINT", () => void shutdown("SIGINT"));
 process.on("SIGTERM", () => void shutdown("SIGTERM"));
 
 void start();
-
 
