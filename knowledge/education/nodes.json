@@ -1,0 +1,834 @@
+[
+  {
+    "id": "profesor",
+    "type": "AUDIENCE",
+    "name": "Profesor",
+    "slug": "profesor",
+    "description": "Concepto del dominio educación y regalos: Profesor.",
+    "priority": 70
+  },
+  {
+    "id": "profesora-infantil",
+    "type": "AUDIENCE",
+    "name": "Profesora de infantil",
+    "slug": "profesora-infantil",
+    "description": "Concepto del dominio educación y regalos: Profesora de infantil.",
+    "priority": 70
+  },
+  {
+    "id": "profesor-primaria",
+    "type": "AUDIENCE",
+    "name": "Profesor de primaria",
+    "slug": "profesor-primaria",
+    "description": "Concepto del dominio educación y regalos: Profesor de primaria.",
+    "priority": 70
+  },
+  {
+    "id": "profesor-secundaria",
+    "type": "AUDIENCE",
+    "name": "Profesor de secundaria",
+    "slug": "profesor-secundaria",
+    "description": "Concepto del dominio educación y regalos: Profesor de secundaria.",
+    "priority": 70
+  },
+  {
+    "id": "tutor",
+    "type": "AUDIENCE",
+    "name": "Tutor",
+    "slug": "tutor",
+    "description": "Concepto del dominio educación y regalos: Tutor.",
+    "priority": 70
+  },
+  {
+    "id": "directora",
+    "type": "AUDIENCE",
+    "name": "Directora",
+    "slug": "directora",
+    "description": "Concepto del dominio educación y regalos: Directora.",
+    "priority": 70
+  },
+  {
+    "id": "entrenador",
+    "type": "AUDIENCE",
+    "name": "Entrenador",
+    "slug": "entrenador",
+    "description": "Concepto del dominio educación y regalos: Entrenador.",
+    "priority": 70
+  },
+  {
+    "id": "monitor",
+    "type": "AUDIENCE",
+    "name": "Monitor",
+    "slug": "monitor",
+    "description": "Concepto del dominio educación y regalos: Monitor.",
+    "priority": 70
+  },
+  {
+    "id": "alumno",
+    "type": "AUDIENCE",
+    "name": "Alumno",
+    "slug": "alumno",
+    "description": "Concepto del dominio educación y regalos: Alumno.",
+    "priority": 70
+  },
+  {
+    "id": "clase",
+    "type": "AUDIENCE",
+    "name": "Clase",
+    "slug": "clase",
+    "description": "Concepto del dominio educación y regalos: Clase.",
+    "priority": 70
+  },
+  {
+    "id": "ampa",
+    "type": "AUDIENCE",
+    "name": "AMPA",
+    "slug": "ampa",
+    "description": "Concepto del dominio educación y regalos: AMPA.",
+    "priority": 70
+  },
+  {
+    "id": "familia-alumnos",
+    "type": "AUDIENCE",
+    "name": "Familias del alumnado",
+    "slug": "familia-alumnos",
+    "description": "Concepto del dominio educación y regalos: Familias del alumnado.",
+    "priority": 70
+  },
+  {
+    "id": "equipo-docente",
+    "type": "AUDIENCE",
+    "name": "Equipo docente",
+    "slug": "equipo-docente",
+    "description": "Concepto del dominio educación y regalos: Equipo docente.",
+    "priority": 70
+  },
+  {
+    "id": "compañero-trabajo",
+    "type": "AUDIENCE",
+    "name": "Compañero de trabajo",
+    "slug": "compañero-trabajo",
+    "description": "Concepto del dominio educación y regalos: Compañero de trabajo.",
+    "priority": 70
+  },
+  {
+    "id": "grupo-amigos",
+    "type": "AUDIENCE",
+    "name": "Grupo de amigos",
+    "slug": "grupo-amigos",
+    "description": "Concepto del dominio educación y regalos: Grupo de amigos.",
+    "priority": 70
+  },
+  {
+    "id": "fin-de-curso",
+    "type": "OCCASION",
+    "name": "Fin de curso",
+    "slug": "fin-de-curso",
+    "description": "Concepto del dominio educación y regalos: Fin de curso.",
+    "priority": 70
+  },
+  {
+    "id": "jubilacion",
+    "type": "OCCASION",
+    "name": "Jubilación",
+    "slug": "jubilacion",
+    "description": "Concepto del dominio educación y regalos: Jubilación.",
+    "priority": 70
+  },
+  {
+    "id": "graduacion",
+    "type": "OCCASION",
+    "name": "Graduación",
+    "slug": "graduacion",
+    "description": "Concepto del dominio educación y regalos: Graduación.",
+    "priority": 70
+  },
+  {
+    "id": "cumpleanos",
+    "type": "OCCASION",
+    "name": "Cumpleaños",
+    "slug": "cumpleanos",
+    "description": "Concepto del dominio educación y regalos: Cumpleaños.",
+    "priority": 70
+  },
+  {
+    "id": "despedida",
+    "type": "OCCASION",
+    "name": "Despedida",
+    "slug": "despedida",
+    "description": "Concepto del dominio educación y regalos: Despedida.",
+    "priority": 70
+  },
+  {
+    "id": "agradecimiento",
+    "type": "OCCASION",
+    "name": "Agradecimiento",
+    "slug": "agradecimiento",
+    "description": "Concepto del dominio educación y regalos: Agradecimiento.",
+    "priority": 70
+  },
+  {
+    "id": "fin-de-temporada",
+    "type": "OCCASION",
+    "name": "Fin de temporada",
+    "slug": "fin-de-temporada",
+    "description": "Concepto del dominio educación y regalos: Fin de temporada.",
+    "priority": 70
+  },
+  {
+    "id": "aniversario-docente",
+    "type": "OCCASION",
+    "name": "Aniversario docente",
+    "slug": "aniversario-docente",
+    "description": "Concepto del dominio educación y regalos: Aniversario docente.",
+    "priority": 70
+  },
+  {
+    "id": "navidad",
+    "type": "OCCASION",
+    "name": "Navidad",
+    "slug": "navidad",
+    "description": "Concepto del dominio educación y regalos: Navidad.",
+    "priority": 70
+  },
+  {
+    "id": "dia-del-maestro",
+    "type": "OCCASION",
+    "name": "Día del maestro",
+    "slug": "dia-del-maestro",
+    "description": "Concepto del dominio educación y regalos: Día del maestro.",
+    "priority": 70
+  },
+  {
+    "id": "gratitud",
+    "type": "CONCEPT",
+    "name": "Gratitud",
+    "slug": "gratitud",
+    "description": "Concepto del dominio educación y regalos: Gratitud.",
+    "priority": 70
+  },
+  {
+    "id": "recuerdo",
+    "type": "CONCEPT",
+    "name": "Recuerdo",
+    "slug": "recuerdo",
+    "description": "Concepto del dominio educación y regalos: Recuerdo.",
+    "priority": 70
+  },
+  {
+    "id": "orgullo",
+    "type": "CONCEPT",
+    "name": "Orgullo",
+    "slug": "orgullo",
+    "description": "Concepto del dominio educación y regalos: Orgullo.",
+    "priority": 70
+  },
+  {
+    "id": "carino",
+    "type": "CONCEPT",
+    "name": "Cariño",
+    "slug": "carino",
+    "description": "Concepto del dominio educación y regalos: Cariño.",
+    "priority": 70
+  },
+  {
+    "id": "admiracion",
+    "type": "CONCEPT",
+    "name": "Admiración",
+    "slug": "admiracion",
+    "description": "Concepto del dominio educación y regalos: Admiración.",
+    "priority": 70
+  },
+  {
+    "id": "trabajo-en-equipo",
+    "type": "CONCEPT",
+    "name": "Trabajo en equipo",
+    "slug": "trabajo-en-equipo",
+    "description": "Concepto del dominio educación y regalos: Trabajo en equipo.",
+    "priority": 70
+  },
+  {
+    "id": "participacion-grupal",
+    "type": "CONCEPT",
+    "name": "Participación grupal",
+    "slug": "participacion-grupal",
+    "description": "Concepto del dominio educación y regalos: Participación grupal.",
+    "priority": 70
+  },
+  {
+    "id": "foto-de-grupo",
+    "type": "CONCEPT",
+    "name": "Foto de grupo",
+    "slug": "foto-de-grupo",
+    "description": "Concepto del dominio educación y regalos: Foto de grupo.",
+    "priority": 70
+  },
+  {
+    "id": "firmas",
+    "type": "CONCEPT",
+    "name": "Firmas",
+    "slug": "firmas",
+    "description": "Concepto del dominio educación y regalos: Firmas.",
+    "priority": 70
+  },
+  {
+    "id": "dedicatoria",
+    "type": "CONCEPT",
+    "name": "Dedicatoria",
+    "slug": "dedicatoria",
+    "description": "Concepto del dominio educación y regalos: Dedicatoria.",
+    "priority": 70
+  },
+  {
+    "id": "mensaje-personal",
+    "type": "CONCEPT",
+    "name": "Mensaje personal",
+    "slug": "mensaje-personal",
+    "description": "Concepto del dominio educación y regalos: Mensaje personal.",
+    "priority": 70
+  },
+  {
+    "id": "nombres-alumnos",
+    "type": "CONCEPT",
+    "name": "Nombres del alumnado",
+    "slug": "nombres-alumnos",
+    "description": "Concepto del dominio educación y regalos: Nombres del alumnado.",
+    "priority": 70
+  },
+  {
+    "id": "curso-escolar",
+    "type": "CONCEPT",
+    "name": "Curso escolar",
+    "slug": "curso-escolar",
+    "description": "Concepto del dominio educación y regalos: Curso escolar.",
+    "priority": 70
+  },
+  {
+    "id": "centro-educativo",
+    "type": "CONCEPT",
+    "name": "Centro educativo",
+    "slug": "centro-educativo",
+    "description": "Concepto del dominio educación y regalos: Centro educativo.",
+    "priority": 70
+  },
+  {
+    "id": "colegio",
+    "type": "CONCEPT",
+    "name": "Colegio",
+    "slug": "colegio",
+    "description": "Concepto del dominio educación y regalos: Colegio.",
+    "priority": 70
+  },
+  {
+    "id": "instituto",
+    "type": "CONCEPT",
+    "name": "Instituto",
+    "slug": "instituto",
+    "description": "Concepto del dominio educación y regalos: Instituto.",
+    "priority": 70
+  },
+  {
+    "id": "academia",
+    "type": "CONCEPT",
+    "name": "Academia",
+    "slug": "academia",
+    "description": "Concepto del dominio educación y regalos: Academia.",
+    "priority": 70
+  },
+  {
+    "id": "guarderia",
+    "type": "CONCEPT",
+    "name": "Guardería",
+    "slug": "guarderia",
+    "description": "Concepto del dominio educación y regalos: Guardería.",
+    "priority": 70
+  },
+  {
+    "id": "campamento",
+    "type": "CONCEPT",
+    "name": "Campamento",
+    "slug": "campamento",
+    "description": "Concepto del dominio educación y regalos: Campamento.",
+    "priority": 70
+  },
+  {
+    "id": "club-deportivo",
+    "type": "CONCEPT",
+    "name": "Club deportivo",
+    "slug": "club-deportivo",
+    "description": "Concepto del dominio educación y regalos: Club deportivo.",
+    "priority": 70
+  },
+  {
+    "id": "reconocimiento",
+    "type": "CONCEPT",
+    "name": "Reconocimiento",
+    "slug": "reconocimiento",
+    "description": "Concepto del dominio educación y regalos: Reconocimiento.",
+    "priority": 70
+  },
+  {
+    "id": "memoria-compartida",
+    "type": "CONCEPT",
+    "name": "Memoria compartida",
+    "slug": "memoria-compartida",
+    "description": "Concepto del dominio educación y regalos: Memoria compartida.",
+    "priority": 70
+  },
+  {
+    "id": "utilidad-diaria",
+    "type": "CONCEPT",
+    "name": "Utilidad diaria",
+    "slug": "utilidad-diaria",
+    "description": "Concepto del dominio educación y regalos: Utilidad diaria.",
+    "priority": 70
+  },
+  {
+    "id": "decoracion-emocional",
+    "type": "CONCEPT",
+    "name": "Decoración emocional",
+    "slug": "decoracion-emocional",
+    "description": "Concepto del dominio educación y regalos: Decoración emocional.",
+    "priority": 70
+  },
+  {
+    "id": "presentacion-elegante",
+    "type": "CONCEPT",
+    "name": "Presentación elegante",
+    "slug": "presentacion-elegante",
+    "description": "Concepto del dominio educación y regalos: Presentación elegante.",
+    "priority": 70
+  },
+  {
+    "id": "hacer-un-regalo",
+    "type": "NEED",
+    "name": "Hacer un regalo",
+    "slug": "hacer-un-regalo",
+    "description": "Concepto del dominio educación y regalos: Hacer un regalo.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-para-profesor",
+    "type": "NEED",
+    "name": "Regalo para profesor",
+    "slug": "regalo-para-profesor",
+    "description": "Concepto del dominio educación y regalos: Regalo para profesor.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-de-clase",
+    "type": "NEED",
+    "name": "Regalo de clase",
+    "slug": "regalo-de-clase",
+    "description": "Concepto del dominio educación y regalos: Regalo de clase.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-de-jubilacion",
+    "type": "NEED",
+    "name": "Regalo de jubilación",
+    "slug": "regalo-de-jubilacion",
+    "description": "Concepto del dominio educación y regalos: Regalo de jubilación.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-fin-de-curso",
+    "type": "NEED",
+    "name": "Regalo de fin de curso",
+    "slug": "regalo-fin-de-curso",
+    "description": "Concepto del dominio educación y regalos: Regalo de fin de curso.",
+    "priority": 70
+  },
+  {
+    "id": "detalle-economico",
+    "type": "NEED",
+    "name": "Detalle económico",
+    "slug": "detalle-economico",
+    "description": "Concepto del dominio educación y regalos: Detalle económico.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-premium",
+    "type": "NEED",
+    "name": "Regalo premium",
+    "slug": "regalo-premium",
+    "description": "Concepto del dominio educación y regalos: Regalo premium.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-urgente",
+    "type": "NEED",
+    "name": "Regalo urgente",
+    "slug": "regalo-urgente",
+    "description": "Concepto del dominio educación y regalos: Regalo urgente.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-con-fotos",
+    "type": "NEED",
+    "name": "Regalo con fotos",
+    "slug": "regalo-con-fotos",
+    "description": "Concepto del dominio educación y regalos: Regalo con fotos.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-con-firmas",
+    "type": "NEED",
+    "name": "Regalo con firmas",
+    "slug": "regalo-con-firmas",
+    "description": "Concepto del dominio educación y regalos: Regalo con firmas.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-colaborativo",
+    "type": "SOLUTION",
+    "name": "Regalo colaborativo",
+    "slug": "regalo-colaborativo",
+    "description": "Concepto del dominio educación y regalos: Regalo colaborativo.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-individual",
+    "type": "SOLUTION",
+    "name": "Regalo individual",
+    "slug": "regalo-individual",
+    "description": "Concepto del dominio educación y regalos: Regalo individual.",
+    "priority": 70
+  },
+  {
+    "id": "recuerdo-personalizado",
+    "type": "SOLUTION",
+    "name": "Recuerdo personalizado",
+    "slug": "recuerdo-personalizado",
+    "description": "Concepto del dominio educación y regalos: Recuerdo personalizado.",
+    "priority": 70
+  },
+  {
+    "id": "homenaje-personalizado",
+    "type": "SOLUTION",
+    "name": "Homenaje personalizado",
+    "slug": "homenaje-personalizado",
+    "description": "Concepto del dominio educación y regalos: Homenaje personalizado.",
+    "priority": 70
+  },
+  {
+    "id": "detalle-util",
+    "type": "SOLUTION",
+    "name": "Detalle útil",
+    "slug": "detalle-util",
+    "description": "Concepto del dominio educación y regalos: Detalle útil.",
+    "priority": 70
+  },
+  {
+    "id": "detalle-decorativo",
+    "type": "SOLUTION",
+    "name": "Detalle decorativo",
+    "slug": "detalle-decorativo",
+    "description": "Concepto del dominio educación y regalos: Detalle decorativo.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-fotografico",
+    "type": "SOLUTION",
+    "name": "Regalo fotográfico",
+    "slug": "regalo-fotografico",
+    "description": "Concepto del dominio educación y regalos: Regalo fotográfico.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-con-dedicatoria",
+    "type": "SOLUTION",
+    "name": "Regalo con dedicatoria",
+    "slug": "regalo-con-dedicatoria",
+    "description": "Concepto del dominio educación y regalos: Regalo con dedicatoria.",
+    "priority": 70
+  },
+  {
+    "id": "pack-recuerdo",
+    "type": "SOLUTION",
+    "name": "Pack recuerdo",
+    "slug": "pack-recuerdo",
+    "description": "Concepto del dominio educación y regalos: Pack recuerdo.",
+    "priority": 70
+  },
+  {
+    "id": "regalo-de-equipo",
+    "type": "SOLUTION",
+    "name": "Regalo de equipo",
+    "slug": "regalo-de-equipo",
+    "description": "Concepto del dominio educación y regalos: Regalo de equipo.",
+    "priority": 70
+  },
+  {
+    "id": "recopilar-fotos",
+    "type": "SOLUTION_STEP",
+    "name": "Recopilar fotografías",
+    "slug": "recopilar-fotos",
+    "description": "Concepto del dominio educación y regalos: Recopilar fotografías.",
+    "priority": 70
+  },
+  {
+    "id": "recopilar-firmas",
+    "type": "SOLUTION_STEP",
+    "name": "Recopilar firmas",
+    "slug": "recopilar-firmas",
+    "description": "Concepto del dominio educación y regalos: Recopilar firmas.",
+    "priority": 70
+  },
+  {
+    "id": "elegir-dedicatoria",
+    "type": "SOLUTION_STEP",
+    "name": "Elegir dedicatoria",
+    "slug": "elegir-dedicatoria",
+    "description": "Concepto del dominio educación y regalos: Elegir dedicatoria.",
+    "priority": 70
+  },
+  {
+    "id": "definir-presupuesto",
+    "type": "SOLUTION_STEP",
+    "name": "Definir presupuesto",
+    "slug": "definir-presupuesto",
+    "description": "Concepto del dominio educación y regalos: Definir presupuesto.",
+    "priority": 70
+  },
+  {
+    "id": "seleccionar-formato",
+    "type": "SOLUTION_STEP",
+    "name": "Seleccionar formato",
+    "slug": "seleccionar-formato",
+    "description": "Concepto del dominio educación y regalos: Seleccionar formato.",
+    "priority": 70
+  },
+  {
+    "id": "revisar-nombres",
+    "type": "SOLUTION_STEP",
+    "name": "Revisar nombres",
+    "slug": "revisar-nombres",
+    "description": "Concepto del dominio educación y regalos: Revisar nombres.",
+    "priority": 70
+  },
+  {
+    "id": "aprobar-diseno",
+    "type": "SOLUTION_STEP",
+    "name": "Aprobar diseño",
+    "slug": "aprobar-diseno",
+    "description": "Concepto del dominio educación y regalos: Aprobar diseño.",
+    "priority": 70
+  },
+  {
+    "id": "preparar-entrega",
+    "type": "SOLUTION_STEP",
+    "name": "Preparar entrega",
+    "slug": "preparar-entrega",
+    "description": "Concepto del dominio educación y regalos: Preparar entrega.",
+    "priority": 70
+  },
+  {
+    "id": "emocionar",
+    "type": "OBJECTIVE",
+    "name": "Emocionar",
+    "slug": "emocionar",
+    "description": "Concepto del dominio educación y regalos: Emocionar.",
+    "priority": 70
+  },
+  {
+    "id": "agradecer",
+    "type": "OBJECTIVE",
+    "name": "Agradecer",
+    "slug": "agradecer",
+    "description": "Concepto del dominio educación y regalos: Agradecer.",
+    "priority": 70
+  },
+  {
+    "id": "sorprender",
+    "type": "OBJECTIVE",
+    "name": "Sorprender",
+    "slug": "sorprender",
+    "description": "Concepto del dominio educación y regalos: Sorprender.",
+    "priority": 70
+  },
+  {
+    "id": "conservar-recuerdo",
+    "type": "OBJECTIVE",
+    "name": "Conservar un recuerdo",
+    "slug": "conservar-recuerdo",
+    "description": "Concepto del dominio educación y regalos: Conservar un recuerdo.",
+    "priority": 70
+  },
+  {
+    "id": "representar-al-grupo",
+    "type": "OBJECTIVE",
+    "name": "Representar al grupo",
+    "slug": "representar-al-grupo",
+    "description": "Concepto del dominio educación y regalos: Representar al grupo.",
+    "priority": 70
+  },
+  {
+    "id": "decorar-espacio",
+    "type": "OBJECTIVE",
+    "name": "Decorar un espacio",
+    "slug": "decorar-espacio",
+    "description": "Concepto del dominio educación y regalos: Decorar un espacio.",
+    "priority": 70
+  },
+  {
+    "id": "usar-a-diario",
+    "type": "OBJECTIVE",
+    "name": "Usar a diario",
+    "slug": "usar-a-diario",
+    "description": "Concepto del dominio educación y regalos: Usar a diario.",
+    "priority": 70
+  },
+  {
+    "id": "reconocer-trayectoria",
+    "type": "OBJECTIVE",
+    "name": "Reconocer una trayectoria",
+    "slug": "reconocer-trayectoria",
+    "description": "Concepto del dominio educación y regalos: Reconocer una trayectoria.",
+    "priority": 70
+  },
+  {
+    "id": "elegante",
+    "type": "STYLE",
+    "name": "Elegante",
+    "slug": "elegante",
+    "description": "Concepto del dominio educación y regalos: Elegante.",
+    "priority": 70
+  },
+  {
+    "id": "divertido",
+    "type": "STYLE",
+    "name": "Divertido",
+    "slug": "divertido",
+    "description": "Concepto del dominio educación y regalos: Divertido.",
+    "priority": 70
+  },
+  {
+    "id": "infantil",
+    "type": "STYLE",
+    "name": "Infantil",
+    "slug": "infantil",
+    "description": "Concepto del dominio educación y regalos: Infantil.",
+    "priority": 70
+  },
+  {
+    "id": "minimalista",
+    "type": "STYLE",
+    "name": "Minimalista",
+    "slug": "minimalista",
+    "description": "Concepto del dominio educación y regalos: Minimalista.",
+    "priority": 70
+  },
+  {
+    "id": "colorido",
+    "type": "STYLE",
+    "name": "Colorido",
+    "slug": "colorido",
+    "description": "Concepto del dominio educación y regalos: Colorido.",
+    "priority": 70
+  },
+  {
+    "id": "emocional",
+    "type": "STYLE",
+    "name": "Emocional",
+    "slug": "emocional",
+    "description": "Concepto del dominio educación y regalos: Emocional.",
+    "priority": 70
+  },
+  {
+    "id": "corporativo",
+    "type": "STYLE",
+    "name": "Corporativo",
+    "slug": "corporativo",
+    "description": "Concepto del dominio educación y regalos: Corporativo.",
+    "priority": 70
+  },
+  {
+    "id": "lienzo",
+    "type": "MATERIAL",
+    "name": "Lienzo",
+    "slug": "lienzo",
+    "description": "Concepto del dominio educación y regalos: Lienzo.",
+    "priority": 70
+  },
+  {
+    "id": "metacrilato",
+    "type": "MATERIAL",
+    "name": "Metacrilato",
+    "slug": "metacrilato",
+    "description": "Concepto del dominio educación y regalos: Metacrilato.",
+    "priority": 70
+  },
+  {
+    "id": "madera",
+    "type": "MATERIAL",
+    "name": "Madera",
+    "slug": "madera",
+    "description": "Concepto del dominio educación y regalos: Madera.",
+    "priority": 70
+  },
+  {
+    "id": "ceramica",
+    "type": "MATERIAL",
+    "name": "Cerámica",
+    "slug": "ceramica",
+    "description": "Concepto del dominio educación y regalos: Cerámica.",
+    "priority": 70
+  },
+  {
+    "id": "textil",
+    "type": "MATERIAL",
+    "name": "Textil",
+    "slug": "textil",
+    "description": "Concepto del dominio educación y regalos: Textil.",
+    "priority": 70
+  },
+  {
+    "id": "papel-fotografico",
+    "type": "MATERIAL",
+    "name": "Papel fotográfico",
+    "slug": "papel-fotografico",
+    "description": "Concepto del dominio educación y regalos: Papel fotográfico.",
+    "priority": 70
+  },
+  {
+    "id": "impresion-digital",
+    "type": "TECHNIQUE",
+    "name": "Impresión digital",
+    "slug": "impresion-digital",
+    "description": "Concepto del dominio educación y regalos: Impresión digital.",
+    "priority": 70
+  },
+  {
+    "id": "sublimacion",
+    "type": "TECHNIQUE",
+    "name": "Sublimación",
+    "slug": "sublimacion",
+    "description": "Concepto del dominio educación y regalos: Sublimación.",
+    "priority": 70
+  },
+  {
+    "id": "grabado-laser",
+    "type": "TECHNIQUE",
+    "name": "Grabado láser",
+    "slug": "grabado-laser",
+    "description": "Concepto del dominio educación y regalos: Grabado láser.",
+    "priority": 70
+  },
+  {
+    "id": "dtf",
+    "type": "TECHNIQUE",
+    "name": "DTF textil",
+    "slug": "dtf",
+    "description": "Concepto del dominio educación y regalos: DTF textil.",
+    "priority": 70
+  },
+  {
+    "id": "impresion-uv",
+    "type": "TECHNIQUE",
+    "name": "Impresión UV",
+    "slug": "impresion-uv",
+    "description": "Concepto del dominio educación y regalos: Impresión UV.",
+    "priority": 70
+  }
+]

@@ -1,0 +1,546 @@
+[
+  {
+    "node": "lienzo",
+    "sku": "LC-LIENZO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 30 × 40 cm encaja con \"Lienzo\"."
+  },
+  {
+    "node": "regalo-fotografico",
+    "sku": "LC-LIENZO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 30 × 40 cm encaja con \"Regalo fotográfico\"."
+  },
+  {
+    "node": "recuerdo-personalizado",
+    "sku": "LC-LIENZO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 30 × 40 cm encaja con \"Recuerdo personalizado\"."
+  },
+  {
+    "node": "regalo-colaborativo",
+    "sku": "LC-LIENZO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 30 × 40 cm encaja con \"Regalo colaborativo\"."
+  },
+  {
+    "node": "foto-de-grupo",
+    "sku": "LC-LIENZO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 30 × 40 cm encaja con \"Foto de grupo\"."
+  },
+  {
+    "node": "lienzo",
+    "sku": "LC-LIENZO-4060",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 40 × 60 cm encaja con \"Lienzo\"."
+  },
+  {
+    "node": "regalo-fotografico",
+    "sku": "LC-LIENZO-4060",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 40 × 60 cm encaja con \"Regalo fotográfico\"."
+  },
+  {
+    "node": "homenaje-personalizado",
+    "sku": "LC-LIENZO-4060",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 40 × 60 cm encaja con \"Homenaje personalizado\"."
+  },
+  {
+    "node": "regalo-de-jubilacion",
+    "sku": "LC-LIENZO-4060",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 40 × 60 cm encaja con \"Regalo de jubilación\"."
+  },
+  {
+    "node": "decorar-espacio",
+    "sku": "LC-LIENZO-4060",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Lienzo personalizado 40 × 60 cm encaja con \"Decorar un espacio\"."
+  },
+  {
+    "node": "metacrilato",
+    "sku": "LC-PLACA-META-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Placa de metacrilato personalizada A5 encaja con \"Metacrilato\"."
+  },
+  {
+    "node": "homenaje-personalizado",
+    "sku": "LC-PLACA-META-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Placa de metacrilato personalizada A5 encaja con \"Homenaje personalizado\"."
+  },
+  {
+    "node": "regalo-con-dedicatoria",
+    "sku": "LC-PLACA-META-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Placa de metacrilato personalizada A5 encaja con \"Regalo con dedicatoria\"."
+  },
+  {
+    "node": "presentacion-elegante",
+    "sku": "LC-PLACA-META-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Placa de metacrilato personalizada A5 encaja con \"Presentación elegante\"."
+  },
+  {
+    "node": "reconocer-trayectoria",
+    "sku": "LC-PLACA-META-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Placa de metacrilato personalizada A5 encaja con \"Reconocer una trayectoria\"."
+  },
+  {
+    "node": "madera",
+    "sku": "LC-PLACA-MADERA-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Placa de madera grabada A5 encaja con \"Madera\"."
+  },
+  {
+    "node": "homenaje-personalizado",
+    "sku": "LC-PLACA-MADERA-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Placa de madera grabada A5 encaja con \"Homenaje personalizado\"."
+  },
+  {
+    "node": "regalo-con-dedicatoria",
+    "sku": "LC-PLACA-MADERA-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Placa de madera grabada A5 encaja con \"Regalo con dedicatoria\"."
+  },
+  {
+    "node": "regalo-de-jubilacion",
+    "sku": "LC-PLACA-MADERA-A5",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Placa de madera grabada A5 encaja con \"Regalo de jubilación\"."
+  },
+  {
+    "node": "ceramica",
+    "sku": "LC-TAZA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Taza personalizada encaja con \"Cerámica\"."
+  },
+  {
+    "node": "detalle-util",
+    "sku": "LC-TAZA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Taza personalizada encaja con \"Detalle útil\"."
+  },
+  {
+    "node": "regalo-individual",
+    "sku": "LC-TAZA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Taza personalizada encaja con \"Regalo individual\"."
+  },
+  {
+    "node": "regalo-fin-de-curso",
+    "sku": "LC-TAZA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Taza personalizada encaja con \"Regalo de fin de curso\"."
+  },
+  {
+    "node": "cumpleanos",
+    "sku": "LC-TAZA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Taza personalizada encaja con \"Cumpleaños\"."
+  },
+  {
+    "node": "detalle-util",
+    "sku": "LC-BOTELLA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Botella personalizada encaja con \"Detalle útil\"."
+  },
+  {
+    "node": "regalo-individual",
+    "sku": "LC-BOTELLA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Botella personalizada encaja con \"Regalo individual\"."
+  },
+  {
+    "node": "fin-de-curso",
+    "sku": "LC-BOTELLA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Botella personalizada encaja con \"Fin de curso\"."
+  },
+  {
+    "node": "entrenador",
+    "sku": "LC-BOTELLA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Botella personalizada encaja con \"Entrenador\"."
+  },
+  {
+    "node": "monitor",
+    "sku": "LC-BOTELLA-PERS",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Botella personalizada encaja con \"Monitor\"."
+  },
+  {
+    "node": "papel-fotografico",
+    "sku": "LC-ALBUM-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Álbum fotográfico A4 encaja con \"Papel fotográfico\"."
+  },
+  {
+    "node": "regalo-fotografico",
+    "sku": "LC-ALBUM-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Álbum fotográfico A4 encaja con \"Regalo fotográfico\"."
+  },
+  {
+    "node": "memoria-compartida",
+    "sku": "LC-ALBUM-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Álbum fotográfico A4 encaja con \"Memoria compartida\"."
+  },
+  {
+    "node": "regalo-colaborativo",
+    "sku": "LC-ALBUM-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Álbum fotográfico A4 encaja con \"Regalo colaborativo\"."
+  },
+  {
+    "node": "recuerdo",
+    "sku": "LC-ALBUM-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Álbum fotográfico A4 encaja con \"Recuerdo\"."
+  },
+  {
+    "node": "papel-fotografico",
+    "sku": "LC-PUZZLE-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Puzzle fotográfico A4 encaja con \"Papel fotográfico\"."
+  },
+  {
+    "node": "divertido",
+    "sku": "LC-PUZZLE-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Puzzle fotográfico A4 encaja con \"Divertido\"."
+  },
+  {
+    "node": "regalo-individual",
+    "sku": "LC-PUZZLE-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Puzzle fotográfico A4 encaja con \"Regalo individual\"."
+  },
+  {
+    "node": "foto-de-grupo",
+    "sku": "LC-PUZZLE-A4",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Puzzle fotográfico A4 encaja con \"Foto de grupo\"."
+  },
+  {
+    "node": "madera",
+    "sku": "LC-MARCO-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Marco personalizado con fotografía encaja con \"Madera\"."
+  },
+  {
+    "node": "recuerdo-personalizado",
+    "sku": "LC-MARCO-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Marco personalizado con fotografía encaja con \"Recuerdo personalizado\"."
+  },
+  {
+    "node": "regalo-fotografico",
+    "sku": "LC-MARCO-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Marco personalizado con fotografía encaja con \"Regalo fotográfico\"."
+  },
+  {
+    "node": "detalle-decorativo",
+    "sku": "LC-MARCO-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Marco personalizado con fotografía encaja con \"Detalle decorativo\"."
+  },
+  {
+    "node": "papel-fotografico",
+    "sku": "LC-FOTO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Ampliación fotográfica 30 × 40 cm encaja con \"Papel fotográfico\"."
+  },
+  {
+    "node": "regalo-fotografico",
+    "sku": "LC-FOTO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Ampliación fotográfica 30 × 40 cm encaja con \"Regalo fotográfico\"."
+  },
+  {
+    "node": "foto-de-grupo",
+    "sku": "LC-FOTO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Ampliación fotográfica 30 × 40 cm encaja con \"Foto de grupo\"."
+  },
+  {
+    "node": "detalle-economico",
+    "sku": "LC-FOTO-3040",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Ampliación fotográfica 30 × 40 cm encaja con \"Detalle económico\"."
+  },
+  {
+    "node": "textil",
+    "sku": "LC-CAMISETA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Camiseta personalizada DTF encaja con \"Textil\"."
+  },
+  {
+    "node": "regalo-de-equipo",
+    "sku": "LC-CAMISETA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Camiseta personalizada DTF encaja con \"Regalo de equipo\"."
+  },
+  {
+    "node": "trabajo-en-equipo",
+    "sku": "LC-CAMISETA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Camiseta personalizada DTF encaja con \"Trabajo en equipo\"."
+  },
+  {
+    "node": "fin-de-temporada",
+    "sku": "LC-CAMISETA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Camiseta personalizada DTF encaja con \"Fin de temporada\"."
+  },
+  {
+    "node": "divertido",
+    "sku": "LC-CAMISETA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Camiseta personalizada DTF encaja con \"Divertido\"."
+  },
+  {
+    "node": "textil",
+    "sku": "LC-SUDADERA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Sudadera personalizada DTF encaja con \"Textil\"."
+  },
+  {
+    "node": "regalo-de-equipo",
+    "sku": "LC-SUDADERA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Sudadera personalizada DTF encaja con \"Regalo de equipo\"."
+  },
+  {
+    "node": "regalo-premium",
+    "sku": "LC-SUDADERA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Sudadera personalizada DTF encaja con \"Regalo premium\"."
+  },
+  {
+    "node": "fin-de-temporada",
+    "sku": "LC-SUDADERA-DTF",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Sudadera personalizada DTF encaja con \"Fin de temporada\"."
+  },
+  {
+    "node": "textil",
+    "sku": "LC-COJIN-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Cojín personalizado con fotografía encaja con \"Textil\"."
+  },
+  {
+    "node": "recuerdo-personalizado",
+    "sku": "LC-COJIN-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Cojín personalizado con fotografía encaja con \"Recuerdo personalizado\"."
+  },
+  {
+    "node": "detalle-decorativo",
+    "sku": "LC-COJIN-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Cojín personalizado con fotografía encaja con \"Detalle decorativo\"."
+  },
+  {
+    "node": "carino",
+    "sku": "LC-COJIN-FOTO",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Cojín personalizado con fotografía encaja con \"Cariño\"."
+  },
+  {
+    "node": "metacrilato",
+    "sku": "LC-LLAVERO-META",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Llavero de metacrilato personalizado encaja con \"Metacrilato\"."
+  },
+  {
+    "node": "detalle-economico",
+    "sku": "LC-LLAVERO-META",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Llavero de metacrilato personalizado encaja con \"Detalle económico\"."
+  },
+  {
+    "node": "regalo-individual",
+    "sku": "LC-LLAVERO-META",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Llavero de metacrilato personalizado encaja con \"Regalo individual\"."
+  },
+  {
+    "node": "fin-de-curso",
+    "sku": "LC-LLAVERO-META",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Llavero de metacrilato personalizado encaja con \"Fin de curso\"."
+  },
+  {
+    "node": "pack-recuerdo",
+    "sku": "LC-PACK-PROFE",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.98,
+    "confidence": 1.0,
+    "explanation": "Pack regalo para profesor encaja con \"Pack recuerdo\"."
+  },
+  {
+    "node": "regalo-para-profesor",
+    "sku": "LC-PACK-PROFE",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Pack regalo para profesor encaja con \"Regalo para profesor\"."
+  },
+  {
+    "node": "regalo-fin-de-curso",
+    "sku": "LC-PACK-PROFE",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Pack regalo para profesor encaja con \"Regalo de fin de curso\"."
+  },
+  {
+    "node": "gratitud",
+    "sku": "LC-PACK-PROFE",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Pack regalo para profesor encaja con \"Gratitud\"."
+  },
+  {
+    "node": "regalo-colaborativo",
+    "sku": "LC-PACK-PROFE",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Pack regalo para profesor encaja con \"Regalo colaborativo\"."
+  }
+]

@@ -1,0 +1,602 @@
+import {
+  KnowledgeEventType,
+  KnowledgeNodeType,
+  KnowledgeRelationType,
+  Prisma
+} from "@prisma/client";
+import { prisma } from "../../lib/prisma.js";
+import type {
+  CreateEdgeBody,
+  CreateNodeBody,
+  CreateProductLinkBody,
+  ListNodesQuery,
+  RecommendBody,
+  TraverseBody,
+  UpdateNodeBody
+} from "./knowledge.schemas.js";
+import {
+  clampScore,
+  decimalNumber,
+  semanticNormalize,
+  slugifyKnowledge,
+  tokenize
+} from "./knowledge.utils.js";
+
+export function listNodes(query: ListNodesQuery) {
+  return prisma.knowledgeNode.findMany({
+    where: {
+      ...(query.type ? { type: query.type as KnowledgeNodeType } : {}),
+      ...(typeof query.active === "boolean" ? { active: query.active } : {}),
+      ...(query.search
+        ? {
+            OR: [
+              { name: { contains: query.search, mode: "insensitive" } },
+              { slug: { contains: query.search, mode: "insensitive" } },
+              { description: { contains: query.search, mode: "insensitive" } }
+            ]
+          }
+        : {})
+    },
+    orderBy: [{ priority: "desc" }, { name: "asc" }],
+    include: {
+      _count: {
+        select: {
+          outgoingEdges: true,
+          incomingEdges: true,
+          productLinks: true
+        }
+      }
+    }
+  });
+}
+
+export function getNode(id: string) {
+  return prisma.knowledgeNode.findUnique({
+    where: { id },
+    include: {
+      outgoingEdges: {
+        where: { active: true },
+        include: { target: true },
+        orderBy: { weight: "desc" }
+      },
+      incomingEdges: {
+        where: { active: true },
+        include: { source: true },
+        orderBy: { weight: "desc" }
+      },
+      productLinks: {
+        where: { active: true },
+        include: {
+          product: {
+            include: {
+              brand: true,
+              supplier: true,
+              media: {
+                where: { isPrimary: true },
+                include: { media: true },
+                take: 1
+              }
+            }
+          }
+        },
+        orderBy: { weight: "desc" }
+      }
+    }
+  });
+}
+
+export function createNode(input: CreateNodeBody) {
+  return prisma.knowledgeNode.create({
+    data: {
+      ...input,
+      type: input.type as KnowledgeNodeType,
+      slug: input.slug?.trim() || slugifyKnowledge(input.name),
+      metadata: input.metadata as Prisma.InputJsonValue | undefined
+    }
+  });
+}
+
+export function updateNode(id: string, input: UpdateNodeBody) {
+  return prisma.knowledgeNode.update({
+    where: { id },
+    data: {
+      ...input,
+      type: input.type as KnowledgeNodeType | undefined,
+      ...(input.name && !input.slug
+        ? { slug: slugifyKnowledge(input.name) }
+        : {}),
+      metadata: input.metadata as Prisma.InputJsonValue | undefined
+    }
+  });
+}
+
+export function deleteNode(id: string) {
+  return prisma.knowledgeNode.delete({
+    where: { id },
+    select: { id: true, name: true, slug: true }
+  });
+}
+
+export function listEdges() {
+  return prisma.knowledgeEdge.findMany({
+    orderBy: [{ weight: "desc" }, { createdAt: "desc" }],
+    include: { source: true, target: true }
+  });
+}
+
+export function createEdge(input: CreateEdgeBody) {
+  return prisma.knowledgeEdge.create({
+    data: {
+      ...input,
+      relationType: input.relationType as KnowledgeRelationType,
+      metadata: input.metadata as Prisma.InputJsonValue | undefined
+    },
+    include: { source: true, target: true }
+  });
+}
+
+export function createProductLink(input: CreateProductLinkBody) {
+  return prisma.knowledgeProductLink.create({
+    data: {
+      ...input,
+      relationType:
+        (input.relationType as KnowledgeRelationType | undefined) ??
+        KnowledgeRelationType.RELATED_TO,
+      metadata: input.metadata as Prisma.InputJsonValue | undefined
+    },
+    include: { node: true, product: true }
+  });
+}
+
+type TraversedNode = {
+  id: string;
+  name: string;
+  slug: string;
+  type: string;
+  depth: number;
+  pathScore: number;
+  path: Array<{
+    edgeId: string;
+    relationType: string;
+    sourceId: string;
+    targetId: string;
+    weight: number;
+    explanation: string | null;
+  }>;
+};
+
+export async function traverseGraph(input: TraverseBody) {
+  const maximumDepth = input.depth ?? 2;
+  const minimumWeight = input.minimumWeight ?? 0;
+  const allowed = input.relationTypes?.length
+    ? new Set(input.relationTypes)
+    : null;
+
+  const root = await prisma.knowledgeNode.findUnique({
+    where: { id: input.nodeId }
+  });
+
+  if (!root) return null;
+
+  const results: TraversedNode[] = [{
+    id: root.id,
+    name: root.name,
+    slug: root.slug,
+    type: root.type,
+    depth: 0,
+    pathScore: 1,
+    path: []
+  }];
+
+  const bestScore = new Map<string, number>([[root.id, 1]]);
+  let frontier = results.slice();
+
+  for (let depth = 1; depth <= maximumDepth; depth += 1) {
+    const sourceIds = frontier.map((item) => item.id);
+    if (!sourceIds.length) break;
+
+    const edges = await prisma.knowledgeEdge.findMany({
+      where: {
+        sourceId: { in: sourceIds },
+        active: true,
+        weight: { gte: minimumWeight },
+        ...(allowed
+          ? { relationType: { in: [...allowed] as KnowledgeRelationType[] } }
+          : {})
+      },
+      include: { target: true }
+    });
+
+    const parentById = new Map(frontier.map((item) => [item.id, item]));
+    const next: TraversedNode[] = [];
+
+    for (const edge of edges) {
+      const parent = parentById.get(edge.sourceId);
+      if (!parent) continue;
+
+      const edgeScore =
+        decimalNumber(edge.weight) * decimalNumber(edge.confidence);
+      const pathScore = parent.pathScore * edgeScore;
+
+      if (pathScore <= (bestScore.get(edge.targetId) ?? 0)) continue;
+      bestScore.set(edge.targetId, pathScore);
+
+      next.push({
+        id: edge.target.id,
+        name: edge.target.name,
+        slug: edge.target.slug,
+        type: edge.target.type,
+        depth,
+        pathScore,
+        path: [
+          ...parent.path,
+          {
+            edgeId: edge.id,
+            relationType: edge.relationType,
+            sourceId: edge.sourceId,
+            targetId: edge.targetId,
+            weight: edgeScore,
+            explanation: edge.explanation
+          }
+        ]
+      });
+    }
+
+    results.push(...next);
+    frontier = next;
+  }
+
+  return {
+    root,
+    nodes: results.sort((a, b) => b.pathScore - a.pathScore)
+  };
+}
+
+function matchScore(
+  query: string,
+  tokens: string[],
+  node: {
+    name: string;
+    slug: string;
+    description: string | null;
+    priority: number;
+  }
+) {
+  const normalized = `${node.name} ${node.slug} ${node.description ?? ""}`
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+  const exactName = normalized.includes(
+    query.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+  );
+
+  const hits = tokens.filter((token) => normalized.includes(token)).length;
+  const tokenScore = tokens.length ? hits / tokens.length : 0;
+  const priorityBoost = Math.min(Math.max(node.priority, 0), 100) / 1000;
+
+  return clampScore(
+    (exactName ? 0.72 : 0) +
+    tokenScore * 0.7 +
+    priorityBoost
+  );
+}
+
+export async function recommendProducts(input: RecommendBody) {
+  const normalizedQuery = semanticNormalize(input.query);
+  const tokens = tokenize(normalizedQuery);
+  const limit = input.limit ?? 10;
+  const depth = input.depth ?? 2;
+  const minimumScore = input.minimumScore ?? 0.05;
+
+  const candidates = await prisma.knowledgeNode.findMany({
+    where: {
+      active: true,
+      ...(input.nodeIds?.length
+        ? { id: { in: input.nodeIds } }
+        : tokens.length
+          ? {
+              OR: tokens.flatMap((token) => [
+                { name: { contains: token, mode: "insensitive" as const } },
+                { slug: { contains: token, mode: "insensitive" as const } },
+                { description: { contains: token, mode: "insensitive" as const } }
+              ])
+            }
+          : {})
+    },
+    take: 50
+  });
+
+  const matchedNodes = candidates
+    .map((node) => ({
+      node,
+      score: input.nodeIds?.includes(node.id)
+        ? 1
+        : matchScore(normalizedQuery, tokens, node)
+    }))
+    .filter((item) => item.score >= minimumScore)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 12);
+
+  const session = await prisma.knowledgeSession.create({
+    data: {
+      query: input.query,
+      normalizedQuery,
+      context: input.context as Prisma.InputJsonValue | undefined
+    }
+  });
+
+  let sequence = 1;
+  const events: Prisma.KnowledgeDecisionEventCreateManyInput[] = [{
+    sessionId: session.id,
+    type: KnowledgeEventType.QUERY_RECEIVED,
+    sequence: sequence++,
+    reason: `Consulta recibida: "${input.query}"`,
+    payload: { tokens }
+  }];
+
+  for (const match of matchedNodes) {
+    await prisma.knowledgeSessionMatch.create({
+      data: {
+        sessionId: session.id,
+        nodeId: match.node.id,
+        score: match.score,
+        reason: `Coincidencia entre la consulta y el concepto "${match.node.name}".`
+      }
+    });
+
+    events.push({
+      sessionId: session.id,
+      type: KnowledgeEventType.NODE_MATCHED,
+      sequence: sequence++,
+      nodeId: match.node.id,
+      score: match.score,
+      reason: `Se detectó "${match.node.name}" con una coincidencia de ${Math.round(match.score * 100)} %.`
+    });
+  }
+
+  const nodeScores = new Map<string, {
+    score: number;
+    origins: Array<{
+      originNodeId: string;
+      originName: string;
+      path: TraversedNode["path"];
+      pathScore: number;
+    }>;
+  }>();
+
+  for (const match of matchedNodes) {
+    const traversal = await traverseGraph({
+      nodeId: match.node.id,
+      depth,
+      minimumWeight: 0.05
+    });
+
+    if (!traversal) continue;
+
+    for (const traversed of traversal.nodes) {
+      const propagated = match.score * traversed.pathScore;
+      const current = nodeScores.get(traversed.id) ?? {
+        score: 0,
+        origins: []
+      };
+
+      current.score = Math.max(current.score, propagated);
+      current.origins.push({
+        originNodeId: match.node.id,
+        originName: match.node.name,
+        path: traversed.path,
+        pathScore: traversed.pathScore
+      });
+      nodeScores.set(traversed.id, current);
+
+      for (const pathEdge of traversed.path) {
+        events.push({
+          sessionId: session.id,
+          type: KnowledgeEventType.EDGE_TRAVERSED,
+          sequence: sequence++,
+          nodeId: traversed.id,
+          edgeId: pathEdge.edgeId,
+          score: propagated,
+          reason:
+            pathEdge.explanation ??
+            `Se recorrió la relación ${pathEdge.relationType}.`
+        });
+      }
+    }
+  }
+
+  const links = await prisma.knowledgeProductLink.findMany({
+    where: {
+      active: true,
+      nodeId: { in: [...nodeScores.keys()] },
+      product: { status: "ACTIVE" }
+    },
+    include: {
+      node: true,
+      product: {
+        include: {
+          brand: true,
+          supplier: true,
+          categories: {
+            where: { isPrimary: true },
+            include: { category: true },
+            take: 1
+          },
+          media: {
+            where: { isPrimary: true },
+            include: { media: true },
+            take: 1
+          },
+          prices: {
+            where: {
+              AND: [
+                {
+                  OR: [
+                    { validFrom: null },
+                    { validFrom: { lte: new Date() } }
+                  ]
+                },
+                {
+                  OR: [
+                    { validTo: null },
+                    { validTo: { gte: new Date() } }
+                  ]
+                }
+              ]
+            },
+            orderBy: [
+              { minQuantity: "asc" },
+              { amount: "asc" }
+            ],
+            take: 1
+          }
+        }
+      }
+    }
+  });
+
+  const productMap = new Map<string, {
+    product: typeof links[number]["product"];
+    score: number;
+    reasons: string[];
+    evidence: Array<{
+      nodeId: string;
+      nodeName: string;
+      relationType: string;
+      contribution: number;
+      explanation: string;
+    }>;
+  }>();
+
+  for (const link of links) {
+    const graph = nodeScores.get(link.nodeId);
+    if (!graph) continue;
+
+    const contribution =
+      graph.score *
+      decimalNumber(link.weight) *
+      decimalNumber(link.confidence);
+
+    const current = productMap.get(link.productId) ?? {
+      product: link.product,
+      score: 0,
+      reasons: [],
+      evidence: []
+    };
+
+    current.score = 1 - (1 - current.score) * (1 - clampScore(contribution));
+
+    const explanation =
+      link.explanation ??
+      `${link.product.name} está relacionado con "${link.node.name}" mediante ${link.relationType}.`;
+
+    current.reasons.push(explanation);
+    current.evidence.push({
+      nodeId: link.node.id,
+      nodeName: link.node.name,
+      relationType: link.relationType,
+      contribution,
+      explanation
+    });
+
+    productMap.set(link.productId, current);
+
+    events.push({
+      sessionId: session.id,
+      type: KnowledgeEventType.PRODUCT_CANDIDATE,
+      sequence: sequence++,
+      nodeId: link.nodeId,
+      productId: link.productId,
+      score: contribution,
+      reason: explanation
+    });
+  }
+
+  const recommendations = [...productMap.values()]
+    .filter((item) => item.score >= minimumScore)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((item, index) => {
+      const strongest = [...item.evidence]
+        .sort((a, b) => b.contribution - a.contribution)
+        .slice(0, 3);
+
+      const explanation = [
+        `Se recomienda "${item.product.name}" con una afinidad de ${Math.round(item.score * 100)} %.`,
+        ...strongest.map((evidence) => evidence.explanation)
+      ].join(" ");
+
+      events.push({
+        sessionId: session.id,
+        type: KnowledgeEventType.PRODUCT_SCORED,
+        sequence: sequence++,
+        productId: item.product.id,
+        score: item.score,
+        reason: explanation,
+        payload: {
+          position: index + 1,
+          evidence: strongest
+        }
+      });
+
+      events.push({
+        sessionId: session.id,
+        type: KnowledgeEventType.EXPLANATION_GENERATED,
+        sequence: sequence++,
+        productId: item.product.id,
+        score: item.score,
+        reason: explanation
+      });
+
+      return {
+        position: index + 1,
+        score: item.score,
+        product: item.product,
+        explanation,
+        evidence: strongest
+      };
+    });
+
+  await prisma.knowledgeDecisionEvent.createMany({
+    data: events
+  });
+
+  await prisma.knowledgeSession.update({
+    where: { id: session.id },
+    data: {
+      result: {
+        matchedNodeIds: matchedNodes.map((item) => item.node.id),
+        recommendedProductIds: recommendations.map((item) => item.product.id)
+      }
+    }
+  });
+
+  return {
+    sessionId: session.id,
+    query: input.query,
+    matchedNodes: matchedNodes.map(({ node, score }) => ({
+      id: node.id,
+      name: node.name,
+      type: node.type,
+      score,
+      reason: `Coincide con la intención expresada en "${input.query}".`
+    })),
+    recommendations
+  };
+}
+
+export function getRecommendationExplanation(sessionId: string) {
+  return prisma.knowledgeSession.findUnique({
+    where: { id: sessionId },
+    include: {
+      matches: {
+        include: { node: true },
+        orderBy: { score: "desc" }
+      },
+      events: {
+        orderBy: { sequence: "asc" }
+      }
+    }
+  });
+}

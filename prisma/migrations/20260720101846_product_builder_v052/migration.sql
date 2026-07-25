@@ -1,0 +1,3 @@
+-- RenameIndex
+ALTER INDEX IF EXISTS
+"DetectedProductEvidence_detectedProductId_documentCandidateId_f" RENAME TO "DetectedProductEvidence_detectedProductId_documentCandidate_key";

@@ -1,0 +1,2850 @@
+[
+  {
+    "from": "hacer-un-regalo",
+    "to": "profesor",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Profesor."
+  },
+  {
+    "from": "profesor",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Profesor suele expresar gratitud."
+  },
+  {
+    "from": "profesor",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "profesora-infantil",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Profesora de infantil."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Profesora de infantil suele expresar gratitud."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "profesor-primaria",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Profesor de primaria."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Profesor de primaria suele expresar gratitud."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "profesor-secundaria",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Profesor de secundaria."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Profesor de secundaria suele expresar gratitud."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "tutor",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Tutor."
+  },
+  {
+    "from": "tutor",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Tutor suele expresar gratitud."
+  },
+  {
+    "from": "tutor",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "directora",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Directora."
+  },
+  {
+    "from": "directora",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Directora suele expresar gratitud."
+  },
+  {
+    "from": "directora",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "entrenador",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Entrenador."
+  },
+  {
+    "from": "entrenador",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Entrenador suele expresar gratitud."
+  },
+  {
+    "from": "entrenador",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "monitor",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Los regalos personalizados son adecuados para Monitor."
+  },
+  {
+    "from": "monitor",
+    "to": "gratitud",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Regalar a Monitor suele expresar gratitud."
+  },
+  {
+    "from": "monitor",
+    "to": "recuerdo",
+    "relation": "RELATED_TO",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "El destinatario está vinculado a recuerdos compartidos del grupo."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Fin de curso es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Jubilación es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Graduación es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Cumpleaños es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Despedida es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Agradecimiento es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Fin de temporada es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "aniversario-docente",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Aniversario docente es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "navidad",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Navidad es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "hacer-un-regalo",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Día del maestro es una ocasión apropiada para un regalo personalizado."
+  },
+  {
+    "from": "fin-de-curso",
+    "to": "gratitud",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Fin de curso favorece Gratitud."
+  },
+  {
+    "from": "fin-de-curso",
+    "to": "recuerdo",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Fin de curso favorece Recuerdo."
+  },
+  {
+    "from": "fin-de-curso",
+    "to": "participacion-grupal",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Fin de curso favorece Participación grupal."
+  },
+  {
+    "from": "fin-de-curso",
+    "to": "regalo-fin-de-curso",
+    "relation": "SUGGESTS",
+    "weight": 0.75,
+    "confidence": 1.0,
+    "explanation": "Fin de curso favorece Regalo de fin de curso."
+  },
+  {
+    "from": "jubilacion",
+    "to": "gratitud",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Jubilación favorece Gratitud."
+  },
+  {
+    "from": "jubilacion",
+    "to": "reconocimiento",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Jubilación favorece Reconocimiento."
+  },
+  {
+    "from": "jubilacion",
+    "to": "memoria-compartida",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Jubilación favorece Memoria compartida."
+  },
+  {
+    "from": "jubilacion",
+    "to": "regalo-de-jubilacion",
+    "relation": "SUGGESTS",
+    "weight": 0.75,
+    "confidence": 1.0,
+    "explanation": "Jubilación favorece Regalo de jubilación."
+  },
+  {
+    "from": "jubilacion",
+    "to": "reconocer-trayectoria",
+    "relation": "SUGGESTS",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "Jubilación favorece Reconocer una trayectoria."
+  },
+  {
+    "from": "graduacion",
+    "to": "orgullo",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Graduación favorece Orgullo."
+  },
+  {
+    "from": "graduacion",
+    "to": "recuerdo",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Graduación favorece Recuerdo."
+  },
+  {
+    "from": "graduacion",
+    "to": "emocionar",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Graduación favorece Emocionar."
+  },
+  {
+    "from": "cumpleanos",
+    "to": "carino",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Cumpleaños favorece Cariño."
+  },
+  {
+    "from": "cumpleanos",
+    "to": "sorprender",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Cumpleaños favorece Sorprender."
+  },
+  {
+    "from": "cumpleanos",
+    "to": "divertido",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Cumpleaños favorece Divertido."
+  },
+  {
+    "from": "despedida",
+    "to": "recuerdo",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Despedida favorece Recuerdo."
+  },
+  {
+    "from": "despedida",
+    "to": "carino",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Despedida favorece Cariño."
+  },
+  {
+    "from": "despedida",
+    "to": "memoria-compartida",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Despedida favorece Memoria compartida."
+  },
+  {
+    "from": "agradecimiento",
+    "to": "gratitud",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Agradecimiento favorece Gratitud."
+  },
+  {
+    "from": "agradecimiento",
+    "to": "agradecer",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Agradecimiento favorece Agradecer."
+  },
+  {
+    "from": "agradecimiento",
+    "to": "admiracion",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Agradecimiento favorece Admiración."
+  },
+  {
+    "from": "fin-de-temporada",
+    "to": "trabajo-en-equipo",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Fin de temporada favorece Trabajo en equipo."
+  },
+  {
+    "from": "fin-de-temporada",
+    "to": "foto-de-grupo",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Fin de temporada favorece Foto de grupo."
+  },
+  {
+    "from": "fin-de-temporada",
+    "to": "regalo-de-equipo",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Fin de temporada favorece Regalo de equipo."
+  },
+  {
+    "from": "aniversario-docente",
+    "to": "reconocimiento",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Aniversario docente favorece Reconocimiento."
+  },
+  {
+    "from": "aniversario-docente",
+    "to": "admiracion",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Aniversario docente favorece Admiración."
+  },
+  {
+    "from": "aniversario-docente",
+    "to": "reconocer-trayectoria",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Aniversario docente favorece Reconocer una trayectoria."
+  },
+  {
+    "from": "navidad",
+    "to": "carino",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Navidad favorece Cariño."
+  },
+  {
+    "from": "navidad",
+    "to": "detalle-util",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Navidad favorece Detalle útil."
+  },
+  {
+    "from": "navidad",
+    "to": "regalo-individual",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Navidad favorece Regalo individual."
+  },
+  {
+    "from": "dia-del-maestro",
+    "to": "gratitud",
+    "relation": "SUGGESTS",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Día del maestro favorece Gratitud."
+  },
+  {
+    "from": "dia-del-maestro",
+    "to": "reconocimiento",
+    "relation": "SUGGESTS",
+    "weight": 0.85,
+    "confidence": 1.0,
+    "explanation": "Día del maestro favorece Reconocimiento."
+  },
+  {
+    "from": "dia-del-maestro",
+    "to": "regalo-para-profesor",
+    "relation": "SUGGESTS",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Día del maestro favorece Regalo para profesor."
+  },
+  {
+    "from": "gratitud",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Gratitud orienta hacia Regalo con dedicatoria."
+  },
+  {
+    "from": "gratitud",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Gratitud orienta hacia Homenaje personalizado."
+  },
+  {
+    "from": "gratitud",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Gratitud orienta hacia Regalo colaborativo."
+  },
+  {
+    "from": "recuerdo",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Recuerdo orienta hacia Recuerdo personalizado."
+  },
+  {
+    "from": "recuerdo",
+    "to": "regalo-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Recuerdo orienta hacia Regalo fotográfico."
+  },
+  {
+    "from": "recuerdo",
+    "to": "pack-recuerdo",
+    "relation": "SUGGESTS",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "Recuerdo orienta hacia Pack recuerdo."
+  },
+  {
+    "from": "orgullo",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Orgullo orienta hacia Homenaje personalizado."
+  },
+  {
+    "from": "orgullo",
+    "to": "regalo-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Orgullo orienta hacia Regalo fotográfico."
+  },
+  {
+    "from": "carino",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Cariño orienta hacia Regalo con dedicatoria."
+  },
+  {
+    "from": "carino",
+    "to": "regalo-individual",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Cariño orienta hacia Regalo individual."
+  },
+  {
+    "from": "admiracion",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Admiración orienta hacia Homenaje personalizado."
+  },
+  {
+    "from": "admiracion",
+    "to": "presentacion-elegante",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Admiración orienta hacia Presentación elegante."
+  },
+  {
+    "from": "trabajo-en-equipo",
+    "to": "regalo-de-equipo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Trabajo en equipo orienta hacia Regalo de equipo."
+  },
+  {
+    "from": "trabajo-en-equipo",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Trabajo en equipo orienta hacia Regalo colaborativo."
+  },
+  {
+    "from": "participacion-grupal",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Participación grupal orienta hacia Regalo colaborativo."
+  },
+  {
+    "from": "participacion-grupal",
+    "to": "regalo-de-clase",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Participación grupal orienta hacia Regalo de clase."
+  },
+  {
+    "from": "foto-de-grupo",
+    "to": "regalo-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Foto de grupo orienta hacia Regalo fotográfico."
+  },
+  {
+    "from": "foto-de-grupo",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Foto de grupo orienta hacia Recuerdo personalizado."
+  },
+  {
+    "from": "firmas",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Firmas orienta hacia Regalo colaborativo."
+  },
+  {
+    "from": "firmas",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Firmas orienta hacia Regalo con dedicatoria."
+  },
+  {
+    "from": "dedicatoria",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Dedicatoria orienta hacia Regalo con dedicatoria."
+  },
+  {
+    "from": "dedicatoria",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Dedicatoria orienta hacia Homenaje personalizado."
+  },
+  {
+    "from": "mensaje-personal",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Mensaje personal orienta hacia Regalo con dedicatoria."
+  },
+  {
+    "from": "mensaje-personal",
+    "to": "regalo-individual",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Mensaje personal orienta hacia Regalo individual."
+  },
+  {
+    "from": "nombres-alumnos",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Nombres del alumnado orienta hacia Regalo colaborativo."
+  },
+  {
+    "from": "nombres-alumnos",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Nombres del alumnado orienta hacia Recuerdo personalizado."
+  },
+  {
+    "from": "memoria-compartida",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Memoria compartida orienta hacia Regalo colaborativo."
+  },
+  {
+    "from": "memoria-compartida",
+    "to": "regalo-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Memoria compartida orienta hacia Regalo fotográfico."
+  },
+  {
+    "from": "utilidad-diaria",
+    "to": "detalle-util",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Utilidad diaria orienta hacia Detalle útil."
+  },
+  {
+    "from": "utilidad-diaria",
+    "to": "regalo-individual",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Utilidad diaria orienta hacia Regalo individual."
+  },
+  {
+    "from": "decoracion-emocional",
+    "to": "detalle-decorativo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Decoración emocional orienta hacia Detalle decorativo."
+  },
+  {
+    "from": "decoracion-emocional",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Decoración emocional orienta hacia Recuerdo personalizado."
+  },
+  {
+    "from": "presentacion-elegante",
+    "to": "regalo-premium",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Presentación elegante orienta hacia Regalo premium."
+  },
+  {
+    "from": "presentacion-elegante",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Presentación elegante orienta hacia Homenaje personalizado."
+  },
+  {
+    "from": "reconocimiento",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Reconocimiento orienta hacia Homenaje personalizado."
+  },
+  {
+    "from": "reconocimiento",
+    "to": "reconocer-trayectoria",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Reconocimiento orienta hacia Reconocer una trayectoria."
+  },
+  {
+    "from": "regalo-para-profesor",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo para profesor se resuelve con Regalo colaborativo."
+  },
+  {
+    "from": "regalo-para-profesor",
+    "to": "regalo-individual",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo para profesor se resuelve con Regalo individual."
+  },
+  {
+    "from": "regalo-para-profesor",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Regalo para profesor se resuelve con Recuerdo personalizado."
+  },
+  {
+    "from": "regalo-de-clase",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo de clase se resuelve con Regalo colaborativo."
+  },
+  {
+    "from": "regalo-de-clase",
+    "to": "representar-al-grupo",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo de clase se resuelve con Representar al grupo."
+  },
+  {
+    "from": "regalo-de-clase",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Regalo de clase se resuelve con Recuerdo personalizado."
+  },
+  {
+    "from": "regalo-de-jubilacion",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo de jubilación se resuelve con Homenaje personalizado."
+  },
+  {
+    "from": "regalo-de-jubilacion",
+    "to": "regalo-premium",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo de jubilación se resuelve con Regalo premium."
+  },
+  {
+    "from": "regalo-de-jubilacion",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Regalo de jubilación se resuelve con Recuerdo personalizado."
+  },
+  {
+    "from": "regalo-fin-de-curso",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo de fin de curso se resuelve con Regalo colaborativo."
+  },
+  {
+    "from": "regalo-fin-de-curso",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo de fin de curso se resuelve con Regalo con dedicatoria."
+  },
+  {
+    "from": "regalo-fin-de-curso",
+    "to": "detalle-util",
+    "relation": "SUGGESTS",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Regalo de fin de curso se resuelve con Detalle útil."
+  },
+  {
+    "from": "detalle-economico",
+    "to": "regalo-individual",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Detalle económico se resuelve con Regalo individual."
+  },
+  {
+    "from": "detalle-economico",
+    "to": "detalle-util",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Detalle económico se resuelve con Detalle útil."
+  },
+  {
+    "from": "regalo-premium",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo premium se resuelve con Homenaje personalizado."
+  },
+  {
+    "from": "regalo-premium",
+    "to": "presentacion-elegante",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo premium se resuelve con Presentación elegante."
+  },
+  {
+    "from": "regalo-urgente",
+    "to": "detalle-util",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo urgente se resuelve con Detalle útil."
+  },
+  {
+    "from": "regalo-urgente",
+    "to": "regalo-individual",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo urgente se resuelve con Regalo individual."
+  },
+  {
+    "from": "regalo-con-fotos",
+    "to": "regalo-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo con fotos se resuelve con Regalo fotográfico."
+  },
+  {
+    "from": "regalo-con-fotos",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo con fotos se resuelve con Recuerdo personalizado."
+  },
+  {
+    "from": "regalo-con-firmas",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Regalo con firmas se resuelve con Regalo colaborativo."
+  },
+  {
+    "from": "regalo-con-firmas",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.91,
+    "confidence": 1.0,
+    "explanation": "Regalo con firmas se resuelve con Regalo con dedicatoria."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "lienzo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Lienzo materializa bien la solución Regalo colaborativo."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Metacrilato materializa bien la solución Regalo colaborativo."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "madera",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Madera materializa bien la solución Regalo colaborativo."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "papel-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.79,
+    "confidence": 1.0,
+    "explanation": "Papel fotográfico materializa bien la solución Regalo colaborativo."
+  },
+  {
+    "from": "regalo-individual",
+    "to": "ceramica",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Cerámica materializa bien la solución Regalo individual."
+  },
+  {
+    "from": "regalo-individual",
+    "to": "textil",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Textil materializa bien la solución Regalo individual."
+  },
+  {
+    "from": "regalo-individual",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Metacrilato materializa bien la solución Regalo individual."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "lienzo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Lienzo materializa bien la solución Recuerdo personalizado."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Metacrilato materializa bien la solución Recuerdo personalizado."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "madera",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Madera materializa bien la solución Recuerdo personalizado."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "papel-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.79,
+    "confidence": 1.0,
+    "explanation": "Papel fotográfico materializa bien la solución Recuerdo personalizado."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Metacrilato materializa bien la solución Homenaje personalizado."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "madera",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Madera materializa bien la solución Homenaje personalizado."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "lienzo",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Lienzo materializa bien la solución Homenaje personalizado."
+  },
+  {
+    "from": "detalle-util",
+    "to": "ceramica",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Cerámica materializa bien la solución Detalle útil."
+  },
+  {
+    "from": "detalle-util",
+    "to": "textil",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Textil materializa bien la solución Detalle útil."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "lienzo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Lienzo materializa bien la solución Detalle decorativo."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Metacrilato materializa bien la solución Detalle decorativo."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "madera",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Madera materializa bien la solución Detalle decorativo."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "lienzo",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Lienzo materializa bien la solución Regalo fotográfico."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "papel-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Papel fotográfico materializa bien la solución Regalo fotográfico."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Metacrilato materializa bien la solución Regalo fotográfico."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Metacrilato materializa bien la solución Regalo con dedicatoria."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "madera",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Madera materializa bien la solución Regalo con dedicatoria."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "ceramica",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Cerámica materializa bien la solución Regalo con dedicatoria."
+  },
+  {
+    "from": "pack-recuerdo",
+    "to": "papel-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Papel fotográfico materializa bien la solución Pack recuerdo."
+  },
+  {
+    "from": "pack-recuerdo",
+    "to": "ceramica",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Cerámica materializa bien la solución Pack recuerdo."
+  },
+  {
+    "from": "pack-recuerdo",
+    "to": "textil",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Textil materializa bien la solución Pack recuerdo."
+  },
+  {
+    "from": "regalo-de-equipo",
+    "to": "textil",
+    "relation": "SUGGESTS",
+    "weight": 0.94,
+    "confidence": 1.0,
+    "explanation": "Textil materializa bien la solución Regalo de equipo."
+  },
+  {
+    "from": "regalo-de-equipo",
+    "to": "lienzo",
+    "relation": "SUGGESTS",
+    "weight": 0.89,
+    "confidence": 1.0,
+    "explanation": "Lienzo materializa bien la solución Regalo de equipo."
+  },
+  {
+    "from": "regalo-de-equipo",
+    "to": "ceramica",
+    "relation": "SUGGESTS",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "Cerámica materializa bien la solución Regalo de equipo."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "regalo-individual",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "regalo-individual",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "regalo-individual",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "regalo-individual",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "detalle-util",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "detalle-util",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "detalle-util",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "detalle-util",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "pack-recuerdo",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "pack-recuerdo",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "pack-recuerdo",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "pack-recuerdo",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "regalo-de-equipo",
+    "to": "definir-presupuesto",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "La solución requiere definir presupuesto."
+  },
+  {
+    "from": "regalo-de-equipo",
+    "to": "seleccionar-formato",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La solución requiere seleccionar formato."
+  },
+  {
+    "from": "regalo-de-equipo",
+    "to": "aprobar-diseno",
+    "relation": "REQUIRES",
+    "weight": 0.76,
+    "confidence": 1.0,
+    "explanation": "La solución requiere aprobar diseño."
+  },
+  {
+    "from": "regalo-de-equipo",
+    "to": "preparar-entrega",
+    "relation": "REQUIRES",
+    "weight": 0.7,
+    "confidence": 1.0,
+    "explanation": "La solución requiere preparar entrega."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "recopilar-fotos",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Conviene recopilar fotografías con calidad suficiente."
+  },
+  {
+    "from": "recuerdo-personalizado",
+    "to": "recopilar-fotos",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Conviene recopilar fotografías con calidad suficiente."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "recopilar-fotos",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Conviene recopilar fotografías con calidad suficiente."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "recopilar-fotos",
+    "relation": "REQUIRES",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Conviene recopilar fotografías con calidad suficiente."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "recopilar-firmas",
+    "relation": "SUGGESTS",
+    "weight": 0.72,
+    "confidence": 1.0,
+    "explanation": "Las firmas aumentan la participación y el valor emocional."
+  },
+  {
+    "from": "regalo-colaborativo",
+    "to": "elegir-dedicatoria",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La dedicatoria debe acordarse antes de producir."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "recopilar-firmas",
+    "relation": "SUGGESTS",
+    "weight": 0.72,
+    "confidence": 1.0,
+    "explanation": "Las firmas aumentan la participación y el valor emocional."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "elegir-dedicatoria",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La dedicatoria debe acordarse antes de producir."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "recopilar-firmas",
+    "relation": "SUGGESTS",
+    "weight": 0.72,
+    "confidence": 1.0,
+    "explanation": "Las firmas aumentan la participación y el valor emocional."
+  },
+  {
+    "from": "homenaje-personalizado",
+    "to": "elegir-dedicatoria",
+    "relation": "REQUIRES",
+    "weight": 0.84,
+    "confidence": 1.0,
+    "explanation": "La dedicatoria debe acordarse antes de producir."
+  },
+  {
+    "from": "lienzo",
+    "to": "impresion-digital",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Lienzo suele producirse mediante Impresión digital."
+  },
+  {
+    "from": "metacrilato",
+    "to": "impresion-uv",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Metacrilato suele producirse mediante Impresión UV."
+  },
+  {
+    "from": "metacrilato",
+    "to": "grabado-laser",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Metacrilato suele producirse mediante Grabado láser."
+  },
+  {
+    "from": "madera",
+    "to": "grabado-laser",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Madera suele producirse mediante Grabado láser."
+  },
+  {
+    "from": "madera",
+    "to": "impresion-uv",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Madera suele producirse mediante Impresión UV."
+  },
+  {
+    "from": "ceramica",
+    "to": "sublimacion",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Cerámica suele producirse mediante Sublimación."
+  },
+  {
+    "from": "textil",
+    "to": "dtf",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Textil suele producirse mediante DTF textil."
+  },
+  {
+    "from": "textil",
+    "to": "sublimacion",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Textil suele producirse mediante Sublimación."
+  },
+  {
+    "from": "papel-fotografico",
+    "to": "impresion-digital",
+    "relation": "REQUIRES",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "Papel fotográfico suele producirse mediante Impresión digital."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "colorido",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "El estilo colorido encaja con este destinatario."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "infantil",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "El estilo infantil encaja con este destinatario."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "divertido",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "El estilo divertido encaja con este destinatario."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "colorido",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "El estilo colorido encaja con este destinatario."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "infantil",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "El estilo infantil encaja con este destinatario."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "divertido",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "El estilo divertido encaja con este destinatario."
+  },
+  {
+    "from": "monitor",
+    "to": "colorido",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "El estilo colorido encaja con este destinatario."
+  },
+  {
+    "from": "monitor",
+    "to": "infantil",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.82,
+    "confidence": 1.0,
+    "explanation": "El estilo infantil encaja con este destinatario."
+  },
+  {
+    "from": "monitor",
+    "to": "divertido",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "El estilo divertido encaja con este destinatario."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "elegante",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "minimalista",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "emocional",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "tutor",
+    "to": "elegante",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "tutor",
+    "to": "minimalista",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "tutor",
+    "to": "emocional",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "directora",
+    "to": "elegante",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "directora",
+    "to": "minimalista",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "directora",
+    "to": "emocional",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "elegante",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.86,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "minimalista",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "emocional",
+    "relation": "SUITABLE_FOR",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Estilo apropiado para un regalo educativo."
+  },
+  {
+    "from": "colegio",
+    "to": "centro-educativo",
+    "relation": "PART_OF",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Colegio forma parte del contexto educativo o formativo."
+  },
+  {
+    "from": "instituto",
+    "to": "centro-educativo",
+    "relation": "PART_OF",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Instituto forma parte del contexto educativo o formativo."
+  },
+  {
+    "from": "academia",
+    "to": "centro-educativo",
+    "relation": "PART_OF",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Academia forma parte del contexto educativo o formativo."
+  },
+  {
+    "from": "guarderia",
+    "to": "centro-educativo",
+    "relation": "PART_OF",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Guardería forma parte del contexto educativo o formativo."
+  },
+  {
+    "from": "campamento",
+    "to": "centro-educativo",
+    "relation": "PART_OF",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Campamento forma parte del contexto educativo o formativo."
+  },
+  {
+    "from": "club-deportivo",
+    "to": "centro-educativo",
+    "relation": "PART_OF",
+    "weight": 0.8,
+    "confidence": 1.0,
+    "explanation": "Club deportivo forma parte del contexto educativo o formativo."
+  },
+  {
+    "from": "profesor",
+    "to": "colegio",
+    "relation": "RELATED_TO",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "El destinatario trabaja habitualmente en este entorno."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "guarderia",
+    "relation": "RELATED_TO",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "El destinatario trabaja habitualmente en este entorno."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "colegio",
+    "relation": "RELATED_TO",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "El destinatario trabaja habitualmente en este entorno."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "instituto",
+    "relation": "RELATED_TO",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "El destinatario trabaja habitualmente en este entorno."
+  },
+  {
+    "from": "monitor",
+    "to": "campamento",
+    "relation": "RELATED_TO",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "El destinatario trabaja habitualmente en este entorno."
+  },
+  {
+    "from": "entrenador",
+    "to": "club-deportivo",
+    "relation": "RELATED_TO",
+    "weight": 0.9,
+    "confidence": 1.0,
+    "explanation": "El destinatario trabaja habitualmente en este entorno."
+  },
+  {
+    "from": "emocionar",
+    "to": "regalo-con-dedicatoria",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Regalo con dedicatoria ayuda a emocionar."
+  },
+  {
+    "from": "emocionar",
+    "to": "regalo-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Regalo fotográfico ayuda a emocionar."
+  },
+  {
+    "from": "agradecer",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Regalo colaborativo ayuda a agradecer."
+  },
+  {
+    "from": "agradecer",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Homenaje personalizado ayuda a agradecer."
+  },
+  {
+    "from": "sorprender",
+    "to": "regalo-premium",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Regalo premium ayuda a sorprender."
+  },
+  {
+    "from": "sorprender",
+    "to": "detalle-decorativo",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Detalle decorativo ayuda a sorprender."
+  },
+  {
+    "from": "conservar-recuerdo",
+    "to": "recuerdo-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Recuerdo personalizado ayuda a conservar un recuerdo."
+  },
+  {
+    "from": "conservar-recuerdo",
+    "to": "regalo-fotografico",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Regalo fotográfico ayuda a conservar un recuerdo."
+  },
+  {
+    "from": "representar-al-grupo",
+    "to": "regalo-colaborativo",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Regalo colaborativo ayuda a representar al grupo."
+  },
+  {
+    "from": "representar-al-grupo",
+    "to": "regalo-de-equipo",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Regalo de equipo ayuda a representar al grupo."
+  },
+  {
+    "from": "decorar-espacio",
+    "to": "detalle-decorativo",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Detalle decorativo ayuda a decorar un espacio."
+  },
+  {
+    "from": "decorar-espacio",
+    "to": "lienzo",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Lienzo ayuda a decorar un espacio."
+  },
+  {
+    "from": "usar-a-diario",
+    "to": "detalle-util",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Detalle útil ayuda a usar a diario."
+  },
+  {
+    "from": "usar-a-diario",
+    "to": "ceramica",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Cerámica ayuda a usar a diario."
+  },
+  {
+    "from": "usar-a-diario",
+    "to": "textil",
+    "relation": "SUGGESTS",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Textil ayuda a usar a diario."
+  },
+  {
+    "from": "reconocer-trayectoria",
+    "to": "homenaje-personalizado",
+    "relation": "SUGGESTS",
+    "weight": 0.93,
+    "confidence": 1.0,
+    "explanation": "Homenaje personalizado ayuda a reconocer una trayectoria."
+  },
+  {
+    "from": "reconocer-trayectoria",
+    "to": "metacrilato",
+    "relation": "SUGGESTS",
+    "weight": 0.88,
+    "confidence": 1.0,
+    "explanation": "Metacrilato ayuda a reconocer una trayectoria."
+  },
+  {
+    "from": "reconocer-trayectoria",
+    "to": "madera",
+    "relation": "SUGGESTS",
+    "weight": 0.83,
+    "confidence": 1.0,
+    "explanation": "Madera ayuda a reconocer una trayectoria."
+  },
+  {
+    "from": "lienzo",
+    "to": "papel-fotografico",
+    "relation": "COMPLEMENTS",
+    "weight": 0.66,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "papel-fotografico",
+    "to": "lienzo",
+    "relation": "COMPLEMENTS",
+    "weight": 0.62,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "metacrilato",
+    "to": "madera",
+    "relation": "COMPLEMENTS",
+    "weight": 0.66,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "madera",
+    "to": "metacrilato",
+    "relation": "COMPLEMENTS",
+    "weight": 0.62,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "ceramica",
+    "to": "textil",
+    "relation": "COMPLEMENTS",
+    "weight": 0.66,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "textil",
+    "to": "ceramica",
+    "relation": "COMPLEMENTS",
+    "weight": 0.62,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "regalo-fotografico",
+    "to": "regalo-con-dedicatoria",
+    "relation": "COMPLEMENTS",
+    "weight": 0.66,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "regalo-con-dedicatoria",
+    "to": "regalo-fotografico",
+    "relation": "COMPLEMENTS",
+    "weight": 0.62,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "detalle-util",
+    "to": "detalle-decorativo",
+    "relation": "COMPLEMENTS",
+    "weight": 0.66,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "detalle-decorativo",
+    "to": "detalle-util",
+    "relation": "COMPLEMENTS",
+    "weight": 0.62,
+    "confidence": 1.0,
+    "explanation": "Pueden combinarse en una propuesta más completa."
+  },
+  {
+    "from": "profesor",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesora-infantil",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-primaria",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "profesor-secundaria",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "tutor",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "directora",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.92,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "entrenador",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.96,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "monitor",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "equipo-docente",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "fin-de-curso",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "jubilacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "graduacion",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "cumpleanos",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "despedida",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "agradecimiento",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "fin-de-temporada",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  },
+  {
+    "from": "compañero-trabajo",
+    "to": "dia-del-maestro",
+    "relation": "RELATED_TO",
+    "weight": 0.78,
+    "confidence": 1.0,
+    "explanation": "Combinación habitual de destinatario y ocasión."
+  }
+]

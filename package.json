@@ -1,0 +1,43 @@
+{
+  "name": "catalog-engine",
+  "version": "0.8.0",
+  "private": true,
+  "description": "Motor de catÃ¡logo y recomendaciones de La Colorida",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prisma:format": "prisma format",
+    "prisma:validate": "prisma validate",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio",
+    "prisma:migrate": "prisma migrate dev",
+    "seed:catalog": "tsx src/scripts/seed-catalog.ts",
+    "seed:knowledge": "tsx src/scripts/seed-knowledge.ts",
+    "seed:all": "npm run seed:catalog && npm run seed:knowledge",
+    "knowledge:products": "tsx src/scripts/seed-education-products.ts",
+    "knowledge:import": "tsx src/scripts/import-knowledge.ts",
+    "knowledge:setup": "npm run knowledge:products && npm run knowledge:import",
+    "import:sample": "tsx src/scripts/import-sample.ts"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.0.0",
+    "@prisma/client": "^7.0.0",
+    "@sinclair/typebox": "^0.34.0",
+    "dotenv": "^16.4.0",
+    "fastify": "^5.0.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "prisma": "^7.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}
