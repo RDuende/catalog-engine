@@ -9,3 +9,11 @@ export * from "./events/event-bus.js";
 
 
 export * from "./jobs/index.js";
+export * from "./document/index.js";
+export * from "./pipeline/index.js";
+export * from "./lexer/index.js";
+export * from "./ast/index.js";
+export * from "./parser/index.js";
+export * from "./metrics/index.js";
+export * from "./dialects/index.js";
+export * from "./compiler.js";

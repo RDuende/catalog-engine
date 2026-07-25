@@ -1,6 +1,6 @@
 {
   "name": "catalog-engine",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "description": "Motor de catÃƒÂ¡logo y recomendaciones de La Colorida",
   "type": "module",
@@ -30,7 +30,11 @@
     "test:pattern-engine": "tsx --test src/modules/pattern-engine/*.test.ts",
     "test:ast-builder": "tsx --test src/modules/ast-builder/*.test.ts",
     "test:interpreter": "tsx --test src/modules/catalog-interpreter/*.test.ts",
-    "test:catalog-intelligence": "npm run test:block-detector && npm run test:pattern-engine && npm run test:ast-builder && npm run test:interpreter"
+    "test:catalog-intelligence": "npm run test:block-detector && npm run test:pattern-engine && npm run test:ast-builder && npm run test:interpreter",
+    "catalog:compile": "tsx src/cli/compile-catalog.ts",
+    "test:core-foundation": "tsx --test src/core/*.test.ts src/core/lexer/*.test.ts src/core/semantic/*.test.ts",
+    "test:all": "npm run test:catalog-intelligence && npm run test:core-foundation",
+    "test:semantic": "tsx --test src/core/semantic/*.test.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",
