@@ -1,31 +1,9 @@
 import type { Product, Recommendation } from "../domain/entities.js";
-import type { CatalogDomainEvent, DomainEvent } from "../events/domain-events.js";
+import type { CatalogDomainEvent } from "../events/domain-events.js";
 
-export type DomainEventName<TEvent extends DomainEvent = CatalogDomainEvent> =
-  TEvent["name"];
-
-export type DomainEventByName<
-  TEvent extends DomainEvent,
-  TName extends DomainEventName<TEvent>,
-> = Extract<TEvent, { readonly name: TName }>;
-
-export type DomainEventHandler<TEvent extends DomainEvent = DomainEvent> = (
-  event: TEvent,
-) => void | Promise<void>;
-
-export type Unsubscribe = () => void;
-
-export interface EventBus<TEvent extends DomainEvent = CatalogDomainEvent> {
-  publish(event: TEvent): Promise<void>;
-
-  publishMany(events: readonly TEvent[]): Promise<void>;
-
-  subscribe<TName extends DomainEventName<TEvent>>(
-    eventName: TName,
-    handler: DomainEventHandler<DomainEventByName<TEvent, TName>>,
-  ): Unsubscribe;
-
-  clear(eventName?: DomainEventName<TEvent>): void;
+export interface EventBus {
+  publish(event: CatalogDomainEvent): Promise<void>;
+  publishMany(events: readonly CatalogDomainEvent[]): Promise<void>;
 }
 
 export interface ImportSource {
