@@ -7,5 +7,3 @@ export * from "./contracts/repositories.js";
 export * from "./contracts/services.js";
 export * from "./events/event-bus.js";
 
-
-export * from "./jobs/index.js";
