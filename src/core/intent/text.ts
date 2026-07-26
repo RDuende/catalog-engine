@@ -1,4 +1,10 @@
 export function normalizeIntentText(value: string): string {
+  if (typeof value !== "string") {
+    throw new TypeError(
+      `normalizeIntentText esperaba un texto, pero recibió: ${String(value)}`,
+    );
+  }
+
   return value
     .toLocaleLowerCase("es-ES")
     .normalize("NFD")
@@ -10,5 +16,12 @@ export function normalizeIntentText(value: string): string {
 }
 
 export function uniqueTerms(values: string[]): string[] {
-  return [...new Set(values.map((value) => normalizeIntentText(value)).filter(Boolean))];
+  return [
+    ...new Set(
+      values
+        .filter((value): value is string => typeof value === "string")
+        .map((value) => normalizeIntentText(value))
+        .filter(Boolean),
+    ),
+  ];
 }
