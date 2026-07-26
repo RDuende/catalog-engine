@@ -23,3 +23,7 @@ export * from "./canonical/index.js";
 export * from "./knowledge/index.js";
 
 export * from "./enrichment/index.js";
+
+export * from "./recommendation/index.js";
+
+export * from "./intent/index.js";

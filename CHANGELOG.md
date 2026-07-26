@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.15.0
+
+- Añade Intent Engine determinista para interpretar consultas en español.
+- Extrae destinatarios, ocasiones, materiales, técnicas, emociones y usos.
+- Interpreta presupuestos máximos, mínimos y rangos en euros, además de cantidad, urgencia y personalización.
+- Resuelve sinónimos frecuentes como `profe`, `maestro` y `seño`.
+- Convierte la intención en `RecommendationCriteria` sin acoplar ambos motores.
+- Añade `npm test`, `npm run test:intent` y pruebas unitarias del nuevo módulo.
+
+## 0.14.0
+
+- Añade Recommendation Engine puro sobre `KnowledgeGraphSnapshot`.
+- Incorpora filtros estrictos por validez, presupuesto, confianza y personalización.
+- Añade scoring ponderado por texto, categorías, atributos, presupuesto, confianza y Product DNA.
+- Devuelve ranking, desglose de puntuación, evidencias y explicaciones legibles.
+- Permite pesos configurables, puntuación mínima y límite de resultados.
+- Añade pruebas unitarias y exportación pública desde `src/core`.
+
 ## 0.13.0
 
 - Añade Ontology Engine y Knowledge Loader al pipeline canónico.
