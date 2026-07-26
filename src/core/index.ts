@@ -27,3 +27,8 @@ export * from "./enrichment/index.js";
 export * from "./recommendation/index.js";
 
 export * from "./intent/index.js";
+
+export * from "./dna/index.js";
+export * from "./capability/index.js";
+export * from "./solution/index.js";
+export * from "./recipe/index.js";
