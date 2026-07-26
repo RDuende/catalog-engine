@@ -1,5 +1,41 @@
 # Changelog
 
+## 0.20.2 - Personalization extraction hotfix
+
+- Corrige la detección de personalización en frases naturales como `quiero que lleve una foto`, `que incluya fotos`, `poner el nombre` y `quiero una dedicatoria`.
+- Mantiene la precedencia de las negaciones explícitas, por ejemplo `sin personalizar`.
+- Añade pruebas de regresión para foto, fotografías, nombres, logotipos, textos, mensajes y dedicatorias.
+- Conserva la API y el esquema de base de datos sin cambios.
+
+## 0.20.1 - Conversation memory and budget extraction hotfix
+
+- Corrige la extracción de presupuestos en expresiones naturales como `tengo 30 euros`, `unos 30 €`, `puedo gastar 30 euros` y cantidades monetarias aisladas.
+- Añade soporte para `como máximo`, `al menos` y rangos `entre X y Y`.
+- Refuerza la memoria incremental para conservar destinatario, ocasión, presupuesto y personalización entre turnos.
+- Añade pruebas de conversaciones de varios turnos y de corrección explícita del presupuesto.
+- Mantiene la API y el esquema de base de datos sin cambios.
+
+## 0.20.0 - Rai Intelligence Platform
+
+- Añade Conversation Engine con sesiones, historial y fusión incremental de intención.
+- Detecta la información que falta y formula una sola pregunta de seguimiento.
+- Añade Creativity Engine con ideas emotivas, elegantes, divertidas, originales y prácticas.
+- Genera explicaciones, productos asociados, presupuesto orientativo y prompts visuales.
+- Añade `POST /api/v1/rai/converse`.
+- Integra conversación, intención, soluciones, recomendaciones y razonamiento.
+- Añade pruebas para conversación y creatividad.
+- No requiere migraciones de Prisma.
+
+## 0.19.0 - Reasoning Engine
+
+- Añade `src/core/reasoning` con motor, restricciones, evidencias y trazas auditables.
+- Evalúa presupuesto, personalización, cantidad y prioridad de entrega.
+- Descarta candidatos que incumplen restricciones obligatorias.
+- Calcula una puntuación razonada y genera explicaciones estructuradas.
+- Integra la traza de razonamiento en `POST /api/v1/intent/recommend`.
+- Añade pruebas específicas del Reasoning Engine.
+- No requiere migraciones de Prisma.
+
 ## 0.17.5 - Foundation
 
 - Añadido Product DNA con confianza, procedencia, versión, builder y validador.
@@ -54,6 +90,13 @@
 - Added Knowledge Graph regression tests.
 
 # Changelog
+
+## 0.20.2 - Personalization extraction hotfix
+
+- Corrige la detección de personalización en frases naturales como `quiero que lleve una foto`, `que incluya fotos`, `poner el nombre` y `quiero una dedicatoria`.
+- Mantiene la precedencia de las negaciones explícitas, por ejemplo `sin personalizar`.
+- Añade pruebas de regresión para foto, fotografías, nombres, logotipos, textos, mensajes y dedicatorias.
+- Conserva la API y el esquema de base de datos sin cambios.
 
 ## 0.7.0
 

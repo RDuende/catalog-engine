@@ -1,6 +1,6 @@
 {
   "name": "catalog-engine",
-  "version": "0.18.2",
+  "version": "0.20.2",
   "private": true,
   "description": "Motor de catálogo y recomendaciones de RecuerdArte",
   "type": "module",
@@ -38,8 +38,10 @@
     "test": "npm run test:all",
     "test:intent": "tsx --test src/core/intent/*.test.ts",
     "test:api": "tsx --test src/modules/intent-api/*.test.ts",
-    "test:foundation": "tsx --test src/core/dna/*.test.ts src/core/capability/*.test.ts src/core/solution/*.test.ts src/core/recipe/*.test.ts src/modules/intent-api/*.test.ts",
-    "test:knowledge-v2": "tsx --test src/core/knowledge/*.test.ts"
+    "test:foundation": "tsx --test src/core/dna/*.test.ts src/core/capability/*.test.ts src/core/solution/*.test.ts src/core/recipe/*.test.ts src/core/reasoning/*.test.ts src/core/conversation/*.test.ts src/core/creativity/*.test.ts src/modules/intent-api/*.test.ts",
+    "test:knowledge-v2": "tsx --test src/core/knowledge/*.test.ts",
+    "test:reasoning": "tsx --test src/core/reasoning/*.test.ts",
+    "test:conversation": "tsx --test src/core/conversation/*.test.ts src/core/creativity/*.test.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",

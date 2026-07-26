@@ -32,3 +32,5 @@ export * from "./dna/index.js";
 export * from "./capability/index.js";
 export * from "./solution/index.js";
 export * from "./recipe/index.js";
+
+export * from "./reasoning/index.js";
