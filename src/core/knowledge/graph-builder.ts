@@ -29,6 +29,9 @@ export class KnowledgeGraphBuilder implements PipelineStage<EnrichedCatalog, Kno
     const relationValues = [...relations.values()];
     return {
       kind: "KnowledgeGraph",
+      schemaVersion: "2.0",
+      graphVersion: 1,
+      generatedAt: new Date().toISOString(),
       sourceFile: catalog.sourceFile,
       entities,
       relations: relationValues,
@@ -49,6 +52,8 @@ function toProductEntity(product: EnrichedProduct): Omit<ProductEntity, "id" | "
     priceMinor: product.prices[0]?.amountMinor,
     valid: product.valid,
     confidence: product.confidence,
+    provenance: [{ sourceKind: "catalog", sourceId: product.source.sourceFile, observedAt: new Date().toISOString(), extractor: "knowledge-graph-builder", version: "2.0" }],
+    version: 1,
     metadata: {
       canonicalId: product.id,
       sku: product.sku,
@@ -86,5 +91,5 @@ function addRelation(
   confidence: number,
 ): void {
   const id = `${from}|${type}|${to}`;
-  if (!relations.has(id)) relations.set(id, { id, from, to, type, confidence, metadata: {} });
+  if (!relations.has(id)) relations.set(id, { id, from, to, type, confidence, weight: confidence, version: 1, metadata: {}, provenance: [{ sourceKind: "inference", sourceId: "knowledge-graph-builder", observedAt: new Date().toISOString(), extractor: "knowledge-graph-builder", version: "2.0" }] });
 }

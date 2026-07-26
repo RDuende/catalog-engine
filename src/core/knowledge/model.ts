@@ -1,6 +1,17 @@
 export type KnowledgeEntityType = "product" | "category" | "attribute";
 export type AttributeType = "material" | "technique" | "dimension" | "occasion" | "audience" | "emotion" | "usage";
-export type KnowledgeRelationType = "BELONGS_TO" | "HAS_ATTRIBUTE";
+export type KnowledgeRelationType = "BELONGS_TO" | "HAS_ATTRIBUTE" | "RELATED_TO" | "REQUIRES" | "ENABLES" | "SUITABLE_FOR";
+
+export type KnowledgeSourceKind = "catalog" | "rule" | "import" | "manual" | "inference";
+
+export interface KnowledgeProvenance {
+  sourceKind: KnowledgeSourceKind;
+  sourceId: string;
+  observedAt: string;
+  extractor?: string;
+  version?: string;
+  evidence?: string[];
+}
 
 export interface KnowledgeEntityBase {
   id: string;
@@ -9,6 +20,8 @@ export interface KnowledgeEntityBase {
   normalizedLabel: string;
   confidence: number;
   metadata: Record<string, unknown>;
+  provenance?: KnowledgeProvenance[];
+  version?: number;
 }
 
 export interface ProductEntity extends KnowledgeEntityBase {
@@ -36,11 +49,18 @@ export interface KnowledgeRelation {
   to: string;
   type: KnowledgeRelationType;
   confidence: number;
+  weight?: number;
+  bidirectional?: boolean;
   metadata: Record<string, unknown>;
+  provenance?: KnowledgeProvenance[];
+  version?: number;
 }
 
 export interface KnowledgeGraphSnapshot {
   kind: "KnowledgeGraph";
+  schemaVersion?: "2.0";
+  graphVersion?: number;
+  generatedAt?: string;
   sourceFile: string;
   entities: KnowledgeEntity[];
   relations: KnowledgeRelation[];
@@ -57,4 +77,25 @@ export interface ProductQuery {
   attributes?: Partial<Record<AttributeType, string>>;
   maxPriceMinor?: number;
   validOnly?: boolean;
+  minConfidence?: number;
+}
+
+export interface GraphTraversalOptions {
+  maxDepth?: number;
+  minConfidence?: number;
+  minWeight?: number;
+  relationTypes?: KnowledgeRelationType[];
+  direction?: "outgoing" | "incoming" | "both";
+}
+
+export interface GraphPathStep {
+  relation: KnowledgeRelation;
+  entity: KnowledgeEntity;
+  score: number;
+}
+
+export interface GraphPath {
+  start: KnowledgeEntity;
+  steps: GraphPathStep[];
+  score: number;
 }

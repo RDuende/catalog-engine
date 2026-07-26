@@ -74,6 +74,14 @@ export const IntentRecommendBodySchema = Type.Object(
         default: false,
       }),
     ),
+
+    solutionLimit: Type.Optional(
+      Type.Integer({
+        minimum: 1,
+        maximum: 10,
+        default: 3,
+      }),
+    ),
   },
   {
     additionalProperties: false,

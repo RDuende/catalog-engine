@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.17.5 - Foundation
+
+- Añadido Product DNA con confianza, procedencia, versión, builder y validador.
+- Añadido Capability Engine para registrar y consultar capacidades por producto.
+- Añadido Solution Engine para convertir intención en soluciones comerciales puntuadas.
+- Añadido Recipe Engine con recetas versionadas y planificación de operaciones.
+- Añadidas pruebas unitarias y documentación de la release.
+- Se mantienen compatibles las APIs y motores existentes.
+
 ## [0.16.0] - 2026-07-26
 
 ### Added
@@ -103,3 +112,40 @@
 - Knowledge Graph ahora consume exclusivamente `CanonicalCatalog`.
 - Actualizada la identidad del producto a RecuerdArte.
 - Versión del proyecto actualizada a 0.12.0.
+
+## 0.17.6 - Solution-aware recommendations
+
+- Integra `SolutionEngine` en el flujo real de `/api/v1/intent/recommend`.
+- Añade `SolutionRecommendationOrchestrator`.
+- Añade catálogo inicial de soluciones comerciales de RecuerdArte.
+- Devuelve solución principal, alternativas, motivos y capacidades requeridas.
+- Enriquece la consulta enviada al motor de productos con el contexto de la solución.
+- Añade `solutionLimit` al contrato de la API.
+- Mantiene compatibilidad con la respuesta anterior.
+
+## 0.18.0 - Knowledge Graph V2
+
+- Añade pesos y confianza independientes en relaciones.
+- Añade procedencia y versionado en entidades, relaciones y snapshots.
+- Amplía las relaciones tipadas para razonamiento comercial y productivo.
+- Añade recorridos ponderados con filtros de profundidad, dirección y tipo.
+- Añade explicaciones auditables de los caminos del grafo.
+- Añade confianza mínima a las consultas de productos.
+- Mantiene compatibilidad con snapshots anteriores y no requiere migración de base de datos.
+
+
+## 0.18.1 - Strict TypeScript and installer hotfix
+
+- Corrige los accesos por índice no comprobados en las pruebas de Knowledge Graph V2.
+- Corrige `KnowledgeGraph.explainPath()` para funcionar con `noUncheckedIndexedAccess`.
+- Corrige el instalador de Windows para fusionar el contenido de `src` sin crear `src\src`.
+- Repara automáticamente una carpeta `src\src` creada por la instalación 0.18.0.
+- El instalador comprueba el código de salida de cada comando npm y se detiene ante cualquier error.
+- Mantiene el proyecto en TypeScript estricto sin desactivar comprobaciones.
+
+## 0.18.2 - Solution scoring regression fix
+
+- Corrige la expectativa obsoleta del test de `SolutionEngine`: el desglose real es 40 puntos por destinatario, 35 por ocasión, 10 por emoción coincidente y 2 por prioridad, total 87.
+- Añade aserciones sobre los motivos de puntuación para evitar que futuros cambios pasen inadvertidos.
+- Mantiene intacto el algoritmo de puntuación, ya que el resultado 87 era el comportamiento correcto y documentado por el código.
+- Conserva las correcciones de TypeScript estricto y del instalador introducidas en 0.18.1.
