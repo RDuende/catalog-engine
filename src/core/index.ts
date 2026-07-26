@@ -21,3 +21,5 @@ export * from "./compiler.js";
 export * from "./semantic/index.js";
 export * from "./canonical/index.js";
 export * from "./knowledge/index.js";
+
+export * from "./enrichment/index.js";

@@ -1,5 +1,5 @@
 export type KnowledgeEntityType = "product" | "category" | "attribute";
-export type AttributeType = "material" | "technique" | "dimension";
+export type AttributeType = "material" | "technique" | "dimension" | "occasion" | "audience" | "emotion" | "usage";
 export type KnowledgeRelationType = "BELONGS_TO" | "HAS_ATTRIBUTE";
 
 export interface KnowledgeEntityBase {

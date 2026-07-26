@@ -7,6 +7,7 @@ import { SemanticAnalyzer, type SemanticCatalog } from "./semantic/index.js";
 import type { DocumentBlock } from "../modules/block-detector/block-detector.types.js";
 import { CanonicalProductBuilder, type CanonicalCatalog } from "./canonical/index.js";
 import { KnowledgeGraphBuilder, type KnowledgeGraphSnapshot } from "./knowledge/index.js";
+import { KnowledgeLoader, type EnrichedCatalog } from "./enrichment/index.js";
 
 export function compileBlocks(sourceFile: string, blocks: DocumentBlock[], provider?: string): Promise<PipelineResult<CatalogSyntaxTree>> {
   const document = documentModelFromBlocks(sourceFile, blocks, provider);
@@ -37,6 +38,18 @@ export function compileCanonicalBlocks(sourceFile: string, blocks: DocumentBlock
   return pipeline.run(document, { sourceFile, provider });
 }
 
+
+export function compileEnrichedBlocks(sourceFile: string, blocks: DocumentBlock[], provider?: string): Promise<PipelineResult<EnrichedCatalog>> {
+  const document = documentModelFromBlocks(sourceFile, blocks, provider);
+  const pipeline = new Pipeline<DocumentModel, EnrichedCatalog>()
+    .use(new DocumentLexer())
+    .use(new CatalogParser(sourceFile))
+    .use(new SemanticAnalyzer())
+    .use(new CanonicalProductBuilder())
+    .use(new KnowledgeLoader());
+  return pipeline.run(document, { sourceFile, provider });
+}
+
 export function compileKnowledgeBlocks(sourceFile: string, blocks: DocumentBlock[], provider?: string): Promise<PipelineResult<KnowledgeGraphSnapshot>> {
   const document = documentModelFromBlocks(sourceFile, blocks, provider);
   const pipeline = new Pipeline<DocumentModel, KnowledgeGraphSnapshot>()
@@ -44,6 +57,7 @@ export function compileKnowledgeBlocks(sourceFile: string, blocks: DocumentBlock
     .use(new CatalogParser(sourceFile))
     .use(new SemanticAnalyzer())
     .use(new CanonicalProductBuilder())
+    .use(new KnowledgeLoader())
     .use(new KnowledgeGraphBuilder());
   return pipeline.run(document, { sourceFile, provider });
 }

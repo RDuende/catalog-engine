@@ -1,3 +1,14 @@
+# Changelog
+
+## 0.13.0
+
+- Añade Ontology Engine y Knowledge Loader al pipeline canónico.
+- Añade Product DNA con memoria, emoción, personalización, sostenibilidad y versatilidad.
+- Infere técnicas compatibles a partir de productos y materiales.
+- Enriquece el Knowledge Graph con ocasiones, públicos, emociones y usos.
+- La CLI incluye la salida `enriched`.
+- Añade pruebas del enriquecimiento y regresión del grafo.
+
 ## 0.11.0
 
 - Added Knowledge Graph Core with entity deduplication.
