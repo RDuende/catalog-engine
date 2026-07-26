@@ -1,3 +1,9 @@
+# Local backups and generated packages
+.catalog-engine-backups/
+.release-backups/
+.sprint-backups/
+backups/
+*.zip
 # Node
 node_modules/
 
