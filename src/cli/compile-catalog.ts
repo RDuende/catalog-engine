@@ -3,7 +3,7 @@ import { basename, dirname, extname, join, resolve } from "node:path";
 import { BlockDetectorService } from "../modules/block-detector/block-detector.service.js";
 import type { CatalogPageInput } from "../modules/block-detector/block-detector.types.js";
 import { calculateCatalogMetrics } from "../core/metrics/catalog-metrics.js";
-import { compileBlocks, compileSemanticBlocks, compileCanonicalBlocks, compileKnowledgeBlocks } from "../core/compiler.js";
+import { compileBlocks, compileSemanticBlocks, compileCanonicalBlocks, compileEnrichedBlocks, compileKnowledgeBlocks } from "../core/compiler.js";
 
 async function main(): Promise<void> {
   const inputArg = process.argv[2];
@@ -15,13 +15,14 @@ async function main(): Promise<void> {
   const result = await compileBlocks(basename(inputPath), detection.blocks);
   const semanticResult = await compileSemanticBlocks(basename(inputPath), detection.blocks);
   const canonicalResult = await compileCanonicalBlocks(basename(inputPath), detection.blocks);
+  const enrichedResult = await compileEnrichedBlocks(basename(inputPath), detection.blocks);
   const graphResult = await compileKnowledgeBlocks(basename(inputPath), detection.blocks);
   const metrics = calculateCatalogMetrics(result.output);
   const outputPath = join(dirname(inputPath), "reports", `${basename(inputPath, extname(inputPath))}-compiled.json`);
   await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, JSON.stringify({ tree: result.output, semantic: semanticResult.output, canonical: canonicalResult.output, graph: graphResult.output, metrics, pipeline: [...result.metrics, ...semanticResult.metrics, ...canonicalResult.metrics, ...graphResult.metrics] }, null, 2), "utf8");
+  await writeFile(outputPath, JSON.stringify({ tree: result.output, semantic: semanticResult.output, canonical: canonicalResult.output, enriched: enrichedResult.output, graph: graphResult.output, metrics, pipeline: [...result.metrics, ...semanticResult.metrics, ...canonicalResult.metrics, ...enrichedResult.metrics, ...graphResult.metrics] }, null, 2), "utf8");
   console.log(`Catalog compiled: ${outputPath}`);
-  console.log(`Products: ${metrics.products} | Canonical: ${canonicalResult.output.statistics.totalProducts} | Valid: ${canonicalResult.output.statistics.validProducts} | Invalid: ${canonicalResult.output.statistics.invalidProducts} | Categories: ${metrics.categories} | Relations: ${graphResult.output.statistics.relations}`);
+  console.log(`Products: ${metrics.products} | Canonical: ${canonicalResult.output.statistics.totalProducts} | Valid: ${canonicalResult.output.statistics.validProducts} | Invalid: ${canonicalResult.output.statistics.invalidProducts} | Categories: ${metrics.categories} | Enriched: ${enrichedResult.output.products.length} | Relations: ${graphResult.output.statistics.relations}`);
 }
 
 function normalizePages(value: unknown): CatalogPageInput[] {

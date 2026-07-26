@@ -1,24 +1,28 @@
-import type { CanonicalCatalog, CanonicalProduct } from "../canonical/model.js";
+import type { EnrichedCatalog, EnrichedProduct } from "../enrichment/model.js";
 import type { PipelineStage, StageContext } from "../pipeline/pipeline.js";
 import type { AttributeType, KnowledgeGraphSnapshot, KnowledgeRelation, ProductEntity } from "./model.js";
 import { EntityRegistry } from "./registry.js";
 
-export class KnowledgeGraphBuilder implements PipelineStage<CanonicalCatalog, KnowledgeGraphSnapshot> {
+export class KnowledgeGraphBuilder implements PipelineStage<EnrichedCatalog, KnowledgeGraphSnapshot> {
   readonly name = "knowledge-graph-builder";
 
-  execute(catalog: CanonicalCatalog, _context: StageContext): KnowledgeGraphSnapshot {
+  execute(catalog: EnrichedCatalog, _context: StageContext): KnowledgeGraphSnapshot {
     const registry = new EntityRegistry();
     const relations = new Map<string, KnowledgeRelation>();
 
     for (const product of catalog.products) {
       const productEntity = registry.product(toProductEntity(product));
       for (const categoryValue of product.categories) {
-        const category = registry.category(categoryValue.label, product.confidence);
+        const category = registry.category(categoryValue.normalized, product.confidence);
         addRelation(relations, productEntity.id, category.id, "BELONGS_TO", product.confidence);
       }
-      addAttributes(registry, relations, productEntity.id, "material", product.materials.map((item) => item.label), product.confidence);
-      addAttributes(registry, relations, productEntity.id, "technique", product.techniques.map((item) => item.label), product.confidence);
+      addAttributes(registry, relations, productEntity.id, "material", product.materials.map((item) => item.normalized), product.confidence);
+      addAttributes(registry, relations, productEntity.id, "technique", product.techniques.map((item) => item.normalized), product.confidence);
       addAttributes(registry, relations, productEntity.id, "dimension", product.dimensions, product.confidence);
+      addAttributes(registry, relations, productEntity.id, "occasion", product.ontology.occasions.map((item) => item.label), product.confidence);
+      addAttributes(registry, relations, productEntity.id, "audience", product.ontology.audiences.map((item) => item.label), product.confidence);
+      addAttributes(registry, relations, productEntity.id, "emotion", product.ontology.emotions.map((item) => item.label), product.confidence);
+      addAttributes(registry, relations, productEntity.id, "usage", product.ontology.usages.map((item) => item.label), product.confidence);
     }
 
     const entities = registry.values();
@@ -38,7 +42,7 @@ export class KnowledgeGraphBuilder implements PipelineStage<CanonicalCatalog, Kn
   }
 }
 
-function toProductEntity(product: CanonicalProduct): Omit<ProductEntity, "id" | "type" | "normalizedLabel"> {
+function toProductEntity(product: EnrichedProduct): Omit<ProductEntity, "id" | "type" | "normalizedLabel"> {
   return {
     label: product.name || product.supplierSku || product.id,
     reference: product.supplierSku,
@@ -54,6 +58,8 @@ function toProductEntity(product: CanonicalProduct): Omit<ProductEntity, "id" | 
       source: product.source,
       warnings: product.warnings,
       tags: product.tags,
+      ontology: product.ontology,
+      dna: product.dna,
     },
   };
 }
