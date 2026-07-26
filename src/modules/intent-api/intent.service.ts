@@ -6,6 +6,7 @@ import {
   type SolutionRecommendationPlan,
 } from "../../core/solution/index.js";
 import { RecommendationService } from "../recommendation-engine/recommendation.service.js";
+import { ReasoningEngine, type ReasoningTrace } from "../../core/reasoning/index.js";
 import type { RecommendationRequest, RecommendationResponse } from "../recommendation-engine/recommendation.types.js";
 import type { IntentAnalyzeBody, IntentRecommendBody } from "./intent.schemas.js";
 
@@ -17,6 +18,7 @@ export interface IntentRecommendationResult {
   };
   readonly recommendationRequest: RecommendationRequest;
   readonly recommendations: RecommendationResponse;
+  readonly reasoning: ReasoningTrace;
 }
 
 export interface SolutionSummary {
@@ -39,6 +41,7 @@ export class IntentApiService {
     private readonly intentEngine = new IntentEngine(),
     private readonly recommendationService = new RecommendationService(),
     solutionOrchestrator?: SolutionRecommendationOrchestrator,
+    private readonly reasoningEngine = new ReasoningEngine(),
   ) {
     this.solutionOrchestrator = solutionOrchestrator
       ?? new SolutionRecommendationOrchestrator(DEFAULT_SOLUTION_DEFINITIONS);
@@ -57,6 +60,11 @@ export class IntentApiService {
     const plan = this.solutionOrchestrator.plan(analysis, input.solutionLimit ?? 3);
     const recommendationRequest = mapPlanToRecommendationRequest(plan, input);
     const recommendations = await this.recommendationService.recommend(recommendationRequest);
+    const reasoning = this.reasoningEngine.reason({
+      intent: analysis.intent,
+      solution: plan.primarySolution,
+      candidates: recommendations.items,
+    });
 
     return {
       analysis,
@@ -66,6 +74,7 @@ export class IntentApiService {
       },
       recommendationRequest,
       recommendations,
+      reasoning,
     };
   }
 }
