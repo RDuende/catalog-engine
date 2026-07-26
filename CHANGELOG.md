@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.16.0] - 2026-07-26
+
+### Added
+- API REST de análisis de intención en `POST /api/v1/intent/analyze`.
+- Flujo integrado intención + recomendación en `POST /api/v1/intent/recommend`.
+- Endpoint `GET /version` y versión incluida en `/health`.
+- Playground web actualizado para visualizar intención, criterios y ranking.
+- Adaptador probado entre el Intent Engine y el servicio persistente de recomendaciones.
+
 ## 0.15.0
 
 - Añade Intent Engine determinista para interpretar consultas en español.
