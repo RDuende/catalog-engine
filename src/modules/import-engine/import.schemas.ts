@@ -26,3 +26,16 @@ export const AnalyzeImportBodySchema = Type.Object({
 export type CreateImportSourceBody = Static<typeof CreateImportSourceBodySchema>;
 export type RunImportBody = Static<typeof RunImportBodySchema>;
 export type AnalyzeImportBody = Static<typeof AnalyzeImportBodySchema>;
+
+
+export const SearchCatalogCandidatesBodySchema = Type.Object({
+  query: Type.Optional(Type.String()),
+  recipient: Type.Optional(Type.String()),
+  interests: Type.Optional(Type.Array(Type.String(), { maxItems: 20 })),
+  occasions: Type.Optional(Type.Array(Type.String(), { maxItems: 20 })),
+  styles: Type.Optional(Type.Array(Type.String(), { maxItems: 20 })),
+  values: Type.Optional(Type.Array(Type.String(), { maxItems: 20 })),
+  limit: Type.Optional(Type.Integer({ minimum: 1, maximum: 100 }))
+});
+
+export type SearchCatalogCandidatesBody = Static<typeof SearchCatalogCandidatesBodySchema>;

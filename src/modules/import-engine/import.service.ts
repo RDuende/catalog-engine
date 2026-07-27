@@ -1,7 +1,7 @@
 import { access } from "node:fs/promises";
 import { Prisma, ProductStatus } from "@prisma/client";
 import { prisma } from "../../lib/prisma.js";
-import type { NormalizedProduct, RunImportInput } from "./import.types.js";
+import type { NormalizedProduct, RunImportInput, WeightedSemanticValue } from "./import.types.js";
 import { resolveImportAdapter } from "./import.registry.js";
 import { slugifyImport } from "./import.utils.js";
 
@@ -17,6 +17,57 @@ async function uniqueProductSlug(name: string, externalId: string, currentId?: s
     if (!existing || existing.id === currentId) return candidate;
   }
   return `${base}-${Date.now()}`;
+}
+
+
+async function syncSemanticRelations(productId: string, normalized: NormalizedProduct) {
+  async function syncTags(items: WeightedSemanticValue[] | undefined, tagType: string) {
+    for (const item of items ?? []) {
+      const slug = `${tagType}-${slugifyImport(item.value)}`;
+      const tag = await prisma.tag.upsert({
+        where: { slug },
+        create: { name: item.value, slug, tagType },
+        update: { name: item.value, tagType }
+      });
+      await prisma.productTag.upsert({
+        where: { productId_tagId: { productId, tagId: tag.id } },
+        create: { productId, tagId: tag.id, weight: item.weight ?? 1, source: item.source ?? "supplier" },
+        update: { weight: item.weight ?? 1, source: item.source ?? "supplier" }
+      });
+    }
+  }
+
+  for (const item of normalized.audiences ?? []) {
+    const slug = slugifyImport(item.value);
+    const entity = await prisma.audience.upsert({ where: { slug }, create: { name: item.value, slug }, update: { name: item.value } });
+    await prisma.productAudience.upsert({ where: { productId_audienceId: { productId, audienceId: entity.id } }, create: { productId, audienceId: entity.id, weight: item.weight ?? 1 }, update: { weight: item.weight ?? 1 } });
+  }
+  for (const item of normalized.occasions ?? []) {
+    const slug = slugifyImport(item.value);
+    const entity = await prisma.occasion.upsert({ where: { slug }, create: { name: item.value, slug }, update: { name: item.value } });
+    await prisma.productOccasion.upsert({ where: { productId_occasionId: { productId, occasionId: entity.id } }, create: { productId, occasionId: entity.id, weight: item.weight ?? 1 }, update: { weight: item.weight ?? 1 } });
+  }
+  for (const item of normalized.emotions ?? []) {
+    const slug = slugifyImport(item.value);
+    const entity = await prisma.emotion.upsert({ where: { slug }, create: { name: item.value, slug }, update: { name: item.value } });
+    await prisma.productEmotion.upsert({ where: { productId_emotionId: { productId, emotionId: entity.id } }, create: { productId, emotionId: entity.id, weight: item.weight ?? 1 }, update: { weight: item.weight ?? 1 } });
+  }
+  for (const item of normalized.professions ?? []) {
+    const slug = slugifyImport(item.value);
+    const entity = await prisma.profession.upsert({ where: { slug }, create: { name: item.value, slug }, update: { name: item.value } });
+    await prisma.productProfession.upsert({ where: { productId_professionId: { productId, professionId: entity.id } }, create: { productId, professionId: entity.id, weight: item.weight ?? 1 }, update: { weight: item.weight ?? 1 } });
+  }
+  for (const item of normalized.interests ?? []) {
+    const slug = slugifyImport(item.value);
+    const entity = await prisma.interest.upsert({ where: { slug }, create: { name: item.value, slug }, update: { name: item.value } });
+    await prisma.productInterest.upsert({ where: { productId_interestId: { productId, interestId: entity.id } }, create: { productId, interestId: entity.id, weight: item.weight ?? 1 }, update: { weight: item.weight ?? 1 } });
+  }
+
+  await syncTags(normalized.tags, "tag");
+  await syncTags(normalized.styles, "style");
+  await syncTags(normalized.values, "value");
+  await syncTags(normalized.useCases, "use-case");
+  await syncTags((normalized.personalizationMethods ?? []).map((value) => ({ value, source: "supplier" })), "personalization");
 }
 
 async function persistProduct(sourceId: string, normalized: NormalizedProduct) {
@@ -136,6 +187,8 @@ async function persistProduct(sourceId: string, normalized: NormalizedProduct) {
       }
     });
   }
+
+  await syncSemanticRelations(product.id, normalized);
 
   return product;
 }
@@ -265,4 +318,72 @@ export async function runImport(input: RunImportInput) {
     });
     throw error;
   }
+}
+
+
+export function getImportJob(jobId: string) {
+  return prisma.importJob.findUnique({
+    where: { id: jobId },
+    include: { source: true, records: { orderBy: { createdAt: "asc" }, take: 100 } }
+  });
+}
+
+export async function searchCatalogCandidates(input: {
+  query?: string;
+  recipient?: string;
+  interests?: string[];
+  occasions?: string[];
+  styles?: string[];
+  values?: string[];
+  limit?: number;
+}) {
+  const terms = [input.query, input.recipient, ...(input.interests ?? []), ...(input.occasions ?? []), ...(input.styles ?? []), ...(input.values ?? [])]
+    .flatMap((value) => value ? value.toLowerCase().split(/\s+/) : [])
+    .map((value) => value.trim())
+    .filter((value) => value.length > 1);
+
+  const products = await prisma.product.findMany({
+    where: {
+      status: { in: [ProductStatus.DRAFT, ProductStatus.ACTIVE] },
+      ...(terms.length ? {
+        OR: terms.flatMap((term) => [
+          { name: { contains: term, mode: "insensitive" as const } },
+          { description: { contains: term, mode: "insensitive" as const } },
+          { searchDocument: { contains: term, mode: "insensitive" as const } },
+          { interests: { some: { interest: { name: { contains: term, mode: "insensitive" as const } } } } },
+          { audiences: { some: { audience: { name: { contains: term, mode: "insensitive" as const } } } } },
+          { occasions: { some: { occasion: { name: { contains: term, mode: "insensitive" as const } } } } },
+          { tags: { some: { tag: { name: { contains: term, mode: "insensitive" as const } } } } }
+        ])
+      } : {})
+    },
+    include: {
+      media: { include: { media: true }, orderBy: { position: "asc" }, take: 3 },
+      variants: { take: 20 },
+      categories: { include: { category: true } },
+      audiences: { include: { audience: true } },
+      occasions: { include: { occasion: true } },
+      interests: { include: { interest: true } },
+      tags: { include: { tag: true } }
+    },
+    take: Math.min(Math.max((input.limit ?? 20) * 4, 20), 200)
+  });
+
+  const scored = products.map((product) => {
+    const corpus = [product.name, product.description, product.searchDocument,
+      ...product.interests.map((x) => x.interest.name),
+      ...product.audiences.map((x) => x.audience.name),
+      ...product.occasions.map((x) => x.occasion.name),
+      ...product.tags.map((x) => x.tag.name)
+    ].filter(Boolean).join(" ").toLowerCase();
+    const matchedTerms = [...new Set(terms.filter((term) => corpus.includes(term)))];
+    let score = matchedTerms.length * 10;
+    if (input.recipient && product.audiences.some((x) => x.audience.name.toLowerCase().includes(input.recipient!.toLowerCase()))) score += 20;
+    score += (input.interests ?? []).filter((term) => product.interests.some((x) => x.interest.name.toLowerCase().includes(term.toLowerCase()))).length * 30;
+    score += (input.occasions ?? []).filter((term) => product.occasions.some((x) => x.occasion.name.toLowerCase().includes(term.toLowerCase()))).length * 15;
+    if (product.customizable) score += 5;
+    return { ...product, score, matchedTerms };
+  }).sort((a, b) => b.score - a.score);
+
+  return { query: input, totalCandidates: scored.length, items: scored.slice(0, input.limit ?? 20) };
 }

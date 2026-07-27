@@ -1,11 +1,22 @@
 export type RawImportRecord = Record<string, unknown>;
 
+export interface WeightedSemanticValue {
+  value: string;
+  weight?: number;
+  source?: "supplier" | "manual" | "ai" | "rule";
+}
+
 export interface NormalizedVariant {
   sku: string;
   name?: string;
   barcode?: string;
   color?: string;
   size?: string;
+  capacity?: string;
+  finish?: string;
+  priceAdjustment?: number;
+  stock?: number;
+  imageUrl?: string;
   metadata?: Record<string, unknown>;
 }
 
@@ -38,6 +49,16 @@ export interface NormalizedProduct {
   categories?: string[];
   variants?: NormalizedVariant[];
   media?: NormalizedMedia[];
+  tags?: WeightedSemanticValue[];
+  audiences?: WeightedSemanticValue[];
+  occasions?: WeightedSemanticValue[];
+  emotions?: WeightedSemanticValue[];
+  professions?: WeightedSemanticValue[];
+  interests?: WeightedSemanticValue[];
+  styles?: WeightedSemanticValue[];
+  values?: WeightedSemanticValue[];
+  useCases?: WeightedSemanticValue[];
+  personalizationMethods?: string[];
   metadata?: Record<string, unknown>;
 }
 
@@ -58,18 +79,14 @@ export interface ImportAdapter {
 export interface ImportAnalysis {
   adapter: { key: string; name: string };
   file: { path: string; name: string; sizeBytes: number };
-  totals: {
-    records: number;
-    normalizable: number;
-    skipped: number;
-    invalid: number;
-  };
+  totals: { records: number; normalizable: number; skipped: number; invalid: number };
   detected: {
     fields: string[];
     categories: string[];
     productTypes: string[];
     materials: string[];
     colors: string[];
+    semanticValues: string[];
     hasImages: boolean;
     hasVariants: boolean;
   };
