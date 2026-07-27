@@ -8,6 +8,8 @@ export interface ParsedIntent {
   normalizedText: string;
   recipient?: string;
   occasion?: string;
+  recipientAge?: number;
+  audienceSegment?: "infantil" | "juvenil" | "adulto" | "senior";
   minPriceMinor?: number;
   maxPriceMinor?: number;
   quantity?: number;

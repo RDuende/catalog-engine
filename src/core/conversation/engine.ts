@@ -7,7 +7,7 @@ const FOLLOW_UPS: Record<ConversationField, string> = {
   recipient: "¿Para quién es el regalo?",
   occasion: "¿Para qué ocasión lo necesitas?",
   budget: "¿Qué presupuesto aproximado tienes?",
-  personalization: "¿Quieres incluir fotos, nombres o una dedicatoria?",
+  personalization: "¿Quieres incluir una foto, su nombre o una dedicatoria?",
 };
 
 export class ConversationEngine {
@@ -19,10 +19,11 @@ export class ConversationEngine {
     const id = sessionId?.trim() || randomUUID();
     const previous = this.sessions.get(id);
     const analysis = this.intentEngine.analyze(message);
-    const mergedIntent = mergeIntent(previous?.mergedIntent, analysis.intent, message);
+    const contextualIntent = applyShortAnswerContext(analysis.intent, message, previous?.missingFields[0]);
+    const mergedIntent = mergeIntent(previous?.mergedIntent, contextualIntent, message);
     const missingFields = findMissingFields(mergedIntent);
     const userTurn: ConversationTurn = { role: "user", text: message, createdAt: new Date().toISOString() };
-    const nextQuestion = missingFields[0] ? FOLLOW_UPS[missingFields[0]] : undefined;
+    const nextQuestion = buildFollowUp(missingFields, mergedIntent);
     const assistantTurn: ConversationTurn | undefined = nextQuestion
       ? { role: "assistant", text: nextQuestion, createdAt: new Date().toISOString() }
       : undefined;
@@ -48,6 +49,8 @@ function mergeIntent(previous: ParsedIntent | undefined, current: ParsedIntent, 
     normalizedText: [previous?.normalizedText, current.normalizedText].filter(Boolean).join(" "),
     recipient: current.recipient ?? previous?.recipient,
     occasion: current.occasion ?? previous?.occasion,
+    recipientAge: current.recipientAge ?? previous?.recipientAge,
+    audienceSegment: current.audienceSegment ?? previous?.audienceSegment,
     minPriceMinor: current.minPriceMinor ?? previous?.minPriceMinor,
     maxPriceMinor: current.maxPriceMinor ?? previous?.maxPriceMinor,
     quantity: current.quantity ?? previous?.quantity,
@@ -76,4 +79,38 @@ function findMissingFields(intent: ParsedIntent): ConversationField[] {
   if (intent.maxPriceMinor === undefined) missing.push("budget");
   if (intent.personalization === undefined) missing.push("personalization");
   return missing;
+}
+
+function buildFollowUp(missing: ConversationField[], intent: ParsedIntent): string | undefined {
+  if (!missing.length) return undefined;
+  if (missing.includes("recipient")) return FOLLOW_UPS.recipient;
+
+  const questions: string[] = [];
+  if (missing.includes("occasion")) questions.push("¿Es para un cumpleaños o para otra ocasión?");
+  if (missing.includes("budget")) questions.push("¿Qué presupuesto tienes aproximadamente?");
+  if (missing.includes("personalization")) questions.push("¿Quieres añadir una foto, su nombre o una dedicatoria?");
+
+  const intro = intent.recipient
+    ? `Perfecto, ya sé que es para ${recipientLabel(intent.recipient)}${intent.recipientAge !== undefined ? ` de ${intent.recipientAge} años` : ""}.`
+    : "Perfecto.";
+  return `${intro} Solo necesito saber: ${questions.join(" ")}`;
+}
+
+function recipientLabel(recipient: string): string {
+  return `tu ${recipient}`;
+}
+
+function applyShortAnswerContext(intent: ParsedIntent, message: string, expected?: ConversationField): ParsedIntent {
+  const normalized = message.trim().toLocaleLowerCase("es-ES");
+  if (expected !== "personalization" || intent.personalization !== undefined) return intent;
+  if (/^(si|sí|claro|vale|por supuesto|perfecto)$/.test(normalized)) return { ...intent, personalization: true };
+  if (/^(?:una?|unas?|el|la|los|las|su|sus)?\s*(?:foto(?:s|grafía|grafías)?|imagen(?:es)?|nombre(?:s)?|logo(?:s)?|dedicatoria(?:s)?|frase(?:s)?|texto(?:s)?|mensaje(?:s)?|inscripción|inscripciones)$/.test(normalized)) {
+    return { ...intent, personalization: true };
+  }
+  if (/^(?:si|sí|claro|vale|perfecto)[,\s]+(?:una?|unas?|el|la|los|las|su|sus)?\s*(?:foto(?:s|grafía|grafías)?|imagen(?:es)?|nombre(?:s)?|logo(?:s)?|dedicatoria(?:s)?|frase(?:s)?|texto(?:s)?|mensaje(?:s)?)$/.test(normalized)) {
+    return { ...intent, personalization: true };
+  }
+  if (/^(?:las tres|todo|todas)(?: las cosas)?$/.test(normalized)) return { ...intent, personalization: true };
+  if (/^(no|ninguna|ninguno|sin personalizar|nada)$/.test(normalized)) return { ...intent, personalization: false };
+  return intent;
 }

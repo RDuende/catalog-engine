@@ -1,3 +1,41 @@
+# 0.24.1
+
+- Corrige la subida de fotografías que Fastify rechazaba por superar el límite JSON predeterminado de 1 MiB.
+- Añade validación de formato y tamaño en el navegador.
+- Mejora la compatibilidad y diagnóstico de OpenAI Images.
+
+# v0.22.1
+
+- Corrige las consultas Prisma de Rai Agent para las relaciones de medios (`ProductMedia.media`).
+- Restaura la inferencia tipada de `prices`, `categories`, `occasions`, `audiences` y `customizations`.
+- Corrige la lectura de URL y tipo de imágenes desde `MediaAsset`.
+
+# v0.21.4 — Respuestas cortas de personalización
+
+- Rai entiende respuestas como «foto», «una foto», «una fotografía», «una imagen», «su nombre», «una dedicatoria», «una frase» y «las tres».
+- Las respuestas cortas se interpretan usando la pregunta pendiente de personalización.
+- Se conserva correctamente el destinatario, la edad, la ocasión y el presupuesto al completar la conversación.
+- Añadidas pruebas de regresión para el caso «graduación de mi padre de 70 años → 50 € → una foto».
+
+# Changelog
+
+## 0.21.3
+
+- Corrige el test de graduación para usar el valor canónico interno `graduacion`.
+- Mantiene la presentación con tildes separada de los valores normalizados del motor.
+- Separa pruebas críticas y funcionales en el instalador.
+- Los fallos funcionales generan advertencias sin abortar una instalación técnicamente válida.
+- Todos los comandos se ejecutan dentro de `C:\catalog-engine`; no se crean `src` ni `node_modules` en la carpeta del instalador.
+
+## 0.21.1 — Conversación inteligente
+
+- Detecta relaciones como hija, hijo, hermana, amigo y entrenador.
+- Extrae la edad del destinatario y su segmento de edad.
+- Comprende respuestas cortas como «mi hija».
+- Evita repetir preguntas ya resueltas.
+- Agrupa ocasión, presupuesto y personalización en una pregunta natural.
+- Añade pruebas de regresión para el flujo observado en Rai Playground.
+
 # Changelog
 
 ## 0.20.2 - Personalization extraction hotfix
@@ -192,3 +230,27 @@
 - Añade aserciones sobre los motivos de puntuación para evitar que futuros cambios pasen inadvertidos.
 - Mantiene intacto el algoritmo de puntuación, ya que el resultado 87 era el comportamiento correcto y documentado por el código.
 - Conserva las correcciones de TypeScript estricto y del instalador introducidas en 0.18.1.
+
+## 0.21.2
+
+- Corrige la detección de la ocasión "graduación".
+- Corrige frases de personalización como "sí quiero añadir una foto".
+- Añade una prueba de regresión para fusionar destinatario, edad, graduación, 50 € y fotografía.
+- Sustituye el instalador autocontenido por un instalador con payload dirigido a C:\catalog-engine.
+- Evita crear `src` y `node_modules` en la carpeta desde la que se ejecuta el instalador.
+
+## 0.22.0 - Rai Agent
+
+- Sustituye el guion conversacional por un agente LLM conectado a OpenAI Responses API.
+- Rai mantiene la conversación mediante `previous_response_id`.
+- Añade herramientas de catálogo sobre PostgreSQL: `buscar_productos`, `obtener_producto` y `estadisticas_catalogo`.
+- Las recomendaciones solo pueden usar productos reales devueltos por la base de datos.
+- Añade configuración `OPENAI_API_KEY` y `OPENAI_MODEL`.
+- El Playground muestra modelo y herramientas consultadas en cada turno.
+
+## 0.22.3 - Rai de baja latencia
+- Sustituye el bucle de hasta tres llamadas a OpenAI por una sola llamada por mensaje.
+- PostgreSQL recupera previamente hasta ocho productos candidatos con una única consulta.
+- El contexto reciente de la sesión se reutiliza para búsquedas posteriores.
+- Limita la respuesta y reduce el esfuerzo de razonamiento para mejorar la latencia.
+- El inspector identifica la estrategia `single_model_call` y conserva el tiempo de búsqueda.
