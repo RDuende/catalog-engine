@@ -1,46 +1,37 @@
-# Catalog Engine
+# RecuerdArte Catalog Engine
 
-Motor de interpretación, normalización y conocimiento para catálogos de productos promocionales.
+**Versión 0.30.0 — Intelligent Catalog Foundation**
 
-## Estado
+Motor de catálogo, conocimiento y recomendaciones para RecuerdArte.
 
-Versión: 0.8.1
+## Novedades principales
 
-### Componentes
+La v0.30.0 incorpora una capa PIM importable y comprensible por Rai:
 
-- Analyzer
-- Block Detector
-- Import Engine
-- Knowledge Builder
+- importación CSV, TSV, Excel y JSON;
+- normalización a producto canónico;
+- variantes e imágenes;
+- destinatarios, intereses, ocasiones, emociones, estilos, valores y casos de uso;
+- trazabilidad de trabajos y errores;
+- búsqueda de candidatos para construir conjuntos de regalo.
 
-Próximo objetivo:
+## Instalación en Windows
 
-- Parser
-- Semantic AST
-- Knowledge Graph
-## Knowledge Graph V2 (0.18.0)
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\instalar.ps1
+npm run dev
+```
 
-El núcleo de conocimiento admite relaciones tipadas, pesos, confianza, procedencia y versionado. `KnowledgeGraph.paths()` permite recorrer el grafo con límites y filtros, mientras `explainPath()` genera una explicación legible de la evidencia encontrada.
+## Endpoints nuevos
 
+```text
+GET  /api/v1/imports/adapters
+POST /api/v1/imports/analyze
+POST /api/v1/imports/sources
+POST /api/v1/imports/run
+GET  /api/v1/imports/jobs
+GET  /api/v1/imports/jobs/:jobId
+POST /api/v1/catalog/candidates
+```
 
-## Hotfix 0.18.1
-
-Esta revisión corrige la instalación anidada de la versión 0.18.0 y deja el Knowledge Graph V2 compatible con TypeScript estricto. No requiere migraciones de base de datos.
-
-## Versión 0.18.2
-
-Esta revisión estabiliza las pruebas del `SolutionEngine`. El caso de referencia para un regalo de profesor obtiene 87 puntos: 40 por destinatario, 35 por ocasión, 10 por emoción y 2 por prioridad.
-
-## v0.19.0 — Reasoning Engine
-
-El flujo de recomendación incorpora restricciones, evaluación de candidatos, puntuación razonada y explicaciones auditables. La API de intención devuelve la propiedad adicional `reasoning`. Consulta `docs/REASONING-ENGINE-V0.19.md`.
-
-
-## Rai v0.20
-
-Usa `POST /api/v1/rai/converse` para iniciar o continuar una conversación y recibir preguntas de seguimiento o ideas creativas explicadas.
-
-
-## Versión 0.20.2
-
-Hotfix del Conversation Engine. Rai conserva el contexto entre turnos y reconoce presupuestos expresados de forma natural, incluidos límites y rangos. No requiere migración de base de datos.
+Consulta `docs/V0.30.0-INTELLIGENT-CATALOG.md` y el ejemplo `examples/import/productos-campo.csv`.

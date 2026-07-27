@@ -2,11 +2,15 @@ import { randomUUID } from "node:crypto";
 import { env } from "../../config/env.js";
 import { searchProducts } from "./product-tools.js";
 import { OpenAIRequestError, OpenAIResponsesClient, type ResponsesClient } from "./openai-responses.js";
+import { extractStatePatch, type RaiStatePatch } from "./state-extractor.js";
 
 type ProductCandidate = Awaited<ReturnType<typeof searchProducts>>[number];
 
-type RaiConversationState = {
+export type RaiConversationState = {
   recipient?: string;
+  recipientName?: string;
+  recipientRelation?: string;
+  interests?: string[];
   recipientAge?: number;
   occasion?: string;
   budget?: number;
@@ -36,7 +40,7 @@ const sessions = new Map<string, RaiSession>();
 const instructions = `Eres Rai, el asesor de regalos personalizados de RecuerdArte.
 Conversas en español natural y comprendes lenguaje libre, incluso faltas de ortografía.
 Recibirás el ESTADO ACTUAL DE LA CONVERSACIÓN y, solo cuando sea necesario, PRODUCTOS REALES de PostgreSQL.
-El estado es la fuente de verdad: no vuelvas a preguntar por datos ya confirmados.
+El estado es la fuente de verdad: no vuelvas a preguntar por datos ya confirmados. Usa recipientName y recipientRelation de forma natural, sin pedir confirmación cuando ya estén presentes.
 Si selectedProduct existe, no recomiendes otros productos salvo que el usuario pida cambiar.
 Solo puedes afirmar nombres, precios y capacidades incluidas en el estado o en los productos reales recibidos.
 No inventes disponibilidad, variantes, tamaños, servicios, envíos, correos ni generación de mockups.
@@ -109,7 +113,8 @@ function mergeMessageIntoState(state: RaiConversationState, message: string): Ra
     next.previewRequested = true;
   }
 
-  const recipient = plain.match(/\b(?:para|a)\s+(?:mi|un|una|el|la)?\s*(hijo|hija|padre|madre|abuelo|abuela|tio|tia|tio abuelo|tia abuela|pareja|marido|mujer|amigo|amiga)\b/i)?.[1];
+  const recipient = plain.match(/\b(?:para|a)\s+(?:mi|un|una|el|la)?\s*(hijo|hija|padre|madre|abuelo|abuela|tio abuelo|tia abuela|tio|tia|pareja|marido|mujer|amigo|amiga)\b/i)?.[1]
+    ?? plain.match(/^\s*(?:es\s+para\s+)?(?:mi|un|una|el|la)?\s*(hijo|hija|padre|madre|abuelo|abuela|tio abuelo|tia abuela|tio|tia|pareja|marido|mujer|amigo|amiga)\s*[.!]?\s*$/i)?.[1];
   if (recipient) next.recipient = recipient;
 
   if (/aniversario/i.test(plain)) next.occasion = "aniversario";
@@ -120,13 +125,74 @@ function mergeMessageIntoState(state: RaiConversationState, message: string): Ra
   return next;
 }
 
+function mergeExtractedPatch(state: RaiConversationState, patch: RaiStatePatch): RaiConversationState {
+  const next: RaiConversationState = {
+    ...state,
+    personalization: { ...state.personalization },
+    interests: [...(state.interests ?? [])],
+  };
+
+  if (patch.recipientName) next.recipientName = patch.recipientName.trim();
+  if (patch.recipientRelation) {
+    next.recipientRelation = patch.recipientRelation.trim().toLowerCase();
+    next.recipient = next.recipientRelation;
+  }
+  if (patch.recipientAge != null && Number.isFinite(patch.recipientAge)) next.recipientAge = patch.recipientAge;
+  if (patch.occasion) next.occasion = patch.occasion.trim().toLowerCase();
+  if (patch.budget != null && Number.isFinite(patch.budget)) next.budget = patch.budget;
+  if (patch.interests?.length) {
+    const known = new Set(next.interests.map((item) => normalize(item)));
+    for (const interest of patch.interests) {
+      const clean = interest.trim();
+      if (clean && !known.has(normalize(clean))) {
+        next.interests.push(clean);
+        known.add(normalize(clean));
+      }
+    }
+  }
+
+  return next;
+}
+
+const SELECTION_CUE = /\b(?:quiero|elijo|escojo|selecciono|prefiero|me quedo con|dame|ponme|compra|anade|añade|elige|ese|esa|este|esta|el primero|la primera|el segundo|la segunda|el tercero|la tercera|opcion|opción)\b/i;
+const NON_PRODUCT_CONTEXT_WORDS = new Set([
+  "cumpleanos", "cumple", "aniversario", "graduacion", "boda", "regalo",
+  "amigo", "amiga", "hijo", "hija", "padre", "madre", "abuelo", "abuela",
+]);
+
 function selectCandidateFromMessage(message: string, candidates: ProductCandidate[]): ProductCandidate | undefined {
-  const words = normalize(message).split(/[^a-z0-9]+/).filter((word) => word.length >= 4);
-  if (!words.length) return undefined;
+  if (!candidates.length) return undefined;
+
+  const plain = normalize(message).trim();
+
+  // Selección ordinal explícita: «la segunda», «opción 3», etc.
+  const ordinalMatch = plain.match(/\b(?:opcion\s*)?(1|2|3|primero|primera|segundo|segunda|tercero|tercera)\b/i);
+  if (ordinalMatch) {
+    const ordinal = ordinalMatch[1];
+    const index = ordinal === "1" || /^primer/.test(ordinal) ? 0
+      : ordinal === "2" || /^segund/.test(ordinal) ? 1
+      : 2;
+    return candidates[index];
+  }
+
+  // Una coincidencia temática («cumpleaños») nunca constituye una elección.
+  // Exigimos una expresión explícita de selección antes de buscar el producto citado.
+  if (!SELECTION_CUE.test(plain)) return undefined;
+
+  const messageWords = plain
+    .split(/[^a-z0-9]+/)
+    .filter((word) => word.length >= 3 && !NON_PRODUCT_CONTEXT_WORDS.has(word));
+  if (!messageWords.length) return undefined;
+
   let best: { product: ProductCandidate; score: number } | undefined;
   for (const product of candidates) {
-    const haystack = normalize([product.name, product.description, ...product.categories].filter(Boolean).join(" "));
-    const score = words.reduce((total, word) => total + (haystack.includes(word) ? 1 : 0), 0);
+    const productWords = normalize(product.name)
+      .split(/[^a-z0-9]+/)
+      .filter((word) => word.length >= 3 && !NON_PRODUCT_CONTEXT_WORDS.has(word));
+    const score = messageWords.reduce(
+      (total, word) => total + (productWords.some((productWord) => productWord === word || productWord.includes(word)) ? 1 : 0),
+      0,
+    );
     if (score > 0 && (!best || score > best.score)) best = { product, score };
   }
   return best?.product;
@@ -136,8 +202,27 @@ function shouldSearchCatalog(session: RaiSession, message: string): boolean {
   const plain = normalize(message);
   if (/\b(?:otro|otra|cambiar|alternativa|opciones|recomienda|regalo|decoracion|papeleria|souvenir|invitados|practico|decorativo)\b/i.test(plain) && !/\b(?:si|no)\b/i.test(plain)) return true;
   if (session.state.selectedProduct) return false;
-  if (selectCandidateFromMessage(message, session.lastCandidates)) return false;
   return session.lastCandidates.length === 0 || message.length > 20;
+}
+
+
+function nextMissingField(state: RaiConversationState): "recipient" | "occasion" | "budget" | "personalization" | null {
+  if (!state.recipient && !state.recipientName) return "recipient";
+  if (!state.occasion) return "occasion";
+  if (state.budget == null) return "budget";
+  const p = state.personalization;
+  if (p.photo == null && !p.text && !p.names && !p.style && !p.size) return "personalization";
+  return null;
+}
+
+function nextQuestion(field: ReturnType<typeof nextMissingField>): string | null {
+  switch (field) {
+    case "recipient": return "¿Para quién es el regalo?";
+    case "occasion": return "¿Para qué ocasión es?";
+    case "budget": return "¿Qué presupuesto aproximado tienes?";
+    case "personalization": return "¿Quieres personalizarlo con una foto, un nombre o una frase?";
+    default: return null;
+  }
 }
 
 function compactProductContext(products: ProductCandidate[]): string {
@@ -198,11 +283,30 @@ export class RaiAgentService {
       userMessages: [], lastCandidates: [], state: { personalization: {} }, updatedAt: Date.now(),
     };
     session.userMessages = [...session.userMessages, message].slice(-8);
-    session.state = mergeMessageIntoState(session.state, message);
     mark("request_received", { sessionId, messageLength: message.length });
-    mark("state_updated", { state: session.state });
+    session.state = mergeMessageIntoState(session.state, message);
 
     try {
+      const extractionStartedAt = Date.now();
+      mark("state_extraction_started", { model: env.openAiModel });
+      try {
+        const extraction = await extractStatePatch(this.client, env.openAiModel, message, session.state);
+        session.state = mergeExtractedPatch(session.state, extraction.patch);
+        mark("state_extraction_completed", {
+          durationMs: Date.now() - extractionStartedAt,
+          responseId: extraction.responseId,
+          patch: extraction.patch,
+          usage: extraction.usage ?? null,
+        });
+      } catch (extractionError) {
+        mark("state_extraction_failed", {
+          durationMs: Date.now() - extractionStartedAt,
+          message: extractionError instanceof Error ? extractionError.message : String(extractionError),
+          fallback: "local_rules",
+        });
+      }
+      mark("state_updated", { state: session.state });
+
       const selected = selectCandidateFromMessage(message, session.lastCandidates);
       if (selected && !session.state.selectedProduct) {
         session.state.selectedProduct = selected;
@@ -229,9 +333,14 @@ export class RaiAgentService {
         });
       }
 
+      const missingField = nextMissingField(session.state);
+      const requiredQuestion = nextQuestion(missingField);
       const input = [
         `MENSAJE DEL USUARIO:\n${message}`,
-        `ESTADO ACTUAL:\n${compactState(session.state)}`,
+        `HISTORIAL RECIENTE DEL USUARIO:\n${session.userMessages.join("\n")}`,
+        `ESTADO ACTUAL (FUENTE DE VERDAD):\n${compactState(session.state)}`,
+        `SIGUIENTE CAMPO PENDIENTE:\n${missingField ?? "ninguno"}`,
+        `PREGUNTA OBLIGATORIA SI FALTA INFORMACIÓN:\n${requiredQuestion ?? "ninguna"}`,
         `PRODUCTOS REALES DISPONIBLES EN ESTE TURNO:\n${compactProductContext(products)}`,
       ].join("\n\n");
 
@@ -284,7 +393,7 @@ export class RaiAgentService {
           provider: "openai",
           model: env.openAiModel,
           responseId: response.id,
-          strategy: "stateful_single_model_call",
+          strategy: "openai_structured_state_plus_business_rules",
           catalogSearch: searchRequired ? "executed" : "skipped",
           tools: searchRequired ? [{
             name: "buscar_productos",

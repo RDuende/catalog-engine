@@ -30,6 +30,7 @@ export async function analyzeImport(input: AnalyzeImportInput): Promise<ImportAn
   const productTypes = new Set<string>();
   const materials = new Set<string>();
   const colors = new Set<string>();
+  const semanticValues = new Set<string>();
   const sample: NormalizedProduct[] = [];
   const errors: Array<{ row: number; message: string }> = [];
 
@@ -57,6 +58,9 @@ export async function analyzeImport(input: AnalyzeImportInput): Promise<ImportAn
       addValue(productTypes, normalized.productType);
       addValue(materials, normalized.material);
       addValue(colors, normalized.primaryColor);
+      for (const group of [normalized.tags, normalized.audiences, normalized.occasions, normalized.emotions, normalized.professions, normalized.interests, normalized.styles, normalized.values, normalized.useCases]) {
+        for (const item of group ?? []) semanticValues.add(item.value);
+      }
       hasImages ||= Boolean(normalized.media?.length);
       hasVariants ||= Boolean(normalized.variants?.length);
       if (sample.length < sampleSize) sample.push(normalized);
@@ -81,6 +85,7 @@ export async function analyzeImport(input: AnalyzeImportInput): Promise<ImportAn
       productTypes: [...productTypes].sort(),
       materials: [...materials].sort(),
       colors: [...colors].sort(),
+      semanticValues: [...semanticValues].sort(),
       hasImages,
       hasVariants
     },
