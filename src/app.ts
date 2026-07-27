@@ -6,6 +6,7 @@ import { knowledgeRoutes } from "./modules/knowledge/index.js";
 import { importRoutes } from "./modules/import-engine/index.js";
 import { intentRoutes } from "./modules/intent-api/index.js";
 import { raiRoutes } from "./modules/rai-api/index.js";
+import { raiPlaygroundRoutes } from "./modules/rai-playground/index.js";
 
 export function buildApp() {
   const app = Fastify({
@@ -36,6 +37,7 @@ export function buildApp() {
   app.register(importRoutes, { prefix: "/api/v1" });
   app.register(intentRoutes, { prefix: "/api/v1" });
   app.register(raiRoutes, { prefix: "/api/v1" });
+  app.register(raiPlaygroundRoutes);
 
   app.setNotFoundHandler(async (_request, reply) => {
     return reply.code(404).send({

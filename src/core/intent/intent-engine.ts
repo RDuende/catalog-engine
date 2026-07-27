@@ -11,6 +11,8 @@ export class IntentEngine {
     const normalizedText = normalizeIntentText(rawText);
     const entities = this.resolver.resolve(rawText);
     const constraints = parseConstraints(rawText);
+    const recipientAge = extractRecipientAge(normalizedText);
+    const audienceSegment = recipientAge === undefined ? undefined : segmentAge(recipientAge);
     const attributes: ParsedIntent["attributes"] = {};
 
     for (const entity of entities) {
@@ -23,7 +25,7 @@ export class IntentEngine {
     const occasion = attributes.occasion?.[0];
     const recognized = entities.map((entity) => entity.matched);
     const terms = extractResidualTerms(normalizedText, recognized);
-    const signals = entities.length + countConstraints(constraints);
+    const signals = entities.length + countConstraints(constraints) + (recipientAge === undefined ? 0 : 1);
     const confidence = Math.min(1, Number((0.25 + signals * 0.11).toFixed(2)));
 
     return {
@@ -31,6 +33,8 @@ export class IntentEngine {
       normalizedText,
       recipient,
       occasion,
+      recipientAge,
+      audienceSegment,
       minPriceMinor: constraints.minPriceMinor,
       maxPriceMinor: constraints.maxPriceMinor,
       quantity: constraints.quantity,
@@ -59,4 +63,18 @@ function extractResidualTerms(text: string, recognized: string[]): string[] {
   for (const phrase of recognized.sort((a, b) => b.length - a.length)) residual = residual.replace(` ${phrase} `, " ");
   const stop = new Set(["quiero", "busco", "necesito", "regalo", "producto", "para", "por", "de", "un", "una", "unos", "unas", "que", "sea", "con", "sin", "menos", "mas", "hasta", "euros", "euro", "y", "o", "mi"]);
   return uniqueTerms(residual.split(" ").filter((term) => term.length > 2 && !stop.has(term) && !/^\d+$/.test(term)));
+}
+
+function extractRecipientAge(text: string): number | undefined {
+  const match = text.match(/\b(?:de\s+)?(\d{1,3})\s+anos?\b/);
+  if (!match?.[1]) return undefined;
+  const age = Number(match[1]);
+  return age >= 0 && age <= 120 ? age : undefined;
+}
+
+function segmentAge(age: number): "infantil" | "juvenil" | "adulto" | "senior" {
+  if (age <= 12) return "infantil";
+  if (age <= 17) return "juvenil";
+  if (age <= 64) return "adulto";
+  return "senior";
 }

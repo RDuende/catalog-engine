@@ -36,6 +36,13 @@ test("detecta peticiones naturales de personalización", () => {
     "quiero una dedicatoria",
     "con logo",
     "personalizado",
+    "foto",
+    "una foto",
+    "una fotografía",
+    "una imagen",
+    "su nombre",
+    "una frase",
+    "las tres",
   ];
 
   for (const text of positive) {

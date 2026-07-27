@@ -39,7 +39,20 @@ export function parseConstraints(rawText: string): ParsedConstraints {
   if (quantity?.[1]) result.quantity = Number(quantity[1]);
 
   const deniesPersonalization = /(?:sin personalizar|no personalizado|sin grabar|sin nombre)/.test(text);
-  const asksPersonalization = /(?:personaliz|grabad|a medida|(?:con|lleve|llevar|incluya|incluir|poner|ponga|quiero)\s+(?:una?\s+|unas?\s+|el\s+|la\s+|los\s+|las\s+)?(?:foto(?:s|grafia|grafias)?|nombre(?:s)?|logo(?:s)?|dedicatoria(?:s)?|texto(?:s)?|mensaje(?:s)?))/.test(text);
+  const personalizationNoun = "(?:foto(?:s|grafia|grafias)?|imagen(?:es)?|nombre(?:s)?|logo(?:s)?|dedicatoria(?:s)?|frase(?:s)?|texto(?:s)?|mensaje(?:s)?|inscripcion(?:es)?)";
+  const article = "(?:(?:una?|unas?|el|la|los|las|su|sus)\\s+)?";
+  const asksPersonalization = new RegExp(
+    [
+      "personaliz",
+      "grabad",
+      "a medida",
+      `(?:con|lleve|llevar|incluya|incluir|poner|ponga|anadir|agregar)\\s+${article}${personalizationNoun}`,
+      `(?:quiero|quisiera|me gustaria|si quiero)\\s+(?:(?:anadir|incluir|poner|agregar)\\s+)?${article}${personalizationNoun}`,
+      `^${article}${personalizationNoun}$`,
+      `^(?:si|sí|claro|vale|perfecto)[,\\s]+${article}${personalizationNoun}$`,
+      `(?:las tres|todo|todas)(?:\\s+las cosas)?$`,
+    ].join("|"),
+  ).test(text);
   if (deniesPersonalization) result.personalization = false;
   else if (asksPersonalization) result.personalization = true;
 
