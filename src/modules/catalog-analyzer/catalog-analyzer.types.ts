@@ -47,6 +47,14 @@ export interface AnalyzerTotals {
   warnings: number;
 }
 
+export interface CatalogDiagnostics {
+  duplicateReferences: Array<{ reference: string; pages: number[] }>;
+  productPagesWithoutReferences: number[];
+  productPagesWithoutPrices: number[];
+  emptyPages: number[];
+  unknownPages: number[];
+}
+
 export interface CatalogAnalyzerReport {
   analyzerVersion: string;
   sourceFile: string;
@@ -57,6 +65,7 @@ export interface CatalogAnalyzerReport {
   confidence: number;
   totals: AnalyzerTotals;
   categories: string[];
+  diagnostics: CatalogDiagnostics;
   warnings: Array<{ page: number; messages: string[] }>;
   pages: AnalyzedPage[];
 }

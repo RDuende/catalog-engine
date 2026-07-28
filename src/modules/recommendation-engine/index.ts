@@ -3,3 +3,7 @@ export * from "./recommendation.schemas.js";
 export * from "./recommendation.events.js";
 export * from "./recommendation.service.js";
 export * from "./recommendation.routes.js";
+export * from "./recommendation-types.js";
+export * from "./product-dna-builder.js";
+export * from "./recommendation-explainer.js";
+export * from "./recommendation-engine.js";

@@ -59,6 +59,8 @@ th{background:#eef2f5;position:sticky;top:0}.badge{font-size:11px;font-weight:70
   <div class="card"><div class="value">${report.totals.prices}</div><div class="label">Precios detectados</div></div>
   <div class="card"><div class="value">${report.totals.printCodes}</div><div class="label">Códigos de marcaje</div></div>
   <div class="card"><div class="value">${formatPercent(report.confidence)}</div><div class="label">Confianza global</div></div>
+  <div class="card"><div class="value">${report.diagnostics.duplicateReferences.length}</div><div class="label">Referencias duplicadas</div></div>
+  <div class="card"><div class="value">${report.diagnostics.unknownPages.length}</div><div class="label">Páginas sin clasificar</div></div>
 </div>
 <div class="card meta">
   <strong>SHA-256:</strong> ${escapeHtml(report.sourceHash)}<br>
@@ -83,6 +85,7 @@ export async function writeReports(
   reportHtml: string;
   pagesJson: string;
   statisticsJson: string;
+  diagnosticsJson: string;
 }> {
   const directory = resolve(outputDirectory);
   await mkdir(directory, { recursive: true });
@@ -91,11 +94,17 @@ export async function writeReports(
   const reportHtml = join(directory, "report.html");
   const pagesJson = join(directory, "pages.json");
   const statisticsJson = join(directory, "statistics.json");
+  const diagnosticsJson = join(directory, "diagnostics.json");
 
   await Promise.all([
     writeFile(reportJson, JSON.stringify(report, null, 2), "utf8"),
     writeFile(reportHtml, createHtml(report), "utf8"),
     writeFile(pagesJson, JSON.stringify(report.pages, null, 2), "utf8"),
+    writeFile(
+      diagnosticsJson,
+      JSON.stringify(report.diagnostics, null, 2),
+      "utf8",
+    ),
     writeFile(
       statisticsJson,
       JSON.stringify(
@@ -117,5 +126,12 @@ export async function writeReports(
     ),
   ]);
 
-  return { directory, reportJson, reportHtml, pagesJson, statisticsJson };
+  return {
+    directory,
+    reportJson,
+    reportHtml,
+    pagesJson,
+    statisticsJson,
+    diagnosticsJson,
+  };
 }

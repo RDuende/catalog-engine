@@ -1,6 +1,6 @@
 {
   "name": "catalog-engine",
-  "version": "0.28.0",
+  "version": "0.36.0",
   "private": true,
   "description": "Motor de catálogo y recomendaciones de RecuerdArte",
   "type": "module",
@@ -33,7 +33,7 @@
     "test:catalog-intelligence": "npm run test:block-detector && npm run test:pattern-engine && npm run test:ast-builder && npm run test:interpreter",
     "catalog:compile": "tsx src/cli/compile-catalog.ts",
     "test:core-foundation": "tsx --test src/core/*.test.ts src/core/lexer/*.test.ts src/core/semantic/*.test.ts src/core/canonical/*.test.ts src/core/enrichment/*.test.ts src/core/knowledge/*.test.ts src/core/recommendation/*.test.ts src/core/intent/*.test.ts src/modules/intent-api/*.test.ts src/core/dna/*.test.ts src/core/capability/*.test.ts src/core/solution/*.test.ts src/core/recipe/*.test.ts src/modules/intent-api/*.test.ts",
-    "test:all": "npm run test:catalog-intelligence && npm run test:core-foundation",
+    "test:all": "npm run test:catalog-intelligence && npm run test:core-foundation && npm run test:knowledge-index && npm run test:knowledge-graph && npm run test:canonical-product && npm run test:recommendation-engine && npm run test:semantic-taxonomy && npm run test:business-decision",
     "test:semantic": "tsx --test src/core/semantic/*.test.ts",
     "test": "npm run test:all",
     "test:intent": "tsx --test src/core/intent/*.test.ts",
@@ -45,7 +45,13 @@
     "test:playground": "tsx --test src/modules/rai-playground/*.test.ts",
     "test:critical": "tsx --test src/core/dna/*.test.ts src/core/capability/*.test.ts src/core/solution/*.test.ts src/core/recipe/*.test.ts src/modules/intent-api/*.test.ts",
     "test:functional": "npm run test:conversation && npm run test:reasoning && npm run test:knowledge-v2 && npm run test:playground",
-    "test:agent": "tsx --test src/modules/rai-agent/*.test.ts"
+    "test:agent": "tsx --test src/modules/rai-agent/*.test.ts",
+    "test:knowledge-index": "tsx --test src/modules/catalog-knowledge/*.test.ts",
+    "test:knowledge-graph": "tsx --test src/modules/catalog-graph/*.test.ts",
+    "test:canonical-product": "tsx --test src/modules/canonical-product/*.test.ts",
+    "test:recommendation-engine": "tsx --test src/modules/recommendation-engine/*.test.ts",
+    "test:semantic-taxonomy": "tsx --test src/modules/semantic-taxonomy/*.test.ts",
+    "test:business-decision": "tsx --test src/modules/business-decision/*.test.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",

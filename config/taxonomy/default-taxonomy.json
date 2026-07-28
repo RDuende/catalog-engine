@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "concepts": [
+    {"id":"bambu","aliases":["bamboo"],"relations":[{"target":"eco","type":"inherits","weight":0.95},{"target":"natural","type":"inherits","weight":0.95},{"target":"laser","type":"supports","weight":0.9}]},
+    {"id":"corcho","relations":[{"target":"eco","type":"inherits","weight":0.95},{"target":"natural","type":"inherits","weight":0.95},{"target":"laser","type":"supports","weight":0.85}]},
+    {"id":"reciclado","relations":[{"target":"eco","type":"inherits","weight":0.95},{"target":"sostenible","type":"inherits","weight":0.95}]},
+    {"id":"eco","aliases":["ecologico","ecológica","ecológica"],"relations":[{"target":"sostenible","type":"inherits","weight":0.9},{"target":"responsable","type":"related","weight":0.7}]},
+    {"id":"natural","relations":[{"target":"minimalista","type":"related","weight":0.55}]},
+    {"id":"sostenible"},{"id":"responsable"},{"id":"laser","aliases":["grabado laser","grabado láser"]},{"id":"minimalista"},
+    {"id":"acero","relations":[{"target":"duradero","type":"inherits","weight":0.9},{"target":"elegante","type":"related","weight":0.65},{"target":"laser","type":"supports","weight":0.9}]},
+    {"id":"aluminio","relations":[{"target":"duradero","type":"inherits","weight":0.85},{"target":"moderno","type":"related","weight":0.7},{"target":"laser","type":"supports","weight":0.9}]},
+    {"id":"madera","relations":[{"target":"natural","type":"inherits","weight":0.9},{"target":"artesanal","type":"related","weight":0.75},{"target":"laser","type":"supports","weight":0.9}]},
+    {"id":"duradero"},{"id":"elegante"},{"id":"moderno"},{"id":"artesanal"}
+  ]
+}

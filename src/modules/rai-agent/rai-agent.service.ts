@@ -141,6 +141,7 @@ function mergeExtractedPatch(state: RaiConversationState, patch: RaiStatePatch):
   if (patch.occasion) next.occasion = patch.occasion.trim().toLowerCase();
   if (patch.budget != null && Number.isFinite(patch.budget)) next.budget = patch.budget;
   if (patch.interests?.length) {
+    next.interests ??= [];
     const known = new Set(next.interests.map((item) => normalize(item)));
     for (const interest of patch.interests) {
       const clean = interest.trim();
@@ -168,7 +169,7 @@ function selectCandidateFromMessage(message: string, candidates: ProductCandidat
   // Selección ordinal explícita: «la segunda», «opción 3», etc.
   const ordinalMatch = plain.match(/\b(?:opcion\s*)?(1|2|3|primero|primera|segundo|segunda|tercero|tercera)\b/i);
   if (ordinalMatch) {
-    const ordinal = ordinalMatch[1];
+    const ordinal = ordinalMatch[1] ?? "";
     const index = ordinal === "1" || /^primer/.test(ordinal) ? 0
       : ordinal === "2" || /^segund/.test(ordinal) ? 1
       : 2;

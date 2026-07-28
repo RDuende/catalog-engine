@@ -7,7 +7,7 @@ import type {
 } from "./catalog-analyzer.types.js";
 import { analyzePage } from "./page-detector.js";
 
-const VERSION = "0.6.0";
+const VERSION = "0.30.1";
 
 const PAGE_KINDS: PageKind[] = [
   "PRODUCT",
@@ -80,6 +80,34 @@ export function analyzeCatalog(input: {
     ...new Set(analyzedPages.flatMap((page) => page.signals.languages)),
   ].sort();
 
+  const referencePages = new Map<string, number[]>();
+  for (const page of analyzedPages) {
+    for (const reference of page.signals.references) {
+      const pages = referencePages.get(reference) ?? [];
+      if (!pages.includes(page.page)) pages.push(page.page);
+      referencePages.set(reference, pages);
+    }
+  }
+
+  const diagnostics = {
+    duplicateReferences: [...referencePages.entries()]
+      .filter(([, pages]) => pages.length > 1)
+      .map(([reference, pages]) => ({ reference, pages }))
+      .sort((a, b) => a.reference.localeCompare(b.reference, "es")),
+    productPagesWithoutReferences: analyzedPages
+      .filter((page) => page.kind === "PRODUCT" && page.signals.references.length === 0)
+      .map((page) => page.page),
+    productPagesWithoutPrices: analyzedPages
+      .filter((page) => page.kind === "PRODUCT" && page.signals.prices.length === 0)
+      .map((page) => page.page),
+    emptyPages: analyzedPages
+      .filter((page) => page.textLength === 0)
+      .map((page) => page.page),
+    unknownPages: analyzedPages
+      .filter((page) => page.kind === "UNKNOWN")
+      .map((page) => page.page),
+  };
+
   return {
     analyzerVersion: VERSION,
     sourceFile: input.sourceFile,
@@ -119,6 +147,7 @@ export function analyzeCatalog(input: {
       ),
     },
     categories,
+    diagnostics,
     warnings: analyzedPages
       .filter((page) => page.warnings.length > 0)
       .map((page) => ({ page: page.page, messages: page.warnings })),

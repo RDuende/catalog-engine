@@ -100,7 +100,11 @@ function classify(
 ): { kind: PageKind; confidence: number } {
   const normalized = page.text.replace(/\s+/g, " ").trim();
 
-  if (page.page >= totalPages - 1 && normalized.length < 800) {
+  // La posición por sí sola no basta para considerar una página como contraportada.
+  // En muestras pequeñas (por ejemplo, tests de 3 páginas), la última página puede
+  // ser simplemente contenido no clasificable. Solo aplicamos esta heurística a
+  // catálogos con un tamaño mínimo razonable.
+  if (totalPages >= 6 && page.page >= totalPages - 1 && normalized.length < 800) {
     return { kind: "BACK_COVER", confidence: 0.72 };
   }
   if (LEGAL_WORDS.test(page.text)) {
