@@ -1,0 +1,22 @@
+{
+  "id": "makito-essential-v1",
+  "supplier": "Makito",
+  "version": 1,
+  "active": true,
+  "referencePattern": "\\b([A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚáéíóúñÑ-]+)\\s+(\\d{3,6})\\b",
+  "dimensionPattern": "\\b\\d+(?:[.,]\\d+)?\\s*[×x]\\s*\\d+(?:[.,]\\d+)?\\s*[×x]\\s*\\d+(?:[.,]\\d+)?\\s*cm\\b",
+  "priceQuantityPattern": "(?:-500|\\+500|\\+2000|\\+5000)",
+  "printCodeLabel": "Print Code:",
+  "categoryHints": ["BACKPACKS", "BAGS", "WRITING", "DRINKWARE", "TECHNOLOGY"],
+  "featureTokens": {
+    "TROLLEY STRAP": "trolley-strap",
+    "LAPTOP COMPARTMENT": "laptop-compartment",
+    "TABLET COMPARTMENT": "tablet-compartment",
+    "ANTI THEFT": "anti-theft",
+    "RPET": "recycled-material",
+    "DTF": "dtf-printing",
+    "REFLECTIVE": "reflective",
+    "USB": "usb-connection",
+    "VACUUM": "vacuum-system"
+  }
+}

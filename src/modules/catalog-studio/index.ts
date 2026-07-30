@@ -1,1 +1,1 @@
-export * from "./catalog-studio.routes.js";
+export { catalogStudioRoutes } from "./catalog-studio.routes.js";

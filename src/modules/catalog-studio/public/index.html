@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Catalog Studio</title>
+  <link rel="stylesheet" href="/studio/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">CE</span><div><strong>Catalog Studio</strong><small>v0.39.1</small></div></div>
+    <nav>
+      <a href="#dashboard" data-view="dashboard" class="active">Dashboard</a>
+      <a href="/imports">Importaciones</a>
+      <a href="#documents" data-view="documents">Documentos</a>
+      <a href="#recommendations" data-view="recommendations">Recomendaciones</a>
+      <a href="#workbench" data-view="workbench">Workbench</a>
+      <a href="#knowledge" data-view="knowledge">Knowledge</a>
+      <a href="/rai/playground">Rai</a>
+    </nav>
+    <div class="sidebar-footer"><span id="api-dot" class="dot"></span><span id="api-status">Comprobando servidor…</span></div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div><p class="eyebrow">CATALOG ENGINE</p><h1 id="page-title">Dashboard</h1></div>
+      <div class="top-actions"><button id="refresh" class="secondary">Actualizar</button><a class="primary" href="/imports">Nueva importación</a></div>
+    </header>
+
+    <section id="view-dashboard" class="view active">
+      <div class="hero"><div><p class="eyebrow">CENTRO DE CONTROL</p><h2>Todo el catálogo, en un solo lugar</h2><p>Importa documentos, revisa el conocimiento extraído y convierte catálogos de proveedor en productos utilizables.</p></div><a class="primary light" href="/imports">Importar catálogo</a></div>
+      <div class="stats">
+        <article><span>Documentos</span><strong id="stat-documents">—</strong><small>catálogos registrados</small></article>
+        <article><span>Productos detectados</span><strong id="stat-products">—</strong><small>desde documentos</small></article>
+        <article><span>Pendientes</span><strong id="stat-pending">—</strong><small>requieren revisión</small></article>
+        <article><span>Confianza media</span><strong id="stat-confidence">—</strong><small>extracción documental</small></article>
+      </div>
+      <div class="dashboard-grid">
+        <section class="panel"><div class="panel-head"><div><p class="eyebrow">ACTIVIDAD</p><h3>Últimos documentos</h3></div><button class="text-button" data-go="documents">Ver todos</button></div><div id="recent-documents" class="document-list loading">Cargando…</div></section>
+        <section class="panel"><div class="panel-head"><div><p class="eyebrow">FLUJO</p><h3>Estado del sistema</h3></div></div><div class="pipeline"><div class="pipeline-step done"><b>1</b><span><strong>Documento</strong><small>PDF, CSV o XLSX</small></span></div><div class="pipeline-step done"><b>2</b><span><strong>Análisis</strong><small>bloques y estructura</small></span></div><div class="pipeline-step"><b>3</b><span><strong>Revisión</strong><small>evidencias y confianza</small></span></div><div class="pipeline-step"><b>4</b><span><strong>Producto canónico</strong><small>listo para publicar</small></span></div></div></section>
+      </div>
+    </section>
+
+    <section id="view-documents" class="view">
+      <div class="section-intro"><div><p class="eyebrow">MEMORIA DOCUMENTAL</p><h2>Documentos importados</h2><p>Cada archivo conserva su identidad, huella, estado y resultados de análisis.</p></div><a class="primary" href="/imports">Añadir documento</a></div>
+      <div class="panel"><div id="documents-table" class="document-table loading">Cargando…</div></div>
+    </section>
+
+    <section id="view-recommendations" class="view">
+      <div class="section-intro"><div><p class="eyebrow">RECOMMENDATION LAB</p><h2>Consulta el catálogo</h2><p>Describe lo que necesita el cliente y deja que el motor encuentre las opciones más adecuadas.</p></div></div>
+      <section class="panel form-panel"><label>¿Qué necesita el cliente?<textarea id="query" placeholder="Ej.: Necesito 300 botellas reutilizables, personalizables y por menos de 6 €"></textarea></label><div class="form-grid"><label>Presupuesto unitario (€)<input id="budget" type="number" min="0" step="0.01"></label><label>Cantidad<input id="quantity" type="number" min="1" step="1"></label><label>N.º resultados<input id="limit" type="number" min="1" max="50" value="12"></label></div><label class="check"><input id="customizable" type="checkbox"> Solo productos personalizables</label><div class="actions"><button id="recommend" class="primary">Obtener recomendaciones</button><span id="recommend-status"></span></div><div id="recommend-error"></div></section>
+      <div id="recommend-meta" class="meta"></div><section id="recommend-results" class="results"></section>
+    </section>
+
+    <section id="view-workbench" class="view"><div class="placeholder"><span>◫</span><h2>Document Workbench</h2><p>El visor sincronizado de páginas, bloques, productos y evidencias se conectará aquí sobre la base ya creada.</p><a class="primary" href="/imports">Abrir Import Center</a></div></section>
+    <section id="view-knowledge" class="view"><div class="placeholder"><span>⌘</span><h2>Knowledge Center</h2><p>Reglas, términos aprendidos y conocimiento por proveedor estarán disponibles desde esta sección.</p></div></section>
+  </main>
+</div>
+<script src="/studio/app.js"></script>
+</body>
+</html>

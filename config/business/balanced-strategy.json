@@ -1,0 +1,13 @@
+{
+  "name": "balanced",
+  "weights": {
+    "margin": 1.2,
+    "stock": 1.1,
+    "delivery": 1.0,
+    "supplier": 0.7,
+    "affinity": 1.4,
+    "sustainability": 0.6,
+    "strategy": 0.8
+  },
+  "minimumScore": 0
+}

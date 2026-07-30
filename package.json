@@ -1,8 +1,8 @@
 {
   "name": "catalog-engine",
-  "version": "0.9.0",
+  "version": "0.44.1",
   "private": true,
-  "description": "Motor de catÃƒÂ¡logo y recomendaciones de La Colorida",
+  "description": "Motor de catálogo y recomendaciones de RecuerdArte",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
@@ -30,7 +30,35 @@
     "test:pattern-engine": "tsx --test src/modules/pattern-engine/*.test.ts",
     "test:ast-builder": "tsx --test src/modules/ast-builder/*.test.ts",
     "test:interpreter": "tsx --test src/modules/catalog-interpreter/*.test.ts",
-    "test:catalog-intelligence": "npm run test:block-detector && npm run test:pattern-engine && npm run test:ast-builder && npm run test:interpreter"
+    "test:catalog-intelligence": "npm run test:block-detector && npm run test:pattern-engine && npm run test:ast-builder && npm run test:interpreter",
+    "catalog:compile": "tsx src/cli/compile-catalog.ts",
+    "test:core-foundation": "tsx --test src/core/*.test.ts src/core/lexer/*.test.ts src/core/semantic/*.test.ts src/core/canonical/*.test.ts src/core/enrichment/*.test.ts src/core/knowledge/*.test.ts src/core/recommendation/*.test.ts src/core/intent/*.test.ts src/modules/intent-api/*.test.ts src/core/dna/*.test.ts src/core/capability/*.test.ts src/core/solution/*.test.ts src/core/recipe/*.test.ts src/modules/intent-api/*.test.ts",
+    "test:all": "npm run test:catalog-intelligence && npm run test:core-foundation && npm run test:knowledge-index && npm run test:knowledge-graph && npm run test:canonical-product && npm run test:recommendation-engine && npm run test:semantic-taxonomy && npm run test:business-decision && npm run test:import-management && npm run test:document-intelligence",
+    "test:semantic": "tsx --test src/core/semantic/*.test.ts",
+    "test": "npm run test:all",
+    "test:intent": "tsx --test src/core/intent/*.test.ts",
+    "test:api": "tsx --test src/modules/intent-api/*.test.ts",
+    "test:foundation": "tsx --test src/core/dna/*.test.ts src/core/capability/*.test.ts src/core/solution/*.test.ts src/core/recipe/*.test.ts src/core/reasoning/*.test.ts src/core/conversation/*.test.ts src/core/creativity/*.test.ts src/modules/intent-api/*.test.ts",
+    "test:knowledge-v2": "tsx --test src/core/knowledge/*.test.ts",
+    "test:reasoning": "tsx --test src/core/reasoning/*.test.ts",
+    "test:conversation": "tsx --test src/core/conversation/*.test.ts src/core/creativity/*.test.ts",
+    "test:playground": "tsx --test src/modules/rai-playground/*.test.ts",
+    "test:critical": "tsx --test src/core/dna/*.test.ts src/core/capability/*.test.ts src/core/solution/*.test.ts src/core/recipe/*.test.ts src/modules/intent-api/*.test.ts",
+    "test:functional": "npm run test:conversation && npm run test:reasoning && npm run test:knowledge-v2 && npm run test:playground",
+    "test:agent": "tsx --test src/modules/rai-agent/*.test.ts",
+    "test:knowledge-index": "tsx --test src/modules/catalog-knowledge/*.test.ts",
+    "test:knowledge-graph": "tsx --test src/modules/catalog-graph/*.test.ts",
+    "test:canonical-product": "tsx --test src/modules/canonical-product/*.test.ts",
+    "test:recommendation-engine": "tsx --test src/modules/recommendation-engine/*.test.ts",
+    "test:semantic-taxonomy": "tsx --test src/modules/semantic-taxonomy/*.test.ts",
+    "test:business-decision": "tsx --test src/modules/business-decision/*.test.ts",
+    "test:import-management": "tsx --test src/modules/import-management/*.test.ts",
+    "test:document-intelligence": "tsx --test src/modules/document-intelligence/*.test.ts",
+    "test:providers": "tsx --test src/modules/provider-engine/*.test.ts",
+    "canonical:install": "tsx src/scripts/install-canonical-catalog.ts",
+    "test:canonical-catalog": "tsx --test src/modules/canonical-catalog/*.test.ts",
+    "test:rate-limiter": "tsx --test src/modules/provider-engine/provider-rate-limiter.test.ts",
+    "test:core-sync": "tsx --test src/modules/core-sync/*.test.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",
@@ -38,7 +66,9 @@
     "@sinclair/typebox": "^0.34.0",
     "dotenv": "^16.4.0",
     "fastify": "^5.0.0",
-    "pg": "^8.13.0"
+    "pg": "^8.13.0",
+    "xlsx": "^0.18.5",
+    "pdfjs-dist": "^5.4.149"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -49,5 +79,10 @@
   },
   "engines": {
     "node": ">=20.19"
+  },
+  "allowScripts": {
+    "@prisma/engines": true,
+    "esbuild": true,
+    "prisma": true
   }
 }

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalog Engine · Importaciones</title>
+  <link rel="stylesheet" href="/imports/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">CE</span><div><strong>Catalog Engine</strong><small>Document Intelligence</small></div></div>
+      <nav>
+        <button class="nav active" data-view="dashboard">▦ <span>Dashboard</span></button>
+        <button class="nav" data-view="new-import">⇧ <span>Nueva importación</span></button>
+        <button class="nav" data-view="documents">▤ <span>Documentos</span></button>
+        <button class="nav" data-view="review">✓ <span>Revisiones</span><b id="reviewBadge">0</b></button>
+      </nav>
+      <div class="engine-state"><i></i><div><strong>Motor disponible</strong><small>v0.39.0</small></div></div>
+    </aside>
+
+    <main>
+      <header><div><p class="eyebrow">IMPORT MANAGEMENT</p><h1 id="pageTitle">Dashboard</h1></div><button class="primary" data-go="new-import">+ Importar catálogo</button></header>
+
+      <section id="dashboard" class="view active">
+        <div class="stats">
+          <article><span>Documentos</span><strong id="statDocuments">0</strong><small>catálogos registrados</small></article>
+          <article><span>Productos detectados</span><strong id="statProducts">0</strong><small>en todos los documentos</small></article>
+          <article><span>Pendientes de revisión</span><strong id="statPending">0</strong><small>requieren decisión humana</small></article>
+          <article><span>Confianza media</span><strong id="statConfidence">—</strong><small>campos analizados</small></article>
+        </div>
+        <div class="grid-main">
+          <article class="panel"><div class="panel-head"><div><h2>Últimas importaciones</h2><p>Actividad documental reciente</p></div><button class="text-button" data-go="documents">Ver todas</button></div><div id="recentDocuments" class="document-list empty-state">No hay documentos importados todavía.</div></article>
+          <article class="panel quick"><h2>Inicio rápido</h2><p>Importa el primer catálogo y crea un snapshot inmutable.</p><div class="steps"><div><b>1</b><span>Selecciona proveedor y archivo</span></div><div><b>2</b><span>Guarda el documento y su SHA-256</span></div><div><b>3</b><span>Ejecuta el análisis inicial</span></div></div><button class="secondary wide" data-go="new-import">Empezar importación</button></article>
+        </div>
+      </section>
+
+      <section id="new-import" class="view">
+        <article class="panel import-card">
+          <div class="panel-head"><div><h2>Nueva importación</h2><p>PDF, CSV o XLSX · máximo 100 MB</p></div><span class="phase">FASE 1 · INGESTA</span></div>
+          <div class="form-grid">
+            <label>Proveedor<select id="supplier"><option value="makito">Makito</option><option value="giving">Giving</option><option value="pf-concept">PF Concept</option><option value="xd-connects">XD Connects</option><option value="other">Otro proveedor</option></select></label>
+            <label>Modo<select id="mode"><option value="review">Revisión manual</option><option value="learning">Aprendizaje</option><option value="automatic">Automático</option></select></label>
+          </div>
+          <div id="dropzone" class="dropzone" tabindex="0"><input id="fileInput" type="file" accept=".pdf,.csv,.xlsx,application/pdf,text/csv" hidden /><div class="upload-icon">⇧</div><h3>Arrastra aquí el catálogo</h3><p>o haz clic para seleccionar el archivo</p><button type="button" class="secondary" id="chooseFile">Seleccionar archivo</button><div id="fileInfo" class="file-info"></div></div>
+          <div class="import-actions"><p id="uploadMessage"></p><button id="uploadButton" class="primary" disabled>Guardar e importar</button></div>
+        </article>
+      </section>
+
+      <section id="documents" class="view"><article class="panel"><div class="panel-head"><div><h2>Documentos</h2><p>Historial persistente de catálogos</p></div><input id="documentSearch" class="search" placeholder="Buscar documento…" /></div><div id="allDocuments" class="document-list empty-state">No hay documentos.</div></article></section>
+      <section id="review" class="view"><article class="panel"><div class="panel-head"><div><h2>Cola de revisión</h2><p>Documentos analizados que necesitan confirmación</p></div></div><div id="reviewDocuments" class="document-list empty-state">No hay revisiones pendientes.</div></article></section>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/imports/app.js" defer></script>
+</body>
+</html>

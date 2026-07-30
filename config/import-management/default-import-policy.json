@@ -1,0 +1,13 @@
+{
+  "reviewMode": "strict",
+  "incidentConfidenceThreshold": 0.8,
+  "preserveHumanCorrections": true,
+  "incrementalKnowledge": {
+    "applyConfirmedRules": true,
+    "autoConfirmObservedRules": false,
+    "minimumEvidenceForProposal": 5
+  },
+  "reprocess": {
+    "comparisonOnly": true
+  }
+}

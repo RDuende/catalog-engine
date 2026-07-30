@@ -1,0 +1,15 @@
+[
+  {
+    "id": "6733c13b-aab6-4533-b367-e213101fa183",
+    "supplier": "makito",
+    "fileName": "33 páginas del catalogo de makito para desarrollo.pdf",
+    "mimeType": "application/pdf",
+    "size": 8025313,
+    "sha256": "a2179b1310db9b4cc3429be60b8f144cb1dedb22973d911073585af168004b0e",
+    "status": "review",
+    "mode": "review",
+    "createdAt": "2026-07-28T12:34:04.275Z",
+    "productsDetected": 122,
+    "confidence": 0.938790983606556
+  }
+]
