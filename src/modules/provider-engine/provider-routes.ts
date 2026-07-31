@@ -5,7 +5,7 @@ import type { ProviderConnectionConfig } from "./provider-types.js";
 import { diagnoseMakitoEndpoint, getMakitoRateLimitStatus, resolveMakitoConfig, type MakitoApiConfig } from "./makito-client.js";
 import { syncMakitoSnapshot, type MakitoSyncOptions } from "./makito-sync.js";
 import { importCanonicalProducts } from "../canonical-catalog/index.js";
-import { jobManager, providerSyncPipeline } from "../core-sync/index.js";
+import { jobManager, providerSyncPipeline, snapshotService } from "../core-sync/index.js";
 
 function configFrom(body: unknown): ProviderConnectionConfig {
   if (!body || typeof body !== "object") throw new Error("Configuración no válida.");
@@ -29,7 +29,7 @@ export async function providerRoutes(app: FastifyInstance): Promise<void> {
     const config = request.params.provider === "makito" ? makitoConfigFrom(request.body) : configFrom(request.body);
     return { items: await previewProvider(request.params.provider, config, request.body?.limit) };
   });
-  app.post<{ Params: { provider: string }; Body: { config?: ProviderConnectionConfig; limit?: number; updatedSince?: string; importCanonical?: boolean; options?: MakitoSyncOptions } }>("/providers/:provider/sync", async (request, reply) => {
+  app.post<{ Params: { provider: string }; Body: { config?: ProviderConnectionConfig; limit?: number; updatedSince?: string; importCanonical?: boolean; saveSnapshot?: boolean; markMissingInactive?: boolean; batchSize?: number; options?: MakitoSyncOptions } }>("/providers/:provider/sync", async (request, reply) => {
     const provider = request.params.provider;
     const config = provider === "makito" ? makitoConfigFrom(request.body) : configFrom(request.body);
     // Validate the provider before accepting the asynchronous job.
@@ -44,6 +44,9 @@ export async function providerRoutes(app: FastifyInstance): Promise<void> {
         updatedSince: request.body?.updatedSince,
         importCanonical: request.body?.importCanonical !== false,
         makitoOptions: request.body?.options,
+        saveSnapshot: request.body?.saveSnapshot !== false,
+        markMissingInactive: request.body?.markMissingInactive === true,
+        batchSize: request.body?.batchSize,
       },
       metadata: { requestedAt: new Date().toISOString() },
     });
@@ -66,6 +69,28 @@ export async function providerRoutes(app: FastifyInstance): Promise<void> {
     const canonical = await importCanonicalProducts(request.params.provider, sync.products);
     return { sync: { ...sync, products: undefined }, canonical };
   });
+
+
+  app.get<{ Params: { provider: string } }>("/providers/:provider/last-report", async (request, reply) => {
+    const report = await snapshotService.lastReport(request.params.provider);
+    if (!report) return reply.code(404).send({ error: "REPORT_NOT_FOUND", message: "Todavía no existe un informe para este proveedor." });
+    return report;
+  });
+
+  app.get<{ Params: { provider: string }; Querystring: { limit?: string } }>("/providers/:provider/snapshots", async request => ({
+    provider: request.params.provider,
+    snapshots: await snapshotService.list(request.params.provider, Number(request.query?.limit ?? 20)),
+  }));
+
+  app.get<{ Params: { provider: string }; Querystring: { limit?: string } }>("/providers/:provider/reports", async request => ({
+    provider: request.params.provider,
+    reports: await snapshotService.listReports(request.params.provider, Number(request.query?.limit ?? 20)),
+  }));
+
+  app.post<{ Params: { provider: string }; Body: { keep?: number; maxAgeDays?: number } }>("/providers/:provider/snapshots/cleanup", async request => ({
+    provider: request.params.provider,
+    ...(await snapshotService.cleanup(request.params.provider, request.body)),
+  }));
 
   app.get("/providers/makito/status", async () => ({
     provider: "makito",

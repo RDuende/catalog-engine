@@ -19,21 +19,50 @@ export class CanonicalCatalogRepository {
     } finally { client.release(); }
   }
 
-  async import(products: CanonicalProductInput[]): Promise<CanonicalImportResult> {
+  async import(
+    products: CanonicalProductInput[],
+    options: { batchSize?: number; onProgress?: (completed: number, total: number) => void } = {},
+  ): Promise<CanonicalImportResult> {
     const summary: CanonicalImportResult = { received: products.length, created: 0, updated: 0, unchanged: 0, failed: 0, results: [], errors: [] };
-    for (const product of products) {
+    const batchSize = Math.max(1, Math.min(options.batchSize ?? Number(process.env.CANONICAL_IMPORT_BATCH_SIZE ?? 100), 1000));
+    for (let offset = 0; offset < products.length; offset += batchSize) {
+      const batch = products.slice(offset, offset + batchSize);
+      const client = await this.pool.connect();
       try {
-        const result = await this.upsert(product);
-        summary.results.push(result);
-        if (result.action === "CREATED") summary.created += 1;
-        else if (result.action === "UPDATED") summary.updated += 1;
-        else summary.unchanged += 1;
+        await client.query("BEGIN");
+        for (const product of batch) {
+          try {
+            const result = await this.upsertWithClient(client, product);
+            summary.results.push(result);
+            if (result.action === "CREATED") summary.created += 1;
+            else if (result.action === "UPDATED") summary.updated += 1;
+            else summary.unchanged += 1;
+          } catch (error) {
+            summary.failed += 1;
+            summary.errors.push({ externalId: product.externalId, message: error instanceof Error ? error.message : String(error) });
+          }
+        }
+        await client.query("COMMIT");
       } catch (error) {
-        summary.failed += 1;
-        summary.errors.push({ externalId: product.externalId, message: error instanceof Error ? error.message : String(error) });
+        await client.query("ROLLBACK");
+        throw error;
+      } finally {
+        client.release();
       }
+      options.onProgress?.(Math.min(offset + batch.length, products.length), products.length);
     }
     return summary;
+  }
+
+  async markMissingInactive(providerKey: string, seenExternalIds: string[]): Promise<number> {
+    const result = await this.pool.query(
+      `UPDATE canonical_products
+       SET status='INACTIVE', updated_at=now()
+       WHERE provider_key=$1 AND status='ACTIVE'
+         AND NOT (external_id = ANY($2::text[]))`,
+      [providerKey, seenExternalIds],
+    );
+    return result.rowCount ?? 0;
   }
 
   private async upsertWithClient(client: PoolClient, product: CanonicalProductInput): Promise<CanonicalUpsertResult> {

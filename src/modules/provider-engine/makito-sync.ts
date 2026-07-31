@@ -116,9 +116,6 @@ export async function syncMakitoSnapshot(input: Partial<MakitoApiConfig> = {}, o
       printConfigProducts: printConfigRows.length,
       printPriceRows: printPriceRows.length
     },
-    products: products.map(product => {
-      if (options.includePrintPrices) metadata(product).printPriceList = printPriceRows;
-      return product;
-    })
+    products
   };
 }

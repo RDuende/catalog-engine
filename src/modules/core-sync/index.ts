@@ -4,3 +4,7 @@ export * from "./pipeline-engine.js";
 export * from "./job-manager.js";
 export * from "./provider-sync-pipeline.js";
 export * from "./job-routes.js";
+
+export * from "./snapshot-service.js";
+
+export * from "./job-store.js";

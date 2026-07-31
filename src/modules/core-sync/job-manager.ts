@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import type { JobProgress, JobRecord, PipelineContext, PipelineDefinition } from "./core-sync-types.js";
 import { PipelineEngine } from "./pipeline-engine.js";
 import { CoreSyncEventBus, coreSyncEventBus } from "./event-bus.js";
+import { JobStore, jobStore } from "./job-store.js";
 
 interface InternalJob<TResult = unknown> {
   record: JobRecord<TResult>;
@@ -26,6 +27,7 @@ export class JobManager {
     private readonly events: CoreSyncEventBus = coreSyncEventBus,
     private readonly concurrency = Math.max(1, Number(process.env.SYNC_JOB_CONCURRENCY ?? 1)),
     private readonly maxRetainedJobs = Math.max(10, Number(process.env.SYNC_JOB_RETENTION ?? 500)),
+    private readonly store: JobStore = jobStore,
   ) {}
 
   create<TInput, TResult>(
@@ -50,6 +52,7 @@ export class JobManager {
       run: async () => this.executeJob(pipeline, options.input, internal),
     };
     this.jobs.set(id, internal as InternalJob);
+    void this.store.save(record).catch(() => undefined);
     this.queue.push(id);
     void this.events.emit("JobQueued", { type: record.type, provider: record.provider }, id);
     queueMicrotask(() => void this.drain());
@@ -83,6 +86,7 @@ export class JobManager {
     const queueIndex = this.queue.indexOf(id);
     if (queueIndex >= 0) this.queue.splice(queueIndex, 1);
     await this.events.emit("JobCancelled", {}, id);
+    await this.store.save(job.record);
     return structuredClone(job.record);
   }
 
@@ -109,6 +113,7 @@ export class JobManager {
     job.record.status = "RUNNING";
     job.record.startedAt = new Date().toISOString();
     await this.events.emit("JobStarted", { type: job.record.type, provider: job.record.provider }, id);
+    await this.store.save(job.record);
 
     const context: PipelineContext<TInput, TResult> = {
       jobId: id,
@@ -119,22 +124,34 @@ export class JobManager {
     };
 
     try {
-      job.record.result = await this.pipelineEngine.execute(pipeline, context);
+      const result = await this.pipelineEngine.execute(pipeline, context);
       if (!job.controller.signal.aborted) {
-        job.record.status = "COMPLETED";
-        job.record.finishedAt = new Date().toISOString();
-        await this.events.emit("JobCompleted", { result: job.record.result }, id);
+        const completedRecord: JobRecord<TResult> = {
+          ...structuredClone(job.record),
+          result,
+          status: "COMPLETED",
+          finishedAt: new Date().toISOString(),
+        };
+        await this.events.emit("JobCompleted", { result }, id);
+        await this.store.save(completedRecord);
+        job.record = completedRecord;
       }
     } catch (error) {
       if (!job.controller.signal.aborted) {
-        job.record.status = "FAILED";
-        job.record.finishedAt = new Date().toISOString();
-        job.record.error = {
+        const failure = {
           name: error instanceof Error ? error.name : "Error",
           message: error instanceof Error ? error.message : String(error),
           stack: process.env.NODE_ENV === "production" ? undefined : error instanceof Error ? error.stack : undefined,
         };
-        await this.events.emit("JobFailed", { error: job.record.error }, id);
+        const failedRecord: JobRecord<TResult> = {
+          ...structuredClone(job.record),
+          status: "FAILED",
+          finishedAt: new Date().toISOString(),
+          error: failure,
+        };
+        await this.events.emit("JobFailed", { error: failure }, id);
+        await this.store.save(failedRecord);
+        job.record = failedRecord;
       }
     }
   }
@@ -148,6 +165,7 @@ export class JobManager {
       total,
       percent: progress.percent ?? (total === 0 ? 0 : Math.round((completed / total) * 100)),
     };
+    void this.store.save(record).catch(() => undefined);
   }
 
   private prune(): void {

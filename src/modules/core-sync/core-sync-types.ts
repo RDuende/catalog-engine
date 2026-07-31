@@ -28,6 +28,15 @@ export interface JobRecord<TResult = unknown> {
   metadata: Record<string, unknown>;
 }
 
+export interface StageMetric {
+  stage: string;
+  startedAt: string;
+  finishedAt: string;
+  durationMs: number;
+  status: "COMPLETED" | "FAILED";
+  error?: string;
+}
+
 export interface PipelineContext<TInput = unknown, TResult = unknown> {
   jobId: string;
   input: TInput;
@@ -45,6 +54,8 @@ export interface PipelineStage<TInput = unknown, TResult = unknown> {
 export interface PipelineDefinition<TInput = unknown, TResult = unknown> {
   readonly name: string;
   readonly stages: readonly PipelineStage<TInput, TResult>[];
+  onError?(context: PipelineContext<TInput, TResult>, error: unknown): Promise<void>;
+  onCancel?(context: PipelineContext<TInput, TResult>): Promise<void>;
 }
 
 export interface CoreSyncEvent<TPayload = unknown> {
