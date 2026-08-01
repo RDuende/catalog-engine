@@ -1,0 +1,19 @@
+{
+  "defaultMarginPercent": 35,
+  "vatPercent": 21,
+  "currency": "EUR",
+  "setupFees": {
+    "laser": 25,
+    "screen_printing": 30,
+    "pad_printing": 25,
+    "digital": 20,
+    "unpriced": 0
+  },
+  "markingUnitCosts": {
+    "laser": 0.35,
+    "screen_printing": 0.28,
+    "pad_printing": 0.22,
+    "digital": 0.45,
+    "unpriced": 0
+  }
+}

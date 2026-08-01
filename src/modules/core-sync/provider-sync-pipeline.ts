@@ -6,6 +6,8 @@ import { syncProvider } from "../provider-engine/provider-service.js";
 import { importCanonicalProducts } from "../canonical-catalog/canonical-service.js";
 import type { PipelineDefinition, PipelineStage } from "./core-sync-types.js";
 import { snapshotService, type SnapshotManifest } from "./snapshot-service.js";
+import { KnowledgeGraphBuilderService } from "../knowledge-graph-v2/knowledge-builder.service.js";
+import { PgKnowledgeBuilderRepository } from "../knowledge-graph-v2/knowledge-builder.repository.js";
 
 export interface ProviderSyncJobInput {
   provider: string;
@@ -17,6 +19,7 @@ export interface ProviderSyncJobInput {
   saveSnapshot?: boolean;
   markMissingInactive?: boolean;
   batchSize?: number;
+  buildKnowledge?: boolean;
 }
 
 export interface ProviderSyncJobResult {
@@ -24,6 +27,7 @@ export interface ProviderSyncJobResult {
   jobId: string;
   sync: Record<string, unknown>;
   canonical?: unknown;
+  knowledge?: unknown;
   snapshot?: { directory: string; manifest: SnapshotManifest };
   startedAt: string;
   finishedAt: string;
@@ -97,6 +101,26 @@ const canonicalStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult>
   },
 };
 
+const knowledgeStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = {
+  name: "knowledge-graph-build",
+  async execute(context) {
+    if (context.input.importCanonical === false || context.input.buildKnowledge === false) return;
+    const canonical = context.data.get("canonical") as { results?: Array<{ id: string }> } | undefined;
+    const productIds = canonical?.results?.map(item => item.id).filter(Boolean) ?? [];
+    if (!productIds.length) return;
+    const builder = new KnowledgeGraphBuilderService(new PgKnowledgeBuilderRepository());
+    context.data.set("knowledge", await builder.build({
+      providerKey: context.input.provider,
+      productIds,
+      batchSize: context.input.batchSize,
+      onProgress: (completed, total) => context.reportProgress({
+        step: "knowledge-graph-build", completed, total,
+        message: `Grafo construido para ${completed} de ${total} productos`,
+      }),
+    }));
+  },
+};
+
 const reportStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = {
   name: "report",
   async execute(context) {
@@ -107,6 +131,7 @@ const reportStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = 
       jobId: context.jobId,
       sync: (context.data.get("sync") as Record<string, unknown> | undefined) ?? {},
       canonical: context.data.get("canonical"),
+      knowledge: context.data.get("knowledge"),
       startedAt,
       finishedAt,
       durationMs: Math.max(0, Date.parse(finishedAt) - Date.parse(startedAt)),
@@ -119,6 +144,7 @@ const reportStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = 
       await snapshotService.complete(context.input.provider, context.jobId, manifest, {
         sync: result.sync,
         canonical: result.canonical,
+        knowledge: context.data.get("knowledge"),
       });
       result.snapshot = {
         directory: snapshotService.directory(context.input.provider, context.jobId),
@@ -133,7 +159,7 @@ const reportStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = 
 
 export const providerSyncPipeline: PipelineDefinition<ProviderSyncJobInput, ProviderSyncJobResult> = {
   name: "provider-sync",
-  stages: [startStage, downloadStage, snapshotStage, canonicalStage, reportStage],
+  stages: [startStage, downloadStage, snapshotStage, canonicalStage, knowledgeStage, reportStage],
   async onError(context, error) {
     const manifest = context.data.get("manifest") as SnapshotManifest | undefined;
     if (manifest) await snapshotService.fail(context.input.provider, context.jobId, manifest, error);

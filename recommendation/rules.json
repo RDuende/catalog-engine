@@ -1,0 +1,10 @@
+{
+  "sustainableTerms":["bambu","bamboo","rpet","reciclado","reciclada","organico","organica","corcho","fsc","algodon reciclado"],
+  "premiumTerms":["acero inoxidable","aluminio","madera","cuero","cristal","premium","luxury","estuche"],
+  "campaignTerms": {
+    "feria":["feria","evento","congreso","acreditacion","lanyard","boligrafo","libreta"],
+    "navidad":["navidad","christmas","invierno","regalo"],
+    "verano":["verano","playa","solar","botella","gorra"],
+    "deporte":["deporte","fitness","running","botella","mochila"]
+  }
+}

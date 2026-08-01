@@ -1,0 +1,10 @@
+{
+  "entities": [
+    {"key":"acero_inoxidable","name":"Acero inoxidable","aliases":["inox","inoxidable","stainless steel","ss304"],"compatibleWith":["grabado_laser","tampografia"],"metadata":{"sustainable":false}},
+    {"key":"bambu","name":"Bambú","aliases":["bamboo"],"compatibleWith":["grabado_laser","serigrafia","tampografia"],"metadata":{"sustainable":true}},
+    {"key":"rpet","name":"RPET","aliases":["recycled pet","pet reciclado"],"compatibleWith":["serigrafia","transfer","dtf"],"metadata":{"sustainable":true,"recycled":true}},
+    {"key":"corcho","name":"Corcho","aliases":["cork"],"compatibleWith":["grabado_laser","serigrafia"],"metadata":{"sustainable":true}},
+    {"key":"aluminio","name":"Aluminio","aliases":["aluminium","aluminum"],"compatibleWith":["grabado_laser","tampografia"],"metadata":{}},
+    {"key":"algodon_organico","name":"Algodón orgánico","aliases":["organic cotton"],"compatibleWith":["serigrafia","transfer","dtf"],"metadata":{"sustainable":true}}
+  ]
+}

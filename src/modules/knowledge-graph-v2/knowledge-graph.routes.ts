@@ -1,0 +1,27 @@
+import type { FastifyInstance } from "fastify";
+import { Type } from "@sinclair/typebox";
+import { PgKnowledgeGraphRepository } from "./knowledge-graph.repository.js";
+import { KnowledgeGraphService } from "./knowledge-graph.service.js";
+import { KnowledgeGraphBuilderService } from "./knowledge-builder.service.js";
+import { PgKnowledgeBuilderRepository } from "./knowledge-builder.repository.js";
+import { KnowledgeDictionaryService } from "./knowledge-dictionary.service.js";
+import { PgKnowledgeIntelligenceRepository } from "./knowledge-intelligence.repository.js";
+import { PgSemanticQueryRepository } from "./semantic-query.repository.js";
+import { SemanticQueryService } from "./semantic-query.service.js";
+import type { SemanticQueryRequest } from "./semantic-query.types.js";
+import { KNOWLEDGE_ENTITY_TYPES, KNOWLEDGE_RELATION_TYPES, type CreateKnowledgeEntity, type KnowledgeEntityType, type KnowledgeRelationType } from "./knowledge-graph.types.js";
+export async function knowledgeGraphV2Routes(app:FastifyInstance){const s=new KnowledgeGraphService(new PgKnowledgeGraphRepository()); const builder=new KnowledgeGraphBuilderService(new PgKnowledgeBuilderRepository()); const intelligence=new PgKnowledgeIntelligenceRepository(); const dictionary=new KnowledgeDictionaryService(intelligence); const semanticQuery=new SemanticQueryService(new PgSemanticQueryRepository());
+ app.get("/knowledge/stats",async()=>s.stats());
+ app.get<{Querystring:{type?:KnowledgeEntityType;q?:string;limit?:number;offset?:number}}>("/knowledge/entities",{schema:{querystring:Type.Object({type:Type.Optional(Type.Union(KNOWLEDGE_ENTITY_TYPES.map(x=>Type.Literal(x)))),q:Type.Optional(Type.String()),limit:Type.Optional(Type.Integer({minimum:1,maximum:250})),offset:Type.Optional(Type.Integer({minimum:0}))})}},async r=>s.listEntities(r.query));
+ app.post<{Body:CreateKnowledgeEntity}>("/knowledge/entities",{schema:{body:Type.Object({type:Type.Union(KNOWLEDGE_ENTITY_TYPES.map(x=>Type.Literal(x))),key:Type.String({minLength:1}),name:Type.String({minLength:1}),slug:Type.Optional(Type.String()),description:Type.Optional(Type.String()),aliases:Type.Optional(Type.Array(Type.String())),metadata:Type.Optional(Type.Record(Type.String(),Type.Unknown()))})}},async(r,reply)=>reply.code(201).send(await s.createEntity(r.body)));
+ app.get<{Params:{id:string}}>("/knowledge/entities/:id",async(r,reply)=>(await s.getEntity(r.params.id))??reply.code(404).send({error:"NOT_FOUND",message:"Entidad no encontrada."}));
+ app.post<{Body:{sourceId:string;targetId:string;type:KnowledgeRelationType;weight?:number;confidence?:number;metadata?:Record<string,unknown>}}>("/knowledge/relations",{schema:{body:Type.Object({sourceId:Type.String(),targetId:Type.String(),type:Type.Union(KNOWLEDGE_RELATION_TYPES.map(x=>Type.Literal(x))),weight:Type.Optional(Type.Number({minimum:0})),confidence:Type.Optional(Type.Number({minimum:0,maximum:1})),metadata:Type.Optional(Type.Record(Type.String(),Type.Unknown()))})}},async(r,reply)=>reply.code(201).send(await s.createRelation(r.body)));
+ app.post<{Body:{providerKey?:string;productIds?:string[];limit?:number;batchSize?:number;removeStaleAutoLinks?:boolean}}>("/knowledge/build",{schema:{body:Type.Object({providerKey:Type.Optional(Type.String()),productIds:Type.Optional(Type.Array(Type.String())),limit:Type.Optional(Type.Integer({minimum:1})),batchSize:Type.Optional(Type.Integer({minimum:1,maximum:500})),removeStaleAutoLinks:Type.Optional(Type.Boolean())})}},async(r,reply)=>reply.code(202).send(await builder.build(r.body)));
+ app.get<{Params:{id:string}}>("/knowledge/products/:id",async(r,reply)=>(await s.getProductGraph(r.params.id))??reply.code(404).send({error:"NOT_FOUND",message:"Producto canónico no encontrado."}));
+ app.post("/knowledge/dictionary/sync",async(_r,reply)=>reply.code(200).send(await dictionary.sync()));
+ app.get<{Querystring:{q:string;limit?:number;providerKey?:string}}>("/knowledge/search",{schema:{querystring:Type.Object({q:Type.String({minLength:1}),limit:Type.Optional(Type.Integer({minimum:1,maximum:100})),providerKey:Type.Optional(Type.String())})}},async r=>intelligence.search(r.query));
+ app.get<{Params:{id:string};Querystring:{depth?:number;limit?:number}}>("/knowledge/explore/:id",{schema:{querystring:Type.Object({depth:Type.Optional(Type.Integer({minimum:1,maximum:4})),limit:Type.Optional(Type.Integer({minimum:1,maximum:500}))})}},async(r,reply)=>(await intelligence.explore(r.params.id,r.query.depth??1,r.query.limit??100))??reply.code(404).send({error:"NOT_FOUND",message:"Entidad no encontrada."}));
+ app.post<{Body:SemanticQueryRequest}>("/knowledge/query",{schema:{body:Type.Object({query:Type.String({minLength:1}),providerKey:Type.Optional(Type.String()),status:Type.Optional(Type.String()),customizable:Type.Optional(Type.Boolean()),limit:Type.Optional(Type.Integer({minimum:1,maximum:100})),constraints:Type.Optional(Type.Array(Type.Object({term:Type.String({minLength:1}),type:Type.Optional(Type.Union(KNOWLEDGE_ENTITY_TYPES.map(x=>Type.Literal(x)))),mode:Type.Union([Type.Literal("MUST"),Type.Literal("SHOULD"),Type.Literal("EXCLUDE")])})))})}},async r=>semanticQuery.query(r.body));
+ app.get<{Querystring:{material:string;technique?:string}}>("/knowledge/compatible",{schema:{querystring:Type.Object({material:Type.String({minLength:1}),technique:Type.Optional(Type.String())})}},async r=>intelligence.compatible(r.query.material,r.query.technique));
+
+}

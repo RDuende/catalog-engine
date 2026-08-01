@@ -1,0 +1,94 @@
+{
+  "general": {
+    "rules": [
+      "text-relevance",
+      "budget",
+      "customizable",
+      "sustainability",
+      "sector-affinity",
+      "campaign-affinity",
+      "premium-affinity",
+      "popularity",
+      "commercial-memory"
+    ]
+  },
+  "eco": {
+    "rules": [
+      "text-relevance",
+      "sustainability",
+      "budget",
+      "customizable",
+      "sector-affinity",
+      "campaign-affinity",
+      "popularity",
+      "commercial-memory"
+    ]
+  },
+  "corporate": {
+    "rules": [
+      "text-relevance",
+      "customizable",
+      "budget",
+      "sector-affinity",
+      "campaign-affinity",
+      "premium-affinity",
+      "popularity",
+      "commercial-memory"
+    ]
+  },
+  "healthcare": {
+    "rules": [
+      "text-relevance",
+      "sector-affinity",
+      "customizable",
+      "budget",
+      "sustainability",
+      "popularity",
+      "commercial-memory"
+    ]
+  },
+  "education": {
+    "rules": [
+      "text-relevance",
+      "sector-affinity",
+      "budget",
+      "customizable",
+      "sustainability",
+      "popularity",
+      "commercial-memory"
+    ]
+  },
+  "hospitality": {
+    "rules": [
+      "text-relevance",
+      "sector-affinity",
+      "customizable",
+      "premium-affinity",
+      "budget",
+      "popularity",
+      "commercial-memory"
+    ]
+  },
+  "premium": {
+    "rules": [
+      "text-relevance",
+      "premium-affinity",
+      "customizable",
+      "sector-affinity",
+      "popularity",
+      "budget",
+      "commercial-memory"
+    ]
+  },
+  "events": {
+    "rules": [
+      "text-relevance",
+      "campaign-affinity",
+      "customizable",
+      "budget",
+      "popularity",
+      "sustainability",
+      "commercial-memory"
+    ]
+  }
+}

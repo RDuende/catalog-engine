@@ -1,0 +1,10 @@
+{
+  "default": {"label":"General","pipeline":"general","weights":{}},
+  "eco": {"label":"Ecológico","pipeline":"eco","weights":{"sustainability":1.8,"relevance":1.15,"budget":1.0}},
+  "corporate": {"label":"Corporativo","pipeline":"corporate","weights":{"relevance":1.2,"personalization":1.4,"popularity":1.15}},
+  "healthcare": {"label":"Salud","pipeline":"healthcare","terms":["salud","higiene","clinica","medico","antibacteriano"],"weights":{"sector":1.7,"personalization":1.2}},
+  "education": {"label":"Educación","pipeline":"education","terms":["educacion","colegio","profesor","estudiante","escritura"],"weights":{"sector":1.6,"budget":1.25}},
+  "hospitality": {"label":"Hostelería","pipeline":"hospitality","terms":["hotel","restaurante","hosteleria","viaje"],"weights":{"sector":1.6,"personalization":1.25}},
+  "premium": {"label":"Premium","pipeline":"premium","terms":["premium","lujo","directivo","elegante"],"weights":{"premium":1.8,"budget":0.6}},
+  "events": {"label":"Eventos","pipeline":"events","terms":["feria","evento","congreso","campana"],"weights":{"campaign":1.6,"personalization":1.25,"popularity":1.2}}
+}

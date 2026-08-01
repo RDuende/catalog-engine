@@ -1,0 +1,7 @@
+{
+  "entities": [
+    {"key":"fsc","name":"FSC","aliases":["forest stewardship council"],"metadata":{"sustainable":true}},
+    {"key":"grs","name":"GRS","aliases":["global recycled standard"],"metadata":{"recycled":true}},
+    {"key":"oeko_tex","name":"OEKO-TEX","aliases":["oeko tex","oekotex"],"metadata":{}}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "entities": [
+    {"key":"grabado_laser","name":"Grabado láser","aliases":["grabado_laser","láser","laser engraving"],"metadata":{}},
+    {"key":"serigrafia","name":"Serigrafía","aliases":["screen printing","silkscreen"],"metadata":{}},
+    {"key":"tampografia","name":"Tampografía","aliases":["pad printing"],"metadata":{}},
+    {"key":"sublimacion","name":"Sublimación","aliases":["sublimation"],"metadata":{}},
+    {"key":"transfer","name":"Transfer","aliases":["transfer printing"],"metadata":{}},
+    {"key":"dtf","name":"DTF","aliases":["direct to film"],"metadata":{}},
+    {"key":"dtf_uv","name":"DTF UV","aliases":["uv dtf","dtf-uv"],"metadata":{}}
+  ]
+}

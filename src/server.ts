@@ -2,15 +2,12 @@ import "dotenv/config";
 import { buildApp } from "./app.js";
 import { env } from "./config/env.js";
 import { prisma } from "./lib/prisma.js";
-import { recommendationRoutes } from "./modules/recommendation-engine/index.js";
 
 const app = buildApp();
 
 async function start() {
   try {
     await prisma.$connect();
-await app.register(recommendationRoutes, { prefix: "/api/v1" });
-
 
     await app.listen({
       host: env.host,

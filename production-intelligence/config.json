@@ -1,0 +1,60 @@
+{
+  "workingHoursPerDay": 8,
+  "planningBufferPercent": 15,
+  "machines": {
+    "laser_co2": {
+      "label": "Láser CO₂",
+      "techniques": ["laser"],
+      "compatibleTerms": ["bambu", "madera", "corcho", "metacrilato", "acrilico", "cuero"],
+      "setupMinutes": 20,
+      "unitsPerHour": 90,
+      "costPerHour": 24,
+      "minimumLeadDays": 2
+    },
+    "laser_fiber": {
+      "label": "Láser de fibra",
+      "techniques": ["laser"],
+      "compatibleTerms": ["metal", "acero", "aluminio", "inox"],
+      "setupMinutes": 20,
+      "unitsPerHour": 120,
+      "costPerHour": 28,
+      "minimumLeadDays": 2
+    },
+    "dtf_uv": {
+      "label": "DTF UV",
+      "techniques": ["digital"],
+      "compatibleTerms": ["plastico", "metal", "vidrio", "madera", "bambu", "acrilico"],
+      "setupMinutes": 30,
+      "unitsPerHour": 75,
+      "costPerHour": 30,
+      "minimumLeadDays": 3
+    },
+    "screen_printing": {
+      "label": "Serigrafía",
+      "techniques": ["screen_printing"],
+      "compatibleTerms": ["textil", "algodon", "papel", "plastico", "metal"],
+      "setupMinutes": 60,
+      "unitsPerHour": 250,
+      "costPerHour": 32,
+      "minimumLeadDays": 3
+    },
+    "pad_printing": {
+      "label": "Tampografía",
+      "techniques": ["pad_printing"],
+      "compatibleTerms": ["plastico", "metal", "madera", "bambu"],
+      "setupMinutes": 45,
+      "unitsPerHour": 300,
+      "costPerHour": 29,
+      "minimumLeadDays": 3
+    },
+    "digital_print": {
+      "label": "Impresión digital",
+      "techniques": ["digital"],
+      "compatibleTerms": ["papel", "carton", "vinilo", "textil", "plastico"],
+      "setupMinutes": 20,
+      "unitsPerHour": 110,
+      "costPerHour": 35,
+      "minimumLeadDays": 2
+    }
+  }
+}

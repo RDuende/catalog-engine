@@ -1,0 +1,8 @@
+{
+  "entities": [
+    {"key":"botellas","name":"Botellas","aliases":["botella","bidones","bottles"],"parent":"bebida","metadata":{}},
+    {"key":"bebida","name":"Bebida","aliases":["drinkware","menaje bebida"],"metadata":{}},
+    {"key":"textil","name":"Textil","aliases":["ropa","textile"],"metadata":{}},
+    {"key":"bolsas","name":"Bolsas","aliases":["bolsa","bags"],"parent":"textil","metadata":{}}
+  ]
+}

@@ -1,169 +1,197 @@
-import { PriceType, ProductStatus } from "@prisma/client";
-import { prisma } from "../../lib/prisma.js";
+import { SemanticQueryService } from "../knowledge-graph-v2/semantic-query.service.js";
+import { PgSemanticQueryRepository } from "../knowledge-graph-v2/semantic-query.repository.js";
+import type { SemanticConstraint, SemanticRecommendation } from "../knowledge-graph-v2/semantic-query.types.js";
 import { recommendationCompletedEvent } from "./recommendation.events.js";
-import type {
-  RecommendationItemResult,
-  RecommendationRequest,
-  RecommendationResponse,
-  RecommendationScoreBreakdown
-} from "./recommendation.types.js";
-
-export interface RecommendationEventPublisher {
-  publish(event: ReturnType<typeof recommendationCompletedEvent>): Promise<void>;
-}
+import { RecommendationEngine } from "./engine/recommendation-engine.js";
+import type { RecommendationCandidate, RecommendationContext } from "./engine/recommendation-core.types.js";
+import { createCoreRecommendationRules } from "./rules/core.rules.js";
+import { loadRecommendationConfig } from "./recommendation.config.js";
+import { PgRecommendationRepository, type RecommendationProductRecord, type RecommendationRepository } from "./recommendation.repository.js";
+import type { RecommendationEventPublisher, RecommendationRequest, RecommendationResponse, RecommendationItemResult } from "./recommendation.types.js";
+import type { CommercialMemoryRecorder } from "../commercial-memory/commercial-memory.types.js";
 
 export interface RecommendationServiceOptions {
   readonly eventPublisher?: RecommendationEventPublisher;
-}
-
-const STOP_WORDS = new Set([
-  "para", "por", "con", "que", "una", "uno", "unos", "unas", "del", "las", "los",
-  "necesito", "quiero", "busco", "producto", "productos", "regalo", "regalos", "como",
-  "más", "menos", "desde", "hasta", "cada", "este", "esta", "estos", "estas"
-]);
-
-function normalize(value: string): string {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
-}
-
-function tokens(value: string): string[] {
-  return [...new Set(normalize(value).split(/\s+/).filter((token) => token.length >= 3 && !STOP_WORDS.has(token)))];
-}
-
-function decimalToNumber(value: { toString(): string } | null | undefined): number | null {
-  if (value == null) return null;
-  const result = Number(value.toString());
-  return Number.isFinite(result) ? result : null;
+  readonly semanticService?: SemanticQueryService;
+  readonly repository?: RecommendationRepository;
+  readonly engine?: RecommendationEngine;
+  readonly memory?: CommercialMemoryRecorder;
 }
 
 export class RecommendationService {
   private readonly eventPublisher?: RecommendationEventPublisher;
+  private readonly semanticService: SemanticQueryService;
+  private readonly repository: RecommendationRepository;
+  private readonly engine: RecommendationEngine;
+  private readonly memory?: CommercialMemoryRecorder;
 
   constructor(options: RecommendationServiceOptions = {}) {
     this.eventPublisher = options.eventPublisher;
+    this.semanticService = options.semanticService ?? new SemanticQueryService(new PgSemanticQueryRepository());
+    this.repository = options.repository ?? new PgRecommendationRepository();
+    this.engine = options.engine ?? new RecommendationEngine(createCoreRecommendationRules());
+    this.memory = options.memory;
   }
 
   async recommend(request: RecommendationRequest): Promise<RecommendationResponse> {
     const startedAt = performance.now();
-    const requestedTokens = tokens(request.query);
-    const currency = (request.currency ?? "EUR").toUpperCase();
-    const quantity = Math.max(1, request.quantity ?? 1);
+    const config = await loadRecommendationConfig();
+    const profileKey = request.profile && config.profiles[request.profile] ? request.profile : "default";
+    const profile = config.profiles[profileKey] ?? config.profiles.default!;
+    const pipelineKey = request.pipeline && config.pipelines[request.pipeline] ? request.pipeline : profile.pipeline;
+    const pipeline = config.pipelines[pipelineKey] ?? config.pipelines.general!;
     const limit = Math.min(50, Math.max(1, request.limit ?? 10));
+    const retrievalLimit = Math.min(500, Math.max(limit * 10, 100));
+    const constraints: SemanticConstraint[] = [
+      ...(request.categorySlugs ?? []).map((term) => ({ term, type: "CATEGORY" as const, mode: "SHOULD" as const })),
+      ...(request.knowledgeSlugs ?? []).map((term) => ({ term, mode: "SHOULD" as const })),
+    ];
 
-    const products = await prisma.product.findMany({
-      where: {
-        status: ProductStatus.ACTIVE,
-        ...(request.customizable === undefined ? {} : { customizable: request.customizable }),
-        ...(request.categorySlugs?.length
-          ? { categories: { some: { category: { slug: { in: [...request.categorySlugs] } } } } }
-          : {}),
-        ...(request.knowledgeSlugs?.length
-          ? { knowledgeLinks: { some: { active: true, node: { slug: { in: [...request.knowledgeSlugs] } } } } }
-          : {})
-      },
-      include: {
-        categories: { include: { category: true } },
-        knowledgeLinks: {
-          where: { active: true },
-          include: { node: true }
-        },
-        prices: {
-          where: {
-            type: { in: [PriceType.RETAIL, PriceType.SALE, PriceType.WHOLESALE] },
-            currency,
-            minQuantity: { lte: quantity },
-            OR: [{ maxQuantity: null }, { maxQuantity: { gte: quantity } }]
-          },
-          orderBy: [{ amount: "asc" }, { minQuantity: "desc" }]
-        }
-      },
-      take: 500
+    const retrievalStarted = performance.now();
+    const semantic = await this.semanticService.query({
+      query: request.query,
+      providerKey: request.providerKey,
+      status: "ACTIVE",
+      customizable: request.customizable,
+      limit: retrievalLimit,
+      constraints,
     });
 
-    const ranked = products
-      .map((product): RecommendationItemResult | null => {
-        const searchable = normalize([
-          product.name,
-          product.shortDescription,
-          product.description,
-          product.material,
-          product.productType,
-          ...product.categories.map(({ category }) => category.name),
-          ...product.knowledgeLinks.map(({ node }) => node.name)
-        ].filter(Boolean).join(" "));
+    const retrievalMs = performance.now() - retrievalStarted;
+    const productIds = semantic.recommendations.map((item) => item.id);
+    const records = await this.repository.findByIds(productIds);
+    const memorySignals = await this.memory?.productSignals?.(productIds, profileKey) ?? new Map();
+    const recordById = new Map(records.map((item) => [item.id, item]));
+    const semanticById = new Map(semantic.recommendations.map((item) => [item.id, item]));
+    const context: RecommendationContext = {
+      query: request.query,
+      budget: request.budget,
+      quantity: Math.max(1, request.quantity ?? 1),
+      currency: (request.currency ?? "EUR").toUpperCase(),
+      customizable: request.customizable,
+      sustainability: request.sustainability,
+      sector: request.sector, campaign: request.campaign, audience: request.audience, profile: profileKey, pipeline: pipelineKey,
+      profileTerms: profile.terms, weights: profile.weights, sustainableTerms: config.rules.sustainableTerms, premiumTerms: config.rules.premiumTerms, campaignTerms: config.rules.campaignTerms,
+    };
 
-        const matchedTokens = requestedTokens.filter((token) => searchable.includes(token));
-        const categoryMatches = request.categorySlugs?.length
-          ? product.categories.filter(({ category }) => request.categorySlugs?.includes(category.slug)).length
-          : 0;
-        const knowledgeMatches = request.knowledgeSlugs?.length
-          ? product.knowledgeLinks.filter(({ node }) => request.knowledgeSlugs?.includes(node.slug)).length
-          : product.knowledgeLinks.filter(({ node }) => requestedTokens.some((token) => normalize(node.name).includes(token))).length;
+    const candidates = semantic.recommendations.flatMap((semanticItem) => {
+      const record = recordById.get(semanticItem.id);
+      return record ? [toCandidate(record, semanticItem, context, memorySignals.get(record.id))] : [];
+    });
 
-        const selectedPrice = product.prices.at(0);
-        const unitPrice = decimalToNumber(selectedPrice?.amount);
-        const withinBudget = request.budget === undefined || (unitPrice !== null && unitPrice <= request.budget);
-
-        const breakdown: RecommendationScoreBreakdown = {
-          text: Math.min(40, matchedTokens.length * 8),
-          categories: Math.min(20, categoryMatches * 10),
-          knowledge: Math.min(20, knowledgeMatches * 5),
-          budget: request.budget === undefined ? 5 : withinBudget ? 15 : -30,
-          customizable: request.customizable === undefined ? 0 : product.customizable === request.customizable ? 5 : -20,
-          popularity: Math.min(10, Math.max(0, Number(product.popularityScore.toString())))
-        };
-
-        const score = Math.max(0, Math.round(Object.values(breakdown).reduce((sum, part) => sum + part, 0)));
-        if (requestedTokens.length > 0 && matchedTokens.length === 0 && knowledgeMatches === 0 && categoryMatches === 0) return null;
-        if (request.budget !== undefined && !withinBudget) return null;
-
-        const reasons: string[] = [];
-        if (matchedTokens.length) reasons.push(`Coincide con: ${matchedTokens.slice(0, 5).join(", ")}.`);
-        if (categoryMatches) reasons.push("Pertenece a una categoría solicitada.");
-        if (knowledgeMatches) reasons.push("Coincide con relaciones del grafo de conocimiento.");
-        if (request.budget !== undefined && withinBudget) reasons.push("Está dentro del presupuesto indicado.");
-        if (product.customizable) reasons.push("Admite personalización.");
-        if (!reasons.length) reasons.push("Producto activo compatible con los criterios generales.");
-
-        return {
-          productId: product.id,
-          sku: product.sku,
-          name: product.name,
-          slug: product.slug,
-          description: product.shortDescription ?? product.description,
-          score,
-          unitPrice,
-          currency,
-          categories: product.categories.map(({ category }) => category.name),
-          knowledge: product.knowledgeLinks.map(({ node }) => node.name),
-          customizable: product.customizable,
-          reasons,
-          ...(request.debug ? { breakdown } : {})
-        };
-      })
-      .filter((item): item is RecommendationItemResult => item !== null)
-      .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, "es"))
+    const scoringStarted = performance.now();
+    const activeEngine = new RecommendationEngine(createCoreRecommendationRules().filter((rule) => pipeline.rules.includes(rule.id)));
+    const evaluations = activeEngine.rank(candidates, context, candidates.length || limit)
+      .filter((evaluation) => request.budget === undefined || (evaluation.candidate.unitPrice !== null && evaluation.candidate.unitPrice <= request.budget))
       .slice(0, limit);
 
+    const items: RecommendationItemResult[] = evaluations.map((evaluation) => {
+      const record = recordById.get(evaluation.candidate.productId)!;
+      const semanticItem = semanticById.get(evaluation.candidate.productId)!;
+      return {
+        productId: record.id,
+        providerKey: record.providerKey,
+        externalId: record.externalId,
+        sku: record.sku,
+        name: record.name,
+        slug: productSlug(record),
+        description: record.shortDescription ?? record.description,
+        score: evaluation.score + Math.round(semanticItem.score),
+        unitPrice: evaluation.candidate.unitPrice,
+        currency: context.currency,
+        categories: record.categories,
+        knowledge: semanticItem.matchedEntities.map((entity) => entity.name),
+        customizable: record.customizable,
+        reasons: [...semanticItem.reasons, ...evaluation.reasons],
+        warnings: evaluation.warnings,
+        matchedEntities: semanticItem.matchedEntities,
+        explanation: { headline: `${evaluation.score + Math.round(semanticItem.score)} puntos de adecuación`, strengths: [...semanticItem.reasons, ...evaluation.reasons].slice(0,5), cautions: evaluation.warnings.slice(0,3) },
+        ...(request.debug ? { factors: evaluation.factors, semanticScore: semanticItem.score } : {}),
+      };
+    }).sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, "es"));
+
+    const scoringMs = performance.now() - scoringStarted;
     const response: RecommendationResponse = {
       query: request.query,
-      totalCandidates: products.length,
+      profile: profileKey,
+      pipeline: pipelineKey,
+      totalCandidates: semantic.diagnostics.candidatesEvaluated,
       elapsedMs: Math.round((performance.now() - startedAt) * 100) / 100,
-      items: ranked
+      metrics: { retrievalMs: Math.round(retrievalMs*100)/100, scoringMs: Math.round(scoringMs*100)/100, candidatesRetrieved: semantic.recommendations.length, candidatesScored: candidates.length, rulesEvaluated: candidates.length * pipeline.rules.length, discardedByBudget: Math.max(0, candidates.length - evaluations.length) },
+      interpreted: semantic.interpreted,
+      diagnostics: semantic.diagnostics,
+      items,
     };
+
+    if (this.memory) {
+      const runId = await this.memory.recordRecommendation(request, response);
+      (response as { runId?: string }).runId = runId;
+    }
 
     await this.eventPublisher?.publish(recommendationCompletedEvent({
       query: request.query,
       totalCandidates: response.totalCandidates,
       returnedItems: response.items.length,
-      elapsedMs: response.elapsedMs
+      elapsedMs: response.elapsedMs,
     }));
-
     return response;
   }
+}
+
+function toCandidate(record: RecommendationProductRecord, semantic: SemanticRecommendation, context: RecommendationContext, memorySignal?: { score: number; evidence: string[] }): RecommendationCandidate {
+  const knowledge = semantic.matchedEntities.map((entity) => entity.name);
+  return {
+    productId: record.id,
+    name: record.name,
+    searchableText: [record.name, record.description, record.shortDescription, record.material, ...record.categories, ...record.tags, ...knowledge].filter(Boolean).join(" "),
+    unitPrice: extractPrice(record, context.quantity, context.currency),
+    customizable: record.customizable,
+    popularityScore: numberFrom(record.metadata.popularityScore) ?? numberFrom(record.attributes.popularityScore) ?? 0,
+    categories: record.categories,
+    knowledge,
+    memoryScore: memorySignal?.score ?? 0,
+    memoryEvidence: memorySignal?.evidence ?? [],
+  };
+}
+
+function extractPrice(record: RecommendationProductRecord, quantity: number, currency: string): number | null {
+  const roots = [record.metadata, record.attributes];
+  for (const root of roots) {
+    for (const key of ["unitPrice", "price", "salePrice", "retailPrice", "precio", "precioVenta"]) {
+      const value = numberFrom(root[key]);
+      if (value !== null) return value;
+    }
+    const prices = root.prices;
+    if (Array.isArray(prices)) {
+      const valid = prices
+        .filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object" && !Array.isArray(item))
+        .filter((item) => !item.currency || String(item.currency).toUpperCase() === currency)
+        .filter((item) => (numberFrom(item.minQuantity) ?? 1) <= quantity && (numberFrom(item.maxQuantity) ?? Number.MAX_SAFE_INTEGER) >= quantity)
+        .map((item) => numberFrom(item.amount ?? item.price ?? item.unitPrice))
+        .filter((value): value is number => value !== null);
+      if (valid.length) return Math.min(...valid);
+    }
+  }
+  return null;
+}
+
+function numberFrom(value: unknown): number | null {
+  const parsed = typeof value === "number" ? value : typeof value === "string" ? Number(value.replace(",", ".")) : NaN;
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+
+function productSlug(record: RecommendationProductRecord): string {
+  const configured = record.metadata.slug ?? record.attributes.slug;
+  if (typeof configured === "string" && configured.trim()) return configured.trim();
+  return slugify(record.name || record.externalId || record.id);
+}
+
+function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "producto";
 }
