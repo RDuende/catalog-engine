@@ -1,32 +1,13 @@
 import type { RecommendationResponse } from "../recommendation-engine/recommendation.types.js";
 import type { ProposalPricingResult } from "../proposal-pricing/proposal-pricing.types.js";
 import type { ProductionPlan } from "../production-intelligence/production-intelligence.types.js";
-import type { AITrace, ConversationPatch, ConversationUnderstanding } from "../ai-gateway/ai-gateway.types.js";
+import type { AITrace, ConversationUnderstanding } from "../ai-gateway/ai-gateway.types.js";
+import type { CommercialContext, CommercialContextField, ContextPatch, ConversationState } from "../../core/commercial-context/index.js";
 
 export type SalesIntent = "DISCOVER" | "RECOMMEND" | "COMPARE" | "REFINE_BUDGET" | "SELECT" | "PROPOSAL";
 
-export type ConversationState = "WELCOME" | "DISCOVERY" | "COLLECT_REQUIREMENTS" | "SEARCH_PRODUCTS" | "COMPARE_OPTIONS" | "BUILD_PROPOSAL" | "CONFIRM" | "FINISHED";
-export type RequirementField = "need" | "businessGoal" | "audience" | "quantity" | "budget" | "currency" | "sector" | "campaign" | "sustainability" | "customizable" | "deadline";
-
-export interface SalesBrainContext {
-  readonly need?: string;
-  readonly businessGoal?: string;
-  readonly quantity?: number;
-  readonly budget?: number;
-  readonly currency?: string;
-  readonly sector?: string;
-  readonly campaign?: string;
-  readonly audience?: string;
-  readonly sustainability?: boolean;
-  readonly customizable?: boolean;
-  readonly providerKey?: string;
-  readonly profile?: string;
-  readonly selectedProductId?: string;
-  readonly deadline?: string;
-  readonly conversationState?: ConversationState;
-  readonly pendingField?: RequirementField;
-  readonly confidence?: Readonly<Record<string, number>>;
-}
+export type RequirementField = CommercialContextField;
+export type SalesBrainContext = CommercialContext;
 
 export interface SalesBrainAnalysis {
   readonly intent: SalesIntent;
@@ -71,7 +52,7 @@ export interface SalesBrainDecision {
   readonly analysis: SalesBrainAnalysis;
   readonly recommendation?: RecommendationResponse;
   readonly proposal?: SalesProposal;
-  readonly conversationAI?: { readonly understanding: ConversationUnderstanding; readonly trace: AITrace; readonly fallbackUsed: boolean; readonly appliedPatches: readonly ConversationPatch[]; };
+  readonly conversationAI?: { readonly understanding: ConversationUnderstanding; readonly trace: AITrace; readonly fallbackUsed: boolean; readonly appliedPatches: readonly ContextPatch[]; };
   readonly reply?: string;
 }
 

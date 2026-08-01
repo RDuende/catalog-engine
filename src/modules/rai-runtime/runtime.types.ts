@@ -1,5 +1,6 @@
 import type { AITrace, ConversationUnderstanding } from "../ai-gateway/ai-gateway.types.js";
-import type { SalesBrainContext, SalesBrainDecision } from "../sales-brain/sales-brain.types.js";
+import type { SalesBrainDecision } from "../sales-brain/sales-brain.types.js";
+import type { CommercialContext } from "../../core/commercial-context/index.js";
 
 export type RuntimeGoal = "UNDERSTAND_REQUEST" | "RECOMMEND_PRODUCTS" | "PREPARE_PROPOSAL";
 export type RuntimeStepKind = "SKILL" | "TOOL";
@@ -8,14 +9,14 @@ export type RuntimeStatus = "COMPLETED" | "WAITING_FOR_USER" | "FAILED";
 export interface RuntimeRequest {
   readonly goal?: RuntimeGoal;
   readonly message: string;
-  readonly context?: SalesBrainContext;
+  readonly context?: CommercialContext;
   readonly limit?: number;
   readonly recommendNow?: boolean;
 }
 
 export interface RuntimeState {
   readonly request: RuntimeRequest;
-  readonly context: SalesBrainContext;
+  readonly context: CommercialContext;
   readonly understanding?: ConversationUnderstanding;
   readonly aiTrace?: AITrace;
   readonly decision?: SalesBrainDecision;
@@ -55,7 +56,7 @@ export interface RuntimeResult {
   readonly flowId: string;
   readonly status: RuntimeStatus;
   readonly reply: string;
-  readonly context: SalesBrainContext;
+  readonly context: CommercialContext;
   readonly understanding?: ConversationUnderstanding;
   readonly decision?: SalesBrainDecision;
   readonly trace: readonly RuntimeStepTrace[];

@@ -1,17 +1,7 @@
 import type { RecommendationResponse } from "../recommendation-engine/recommendation.types.js";
+import type { CommercialContext } from "../../core/commercial-context/index.js";
 
-export interface RaiCommercialContext {
-  readonly providerKey?: string;
-  readonly profile?: string;
-  readonly sector?: string;
-  readonly campaign?: string;
-  readonly audience?: string;
-  readonly budget?: number;
-  readonly quantity?: number;
-  readonly currency?: string;
-  readonly sustainability?: boolean;
-  readonly customizable?: boolean;
-}
+export type RaiCommercialContext = CommercialContext;
 
 export interface RaiCommercialState extends RaiCommercialContext {
   readonly need?: string;

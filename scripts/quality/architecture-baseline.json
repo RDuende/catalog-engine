@@ -1,0 +1,11 @@
+{
+  "coreImportsModules": [
+    "src/core/compiler.test.ts",
+    "src/core/compiler.ts",
+    "src/core/document/document-model.ts",
+    "src/core/lexer/document-lexer.test.ts",
+    "src/core/lexer/tokens.ts",
+    "src/core/reasoning/constraint-engine.ts",
+    "src/core/reasoning/model.ts"
+  ]
+}

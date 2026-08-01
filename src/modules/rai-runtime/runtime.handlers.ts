@@ -1,5 +1,6 @@
 import { AIGatewayService } from "../ai-gateway/ai-gateway.service.js";
 import type { ConversationPatch } from "../ai-gateway/ai-gateway.types.js";
+import { mergeCommercialContext } from "../../core/commercial-context/index.js";
 import { SalesBrainService } from "../sales-brain/sales-brain.service.js";
 import type { SalesBrainContext } from "../sales-brain/sales-brain.types.js";
 import type { RuntimeSkill, RuntimeState, RuntimeTool } from "./runtime.types.js";
@@ -7,30 +8,7 @@ import type { RuntimeSkill, RuntimeState, RuntimeTool } from "./runtime.types.js
 const required = ["need", "quantity", "budget", "sustainability", "customizable"] as const;
 
 function applyPatches(current: SalesBrainContext, patches: readonly ConversationPatch[]): SalesBrainContext {
-  const next: Record<string, unknown> = { ...current, confidence: { ...(current.confidence ?? {}) } };
-  const confidence = next.confidence as Record<string, number>;
-  for (const patch of patches) {
-    if (patch.operation === "UNSET") {
-      delete next[patch.field];
-      delete confidence[patch.field];
-      continue;
-    }
-    if (patch.value === null) continue;
-    if (patch.field === "quantity" || patch.field === "budget") {
-      const value = typeof patch.value === "number" ? patch.value : Number(String(patch.value).replace(",", "."));
-      if (!Number.isFinite(value) || value < 0) continue;
-      next[patch.field] = value;
-    } else if (patch.field === "sustainability" || patch.field === "customizable") {
-      if (typeof patch.value !== "boolean") continue;
-      next[patch.field] = patch.value;
-    } else {
-      next[patch.field] = String(patch.value).trim();
-    }
-    confidence[patch.field] = patch.confidence;
-  }
-  next.currency ??= "EUR";
-  next.providerKey ??= "makito";
-  return next as SalesBrainContext;
+  return mergeCommercialContext(current, patches).context;
 }
 
 function incomplete(context: SalesBrainContext): boolean {

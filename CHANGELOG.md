@@ -1,3 +1,10 @@
+# 0.71.3-rc1-quality
+
+- Añade `npm run check` como puerta de calidad de la V1.
+- Añade validación arquitectónica, escaneo de secretos y control de tests críticos.
+- Añade una batería estable `test:v1-critical`.
+- Documenta el proceso de validación previo a commit y merge.
+
 # Changelog
 
 ## 0.7.0
@@ -19,3 +26,11 @@
 - Proyecto completo unificado.
 - API REST del catálogo.
 - Prisma 7 con PostgreSQL.
+
+## 0.71.2-pr001
+
+- Añadido contrato central `CommercialContext`.
+- Añadido `ContextPatch` común y merger validado.
+- Unificados los esquemas de contexto de Sales Brain y Rai Commercial.
+- Eliminada la duplicación de aplicación de parches entre Sales Brain y Rai Runtime.
+- Añadidos tests de regresión para contexto comercial.

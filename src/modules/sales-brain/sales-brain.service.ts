@@ -1,6 +1,7 @@
 import { RecommendationService } from "../recommendation-engine/recommendation.service.js";
 import { AIGatewayService } from "../ai-gateway/ai-gateway.service.js";
 import type { ConversationPatch, ConversationUnderstanding } from "../ai-gateway/ai-gateway.types.js";
+import { mergeCommercialContext } from "../../core/commercial-context/index.js";
 import type { RecommendationRequest, RecommendationResponse } from "../recommendation-engine/recommendation.types.js";
 import { ProposalPricingService } from "../proposal-pricing/proposal-pricing.service.js";
 import { ProductionIntelligenceService } from "../production-intelligence/production-intelligence.service.js";
@@ -133,29 +134,7 @@ export class SalesBrainService {
   }
 
   private applyConversationPatches(current: SalesBrainContext, patches: readonly ConversationPatch[]): SalesBrainContext {
-    const next: Record<string, unknown> = { ...current, confidence: { ...(current.confidence ?? {}) } };
-    for (const patch of patches) {
-      if (patch.operation === "UNSET") {
-        delete next[patch.field];
-        delete (next.confidence as Record<string, number>)[patch.field];
-        continue;
-      }
-      if (patch.value === null) continue;
-      if (patch.field === "quantity" || patch.field === "budget") {
-        const value = typeof patch.value === "number" ? patch.value : Number(String(patch.value).replace(",", "."));
-        if (!Number.isFinite(value) || value < 0) continue;
-        next[patch.field] = value;
-      } else if (patch.field === "sustainability" || patch.field === "customizable") {
-        if (typeof patch.value !== "boolean") continue;
-        next[patch.field] = patch.value;
-      } else {
-        next[patch.field] = String(patch.value).trim();
-      }
-      (next.confidence as Record<string, number>)[patch.field] = patch.confidence;
-    }
-    next.currency ??= "EUR";
-    next.providerKey ??= "makito";
-    return next as SalesBrainContext;
+    return mergeCommercialContext(current, patches).context;
   }
 
   private analysisFromAI(understanding: ConversationUnderstanding, context: SalesBrainContext): SalesBrainAnalysis {

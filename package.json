@@ -1,6 +1,6 @@
 {
   "name": "catalog-engine",
-  "version": "0.71.0",
+  "version": "0.71.3-rc1-quality-hotfix1",
   "private": true,
   "description": "Motor de catálogo y recomendaciones de RecuerdArte",
   "type": "module",
@@ -75,7 +75,15 @@
     "test:rai-commercial-os": "tsx --test src/modules/sales-brain/*.test.ts src/modules/rai-workspace/*.test.ts",
     "test:ai-gateway": "tsx --test src/modules/ai-gateway/*.test.ts",
     "test:hybrid-conversation": "tsx --test src/modules/ai-gateway/*.test.ts src/modules/sales-brain/hybrid-conversation.test.ts",
-    "test:rai-runtime": "tsx --test src/modules/rai-runtime/*.test.ts"
+    "test:rai-runtime": "tsx --test src/modules/rai-runtime/*.test.ts",
+    "test:commercial-context": "tsx --test src/core/commercial-context/*.test.ts",
+    "quality:architecture": "node scripts/quality/check-architecture.mjs",
+    "quality:secrets": "node scripts/quality/check-secrets.mjs",
+    "quality:tests": "node scripts/quality/check-critical-tests.mjs",
+    "quality": "npm run quality:architecture && npm run quality:secrets && npm run quality:tests",
+    "test:v1-critical": "npm run test:commercial-context && npm run test:ai-gateway && npm run test:hybrid-conversation && npm run test:sales-brain && npm run test:rai-runtime && npm run test:recommendation-engine",
+    "check:fast": "npm run quality && npm run typecheck && npm run test:v1-critical",
+    "check": "npm run check:fast && npm run build"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",

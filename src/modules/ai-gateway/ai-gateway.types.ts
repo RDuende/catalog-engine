@@ -1,3 +1,5 @@
+import type { CommercialContext, CommercialContextField, ContextPatch } from "../../core/commercial-context/index.js";
+
 export type AIProviderName = "openai" | "mock";
 
 export interface AIUsage {
@@ -37,26 +39,8 @@ export interface AIProvider {
   structured<T>(request: StructuredAIRequest<T>): Promise<StructuredAIResult<T>>;
 }
 
-export type ConversationPatchField =
-  | "need"
-  | "businessGoal"
-  | "audience"
-  | "quantity"
-  | "budget"
-  | "currency"
-  | "sector"
-  | "campaign"
-  | "sustainability"
-  | "customizable"
-  | "deadline";
-
-export interface ConversationPatch {
-  readonly field: ConversationPatchField;
-  readonly operation: "SET" | "UNSET";
-  readonly value: string | number | boolean | null;
-  readonly confidence: number;
-  readonly evidence: string;
-}
+export type ConversationPatchField = CommercialContextField;
+export type ConversationPatch = ContextPatch;
 
 export interface ConversationUnderstanding {
   readonly intent: "GREETING" | "DISCOVER" | "RECOMMEND" | "COMPARE" | "PROPOSAL" | "CORRECT" | "CONFIRM" | "OTHER";
@@ -69,5 +53,5 @@ export interface ConversationUnderstanding {
 
 export interface ConversationExtractRequest {
   readonly message: string;
-  readonly context?: Readonly<object>;
+  readonly context?: CommercialContext;
 }
