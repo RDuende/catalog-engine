@@ -1,0 +1,231 @@
+{
+  "id": "5660aa43-2165-4503-b6d2-b518ad7efb6a",
+  "journeyId": "0c396933-3607-48b2-9086-02146099b36c",
+  "journey": {
+    "id": "0c396933-3607-48b2-9086-02146099b36c",
+    "type": "GIFT",
+    "status": "READY_FOR_INSPIRATION",
+    "version": 30,
+    "sessionId": "5660aa43-2165-4503-b6d2-b518ad7efb6a",
+    "participants": [],
+    "facts": [
+      {
+        "key": "recipient.age",
+        "value": 12,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "de 12 anos",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T21:59:38.611Z"
+      },
+      {
+        "key": "occasion.type",
+        "value": "communion",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "communion",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T21:59:38.611Z"
+      },
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T21:59:38.611Z"
+      },
+      {
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "mi ahijado",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T22:00:04.240Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T22:07:06.779Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T22:07:06.779Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 60,
+          "requiredScore": 69.23,
+          "recommendedScore": 42.86,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "recipient.count",
+            "occasion.type",
+            "recipient.age"
+          ],
+          "missingRequired": [
+            "recipient.relationship"
+          ],
+          "missingRecommended": [
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T22:07:06.780Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T22:07:06.780Z"
+      },
+      {
+        "key": "conversation.pending_fact",
+        "value": "recipient.relationship",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T21:59:38.611Z",
+        "updatedAt": "2026-08-02T22:07:06.780Z"
+      },
+      {
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "1",
+        "createdAt": "2026-08-02T21:59:48.429Z",
+        "updatedAt": "2026-08-02T21:59:48.429Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T21:59:38.609Z",
+    "updatedAt": "2026-08-02T22:07:06.780Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "e63c2f1e-301a-48c6-9c51-3065082da382",
+    "accessKeyHash": "189705698bf40610c44ecd806659fde77461032606abc334cf5ab60ba5bbcb40",
+    "createdAt": "2026-08-02T21:59:38.609Z"
+  },
+  "messages": [
+    {
+      "id": "59a4b26c-771c-493a-abd0-370fb1a8b4ef",
+      "role": "USER",
+      "text": "un regalo para la comunion de mi ahijado de 12 años",
+      "createdAt": "2026-08-02T21:59:38.609Z"
+    },
+    {
+      "id": "f045412a-a759-4621-a944-6f5ec520387b",
+      "role": "RAI",
+      "text": "¡Qué ocasión tan especial! ¿Qué aficiones o intereses tiene tu ahijado?",
+      "createdAt": "2026-08-02T21:59:42.121Z"
+    },
+    {
+      "id": "bde3a64b-b5d8-469f-8ac4-39d32aee43b0",
+      "role": "USER",
+      "text": "1",
+      "createdAt": "2026-08-02T21:59:48.428Z"
+    },
+    {
+      "id": "01bda66e-8135-4b29-b9c4-8e8ac3b172ae",
+      "role": "RAI",
+      "text": "No he entendido a qué te refieres con «1». ¿Cuál es la afición principal de tu ahijado?",
+      "createdAt": "2026-08-02T21:59:52.656Z"
+    },
+    {
+      "id": "6fd0ea54-8281-417e-9a38-7c4915f63ac3",
+      "role": "USER",
+      "text": "mi ahijado",
+      "createdAt": "2026-08-02T22:00:04.240Z"
+    },
+    {
+      "id": "8428684a-a5a6-435a-811b-2b5959c62b07",
+      "role": "RAI",
+      "text": "Entendido, es para tu ahijado de 12 años por su comunión. ¿Qué presupuesto aproximado tienes?",
+      "createdAt": "2026-08-02T22:00:07.914Z"
+    },
+    {
+      "id": "cc1d6f56-795d-4eee-afa6-38ffe5b165ca",
+      "role": "USER",
+      "text": "ninguna",
+      "createdAt": "2026-08-02T22:07:06.776Z"
+    },
+    {
+      "id": "e2df3bd3-fbc8-487f-9f11-b3d9a5354701",
+      "role": "RAI",
+      "text": "Sin problema, no fijamos presupuesto por ahora. ¿Cómo es él: creativo, aventurero, deportista o más tranquilo?",
+      "createdAt": "2026-08-02T22:07:11.958Z"
+    }
+  ],
+  "createdAt": "2026-08-02T21:59:42.121Z",
+  "updatedAt": "2026-08-02T22:07:11.959Z"
+}

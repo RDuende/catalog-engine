@@ -1,0 +1,150 @@
+{
+  "id": "54c42220-6df7-41df-97df-d3d3ff4fbe92",
+  "journeyId": "446853b9-e50b-4a1a-865f-aaf29cd428ce",
+  "journey": {
+    "id": "446853b9-e50b-4a1a-865f-aaf29cd428ce",
+    "type": "GIFT",
+    "status": "DISCOVERING",
+    "version": 6,
+    "sessionId": "54c42220-6df7-41df-97df-d3d3ff4fbe92",
+    "participants": [],
+    "facts": [
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T09:24:58.970Z",
+        "updatedAt": "2026-08-02T09:24:58.970Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.2-discovery-rules-v1",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:24:58.970Z",
+        "updatedAt": "2026-08-02T09:24:58.970Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.56,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:24:58.970Z",
+        "updatedAt": "2026-08-02T09:24:58.970Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.discovery",
+          "profileVersion": "v1",
+          "score": 0,
+          "requiredScore": 0,
+          "recommendedScore": 0,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [],
+          "missingRequired": [
+            "recipient.count",
+            "recipient.relationship",
+            "occasion.type"
+          ],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T09:24:58.971Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:24:58.971Z",
+        "updatedAt": "2026-08-02T09:24:58.971Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T09:24:58.969Z",
+    "updatedAt": "2026-08-02T09:24:58.971Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "782884c5-2a73-41a0-a4d2-2ff6348c933f",
+    "accessKeyHash": "483a3d0b80beab4cd1bfe5b7171bd40655b74e664dc3b608d2c37c357afdfe51",
+    "createdAt": "2026-08-02T09:24:58.969Z"
+  },
+  "messages": [
+    {
+      "id": "a2dd9f68-989a-45ef-ae83-7240643c3550",
+      "role": "USER",
+      "text": "un regalo",
+      "createdAt": "2026-08-02T09:24:58.969Z"
+    },
+    {
+      "id": "6d444e8c-28d1-4778-94f7-3538ff03cce9",
+      "role": "RAI",
+      "text": "¿Para cuántas personas será el regalo?",
+      "createdAt": "2026-08-02T09:24:58.971Z"
+    }
+  ],
+  "createdAt": "2026-08-02T09:24:58.971Z",
+  "updatedAt": "2026-08-02T09:24:58.971Z"
+}

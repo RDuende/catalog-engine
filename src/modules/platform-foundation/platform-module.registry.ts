@@ -1,0 +1,25 @@
+import type { PlatformModuleDefinition } from "./platform-foundation.types.js";
+
+export const PLATFORM_MODULES: readonly PlatformModuleDefinition[] = Object.freeze([
+  { id:"interest-brain-v2", name:"Interest Brain V2", version:"2.0.0", category:"intelligence", description:"Taxonomía semántica, intereses implícitos, clusters y pesos canónicos.", testScript:"npm run test:interest-brain-v2", targetMs:30 },
+  { id:"functional-test-console", name:"Functional Test Console", version:"1.0.0", category:"infrastructure", description:"Batería funcional y revisión manual de Rai.", testScript:"npm run test:functional-console", targetMs:50 },
+  { id:"intent-brain-v1", name:"Intent Brain V1", version:"1.0.0", category:"intelligence", description:"Clasificación de intención y planificación de ejecución entre Brains.", testScript:"npm run test:intent-brain-v1", targetMs:25 },
+  { id:"emotion-brain-v1", name:"Emotion Brain V1", version:"1.0.0", category:"intelligence", description:"Análisis emocional explicable para Gift Brain y Proposal Brain.", testScript:"npm run test:emotion-brain-v1", targetMs:35 },
+  { id:"memory-brain-v1", name:"Memory Brain V1", version:"1.0.0", category:"conversation", description:"Memoria persistente y explicable de destinatarios, preferencias e historial de regalos.", testScript:"npm run test:memory-brain-v1", targetMs:40 },
+  { id:"conversation-engine-v2", name:"Conversation Engine V2", version:"2.1.0-natural-gate", category:"conversation", description:"Conversation Graph, planificación de preguntas y coordinación conversacional de Rai.", testScript:"npm run test:conversation-engine-v2", targetMs:100 },
+  { id:"brain-orchestrator", name:"Brain Orchestrator", version:"1.1.0-runtime", category:"infrastructure", description:"Coordinación central del pipeline de inteligencia de Rai.", testScript:"npm run test:brain-orchestrator", targetMs:120 },
+  { id:"proposal-brain", name:"Proposal Brain", version:"1.2.0-studio", category:"intelligence", description:"Candidatos, diversidad y presupuesto de propuestas.", testScript:"npm run test:proposal-brain", targetMs:60 },
+  { id:"gift-brain", name:"Gift Brain", version:"1.0.0", category:"intelligence", description:"Razonamiento emocional y estrategia de regalo.", testScript:"npm run test:gift-brain", targetMs:50 },
+  { id:"interest-brain", name:"Interest Brain", version:"1.0.0", category:"intelligence", description:"Normalización de intereses.", testScript:"npm run test:interest-brain", targetMs:25 },
+  { id:"knowledge-brain", name:"Knowledge Brain", version:"1.0.0", category:"intelligence", description:"Clasificación contextual.", testScript:"npm run test:knowledge-brain", targetMs:30 },
+  { id:"smart-catalog", name:"Smart Catalog", version:"1.0.0", category:"catalog", description:"Afinidad y ranking.", testScript:"npm run test:smart-catalog", targetMs:40 },
+  { id:"catalog-interest-enrichment", name:"Catalog Enrichment", version:"1.0.0", category:"catalog", description:"Intereses canónicos.", testScript:"npm run test:catalog-interest-enrichment", targetMs:50 },
+  { id:"product-brain-studio", name:"Product Brain Studio", version:"1.0.3", category:"catalog", description:"Rayos X del catálogo.", testScript:"npm run test:product-brain-studio" },
+  { id:"catalog-media/image-resolver", name:"Image Resolver", version:"1.0.0", category:"infrastructure", description:"Deduplicación y ranking visual.", testScript:"npm run test:image-resolver", targetMs:8 },
+  { id:"catalog-media/image-runtime", name:"Image Runtime", version:"1.0.0", category:"infrastructure", description:"Integración visual en runtime.", testScript:"npm run test:image-runtime" },
+  { id:"composer-engine", name:"Composer Engine", version:"1.0.0", category:"creative", description:"Composición de lotes.", testScript:"npm run test:composer-engine" },
+  { id:"composer-v2", name:"Composer V2", version:"2.0.0", category:"creative", description:"Bundles, restricciones y narrativa.", testScript:"npm run test:composer-v2", targetMs:75 },
+  { id:"admin-tools", name:"Engineering Console", version:"2.0.0", category:"infrastructure", description:"Casos, trazas y diagnósticos.", testScript:"npm run test:admin-tools" },
+  { id:"journey-memory", name:"Journey Memory", version:"1.0.0", category:"conversation", description:"Memoria del Journey.", testScript:"npm run test:journey-memory" },
+  { id:"memory-brain", name:"Memory Brain", version:"1.0.0", category:"conversation", description:"Memoria incremental.", testScript:"npm run test:memory-brain" },
+] satisfies PlatformModuleDefinition[]);

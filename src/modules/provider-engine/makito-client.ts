@@ -230,6 +230,56 @@ export async function makitoFetchJson<T = unknown>(input: Partial<MakitoApiConfi
   }
 }
 
+export async function makitoFetchBinary(
+  input: Partial<MakitoApiConfig>,
+  resourceUrl: string,
+): Promise<{ bytes: Buffer; contentType: string; sourceUrl: string }> {
+  const config = resolveMakitoConfig(input);
+  const maxRetries = Math.max(0, Math.floor(config.maxRetries ?? 5));
+
+  const request = async (url: string, forceRefresh: boolean): Promise<Response> => {
+    const token = await getMakitoToken(config, forceRefresh);
+    await makitoLimiter(config).acquire();
+    return fetch(url, {
+      headers: { ...config.headers, accept: "image/*", authorization: `Bearer ${token}` },
+      redirect: "manual",
+    });
+  };
+
+  let currentUrl = new URL(resourceUrl, config.baseUrl).toString();
+  let forceRefresh = false;
+  let redirects = 0;
+  for (let attempt = 0; ; attempt += 1) {
+    const response = await request(currentUrl, forceRefresh);
+    if (response.status === 401 && !forceRefresh) {
+      forceRefresh = true;
+      continue;
+    }
+    if ((response.status === 429 || response.status === 503) && attempt < maxRetries) {
+      await sleep(retryDelayMs(response, attempt));
+      continue;
+    }
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get("location");
+      if (!location) throw new MakitoHttpError(response.status, response.statusText, currentUrl, "Redirección sin Location", headersToRecord(response.headers));
+      redirects += 1;
+      if (redirects > 5) throw new Error("Demasiadas redirecciones al descargar una imagen de Makito.");
+      currentUrl = new URL(location, currentUrl).toString();
+      continue;
+    }
+    if (!response.ok) {
+      const body = await response.text();
+      throw new MakitoHttpError(response.status, response.statusText, currentUrl, body, headersToRecord(response.headers));
+    }
+    const bytes = Buffer.from(await response.arrayBuffer());
+    return {
+      bytes,
+      contentType: response.headers.get("content-type")?.split(";")[0]?.trim() || "application/octet-stream",
+      sourceUrl: currentUrl,
+    };
+  }
+}
+
 export async function diagnoseMakitoEndpoint(
   input: Partial<MakitoApiConfig> = {},
   path = "/catalog/files",

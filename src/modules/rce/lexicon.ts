@@ -1,0 +1,46 @@
+export const RELATION_BY_TERM: Readonly<Record<string, string>> = Object.freeze({
+  padre: "parent", padres: "parent", madre: "parent", madres: "parent",
+  hermano: "sibling", hermana: "sibling", hermanos: "sibling", hermanas: "sibling",
+  hijo: "child", hija: "child", hijos: "child", hijas: "child",
+  sobrino: "nephew", sobrina: "nephew", sobrinos: "nephew", sobrinas: "nephew",
+  tio: "uncle", tia: "uncle", tios: "uncle", tias: "uncle",
+  abuelo: "grandparent", abuela: "grandparent", abuelos: "grandparent", abuelas: "grandparent",
+  nieto: "grandchild", nieta: "grandchild", nietos: "grandchild", nietas: "grandchild",
+  primo: "cousin", prima: "cousin", primos: "cousin", primas: "cousin",
+  amigo: "friend", amiga: "friend", amigos: "friend", amigas: "friend",
+  pareja: "partner", novio: "partner", novia: "partner", marido: "partner", esposa: "partner",
+  compañero: "colleague", compañera: "colleague",
+  companero: "colleague", companera: "colleague",
+});
+
+export const ORDINAL_AGE: Readonly<Record<string, number>> = Object.freeze({
+  primer: 1, primero: 1, primera: 1,
+  segundo: 2, segunda: 2,
+  tercer: 3, tercero: 3, tercera: 3,
+  cuarto: 4, cuarta: 4,
+  quinto: 5, quinta: 5,
+  sexto: 6, sexta: 6,
+  septimo: 7, septima: 7,
+  octavo: 8, octava: 8,
+  noveno: 9, novena: 9,
+  decimo: 10, decima: 10,
+  undecimo: 11, undecima: 11,
+  duodecimo: 12, duodecima: 12,
+});
+
+export const INTEREST_ALIASES: Readonly<Record<string, string>> = Object.freeze({
+  futbol: "football",
+  baloncesto: "basketball",
+  musica: "music",
+  rap: "rap",
+  hiphop: "rap",
+  "hip hop": "rap",
+  marvel: "marvel",
+  pokemon: "pokemon",
+  videojuegos: "gaming",
+  gaming: "gaming",
+  lectura: "reading",
+  animales: "animals",
+  coches: "cars",
+  motos: "motorcycles",
+});

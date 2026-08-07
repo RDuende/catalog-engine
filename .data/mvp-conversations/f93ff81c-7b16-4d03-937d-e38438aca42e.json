@@ -1,0 +1,1695 @@
+{
+  "id": "f93ff81c-7b16-4d03-937d-e38438aca42e",
+  "journeyId": "4a6ec550-97ba-42d0-aad8-b91320ea0615",
+  "journey": {
+    "id": "4a6ec550-97ba-42d0-aad8-b91320ea0615",
+    "type": "GIFT",
+    "status": "READY_FOR_INSPIRATION",
+    "version": 39,
+    "sessionId": "f93ff81c-7b16-4d03-937d-e38438aca42e",
+    "participants": [],
+    "facts": [
+      {
+        "id": "0e549a9e-3240-41a4-82f8-55ce3d6b479c",
+        "key": "occasion.type",
+        "value": "communion",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "communion",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-03T08:14:40.474Z",
+        "updatedAt": "2026-08-03T08:14:40.474Z"
+      },
+      {
+        "id": "530c3302-4873-4dcc-b9d8-fbf8ab3358ed",
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-03T08:14:40.474Z",
+        "updatedAt": "2026-08-03T08:14:40.474Z"
+      },
+      {
+        "id": "51eac242-8ed5-427e-bcbc-1b76e3fceb4b",
+        "key": "discovery.last_extractor_version",
+        "value": "v2.0.0-gift-model-memory",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-03T08:14:40.474Z",
+        "updatedAt": "2026-08-03T08:15:15.452Z"
+      },
+      {
+        "id": "82a86fd2-5d78-4137-9765-a270351893f8",
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": 0.67,
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:14:52.038Z"
+          }
+        ],
+        "createdAt": "2026-08-03T08:14:40.474Z",
+        "updatedAt": "2026-08-03T08:15:15.452Z"
+      },
+      {
+        "id": "68608bd6-0302-4ad1-bb8a-201a6d01c641",
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 45,
+          "requiredScore": 69.23,
+          "recommendedScore": 0,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "recipient.count",
+            "occasion.type"
+          ],
+          "missingRequired": [
+            "recipient.relationship"
+          ],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-03T08:15:15.452Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 0,
+              "requiredScore": 0,
+              "recommendedScore": 100,
+              "requiredComplete": false,
+              "readyForInspiration": false,
+              "satisfiedKeys": [],
+              "missingRequired": [
+                "gift.scope"
+              ],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                }
+              ],
+              "evaluatedAt": "2026-08-03T08:14:40.475Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:14:52.039Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-03T08:14:52.039Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:14:52.039Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.personal.discovery",
+              "profileVersion": "v1",
+              "score": 25,
+              "requiredScore": 38.46,
+              "recommendedScore": 0,
+              "requiredComplete": false,
+              "readyForInspiration": false,
+              "satisfiedKeys": [
+                "occasion.type"
+              ],
+              "missingRequired": [
+                "recipient.count",
+                "recipient.relationship"
+              ],
+              "missingRecommended": [
+                "recipient.age",
+                "budget.max",
+                "recipient.interests"
+              ],
+              "requirements": [
+                {
+                  "key": "recipient.count",
+                  "label": "Número de destinatarios",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "recipient.relationship",
+                  "label": "Relación con el destinatario",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "occasion.type",
+                  "label": "Ocasión",
+                  "level": "REQUIRED",
+                  "weight": 25,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.age",
+                  "label": "Edad del destinatario",
+                  "level": "RECOMMENDED",
+                  "weight": 15,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "budget.max",
+                  "label": "Presupuesto máximo",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "recipient.interests",
+                  "label": "Intereses o aficiones",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "minimumConfidence": 0.5,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                }
+              ],
+              "evaluatedAt": "2026-08-03T08:14:52.039Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:06.374Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-03T08:15:06.374Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:06.374Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.personal.discovery",
+              "profileVersion": "v1",
+              "score": 45,
+              "requiredScore": 69.23,
+              "recommendedScore": 0,
+              "requiredComplete": false,
+              "readyForInspiration": false,
+              "satisfiedKeys": [
+                "recipient.count",
+                "occasion.type"
+              ],
+              "missingRequired": [
+                "recipient.relationship"
+              ],
+              "missingRecommended": [
+                "recipient.age",
+                "budget.max",
+                "recipient.interests"
+              ],
+              "requirements": [
+                {
+                  "key": "recipient.count",
+                  "label": "Número de destinatarios",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.relationship",
+                  "label": "Relación con el destinatario",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "occasion.type",
+                  "label": "Ocasión",
+                  "level": "REQUIRED",
+                  "weight": 25,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.age",
+                  "label": "Edad del destinatario",
+                  "level": "RECOMMENDED",
+                  "weight": 15,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "budget.max",
+                  "label": "Presupuesto máximo",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "recipient.interests",
+                  "label": "Intereses o aficiones",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "minimumConfidence": 0.5,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                }
+              ],
+              "evaluatedAt": "2026-08-03T08:15:06.374Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:15.452Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-03T08:15:15.452Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:15.452Z"
+          }
+        ],
+        "createdAt": "2026-08-03T08:14:40.475Z",
+        "updatedAt": "2026-08-03T08:15:15.452Z"
+      },
+      {
+        "id": "a5d3d845-a5b8-4692-9e2b-b8b3a2ffc65b",
+        "key": "journey.gift_model",
+        "value": {
+          "journeyId": "4a6ec550-97ba-42d0-aad8-b91320ea0615",
+          "recipient": {
+            "count": 1,
+            "interests": [],
+            "personality": []
+          },
+          "occasion": {
+            "type": "communion"
+          },
+          "budget": {
+            "currency": "EUR"
+          },
+          "personalization": {},
+          "style": [],
+          "constraints": {},
+          "quality": {
+            "score": 14.7,
+            "requiredComplete": false,
+            "dimensions": [
+              {
+                "id": "recipient",
+                "label": "Destinatario",
+                "weight": 25,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "recipient.relationship",
+                  "recipient.age",
+                  "recipient.name"
+                ]
+              },
+              {
+                "id": "interests",
+                "label": "Intereses",
+                "weight": 20,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "recipient.interests"
+                ]
+              },
+              {
+                "id": "budget",
+                "label": "Presupuesto",
+                "weight": 20,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "budget.max"
+                ]
+              },
+              {
+                "id": "occasion",
+                "label": "Ocasión",
+                "weight": 15,
+                "score": 98,
+                "weightedScore": 14.7,
+                "status": "STRONG",
+                "facts": [
+                  "occasion.type"
+                ],
+                "missing": [
+                  "occasion.date_text"
+                ]
+              },
+              {
+                "id": "personalization",
+                "label": "Personalización",
+                "weight": 10,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "personalization.enabled",
+                  "personalization.name",
+                  "personalization.photo_available",
+                  "personalization.phrase"
+                ]
+              },
+              {
+                "id": "delivery",
+                "label": "Plazo",
+                "weight": 5,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "delivery.date_text",
+                  "occasion.date_text"
+                ]
+              },
+              {
+                "id": "style",
+                "label": "Estilo",
+                "weight": 5,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "gift.style",
+                  "recipient.personality"
+                ]
+              }
+            ],
+            "missing": [
+              "recipient.relationship",
+              "recipient.age",
+              "recipient.name",
+              "recipient.interests",
+              "budget.max",
+              "occasion.date_text",
+              "personalization.enabled",
+              "personalization.name",
+              "personalization.photo_available",
+              "personalization.phrase",
+              "delivery.date_text",
+              "gift.style",
+              "recipient.personality"
+            ],
+            "strengths": [
+              "occasion"
+            ],
+            "evaluatedAt": "2026-08-03T08:15:15.452Z"
+          },
+          "readiness": {
+            "ready": false,
+            "level": "NOT_READY",
+            "score": 14.7,
+            "reasons": [
+              "La ocasión está definida."
+            ],
+            "blockers": [
+              "Falta identificar suficientemente al destinatario."
+            ],
+            "canOfferButton": false
+          },
+          "generatedAt": "2026-08-03T08:15:15.452Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "journeyId": "4a6ec550-97ba-42d0-aad8-b91320ea0615",
+              "recipient": {
+                "interests": [],
+                "personality": []
+              },
+              "occasion": {
+                "type": "communion"
+              },
+              "budget": {
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 14.7,
+                "requiredComplete": false,
+                "dimensions": [
+                  {
+                    "id": "recipient",
+                    "label": "Destinatario",
+                    "weight": 25,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "recipient.relationship",
+                      "recipient.age",
+                      "recipient.name"
+                    ]
+                  },
+                  {
+                    "id": "interests",
+                    "label": "Intereses",
+                    "weight": 20,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "recipient.interests"
+                    ]
+                  },
+                  {
+                    "id": "budget",
+                    "label": "Presupuesto",
+                    "weight": 20,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "budget.max"
+                    ]
+                  },
+                  {
+                    "id": "occasion",
+                    "label": "Ocasión",
+                    "weight": 15,
+                    "score": 98,
+                    "weightedScore": 14.7,
+                    "status": "STRONG",
+                    "facts": [
+                      "occasion.type"
+                    ],
+                    "missing": [
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "personalization",
+                    "label": "Personalización",
+                    "weight": 10,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "personalization.enabled",
+                      "personalization.name",
+                      "personalization.photo_available",
+                      "personalization.phrase"
+                    ]
+                  },
+                  {
+                    "id": "delivery",
+                    "label": "Plazo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "delivery.date_text",
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "style",
+                    "label": "Estilo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "gift.style",
+                      "recipient.personality"
+                    ]
+                  }
+                ],
+                "missing": [
+                  "recipient.relationship",
+                  "recipient.age",
+                  "recipient.name",
+                  "recipient.interests",
+                  "budget.max",
+                  "occasion.date_text",
+                  "personalization.enabled",
+                  "personalization.name",
+                  "personalization.photo_available",
+                  "personalization.phrase",
+                  "delivery.date_text",
+                  "gift.style",
+                  "recipient.personality"
+                ],
+                "strengths": [
+                  "occasion"
+                ],
+                "evaluatedAt": "2026-08-03T08:14:40.475Z"
+              },
+              "readiness": {
+                "ready": false,
+                "level": "NOT_READY",
+                "score": 14.7,
+                "reasons": [
+                  "La ocasión está definida."
+                ],
+                "blockers": [
+                  "Falta identificar suficientemente al destinatario."
+                ],
+                "canOfferButton": false
+              },
+              "generatedAt": "2026-08-03T08:14:40.475Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:14:52.039Z"
+          },
+          {
+            "value": {
+              "journeyId": "4a6ec550-97ba-42d0-aad8-b91320ea0615",
+              "recipient": {
+                "interests": [],
+                "personality": []
+              },
+              "occasion": {
+                "type": "communion"
+              },
+              "budget": {
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 14.7,
+                "requiredComplete": false,
+                "dimensions": [
+                  {
+                    "id": "recipient",
+                    "label": "Destinatario",
+                    "weight": 25,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "recipient.relationship",
+                      "recipient.age",
+                      "recipient.name"
+                    ]
+                  },
+                  {
+                    "id": "interests",
+                    "label": "Intereses",
+                    "weight": 20,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "recipient.interests"
+                    ]
+                  },
+                  {
+                    "id": "budget",
+                    "label": "Presupuesto",
+                    "weight": 20,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "budget.max"
+                    ]
+                  },
+                  {
+                    "id": "occasion",
+                    "label": "Ocasión",
+                    "weight": 15,
+                    "score": 98,
+                    "weightedScore": 14.7,
+                    "status": "STRONG",
+                    "facts": [
+                      "occasion.type"
+                    ],
+                    "missing": [
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "personalization",
+                    "label": "Personalización",
+                    "weight": 10,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "personalization.enabled",
+                      "personalization.name",
+                      "personalization.photo_available",
+                      "personalization.phrase"
+                    ]
+                  },
+                  {
+                    "id": "delivery",
+                    "label": "Plazo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "delivery.date_text",
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "style",
+                    "label": "Estilo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "gift.style",
+                      "recipient.personality"
+                    ]
+                  }
+                ],
+                "missing": [
+                  "recipient.relationship",
+                  "recipient.age",
+                  "recipient.name",
+                  "recipient.interests",
+                  "budget.max",
+                  "occasion.date_text",
+                  "personalization.enabled",
+                  "personalization.name",
+                  "personalization.photo_available",
+                  "personalization.phrase",
+                  "delivery.date_text",
+                  "gift.style",
+                  "recipient.personality"
+                ],
+                "strengths": [
+                  "occasion"
+                ],
+                "evaluatedAt": "2026-08-03T08:14:52.039Z"
+              },
+              "readiness": {
+                "ready": false,
+                "level": "NOT_READY",
+                "score": 14.7,
+                "reasons": [
+                  "La ocasión está definida."
+                ],
+                "blockers": [
+                  "Falta identificar suficientemente al destinatario."
+                ],
+                "canOfferButton": false
+              },
+              "generatedAt": "2026-08-03T08:14:52.039Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:06.374Z"
+          },
+          {
+            "value": {
+              "journeyId": "4a6ec550-97ba-42d0-aad8-b91320ea0615",
+              "recipient": {
+                "count": 1,
+                "interests": [],
+                "personality": []
+              },
+              "occasion": {
+                "type": "communion"
+              },
+              "budget": {
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 14.7,
+                "requiredComplete": false,
+                "dimensions": [
+                  {
+                    "id": "recipient",
+                    "label": "Destinatario",
+                    "weight": 25,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "recipient.relationship",
+                      "recipient.age",
+                      "recipient.name"
+                    ]
+                  },
+                  {
+                    "id": "interests",
+                    "label": "Intereses",
+                    "weight": 20,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "recipient.interests"
+                    ]
+                  },
+                  {
+                    "id": "budget",
+                    "label": "Presupuesto",
+                    "weight": 20,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "budget.max"
+                    ]
+                  },
+                  {
+                    "id": "occasion",
+                    "label": "Ocasión",
+                    "weight": 15,
+                    "score": 98,
+                    "weightedScore": 14.7,
+                    "status": "STRONG",
+                    "facts": [
+                      "occasion.type"
+                    ],
+                    "missing": [
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "personalization",
+                    "label": "Personalización",
+                    "weight": 10,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "personalization.enabled",
+                      "personalization.name",
+                      "personalization.photo_available",
+                      "personalization.phrase"
+                    ]
+                  },
+                  {
+                    "id": "delivery",
+                    "label": "Plazo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "delivery.date_text",
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "style",
+                    "label": "Estilo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "gift.style",
+                      "recipient.personality"
+                    ]
+                  }
+                ],
+                "missing": [
+                  "recipient.relationship",
+                  "recipient.age",
+                  "recipient.name",
+                  "recipient.interests",
+                  "budget.max",
+                  "occasion.date_text",
+                  "personalization.enabled",
+                  "personalization.name",
+                  "personalization.photo_available",
+                  "personalization.phrase",
+                  "delivery.date_text",
+                  "gift.style",
+                  "recipient.personality"
+                ],
+                "strengths": [
+                  "occasion"
+                ],
+                "evaluatedAt": "2026-08-03T08:15:06.374Z"
+              },
+              "readiness": {
+                "ready": false,
+                "level": "NOT_READY",
+                "score": 14.7,
+                "reasons": [
+                  "La ocasión está definida."
+                ],
+                "blockers": [
+                  "Falta identificar suficientemente al destinatario."
+                ],
+                "canOfferButton": false
+              },
+              "generatedAt": "2026-08-03T08:15:06.374Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:15.453Z"
+          }
+        ],
+        "createdAt": "2026-08-03T08:14:40.476Z",
+        "updatedAt": "2026-08-03T08:15:15.453Z"
+      },
+      {
+        "id": "06507a63-8742-442a-a837-532131c34c51",
+        "key": "journey.quality",
+        "value": {
+          "score": 14.7,
+          "requiredComplete": false,
+          "dimensions": [
+            {
+              "id": "recipient",
+              "label": "Destinatario",
+              "weight": 25,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "recipient.relationship",
+                "recipient.age",
+                "recipient.name"
+              ]
+            },
+            {
+              "id": "interests",
+              "label": "Intereses",
+              "weight": 20,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "recipient.interests"
+              ]
+            },
+            {
+              "id": "budget",
+              "label": "Presupuesto",
+              "weight": 20,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "budget.max"
+              ]
+            },
+            {
+              "id": "occasion",
+              "label": "Ocasión",
+              "weight": 15,
+              "score": 98,
+              "weightedScore": 14.7,
+              "status": "STRONG",
+              "facts": [
+                "occasion.type"
+              ],
+              "missing": [
+                "occasion.date_text"
+              ]
+            },
+            {
+              "id": "personalization",
+              "label": "Personalización",
+              "weight": 10,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "personalization.enabled",
+                "personalization.name",
+                "personalization.photo_available",
+                "personalization.phrase"
+              ]
+            },
+            {
+              "id": "delivery",
+              "label": "Plazo",
+              "weight": 5,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "delivery.date_text",
+                "occasion.date_text"
+              ]
+            },
+            {
+              "id": "style",
+              "label": "Estilo",
+              "weight": 5,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "gift.style",
+                "recipient.personality"
+              ]
+            }
+          ],
+          "missing": [
+            "recipient.relationship",
+            "recipient.age",
+            "recipient.name",
+            "recipient.interests",
+            "budget.max",
+            "occasion.date_text",
+            "personalization.enabled",
+            "personalization.name",
+            "personalization.photo_available",
+            "personalization.phrase",
+            "delivery.date_text",
+            "gift.style",
+            "recipient.personality"
+          ],
+          "strengths": [
+            "occasion"
+          ],
+          "evaluatedAt": "2026-08-03T08:15:15.452Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "score": 14.7,
+              "requiredComplete": false,
+              "dimensions": [
+                {
+                  "id": "recipient",
+                  "label": "Destinatario",
+                  "weight": 25,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "recipient.relationship",
+                    "recipient.age",
+                    "recipient.name"
+                  ]
+                },
+                {
+                  "id": "interests",
+                  "label": "Intereses",
+                  "weight": 20,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "recipient.interests"
+                  ]
+                },
+                {
+                  "id": "budget",
+                  "label": "Presupuesto",
+                  "weight": 20,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "budget.max"
+                  ]
+                },
+                {
+                  "id": "occasion",
+                  "label": "Ocasión",
+                  "weight": 15,
+                  "score": 98,
+                  "weightedScore": 14.7,
+                  "status": "STRONG",
+                  "facts": [
+                    "occasion.type"
+                  ],
+                  "missing": [
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "personalization",
+                  "label": "Personalización",
+                  "weight": 10,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "personalization.enabled",
+                    "personalization.name",
+                    "personalization.photo_available",
+                    "personalization.phrase"
+                  ]
+                },
+                {
+                  "id": "delivery",
+                  "label": "Plazo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "delivery.date_text",
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "style",
+                  "label": "Estilo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "gift.style",
+                    "recipient.personality"
+                  ]
+                }
+              ],
+              "missing": [
+                "recipient.relationship",
+                "recipient.age",
+                "recipient.name",
+                "recipient.interests",
+                "budget.max",
+                "occasion.date_text",
+                "personalization.enabled",
+                "personalization.name",
+                "personalization.photo_available",
+                "personalization.phrase",
+                "delivery.date_text",
+                "gift.style",
+                "recipient.personality"
+              ],
+              "strengths": [
+                "occasion"
+              ],
+              "evaluatedAt": "2026-08-03T08:14:40.475Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:14:52.039Z"
+          },
+          {
+            "value": {
+              "score": 14.7,
+              "requiredComplete": false,
+              "dimensions": [
+                {
+                  "id": "recipient",
+                  "label": "Destinatario",
+                  "weight": 25,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "recipient.relationship",
+                    "recipient.age",
+                    "recipient.name"
+                  ]
+                },
+                {
+                  "id": "interests",
+                  "label": "Intereses",
+                  "weight": 20,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "recipient.interests"
+                  ]
+                },
+                {
+                  "id": "budget",
+                  "label": "Presupuesto",
+                  "weight": 20,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "budget.max"
+                  ]
+                },
+                {
+                  "id": "occasion",
+                  "label": "Ocasión",
+                  "weight": 15,
+                  "score": 98,
+                  "weightedScore": 14.7,
+                  "status": "STRONG",
+                  "facts": [
+                    "occasion.type"
+                  ],
+                  "missing": [
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "personalization",
+                  "label": "Personalización",
+                  "weight": 10,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "personalization.enabled",
+                    "personalization.name",
+                    "personalization.photo_available",
+                    "personalization.phrase"
+                  ]
+                },
+                {
+                  "id": "delivery",
+                  "label": "Plazo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "delivery.date_text",
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "style",
+                  "label": "Estilo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "gift.style",
+                    "recipient.personality"
+                  ]
+                }
+              ],
+              "missing": [
+                "recipient.relationship",
+                "recipient.age",
+                "recipient.name",
+                "recipient.interests",
+                "budget.max",
+                "occasion.date_text",
+                "personalization.enabled",
+                "personalization.name",
+                "personalization.photo_available",
+                "personalization.phrase",
+                "delivery.date_text",
+                "gift.style",
+                "recipient.personality"
+              ],
+              "strengths": [
+                "occasion"
+              ],
+              "evaluatedAt": "2026-08-03T08:14:52.039Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:06.374Z"
+          },
+          {
+            "value": {
+              "score": 14.7,
+              "requiredComplete": false,
+              "dimensions": [
+                {
+                  "id": "recipient",
+                  "label": "Destinatario",
+                  "weight": 25,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "recipient.relationship",
+                    "recipient.age",
+                    "recipient.name"
+                  ]
+                },
+                {
+                  "id": "interests",
+                  "label": "Intereses",
+                  "weight": 20,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "recipient.interests"
+                  ]
+                },
+                {
+                  "id": "budget",
+                  "label": "Presupuesto",
+                  "weight": 20,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "budget.max"
+                  ]
+                },
+                {
+                  "id": "occasion",
+                  "label": "Ocasión",
+                  "weight": 15,
+                  "score": 98,
+                  "weightedScore": 14.7,
+                  "status": "STRONG",
+                  "facts": [
+                    "occasion.type"
+                  ],
+                  "missing": [
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "personalization",
+                  "label": "Personalización",
+                  "weight": 10,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "personalization.enabled",
+                    "personalization.name",
+                    "personalization.photo_available",
+                    "personalization.phrase"
+                  ]
+                },
+                {
+                  "id": "delivery",
+                  "label": "Plazo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "delivery.date_text",
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "style",
+                  "label": "Estilo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "gift.style",
+                    "recipient.personality"
+                  ]
+                }
+              ],
+              "missing": [
+                "recipient.relationship",
+                "recipient.age",
+                "recipient.name",
+                "recipient.interests",
+                "budget.max",
+                "occasion.date_text",
+                "personalization.enabled",
+                "personalization.name",
+                "personalization.photo_available",
+                "personalization.phrase",
+                "delivery.date_text",
+                "gift.style",
+                "recipient.personality"
+              ],
+              "strengths": [
+                "occasion"
+              ],
+              "evaluatedAt": "2026-08-03T08:15:06.374Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:15.453Z"
+          }
+        ],
+        "createdAt": "2026-08-03T08:14:40.476Z",
+        "updatedAt": "2026-08-03T08:15:15.453Z"
+      },
+      {
+        "id": "9179fee4-9ca9-437e-9a74-4c978aa2ae49",
+        "key": "journey.proposal_readiness",
+        "value": {
+          "ready": false,
+          "level": "NOT_READY",
+          "score": 14.7,
+          "reasons": [
+            "La ocasión está definida."
+          ],
+          "blockers": [
+            "Falta identificar suficientemente al destinatario."
+          ],
+          "canOfferButton": false
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-03T08:14:40.476Z",
+        "updatedAt": "2026-08-03T08:15:15.453Z"
+      },
+      {
+        "id": "c6b67178-014b-415c-916b-a4428a392dae",
+        "key": "conversation.pending_fact",
+        "value": "recipient.relationship",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": "gift.scope",
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:14:52.039Z"
+          },
+          {
+            "value": "recipient.count",
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-03T08:15:06.374Z"
+          }
+        ],
+        "createdAt": "2026-08-03T08:14:40.476Z",
+        "updatedAt": "2026-08-03T08:15:15.453Z"
+      },
+      {
+        "id": "24e9505d-1872-4c8c-a21a-ed0edb13c8aa",
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "para mi sobrina",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-03T08:14:52.038Z",
+        "updatedAt": "2026-08-03T08:14:52.039Z"
+      },
+      {
+        "id": "099d6b36-c92b-4b9e-9dcd-ca256b5d2af3",
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "1",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-03T08:15:06.374Z",
+        "updatedAt": "2026-08-03T08:15:06.374Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-03T08:14:40.472Z",
+    "updatedAt": "2026-08-03T08:15:15.453Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "7c682220-eb4f-4aa5-89af-e75a6683b2b0",
+    "accessKeyHash": "50c897b5ac9d008613f7e6d837e69fec01c2d19c5c985d26dbfb5c4175e998f6",
+    "createdAt": "2026-08-03T08:14:40.472Z"
+  },
+  "messages": [
+    {
+      "id": "38a775d5-bf83-4c21-a9ec-f1cf7ae2cb09",
+      "role": "USER",
+      "text": "un regalo de comunión",
+      "createdAt": "2026-08-03T08:14:40.472Z"
+    },
+    {
+      "id": "3c9520c7-9097-45a5-b332-4b6b2fd565ee",
+      "role": "RAI",
+      "text": "Perfecto, la ocasión es una comunión. Vamos dando forma al regalo paso a paso. ¿Buscas una idea de regalo genérica o quieres crear algo para alguien en particular?",
+      "createdAt": "2026-08-03T08:14:45.244Z"
+    },
+    {
+      "id": "88c7f037-90a0-42eb-91de-f1193bb8a56c",
+      "role": "USER",
+      "text": "para mi sobrina",
+      "createdAt": "2026-08-03T08:14:52.037Z"
+    },
+    {
+      "id": "2d476956-5aee-450b-9ee3-0fc0d522a5fd",
+      "role": "RAI",
+      "text": "Perfecto, quieres preparar algo para alguien en particular. Vamos dando forma al regalo paso a paso. ¿Para cuántas personas será el regalo?",
+      "createdAt": "2026-08-03T08:14:55.066Z"
+    },
+    {
+      "id": "5aa756bb-1cab-4793-aa07-0c6c1fd75930",
+      "role": "USER",
+      "text": "1",
+      "createdAt": "2026-08-03T08:15:06.374Z"
+    },
+    {
+      "id": "d9d08c55-eb23-4ae2-8cd4-f573ba375e89",
+      "role": "RAI",
+      "text": "Perfecto, es para una persona. Ya tengo una buena base; solo necesito afinar un detalle más. ¿Qué relación tienes con la persona que recibirá el regalo?",
+      "createdAt": "2026-08-03T08:15:10.118Z"
+    },
+    {
+      "id": "568dd348-9760-4b1d-a893-5dc6da548c4a",
+      "role": "USER",
+      "text": "sobrina",
+      "createdAt": "2026-08-03T08:15:15.452Z"
+    },
+    {
+      "id": "25a07ad9-a06b-44c1-b837-9da81e04beba",
+      "role": "RAI",
+      "text": "Ya tengo una buena base; solo necesito afinar un detalle más. ¿Qué relación tienes con la persona que recibirá el regalo?",
+      "createdAt": "2026-08-03T08:15:18.515Z"
+    }
+  ],
+  "createdAt": "2026-08-03T08:14:45.244Z",
+  "updatedAt": "2026-08-03T08:15:18.516Z"
+}

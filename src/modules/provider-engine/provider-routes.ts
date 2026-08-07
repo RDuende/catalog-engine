@@ -29,7 +29,7 @@ export async function providerRoutes(app: FastifyInstance): Promise<void> {
     const config = request.params.provider === "makito" ? makitoConfigFrom(request.body) : configFrom(request.body);
     return { items: await previewProvider(request.params.provider, config, request.body?.limit) };
   });
-  app.post<{ Params: { provider: string }; Body: { config?: ProviderConnectionConfig; limit?: number; updatedSince?: string; importCanonical?: boolean; saveSnapshot?: boolean; markMissingInactive?: boolean; batchSize?: number; buildKnowledge?: boolean; options?: MakitoSyncOptions } }>("/providers/:provider/sync", async (request, reply) => {
+  app.post<{ Params: { provider: string }; Body: { config?: ProviderConnectionConfig; limit?: number; updatedSince?: string; importCanonical?: boolean; saveSnapshot?: boolean; markMissingInactive?: boolean; batchSize?: number; buildKnowledge?: boolean; classifyProducts?: boolean; forceClassification?: boolean; importMedia?: boolean; forceMedia?: boolean; mediaConcurrency?: number; options?: MakitoSyncOptions } }>("/providers/:provider/sync", async (request, reply) => {
     const provider = request.params.provider;
     const config = provider === "makito" ? makitoConfigFrom(request.body) : configFrom(request.body);
     // Validate the provider before accepting the asynchronous job.
@@ -48,6 +48,11 @@ export async function providerRoutes(app: FastifyInstance): Promise<void> {
         markMissingInactive: request.body?.markMissingInactive === true,
         batchSize: request.body?.batchSize,
         buildKnowledge: request.body?.buildKnowledge !== false,
+        classifyProducts: request.body?.classifyProducts !== false,
+        forceClassification: request.body?.forceClassification === true,
+        importMedia: request.body?.importMedia !== false,
+        forceMedia: request.body?.forceMedia === true,
+        mediaConcurrency: request.body?.mediaConcurrency,
       },
       metadata: { requestedAt: new Date().toISOString() },
     });

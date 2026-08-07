@@ -1,0 +1,351 @@
+{
+  "id": "6fd811d3-438f-4e21-95b9-95afd89dd2e3",
+  "journeyId": "cc590203-9686-41a9-9e78-230aff5ea3c2",
+  "journey": {
+    "id": "cc590203-9686-41a9-9e78-230aff5ea3c2",
+    "type": "GIFT",
+    "status": "READY_FOR_INSPIRATION",
+    "version": 68,
+    "sessionId": "6fd811d3-438f-4e21-95b9-95afd89dd2e3",
+    "participants": [],
+    "facts": [
+      {
+        "key": "occasion.type",
+        "value": "communion",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "communion",
+        "createdAt": "2026-08-02T17:54:28.730Z",
+        "updatedAt": "2026-08-02T17:54:28.730Z"
+      },
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T17:54:28.730Z",
+        "updatedAt": "2026-08-02T17:54:28.730Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T17:54:28.730Z",
+        "updatedAt": "2026-08-02T17:57:24.594Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T17:54:28.730Z",
+        "updatedAt": "2026-08-02T17:57:24.594Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 80,
+          "requiredScore": 100,
+          "recommendedScore": 42.86,
+          "requiredComplete": true,
+          "readyForInspiration": true,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship",
+            "occasion.type",
+            "recipient.age"
+          ],
+          "missingRequired": [],
+          "missingRecommended": [
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T17:57:24.594Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T17:54:28.730Z",
+        "updatedAt": "2026-08-02T17:57:24.594Z"
+      },
+      {
+        "key": "recipient.relationship",
+        "value": "child",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "es para el hijo de un amigo, no me quiero gastar mas de 25€",
+        "createdAt": "2026-08-02T17:54:48.682Z",
+        "updatedAt": "2026-08-02T17:54:48.683Z"
+      },
+      {
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "es para el hijo de un amigo, no me quiero gastar mas de 25€",
+        "createdAt": "2026-08-02T17:54:48.683Z",
+        "updatedAt": "2026-08-02T17:54:48.683Z"
+      },
+      {
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "1",
+        "createdAt": "2026-08-02T17:54:57.167Z",
+        "updatedAt": "2026-08-02T17:54:57.167Z"
+      },
+      {
+        "key": "recipient.age",
+        "value": 12,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "de 12 anos",
+        "createdAt": "2026-08-02T17:55:19.017Z",
+        "updatedAt": "2026-08-02T17:55:19.017Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T17:54:28.729Z",
+    "updatedAt": "2026-08-02T17:57:24.594Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "c108d3fc-3b07-4a92-892c-8168bab6c24d",
+    "accessKeyHash": "7af41fc71092a00d62826af92be1cd57c47bd45b19f538765c55dfa22f345e91",
+    "createdAt": "2026-08-02T17:54:28.729Z"
+  },
+  "messages": [
+    {
+      "id": "4c18a1b8-2026-40ba-bce2-c13a445e33c3",
+      "role": "USER",
+      "text": "un regalo de comunión",
+      "createdAt": "2026-08-02T17:54:28.729Z"
+    },
+    {
+      "id": "9c5e78d8-aa85-4545-b424-15daab0fe617",
+      "role": "RAI",
+      "text": "¿Buscas una idea general o un regalo para alguien en particular?",
+      "createdAt": "2026-08-02T17:54:30.740Z"
+    },
+    {
+      "id": "2e69bd06-153d-4c08-ae3f-6414c140678d",
+      "role": "USER",
+      "text": "es para el hijo de un amigo, no me quiero gastar mas de 25€",
+      "createdAt": "2026-08-02T17:54:48.681Z"
+    },
+    {
+      "id": "a2fb182d-5e08-4a1a-b03f-396b93d62275",
+      "role": "RAI",
+      "text": "Perfecto, con un máximo de 25 €. ¿Qué edad tiene aproximadamente el niño?",
+      "createdAt": "2026-08-02T17:54:51.616Z"
+    },
+    {
+      "id": "f3a0b286-0b32-4f31-897f-6dbdde0b2b9b",
+      "role": "USER",
+      "text": "1",
+      "createdAt": "2026-08-02T17:54:57.166Z"
+    },
+    {
+      "id": "efdcaeb3-382e-4b8d-b092-5655853bce37",
+      "role": "RAI",
+      "text": "¿Querías decir que tiene 11 años?",
+      "createdAt": "2026-08-02T17:54:59.822Z"
+    },
+    {
+      "id": "71391cca-b051-4a72-90d2-27437f788d86",
+      "role": "USER",
+      "text": "es para un niño de 12 años",
+      "createdAt": "2026-08-02T17:55:19.017Z"
+    },
+    {
+      "id": "aeee5701-844a-475c-b5c1-0ef1a518def3",
+      "role": "RAI",
+      "text": "Entendido, tiene 12 años. ¿Qué aficiones o intereses tiene?",
+      "createdAt": "2026-08-02T17:55:21.739Z"
+    },
+    {
+      "id": "120dae46-f6c4-4494-a04f-559599641f4f",
+      "role": "USER",
+      "text": "la música",
+      "createdAt": "2026-08-02T17:55:28.733Z"
+    },
+    {
+      "id": "4d1bfdc5-b143-412f-b19c-7d7c270509b6",
+      "role": "RAI",
+      "text": "¡Genial! ¿Toca algún instrumento o tiene algún estilo musical favorito?",
+      "createdAt": "2026-08-02T17:55:31.247Z"
+    },
+    {
+      "id": "749e2c69-5ba9-4bc1-9e05-1137d7887b8d",
+      "role": "USER",
+      "text": "rap",
+      "createdAt": "2026-08-02T17:55:35.963Z"
+    },
+    {
+      "id": "82d450ae-3604-41ff-a764-0c1951dafb44",
+      "role": "RAI",
+      "text": "¡Perfecto, le gusta el rap! ¿Prefieres que el regalo sea divertido o más emotivo y especial por su comunión?",
+      "createdAt": "2026-08-02T17:55:39.045Z"
+    },
+    {
+      "id": "b1c9fac0-4e61-40aa-95e0-2ad7f7b8f7e2",
+      "role": "USER",
+      "text": "divertido",
+      "createdAt": "2026-08-02T17:56:02.798Z"
+    },
+    {
+      "id": "981fcaf7-1b5b-4404-9009-043f11007df7",
+      "role": "RAI",
+      "text": "¡Perfecto, algo divertido relacionado con el rap! ¿Te gustaría que estuviera personalizado con su nombre?",
+      "createdAt": "2026-08-02T17:56:06.694Z"
+    },
+    {
+      "id": "7b3a9411-8698-4489-b9c2-e3e96c6b28b3",
+      "role": "USER",
+      "text": "sí",
+      "createdAt": "2026-08-02T17:56:22.689Z"
+    },
+    {
+      "id": "3329d76a-35a7-4da6-9eda-e00cee07e331",
+      "role": "RAI",
+      "text": "¿Cómo se llama el niño?",
+      "createdAt": "2026-08-02T17:56:28.401Z"
+    },
+    {
+      "id": "088da513-9918-4c68-b189-890858a9b383",
+      "role": "USER",
+      "text": "Angelillo",
+      "createdAt": "2026-08-02T17:56:35.226Z"
+    },
+    {
+      "id": "d0b373d2-348c-49d7-8c8a-5faa144439e8",
+      "role": "RAI",
+      "text": "¡Perfecto, Angelillo! ¿Tienes alguna foto suya que te gustaría incluir en la personalización?",
+      "createdAt": "2026-08-02T17:56:38.333Z"
+    },
+    {
+      "id": "44d76d07-e43d-4d70-b4b0-c0c8322b3b93",
+      "role": "USER",
+      "text": "no",
+      "createdAt": "2026-08-02T17:56:44.072Z"
+    },
+    {
+      "id": "3afa1c14-890c-4d9b-9b34-38f8648795ea",
+      "role": "RAI",
+      "text": "Sin problema, podemos personalizarlo solo con su nombre y un diseño divertido de rap. ¿Para cuándo es la comunión?",
+      "createdAt": "2026-08-02T17:56:47.243Z"
+    },
+    {
+      "id": "ea8d30dd-53bb-4f8a-bc9f-fbe67a05f325",
+      "role": "USER",
+      "text": "para octubre",
+      "createdAt": "2026-08-02T17:56:53.512Z"
+    },
+    {
+      "id": "1c6c5541-ab4f-487e-9c2a-0ecf5cdace89",
+      "role": "RAI",
+      "text": "Perfecto, la comunión es en octubre. ¿Qué presupuesto máximo tienes para el regalo?",
+      "createdAt": "2026-08-02T17:56:56.868Z"
+    },
+    {
+      "id": "46ad6cce-d301-425f-b9f3-12f117e8c681",
+      "role": "USER",
+      "text": "25€",
+      "createdAt": "2026-08-02T17:57:07.063Z"
+    },
+    {
+      "id": "47bbc19e-2eb7-4130-ad3c-d99a8f65ec1f",
+      "role": "RAI",
+      "text": "Perfecto, presupuesto máximo de 25 €. ¿Quieres añadir alguna frase divertida junto a «Angelillo»?",
+      "createdAt": "2026-08-02T17:57:10.181Z"
+    },
+    {
+      "id": "b5439680-c7b5-4965-8e91-97ced87a76a4",
+      "role": "USER",
+      "text": "no",
+      "createdAt": "2026-08-02T17:57:15.020Z"
+    },
+    {
+      "id": "8ccb8ae6-a0fd-47cb-a067-2cb7687b4a80",
+      "role": "RAI",
+      "text": "Perfecto: sin frase, solo «Angelillo» y un diseño divertido de rap. ¿Quieres que te muestre propuestas?",
+      "createdAt": "2026-08-02T17:57:19.751Z"
+    },
+    {
+      "id": "4d618e22-1ef5-4e5f-a154-4aa5b1fd5ee3",
+      "role": "USER",
+      "text": "si",
+      "createdAt": "2026-08-02T17:57:24.594Z"
+    },
+    {
+      "id": "47801ecd-f3ba-43a3-9750-81bca987b7a2",
+      "role": "RAI",
+      "text": "¡Claro! Te muestro propuestas divertidas de rap, personalizadas con «Angelillo» y dentro de tu presupuesto de 25 €.",
+      "createdAt": "2026-08-02T17:57:27.078Z"
+    }
+  ],
+  "createdAt": "2026-08-02T17:54:30.740Z",
+  "updatedAt": "2026-08-02T17:57:27.079Z"
+}

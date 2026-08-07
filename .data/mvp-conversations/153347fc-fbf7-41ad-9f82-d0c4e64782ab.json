@@ -1,0 +1,115 @@
+{
+  "id": "153347fc-fbf7-41ad-9f82-d0c4e64782ab",
+  "journeyId": "99a9ffe0-4a13-4f2a-a7aa-b2cc6dda7d98",
+  "journey": {
+    "id": "99a9ffe0-4a13-4f2a-a7aa-b2cc6dda7d98",
+    "type": "GIFT",
+    "status": "DISCOVERING",
+    "version": 8,
+    "sessionId": "153347fc-fbf7-41ad-9f82-d0c4e64782ab",
+    "participants": [],
+    "facts": [
+      {
+        "key": "occasion.type",
+        "value": "anniversary",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "anniversary",
+        "createdAt": "2026-08-02T15:28:39.777Z",
+        "updatedAt": "2026-08-02T15:28:39.777Z"
+      },
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T15:28:39.777Z",
+        "updatedAt": "2026-08-02T15:28:39.777Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.6-gift-scope-discovery-v1",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:28:39.777Z",
+        "updatedAt": "2026-08-02T15:28:39.777Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.67,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:28:39.777Z",
+        "updatedAt": "2026-08-02T15:28:39.777Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.scope",
+          "profileVersion": "v1",
+          "score": 0,
+          "requiredScore": 0,
+          "recommendedScore": 100,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [],
+          "missingRequired": [
+            "gift.scope"
+          ],
+          "missingRecommended": [],
+          "requirements": [
+            {
+              "key": "gift.scope",
+              "label": "Tipo de búsqueda",
+              "level": "REQUIRED",
+              "weight": 100,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T15:28:39.778Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:28:39.778Z",
+        "updatedAt": "2026-08-02T15:28:39.778Z"
+      },
+      {
+        "key": "conversation.pending_fact",
+        "value": "gift.scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:28:39.778Z",
+        "updatedAt": "2026-08-02T15:28:39.778Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T15:28:39.776Z",
+    "updatedAt": "2026-08-02T15:28:39.778Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "cf920dad-f6c7-4926-90f5-e07162a140e3",
+    "accessKeyHash": "e0b82d8a77d065fb106bea52d9f2e9fc79d451cb140758958b0c7b5199c19f2a",
+    "createdAt": "2026-08-02T15:28:39.775Z"
+  },
+  "messages": [
+    {
+      "id": "58eff6a3-b3de-41f1-b839-658f255cafb7",
+      "role": "USER",
+      "text": "un regalo de aniversario poara mis tios",
+      "createdAt": "2026-08-02T15:28:39.775Z"
+    },
+    {
+      "id": "fc584ecc-aa70-4ac9-a83e-23d81c39cb53",
+      "role": "RAI",
+      "text": "¿Buscas una idea de regalo genérica o quieres crear algo para alguien en particular?",
+      "createdAt": "2026-08-02T15:28:39.778Z"
+    }
+  ],
+  "createdAt": "2026-08-02T15:28:39.778Z",
+  "updatedAt": "2026-08-02T15:28:39.778Z"
+}

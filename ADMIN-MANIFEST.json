@@ -1,0 +1,17 @@
+{
+  "name": "RecuerdArte Complete Admin Area",
+  "version": "rc4.0.0",
+  "routes": [
+    "/admin",
+    "/admin/catalog-intelligence",
+    "/admin/catalog-imports",
+    "/admin/providers",
+    "/admin/statistics",
+    "/admin/settings",
+    "/admin/ai-lab",
+    "/admin/intelligence-center",
+    "/admin/commercial-operations"
+  ],
+  "persistentDataExcluded": true,
+  "futureSettingsProvider": "RDGEST"
+}

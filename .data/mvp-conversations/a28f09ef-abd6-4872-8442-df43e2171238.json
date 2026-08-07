@@ -1,0 +1,160 @@
+{
+  "id": "a28f09ef-abd6-4872-8442-df43e2171238",
+  "journeyId": "74bf51ab-ac0c-4b1f-8c6e-d7cd260757b5",
+  "journey": {
+    "id": "74bf51ab-ac0c-4b1f-8c6e-d7cd260757b5",
+    "type": "GIFT",
+    "status": "DISCOVERING",
+    "version": 7,
+    "sessionId": "a28f09ef-abd6-4872-8442-df43e2171238",
+    "participants": [],
+    "facts": [
+      {
+        "key": "occasion.type",
+        "value": "communion",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "communion",
+        "createdAt": "2026-08-02T09:39:24.571Z",
+        "updatedAt": "2026-08-02T09:39:24.571Z"
+      },
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T09:39:24.571Z",
+        "updatedAt": "2026-08-02T09:39:24.571Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.2-discovery-rules-v1",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:39:24.571Z",
+        "updatedAt": "2026-08-02T09:39:24.571Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.67,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:39:24.571Z",
+        "updatedAt": "2026-08-02T09:39:24.571Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.discovery",
+          "profileVersion": "v1",
+          "score": 25,
+          "requiredScore": 38.46,
+          "recommendedScore": 0,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "occasion.type"
+          ],
+          "missingRequired": [
+            "recipient.count",
+            "recipient.relationship"
+          ],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T09:39:24.571Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:39:24.571Z",
+        "updatedAt": "2026-08-02T09:39:24.571Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T09:39:24.571Z",
+    "updatedAt": "2026-08-02T09:39:24.571Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "2ee58589-d06e-45e0-8d99-a90e9cc3c5a8",
+    "accessKeyHash": "9ac6852f1ef7531296f7c6e364ce6a2cba94b5f4bd8a9b574f666915b1b29e09",
+    "createdAt": "2026-08-02T09:39:24.571Z"
+  },
+  "messages": [
+    {
+      "id": "62f784a5-4404-4143-a268-bae186c930cc",
+      "role": "USER",
+      "text": "un regalo de comunión para mi sobrino",
+      "createdAt": "2026-08-02T09:39:24.571Z"
+    },
+    {
+      "id": "617bf154-3d3f-43c2-ad68-03db2002564a",
+      "role": "RAI",
+      "text": "¿Para cuántas personas será el regalo?",
+      "createdAt": "2026-08-02T09:39:24.572Z"
+    }
+  ],
+  "createdAt": "2026-08-02T09:39:24.572Z",
+  "updatedAt": "2026-08-02T09:39:24.572Z"
+}

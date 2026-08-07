@@ -1,0 +1,13 @@
+{
+  "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+  "artifactId": "afca5094-9f46-4383-88cb-c57a09695a4a",
+  "version": 1,
+  "fileName": "tshirt-990c8658-70f4-41b1-8b3c-9cfa784ca14a.svg",
+  "relativePath": "journeys/4d37fd05-cde3-40ad-bee6-a2f88fe1c537/artifacts/afca5094-9f46-4383-88cb-c57a09695a4a/v1/content.svg",
+  "absolutePath": "C:\\catalog-engine\\.data\\artifacts\\journeys\\4d37fd05-cde3-40ad-bee6-a2f88fe1c537\\artifacts\\afca5094-9f46-4383-88cb-c57a09695a4a\\v1\\content.svg",
+  "uri": "/api/v1/artifacts/content/journeys%2F4d37fd05-cde3-40ad-bee6-a2f88fe1c537%2Fartifacts%2Fafca5094-9f46-4383-88cb-c57a09695a4a%2Fv1%2Fcontent.svg",
+  "sizeBytes": 2537274,
+  "checksum": "6345a7d522525a5e28f28648b4bf5849fdb084e40dafe1083cdbb0fc770d5524",
+  "mimeType": "image/svg+xml",
+  "createdAt": "2026-08-02T16:59:40.182Z"
+}

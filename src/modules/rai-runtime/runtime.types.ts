@@ -1,6 +1,9 @@
-import type { AITrace, ConversationUnderstanding } from "../ai-gateway/ai-gateway.types.js";
+import type { AITrace } from "../ai-gateway/ai-gateway.types.js";
+import type { ConversationUnderstanding } from "../../ai/conversation/conversation.types.js";
 import type { SalesBrainDecision } from "../sales-brain/sales-brain.types.js";
-import type { CommercialContext } from "../../core/commercial-context/index.js";
+import type { CommercialContext, CommercialContextField } from "../../core/commercial-context/index.js";
+import type { RuntimeMetrics } from "./runtime-metrics.js";
+import type { CapabilitySelection, ConversationStateResolution, Decision, RaiContext, RaiIntentClassification, ReasoningTrace, RuntimePerformanceAssessment, RuntimePerformanceReport } from "../../platform/runtime/contracts/index.js";
 
 export type RuntimeGoal = "UNDERSTAND_REQUEST" | "RECOMMEND_PRODUCTS" | "PREPARE_PROPOSAL";
 export type RuntimeStepKind = "SKILL" | "TOOL";
@@ -16,7 +19,16 @@ export interface RuntimeRequest {
 
 export interface RuntimeState {
   readonly request: RuntimeRequest;
+  /** Canonical context carried across every runtime step. */
+  readonly raiContext: RaiContext;
   readonly context: CommercialContext;
+  readonly intentClassification?: RaiIntentClassification;
+  readonly conversationStateResolution?: ConversationStateResolution;
+  readonly reasoningTrace?: ReasoningTrace;
+  readonly reasoningDecision?: Decision;
+  readonly capabilitySelection?: CapabilitySelection;
+  readonly performanceAssessment?: RuntimePerformanceAssessment;
+  readonly performanceReport?: RuntimePerformanceReport;
   readonly understanding?: ConversationUnderstanding;
   readonly aiTrace?: AITrace;
   readonly decision?: SalesBrainDecision;
@@ -50,6 +62,18 @@ export interface RuntimeStepTrace {
   readonly error?: string;
 }
 
+export interface RuntimeDecisionTrace {
+  readonly policyId: string;
+  readonly requiredFields: readonly CommercialContextField[];
+  readonly missingRequired: readonly CommercialContextField[];
+  readonly missingOptional: readonly CommercialContextField[];
+  readonly ready: boolean;
+  readonly selectedQuestion?: { readonly field: CommercialContextField; readonly question: string; readonly score: number; readonly reason: string; readonly blocking: boolean; };
+  readonly alternatives: readonly { readonly field: CommercialContextField; readonly score: number; readonly reason: string; readonly blocking: boolean; }[];
+  readonly decision: "ASK_REQUIRED" | "CONTINUE" | "CONTINUE_WITH_OPTIONAL_GAPS";
+  readonly reason: string;
+}
+
 export interface RuntimeResult {
   readonly runtimeId: string;
   readonly goal: RuntimeGoal;
@@ -57,15 +81,29 @@ export interface RuntimeResult {
   readonly status: RuntimeStatus;
   readonly reply: string;
   readonly context: CommercialContext;
+  readonly raiContext: RaiContext;
+  readonly intentClassification?: RaiIntentClassification;
+  readonly conversationStateResolution?: ConversationStateResolution;
+  readonly reasoningTrace?: ReasoningTrace;
+  readonly reasoningDecision?: Decision;
+  readonly capabilitySelection?: CapabilitySelection;
+  readonly performanceAssessment?: RuntimePerformanceAssessment;
+  readonly performanceReport?: RuntimePerformanceReport;
   readonly understanding?: ConversationUnderstanding;
+  readonly aiTrace?: AITrace;
   readonly decision?: SalesBrainDecision;
+  readonly data: Readonly<Record<string, unknown>>;
   readonly trace: readonly RuntimeStepTrace[];
+  readonly decisionTrace?: RuntimeDecisionTrace;
+  readonly metrics: RuntimeMetrics;
   readonly startedAt: string;
   readonly durationMs: number;
 }
 
 export interface RuntimeHandler {
   readonly id: string;
+  /** Declares that the handler consumes RaiContext as its source of truth. */
+  readonly contextMode?: "RAI_CONTEXT" | "LEGACY";
   execute(state: RuntimeState): Promise<RuntimeState>;
 }
 

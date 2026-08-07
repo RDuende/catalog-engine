@@ -1,0 +1,195 @@
+.brainOrchestrator {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f3f2ee;
+  color: #242420;
+  font-family: Inter, system-ui, sans-serif;
+}
+.brainOrchestrator__header,
+.brainOrchestrator__actions,
+.brainOrchestrator__xray header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.brainOrchestrator__header { margin-bottom: 18px; }
+.brainOrchestrator__header h1 { margin: 4px 0 6px; }
+.brainOrchestrator__header p {
+  margin: 0;
+  color: #77766f;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.brainOrchestrator__actions { flex-wrap: wrap; }
+.brainOrchestrator button,
+.brainOrchestrator a {
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background: white;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.brainOrchestrator__layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 16px;
+}
+.brainOrchestrator__input,
+.brainOrchestrator__workspace > section {
+  border: 1px solid #deddd7;
+  border-radius: 14px;
+  background: white;
+}
+.brainOrchestrator__input {
+  align-self: start;
+  padding: 16px;
+}
+.brainOrchestrator__input textarea {
+  width: 100%;
+  min-height: 720px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 12px;
+  resize: vertical;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+}
+.brainOrchestrator__summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+  border: 0 !important;
+  background: transparent !important;
+}
+.brainOrchestrator__summary article,
+.brainOrchestrator__benchmark article {
+  border: 1px solid #deddd7;
+  border-radius: 11px;
+  padding: 12px;
+  background: white;
+}
+.brainOrchestrator__summary span,
+.brainOrchestrator__benchmark span {
+  display: block;
+  color: #77766f;
+  font-size: 11px;
+}
+.brainOrchestrator__summary strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brainOrchestrator__decision {
+  margin-bottom: 12px;
+  padding: 14px;
+  background: #e9f5e8 !important;
+}
+.brainOrchestrator__decision p {
+  margin: 6px 0 0;
+}
+.brainOrchestrator__pipeline {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+  padding: 12px;
+}
+.brainOrchestrator__pipeline button {
+  display: grid;
+  min-width: 185px;
+  grid-template-columns: 32px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+}
+.brainOrchestrator__pipeline button.is-active {
+  border: 2px solid #242420;
+  background: #efeee8;
+}
+.brainOrchestrator__pipeline button > span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: #242420;
+  color: white;
+}
+.brainOrchestrator__pipeline small {
+  display: block;
+  color: #77766f;
+}
+.brainOrchestrator__xray {
+  margin-bottom: 12px;
+  padding: 16px;
+}
+.brainOrchestrator__xray h2 {
+  margin: 4px 0;
+}
+.brainOrchestrator__xray header span,
+.brainOrchestrator__xray header small {
+  color: #77766f;
+  font-size: 11px;
+}
+.brainOrchestrator__xray header > div:last-child {
+  text-align: right;
+}
+.brainOrchestrator__io {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.brainOrchestrator pre {
+  max-height: 430px;
+  overflow: auto;
+  border-radius: 9px;
+  padding: 12px;
+  background: #20211e;
+  color: #edf0e7;
+  white-space: pre-wrap;
+  font: 11px/1.45 ui-monospace, Consolas, monospace;
+}
+.brainOrchestrator__benchmark {
+  padding: 16px;
+}
+.brainOrchestrator__benchmark > div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 9px;
+}
+.brainOrchestrator__error {
+  margin-bottom: 12px;
+  border: 1px solid #e3aaa7;
+  border-radius: 9px;
+  padding: 10px;
+  background: #fff0ef;
+}
+@media (max-width: 1050px) {
+  .brainOrchestrator__layout {
+    grid-template-columns: 1fr;
+  }
+  .brainOrchestrator__input textarea {
+    min-height: 380px;
+  }
+}
+@media (max-width: 760px) {
+  .brainOrchestrator {
+    padding: 12px;
+  }
+  .brainOrchestrator__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .brainOrchestrator__summary,
+  .brainOrchestrator__benchmark > div,
+  .brainOrchestrator__io {
+    grid-template-columns: 1fr;
+  }
+}

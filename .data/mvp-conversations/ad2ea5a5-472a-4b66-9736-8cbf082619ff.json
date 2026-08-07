@@ -1,0 +1,1754 @@
+{
+  "id": "ad2ea5a5-472a-4b66-9736-8cbf082619ff",
+  "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+  "journey": {
+    "id": "116b202c-80ff-454b-b69e-b32980a1614c",
+    "type": "GIFT",
+    "status": "PROPOSING",
+    "version": 40,
+    "sessionId": "ad2ea5a5-472a-4b66-9736-8cbf082619ff",
+    "participants": [
+      {
+        "id": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+        "role": "RECIPIENT",
+        "relationship": "mother",
+        "preferences": {},
+        "facts": {},
+        "createdAt": "2026-08-04T22:00:48.474Z",
+        "updatedAt": "2026-08-04T22:00:48.474Z"
+      }
+    ],
+    "facts": [
+      {
+        "id": "9908b0e6-0443-4a57-a183-ca355ee11293",
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 0.99,
+        "source": "CONVERSATION",
+        "evidence": "Quiero un regalo para mi madre\nLe encanta la jardinería\nEs por su cumpleaños\nTengo un presupuesto de 40 euros",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.474Z",
+        "updatedAt": "2026-08-04T22:00:48.476Z"
+      },
+      {
+        "id": "8e130500-3c23-4379-91ce-a46d56306892",
+        "key": "recipient.relationship",
+        "value": "parent",
+        "confidence": 0.99,
+        "source": "CONVERSATION",
+        "evidence": "Quiero un regalo para mi madre\nLe encanta la jardinería\nEs por su cumpleaños\nTengo un presupuesto de 40 euros",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": "mother",
+            "confidence": 0.95,
+            "source": "CONVERSATION",
+            "evidence": "mother",
+            "changedAt": "2026-08-04T22:00:48.476Z"
+          }
+        ],
+        "createdAt": "2026-08-04T22:00:48.474Z",
+        "updatedAt": "2026-08-04T22:00:48.476Z"
+      },
+      {
+        "id": "1afdeadf-8a59-420a-986e-ef910cd362bb",
+        "key": "occasion.type",
+        "value": "birthday",
+        "confidence": 0.99,
+        "source": "CONVERSATION",
+        "evidence": "birthday",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.474Z",
+        "updatedAt": "2026-08-04T22:00:48.477Z"
+      },
+      {
+        "id": "2b890282-b5cd-4225-aed9-bb36b1ee5b04",
+        "key": "budget.max",
+        "value": 40,
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "presupuesto de 40 euros",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.474Z",
+        "updatedAt": "2026-08-04T22:00:48.477Z"
+      },
+      {
+        "id": "47cb9156-e5a9-4355-a16a-289ec3261da2",
+        "key": "budget.currency",
+        "value": "EUR",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.474Z",
+        "updatedAt": "2026-08-04T22:00:48.474Z"
+      },
+      {
+        "id": "ff15f66b-0323-41aa-9610-e9c1474c32f8",
+        "key": "recipient.interests",
+        "value": [
+          "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+        ],
+        "confidence": 0.92,
+        "source": "CONVERSATION",
+        "evidence": "Le encanta la jardinería\nEs por su cumpleaños\nTengo un presupuesto de 40 euros",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.474Z",
+        "updatedAt": "2026-08-04T22:00:48.474Z"
+      },
+      {
+        "id": "09c7802d-4301-441e-bc4b-b92a4d5daa4e",
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.475Z",
+        "updatedAt": "2026-08-04T22:00:48.475Z"
+      },
+      {
+        "id": "899c4d7c-4246-4fec-9c61-feedd967a05a",
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "Quiero un regalo para mi madre\nLe encanta la jardinería\nEs por su cumpleaños\nTengo un presupuesto de 40 euros",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.475Z",
+        "updatedAt": "2026-08-04T22:00:48.476Z"
+      },
+      {
+        "id": "4ba10e84-a7ae-46c9-89d0-4c46006ecc7c",
+        "key": "discovery.last_extractor_version",
+        "value": "v2.0.0-gift-model-memory",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.475Z",
+        "updatedAt": "2026-08-04T22:01:12.013Z"
+      },
+      {
+        "id": "79a7f8aa-8015-4e57-a73a-280e75e8b242",
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": 0.89,
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-04T22:01:12.013Z"
+          }
+        ],
+        "createdAt": "2026-08-04T22:00:48.475Z",
+        "updatedAt": "2026-08-04T22:01:12.013Z"
+      },
+      {
+        "id": "09163fa3-a18d-45c7-860e-6e4c169fb4ad",
+        "key": "recipient.age",
+        "value": 40,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "Quiero un regalo para mi madre\nLe encanta la jardinería\nEs por su cumpleaños\nTengo un presupuesto de 40 euros",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.477Z",
+        "updatedAt": "2026-08-04T22:00:48.477Z"
+      },
+      {
+        "id": "4d8a7fb0-431a-40b7-925c-f27e643f3c5e",
+        "key": "conversation.rce_plan",
+        "value": {
+          "version": "rce-0.5.0",
+          "intent": "UNKNOWN",
+          "readiness": {
+            "readyForProposals": true,
+            "score": 86.67,
+            "missingRequired": []
+          },
+          "response": {
+            "mode": "READY",
+            "text": "Ya sé que tiene 40 años, la ocasión es su cumpleaños, le interesa jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros y el presupuesto máximo es 40 €. Ya tengo información suficiente para empezar.",
+            "summary": "Ya sé que tiene 40 años, la ocasión es su cumpleaños, le interesa jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros y el presupuesto máximo es 40 €.",
+            "action": {
+              "type": "SHOW_PROPOSALS",
+              "label": "Hacer propuestas"
+            }
+          },
+          "tasks": [
+            {
+              "id": "c7e224d5-f50b-4558-b798-e459a269acaf",
+              "type": "PREPARE_PROPOSALS",
+              "status": "PLANNED",
+              "priority": 100,
+              "reason": "La conversación está preparada para construir propuestas."
+            },
+            {
+              "id": "ec6528eb-53f1-45c6-b7dd-cdc04b11692e",
+              "type": "SEARCH_PRODUCTS",
+              "status": "PLANNED",
+              "priority": 90,
+              "reason": "Ya existe contexto suficiente para iniciar una búsqueda preliminar."
+            },
+            {
+              "id": "351859ce-85d2-4fd9-a31d-1fcc9e2a1343",
+              "type": "RANK_PRODUCTS",
+              "status": "PLANNED",
+              "priority": 85,
+              "reason": "El presupuesto permite ordenar candidatos viables."
+            },
+            {
+              "id": "c7b0e6f2-b0d5-4078-8506-0b6b4ed61bfb",
+              "type": "SEARCH_TEMPLATES",
+              "status": "PLANNED",
+              "priority": 65,
+              "reason": "Los intereses permiten preparar líneas visuales compatibles."
+            },
+            {
+              "id": "685bded8-f086-4f93-9b47-31e655014b0a",
+              "type": "PREPARE_STORY_SEEDS",
+              "status": "PLANNED",
+              "priority": 55,
+              "reason": "La relación y la ocasión permiten anticipar enfoques emocionales."
+            }
+          ],
+          "generatedAt": "2026-08-04T22:01:12.016Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "version": "rce-0.5.0",
+              "intent": "DISCOVER_GIFT",
+              "readiness": {
+                "readyForProposals": true,
+                "score": 86.67,
+                "missingRequired": []
+              },
+              "response": {
+                "mode": "READY",
+                "text": "Ya sé que tiene 40 años, la ocasión es su cumpleaños, le interesa jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros y el presupuesto máximo es 40 €. Ya tengo información suficiente para empezar.",
+                "summary": "Ya sé que tiene 40 años, la ocasión es su cumpleaños, le interesa jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros y el presupuesto máximo es 40 €.",
+                "action": {
+                  "type": "SHOW_PROPOSALS",
+                  "label": "Hacer propuestas"
+                }
+              },
+              "tasks": [
+                {
+                  "id": "ebdf7003-c13d-4a0e-9fcf-ba0cb87e8bdc",
+                  "type": "PREPARE_PROPOSALS",
+                  "status": "PLANNED",
+                  "priority": 100,
+                  "reason": "La conversación está preparada para construir propuestas."
+                },
+                {
+                  "id": "5ea34a20-8ab8-412f-ba99-f7013c6c370f",
+                  "type": "SEARCH_PRODUCTS",
+                  "status": "PLANNED",
+                  "priority": 90,
+                  "reason": "Ya existe contexto suficiente para iniciar una búsqueda preliminar."
+                },
+                {
+                  "id": "41ed6013-f17a-4755-bf0d-34b30bb98180",
+                  "type": "RANK_PRODUCTS",
+                  "status": "PLANNED",
+                  "priority": 85,
+                  "reason": "El presupuesto permite ordenar candidatos viables."
+                },
+                {
+                  "id": "d129b483-7ed4-4cd9-97d8-b3a18368ae86",
+                  "type": "SEARCH_TEMPLATES",
+                  "status": "PLANNED",
+                  "priority": 65,
+                  "reason": "Los intereses permiten preparar líneas visuales compatibles."
+                },
+                {
+                  "id": "e0a02ed3-f2cf-4ca4-aeda-8326e5c23bd1",
+                  "type": "PREPARE_STORY_SEEDS",
+                  "status": "PLANNED",
+                  "priority": 55,
+                  "reason": "La relación y la ocasión permiten anticipar enfoques emocionales."
+                }
+              ],
+              "generatedAt": "2026-08-04T22:00:48.483Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-04T22:01:12.016Z"
+          }
+        ],
+        "createdAt": "2026-08-04T22:00:48.485Z",
+        "updatedAt": "2026-08-04T22:01:12.016Z"
+      },
+      {
+        "id": "05573d55-3f8f-4e0d-b7f0-f60a41ad98c4",
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 100,
+          "requiredScore": 100,
+          "recommendedScore": 100,
+          "requiredComplete": true,
+          "readyForInspiration": true,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship",
+            "occasion.type",
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "missingRequired": [],
+          "missingRecommended": [],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.99,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.99,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.99,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": true,
+              "confidence": 0.92,
+              "source": "FACT"
+            }
+          ],
+          "evaluatedAt": "2026-08-04T22:01:12.016Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-04T22:00:48.486Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-04T22:00:48.486Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.personal.discovery",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "recipient.count",
+                "recipient.relationship",
+                "occasion.type",
+                "recipient.age",
+                "budget.max",
+                "recipient.interests"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "recipient.count",
+                  "label": "Número de destinatarios",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 0.99,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.relationship",
+                  "label": "Relación con el destinatario",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 0.99,
+                  "source": "FACT"
+                },
+                {
+                  "key": "occasion.type",
+                  "label": "Ocasión",
+                  "level": "REQUIRED",
+                  "weight": 25,
+                  "satisfied": true,
+                  "confidence": 0.99,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.age",
+                  "label": "Edad del destinatario",
+                  "level": "RECOMMENDED",
+                  "weight": 15,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "budget.max",
+                  "label": "Presupuesto máximo",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.interests",
+                  "label": "Intereses o aficiones",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "minimumConfidence": 0.5,
+                  "satisfied": true,
+                  "confidence": 0.92,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-04T22:00:48.486Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-04T22:01:12.016Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-04T22:01:12.016Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-04T22:01:12.016Z"
+          }
+        ],
+        "createdAt": "2026-08-04T22:00:48.486Z",
+        "updatedAt": "2026-08-04T22:01:12.016Z"
+      },
+      {
+        "id": "b4b73c65-8107-4658-a70c-b472cbb37719",
+        "key": "journey.gift_model",
+        "value": {
+          "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+          "recipient": {
+            "count": 1,
+            "age": 40,
+            "relationship": "parent",
+            "interests": [
+              "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+            ],
+            "personality": []
+          },
+          "occasion": {
+            "type": "birthday"
+          },
+          "budget": {
+            "max": 40,
+            "currency": "EUR"
+          },
+          "personalization": {},
+          "style": [],
+          "constraints": {},
+          "quality": {
+            "score": 77.73,
+            "requiredComplete": true,
+            "dimensions": [
+              {
+                "id": "recipient",
+                "label": "Destinatario",
+                "weight": 25,
+                "score": 99.5,
+                "weightedScore": 24.88,
+                "status": "STRONG",
+                "facts": [
+                  "recipient.relationship",
+                  "recipient.age"
+                ],
+                "missing": [
+                  "recipient.name"
+                ]
+              },
+              {
+                "id": "interests",
+                "label": "Intereses",
+                "weight": 20,
+                "score": 92,
+                "weightedScore": 18.4,
+                "status": "STRONG",
+                "facts": [
+                  "recipient.interests"
+                ],
+                "missing": []
+              },
+              {
+                "id": "budget",
+                "label": "Presupuesto",
+                "weight": 20,
+                "score": 98,
+                "weightedScore": 19.6,
+                "status": "STRONG",
+                "facts": [
+                  "budget.max"
+                ],
+                "missing": []
+              },
+              {
+                "id": "occasion",
+                "label": "Ocasión",
+                "weight": 15,
+                "score": 99,
+                "weightedScore": 14.85,
+                "status": "STRONG",
+                "facts": [
+                  "occasion.type"
+                ],
+                "missing": [
+                  "occasion.date_text"
+                ]
+              },
+              {
+                "id": "personalization",
+                "label": "Personalización",
+                "weight": 10,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "personalization.enabled",
+                  "personalization.name",
+                  "personalization.photo_available",
+                  "personalization.phrase"
+                ]
+              },
+              {
+                "id": "delivery",
+                "label": "Plazo",
+                "weight": 5,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "delivery.date_text",
+                  "occasion.date_text"
+                ]
+              },
+              {
+                "id": "style",
+                "label": "Estilo",
+                "weight": 5,
+                "score": 0,
+                "weightedScore": 0,
+                "status": "EMPTY",
+                "facts": [],
+                "missing": [
+                  "gift.style",
+                  "recipient.personality"
+                ]
+              }
+            ],
+            "missing": [
+              "recipient.name",
+              "occasion.date_text",
+              "personalization.enabled",
+              "personalization.name",
+              "personalization.photo_available",
+              "personalization.phrase",
+              "delivery.date_text",
+              "gift.style",
+              "recipient.personality"
+            ],
+            "strengths": [
+              "recipient",
+              "interests",
+              "budget",
+              "occasion"
+            ],
+            "evaluatedAt": "2026-08-04T22:01:12.016Z"
+          },
+          "readiness": {
+            "ready": true,
+            "level": "STRONG",
+            "score": 77.73,
+            "reasons": [
+              "El destinatario está bien definido.",
+              "La ocasión está definida.",
+              "Hay intereses suficientes para personalizar las propuestas.",
+              "El presupuesto permite filtrar el catálogo."
+            ],
+            "blockers": [],
+            "canOfferButton": true
+          },
+          "generatedAt": "2026-08-04T22:01:12.016Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+              "recipient": {
+                "count": 1,
+                "age": 40,
+                "relationship": "parent",
+                "interests": [
+                  "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                ],
+                "personality": []
+              },
+              "occasion": {
+                "type": "birthday"
+              },
+              "budget": {
+                "max": 40,
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 77.73,
+                "requiredComplete": true,
+                "dimensions": [
+                  {
+                    "id": "recipient",
+                    "label": "Destinatario",
+                    "weight": 25,
+                    "score": 99.5,
+                    "weightedScore": 24.88,
+                    "status": "STRONG",
+                    "facts": [
+                      "recipient.relationship",
+                      "recipient.age"
+                    ],
+                    "missing": [
+                      "recipient.name"
+                    ]
+                  },
+                  {
+                    "id": "interests",
+                    "label": "Intereses",
+                    "weight": 20,
+                    "score": 92,
+                    "weightedScore": 18.4,
+                    "status": "STRONG",
+                    "facts": [
+                      "recipient.interests"
+                    ],
+                    "missing": []
+                  },
+                  {
+                    "id": "budget",
+                    "label": "Presupuesto",
+                    "weight": 20,
+                    "score": 98,
+                    "weightedScore": 19.6,
+                    "status": "STRONG",
+                    "facts": [
+                      "budget.max"
+                    ],
+                    "missing": []
+                  },
+                  {
+                    "id": "occasion",
+                    "label": "Ocasión",
+                    "weight": 15,
+                    "score": 99,
+                    "weightedScore": 14.85,
+                    "status": "STRONG",
+                    "facts": [
+                      "occasion.type"
+                    ],
+                    "missing": [
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "personalization",
+                    "label": "Personalización",
+                    "weight": 10,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "personalization.enabled",
+                      "personalization.name",
+                      "personalization.photo_available",
+                      "personalization.phrase"
+                    ]
+                  },
+                  {
+                    "id": "delivery",
+                    "label": "Plazo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "delivery.date_text",
+                      "occasion.date_text"
+                    ]
+                  },
+                  {
+                    "id": "style",
+                    "label": "Estilo",
+                    "weight": 5,
+                    "score": 0,
+                    "weightedScore": 0,
+                    "status": "EMPTY",
+                    "facts": [],
+                    "missing": [
+                      "gift.style",
+                      "recipient.personality"
+                    ]
+                  }
+                ],
+                "missing": [
+                  "recipient.name",
+                  "occasion.date_text",
+                  "personalization.enabled",
+                  "personalization.name",
+                  "personalization.photo_available",
+                  "personalization.phrase",
+                  "delivery.date_text",
+                  "gift.style",
+                  "recipient.personality"
+                ],
+                "strengths": [
+                  "recipient",
+                  "interests",
+                  "budget",
+                  "occasion"
+                ],
+                "evaluatedAt": "2026-08-04T22:00:48.487Z"
+              },
+              "readiness": {
+                "ready": true,
+                "level": "STRONG",
+                "score": 77.73,
+                "reasons": [
+                  "El destinatario está bien definido.",
+                  "La ocasión está definida.",
+                  "Hay intereses suficientes para personalizar las propuestas.",
+                  "El presupuesto permite filtrar el catálogo."
+                ],
+                "blockers": [],
+                "canOfferButton": true
+              },
+              "generatedAt": "2026-08-04T22:00:48.487Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-04T22:01:12.017Z"
+          }
+        ],
+        "createdAt": "2026-08-04T22:00:48.488Z",
+        "updatedAt": "2026-08-04T22:01:12.017Z"
+      },
+      {
+        "id": "acc7d0d9-80ad-4b6f-a799-e9961662095d",
+        "key": "journey.quality",
+        "value": {
+          "score": 77.73,
+          "requiredComplete": true,
+          "dimensions": [
+            {
+              "id": "recipient",
+              "label": "Destinatario",
+              "weight": 25,
+              "score": 99.5,
+              "weightedScore": 24.88,
+              "status": "STRONG",
+              "facts": [
+                "recipient.relationship",
+                "recipient.age"
+              ],
+              "missing": [
+                "recipient.name"
+              ]
+            },
+            {
+              "id": "interests",
+              "label": "Intereses",
+              "weight": 20,
+              "score": 92,
+              "weightedScore": 18.4,
+              "status": "STRONG",
+              "facts": [
+                "recipient.interests"
+              ],
+              "missing": []
+            },
+            {
+              "id": "budget",
+              "label": "Presupuesto",
+              "weight": 20,
+              "score": 98,
+              "weightedScore": 19.6,
+              "status": "STRONG",
+              "facts": [
+                "budget.max"
+              ],
+              "missing": []
+            },
+            {
+              "id": "occasion",
+              "label": "Ocasión",
+              "weight": 15,
+              "score": 99,
+              "weightedScore": 14.85,
+              "status": "STRONG",
+              "facts": [
+                "occasion.type"
+              ],
+              "missing": [
+                "occasion.date_text"
+              ]
+            },
+            {
+              "id": "personalization",
+              "label": "Personalización",
+              "weight": 10,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "personalization.enabled",
+                "personalization.name",
+                "personalization.photo_available",
+                "personalization.phrase"
+              ]
+            },
+            {
+              "id": "delivery",
+              "label": "Plazo",
+              "weight": 5,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "delivery.date_text",
+                "occasion.date_text"
+              ]
+            },
+            {
+              "id": "style",
+              "label": "Estilo",
+              "weight": 5,
+              "score": 0,
+              "weightedScore": 0,
+              "status": "EMPTY",
+              "facts": [],
+              "missing": [
+                "gift.style",
+                "recipient.personality"
+              ]
+            }
+          ],
+          "missing": [
+            "recipient.name",
+            "occasion.date_text",
+            "personalization.enabled",
+            "personalization.name",
+            "personalization.photo_available",
+            "personalization.phrase",
+            "delivery.date_text",
+            "gift.style",
+            "recipient.personality"
+          ],
+          "strengths": [
+            "recipient",
+            "interests",
+            "budget",
+            "occasion"
+          ],
+          "evaluatedAt": "2026-08-04T22:01:12.016Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "score": 77.73,
+              "requiredComplete": true,
+              "dimensions": [
+                {
+                  "id": "recipient",
+                  "label": "Destinatario",
+                  "weight": 25,
+                  "score": 99.5,
+                  "weightedScore": 24.88,
+                  "status": "STRONG",
+                  "facts": [
+                    "recipient.relationship",
+                    "recipient.age"
+                  ],
+                  "missing": [
+                    "recipient.name"
+                  ]
+                },
+                {
+                  "id": "interests",
+                  "label": "Intereses",
+                  "weight": 20,
+                  "score": 92,
+                  "weightedScore": 18.4,
+                  "status": "STRONG",
+                  "facts": [
+                    "recipient.interests"
+                  ],
+                  "missing": []
+                },
+                {
+                  "id": "budget",
+                  "label": "Presupuesto",
+                  "weight": 20,
+                  "score": 98,
+                  "weightedScore": 19.6,
+                  "status": "STRONG",
+                  "facts": [
+                    "budget.max"
+                  ],
+                  "missing": []
+                },
+                {
+                  "id": "occasion",
+                  "label": "Ocasión",
+                  "weight": 15,
+                  "score": 99,
+                  "weightedScore": 14.85,
+                  "status": "STRONG",
+                  "facts": [
+                    "occasion.type"
+                  ],
+                  "missing": [
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "personalization",
+                  "label": "Personalización",
+                  "weight": 10,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "personalization.enabled",
+                    "personalization.name",
+                    "personalization.photo_available",
+                    "personalization.phrase"
+                  ]
+                },
+                {
+                  "id": "delivery",
+                  "label": "Plazo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "delivery.date_text",
+                    "occasion.date_text"
+                  ]
+                },
+                {
+                  "id": "style",
+                  "label": "Estilo",
+                  "weight": 5,
+                  "score": 0,
+                  "weightedScore": 0,
+                  "status": "EMPTY",
+                  "facts": [],
+                  "missing": [
+                    "gift.style",
+                    "recipient.personality"
+                  ]
+                }
+              ],
+              "missing": [
+                "recipient.name",
+                "occasion.date_text",
+                "personalization.enabled",
+                "personalization.name",
+                "personalization.photo_available",
+                "personalization.phrase",
+                "delivery.date_text",
+                "gift.style",
+                "recipient.personality"
+              ],
+              "strengths": [
+                "recipient",
+                "interests",
+                "budget",
+                "occasion"
+              ],
+              "evaluatedAt": "2026-08-04T22:00:48.487Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-04T22:01:12.017Z"
+          }
+        ],
+        "createdAt": "2026-08-04T22:00:48.488Z",
+        "updatedAt": "2026-08-04T22:01:12.017Z"
+      },
+      {
+        "id": "22d417c9-fac9-4641-b6b1-394aac0c9e2d",
+        "key": "journey.proposal_readiness",
+        "value": {
+          "ready": true,
+          "level": "STRONG",
+          "score": 77.73,
+          "reasons": [
+            "El destinatario está bien definido.",
+            "La ocasión está definida.",
+            "Hay intereses suficientes para personalizar las propuestas.",
+            "El presupuesto permite filtrar el catálogo."
+          ],
+          "blockers": [],
+          "canOfferButton": true
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-04T22:00:48.488Z",
+        "updatedAt": "2026-08-04T22:01:12.017Z"
+      }
+    ],
+    "artifacts": [
+      {
+        "id": "0f459e04-4376-409c-a0f6-d89e4ea8bfdc",
+        "type": "CREATIVE_BRIEF",
+        "version": 1,
+        "status": "READY",
+        "title": "Creative Brief v1",
+        "data": {
+          "brief": {
+            "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+            "specificationVersion": "v2",
+            "builderVersion": "creative-brief-v2-gift-model",
+            "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+            "journeyVersion": 34,
+            "version": 1,
+            "fingerprint": "dcc95fc34c5980827ffec845",
+            "status": "READY",
+            "objective": "Crear un regalo personalizado y memorable con motivo de birthday.",
+            "audience": [
+              {
+                "participantId": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+                "role": "RECIPIENT",
+                "relationship": "mother",
+                "interests": [
+                  "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                ]
+              }
+            ],
+            "occasion": "birthday",
+            "emotionalGoals": [
+              "SURPRISE",
+              "CELEBRATION"
+            ],
+            "themes": [
+              "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+            ],
+            "narrativeStyle": "EMOTIONAL",
+            "visualStyle": "UNSPECIFIED",
+            "creativeDirection": {
+              "tone": [],
+              "themes": [
+                "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+              ],
+              "emotionalGoal": "crear una conexión emocional"
+            },
+            "personalization": {},
+            "budget": {
+              "maximum": 40,
+              "currency": "EUR"
+            },
+            "constraints": [
+              {
+                "id": "budget.maximum",
+                "kind": "BUDGET",
+                "description": "La propuesta completa no debe superar 40 EUR.",
+                "blocking": true
+              }
+            ],
+            "pendingFacts": [],
+            "sources": [
+              {
+                "field": "audience",
+                "source": "PARTICIPANT",
+                "confidence": 0.98,
+                "reason": "Destinatarios derivados del Journey consolidado."
+              },
+              {
+                "field": "creativeDirection",
+                "source": "GIFT_MODEL",
+                "confidence": 0.9,
+                "reason": "Dirección derivada de intereses, personalidad y estilo."
+              },
+              {
+                "field": "emotionalGoals",
+                "source": "RULE",
+                "confidence": 0.82,
+                "reason": "Inferidos de ocasión, edad, audiencia y tono."
+              },
+              {
+                "field": "occasion",
+                "factKey": "occasion.type",
+                "source": "CONVERSATION",
+                "confidence": 0.99,
+                "reason": "Hecho consolidado del Journey."
+              },
+              {
+                "field": "budget",
+                "factKey": "budget.max",
+                "source": "CONVERSATION",
+                "confidence": 0.98,
+                "reason": "Hecho consolidado del Journey."
+              },
+              {
+                "field": "themes",
+                "factKey": "recipient.interests",
+                "source": "CONVERSATION",
+                "confidence": 0.92,
+                "reason": "Hecho consolidado del Journey."
+              }
+            ],
+            "validation": {
+              "valid": true,
+              "issues": []
+            },
+            "qualityGate": {
+              "passed": true,
+              "score": 100,
+              "blockingIssues": [],
+              "warnings": []
+            },
+            "createdAt": "2026-08-04T22:01:12.018Z"
+          },
+          "fingerprint": "dcc95fc34c5980827ffec845",
+          "qualityGate": {
+            "passed": true,
+            "score": 100,
+            "blockingIssues": [],
+            "warnings": []
+          }
+        },
+        "createdAt": "2026-08-04T22:01:12.018Z"
+      },
+      {
+        "id": "a5358ced-18bf-494b-ae4d-9484fef4502b",
+        "type": "STORY",
+        "version": 1,
+        "status": "READY",
+        "title": "Story Concepts v1",
+        "data": {
+          "storySet": {
+            "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story-set:1",
+            "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+            "journeyVersion": 34,
+            "briefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+            "briefVersion": 1,
+            "version": 1,
+            "concepts": [
+              {
+                "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:1",
+                "version": 1,
+                "status": "READY",
+                "briefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+                "briefVersion": 1,
+                "title": "El poder que siempre estuvo dentro",
+                "logline": "la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo.",
+                "premise": "En un universo inspirado en jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                "emotionalPromise": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "centralConflict": "Cada protagonista intenta resolver la misión sola y descubre que ninguna habilidad está completa por separado.",
+                "resolution": "Al unir sus poderes, completan el emblema, salvan su mundo y comprenden que siempre forman el mejor equipo.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+                    "name": "Protagonista 1",
+                    "description": "Tiene una habilidad única que se completa con la de la otra protagonista.",
+                    "definingTrait": "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "emblema dividido que se une",
+                  "poderes de colores complementarios",
+                  "pose final de equipo"
+                ],
+                "differentiators": [
+                  "Cada destinataria conserva identidad propia",
+                  "La imagen se completa al estar juntas",
+                  "Fácil de materializar en dos productos conectados"
+                ],
+                "narrativeStyle": "EMOTIONAL",
+                "visualStyle": "UNSPECIFIED",
+                "themes": [
+                  "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                ],
+                "emotionalGoals": [
+                  "SURPRISE",
+                  "CELEBRATION"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-04T22:01:12.018Z"
+              },
+              {
+                "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:2",
+                "version": 1,
+                "status": "READY",
+                "briefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+                "briefVersion": 1,
+                "title": "La misión de la guardiana",
+                "logline": "la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo.",
+                "premise": "El día de birthday, una señal oculta abre la puerta a un reino de jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                "emotionalPromise": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "centralConflict": "Una sombra intenta borrar los momentos compartidos y deja el reino sin color.",
+                "resolution": "Las guardianas recuperan los recuerdos, devuelven el color al reino y guardan uno nuevo: el de su propia aventura.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+                    "name": "Protagonista 1",
+                    "description": "Forma parte de un equipo inseparable con una misión compartida.",
+                    "definingTrait": "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "portal de cumpleaños",
+                  "mapa de recuerdos",
+                  "reino que recupera el color"
+                ],
+                "differentiators": [
+                  "Integra la ocasión dentro de la historia",
+                  "Permite ampliar el universo en futuras celebraciones",
+                  "Funciona como cuento, póster o puzle"
+                ],
+                "narrativeStyle": "EMOTIONAL",
+                "visualStyle": "UNSPECIFIED",
+                "themes": [
+                  "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                ],
+                "emotionalGoals": [
+                  "SURPRISE",
+                  "CELEBRATION"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-04T22:01:12.018Z"
+              },
+              {
+                "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:3",
+                "version": 1,
+                "status": "READY",
+                "briefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+                "briefVersion": 1,
+                "title": "Creadora de su propio universo",
+                "logline": "la protagonista no reciben una aventura terminada: tienen el poder de elegir cómo nace y evoluciona su mundo.",
+                "premise": "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros, hasta formar un universo completamente suyo.",
+                "emotionalPromise": "Hacer que el proceso de crear juntas sea tan memorable como el regalo final.",
+                "centralConflict": "El universo empieza a desordenarse porque cada idea tira en una dirección distinta.",
+                "resolution": "Las protagonistas aprenden a combinar sus ideas y crean un mundo donde todas tienen un lugar.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+                    "name": "Protagonista 1",
+                    "description": "Puede imaginar y transformar el mundo con sus propias decisiones.",
+                    "definingTrait": "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "libro o portal en blanco",
+                  "escenarios que cambian con cada elección",
+                  "firma final de las creadoras"
+                ],
+                "differentiators": [
+                  "Experiencia participativa",
+                  "Ideal para bono de personalización",
+                  "Genera múltiples artefactos desde una misma historia"
+                ],
+                "narrativeStyle": "EMOTIONAL",
+                "visualStyle": "UNSPECIFIED",
+                "themes": [
+                  "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                ],
+                "emotionalGoals": [
+                  "SURPRISE",
+                  "CELEBRATION"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-04T22:01:12.018Z"
+              }
+            ],
+            "createdAt": "2026-08-04T22:01:12.018Z"
+          }
+        },
+        "createdAt": "2026-08-04T22:01:12.019Z"
+      },
+      {
+        "id": "90097ea2-5176-4274-901f-468f82bb3035",
+        "type": "IMAGE",
+        "version": 1,
+        "status": "READY",
+        "title": "Image Briefs v1",
+        "data": {
+          "imageBriefSet": {
+            "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story-set:1:image-brief-set:1",
+            "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+            "journeyVersion": 34,
+            "creativeBriefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+            "creativeBriefVersion": 1,
+            "storySetId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story-set:1",
+            "storySetVersion": 1,
+            "version": 1,
+            "briefs": [
+              {
+                "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:1:image-brief:1",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+                "journeyVersion": 34,
+                "creativeBriefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:1",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — El poder que siempre estuvo dentro",
+                "scene": "En un universo inspirado en jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                "emotionalIntent": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "visualStyle": "UNSPECIFIED",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Tiene una habilidad única que se completa con la de la otra protagonista.",
+                    "visualTraits": [
+                      "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                    ],
+                    "participantId": "9f73e15b-8bef-41e2-bab7-16a0f0011d01"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "GROUP",
+                  "camera": "LOW_ANGLE",
+                  "focalPoint": "emblema dividido que se une",
+                  "foreground": [
+                    "emblema dividido que se une",
+                    "poderes de colores complementarios"
+                  ],
+                  "background": [
+                    "En un universo inspirado en jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                    "pose final de equipo"
+                  ],
+                  "balance": "SYMMETRIC"
+                },
+                "palette": {
+                  "mood": "cálido y emocionante",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "emblema dividido que se une",
+                  "poderes de colores complementarios",
+                  "pose final de equipo",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "El poder que siempre estuvo dentro. la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo.. Protagonistas: años. Tema: jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Celebrar que ser diferentes hace más fuerte el vínculo que las une.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-04T22:01:12.019Z"
+              },
+              {
+                "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:2:image-brief:2",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+                "journeyVersion": 34,
+                "creativeBriefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:2",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — La misión de la guardiana",
+                "scene": "El día de birthday, una señal oculta abre la puerta a un reino de jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                "emotionalIntent": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "visualStyle": "UNSPECIFIED",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Forma parte de un equipo inseparable con una misión compartida.",
+                    "visualTraits": [
+                      "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                    ],
+                    "participantId": "9f73e15b-8bef-41e2-bab7-16a0f0011d01"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "FULL_BODY",
+                  "camera": "EYE_LEVEL",
+                  "focalPoint": "portal de cumpleaños",
+                  "foreground": [
+                    "portal de cumpleaños",
+                    "mapa de recuerdos"
+                  ],
+                  "background": [
+                    "El día de birthday, una señal oculta abre la puerta a un reino de jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                    "reino que recupera el color"
+                  ],
+                  "balance": "DYNAMIC"
+                },
+                "palette": {
+                  "mood": "cálido y emocionante",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "portal de cumpleaños",
+                  "mapa de recuerdos",
+                  "reino que recupera el color",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "La misión de la guardiana. la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo.. Protagonistas: años. Tema: jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-04T22:01:12.019Z"
+              },
+              {
+                "id": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:3:image-brief:3",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+                "journeyVersion": 34,
+                "creativeBriefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story:3",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — Creadora de su propio universo",
+                "scene": "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros, hasta formar un universo completamente suyo.",
+                "emotionalIntent": "Hacer que el proceso de crear juntas sea tan memorable como el regalo final.",
+                "visualStyle": "UNSPECIFIED",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "9f73e15b-8bef-41e2-bab7-16a0f0011d01",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Puede imaginar y transformar el mundo con sus propias decisiones.",
+                    "visualTraits": [
+                      "jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros"
+                    ],
+                    "participantId": "9f73e15b-8bef-41e2-bab7-16a0f0011d01"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "FULL_BODY",
+                  "camera": "EYE_LEVEL",
+                  "focalPoint": "libro o portal en blanco",
+                  "foreground": [
+                    "libro o portal en blanco",
+                    "escenarios que cambian con cada elección"
+                  ],
+                  "background": [
+                    "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros, hasta formar un universo completamente suyo.",
+                    "firma final de las creadoras"
+                  ],
+                  "balance": "DYNAMIC"
+                },
+                "palette": {
+                  "mood": "cálido y emocionante",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "libro o portal en blanco",
+                  "escenarios que cambian con cada elección",
+                  "firma final de las creadoras",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "Creadora de su propio universo. la protagonista no reciben una aventura terminada: tienen el poder de elegir cómo nace y evoluciona su mundo.. Protagonistas: años. Tema: jardineria\nes por su cumpleanos\ntengo un presupuesto de 40 euros. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Hacer que el proceso de crear juntas sea tan memorable como el regalo final.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-04T22:01:12.019Z"
+              }
+            ],
+            "createdAt": "2026-08-04T22:01:12.019Z"
+          }
+        },
+        "createdAt": "2026-08-04T22:01:12.020Z"
+      },
+      {
+        "id": "33234812-d622-43bc-b9c9-d8069e475772",
+        "type": "PROPOSAL",
+        "version": 1,
+        "status": "READY",
+        "title": "Solution Set v1",
+        "data": {
+          "solutionSet": {
+            "id": "aa0c01d6-4d73-4e7c-9414-ed75c91c5c05",
+            "journeyId": "116b202c-80ff-454b-b69e-b32980a1614c",
+            "journeyVersion": 34,
+            "creativeBriefId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d",
+            "creativeBriefVersion": 1,
+            "storySetId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story-set:1",
+            "storySetVersion": 1,
+            "imageBriefSetId": "d6dc1c67-5096-4ef2-8203-6e244b545a9d:story-set:1:image-brief-set:1",
+            "imageBriefSetVersion": 1,
+            "version": 1,
+            "solutions": [],
+            "rejectedCandidates": 3,
+            "createdAt": "2026-08-04T22:01:12.021Z"
+          }
+        },
+        "createdAt": "2026-08-04T22:01:12.021Z"
+      }
+    ],
+    "metadata": {},
+    "createdAt": "2026-08-04T22:00:48.467Z",
+    "updatedAt": "2026-08-04T22:01:12.021Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "7119e012-3f84-45fc-adda-60058a3ca175",
+    "accessKeyHash": "8a1daf98c599b29c208465ab742d6fc5fbeed6a43eea26cfd87c33d14fc446f0",
+    "createdAt": "2026-08-04T22:00:48.467Z"
+  },
+  "messages": [
+    {
+      "id": "531d917b-8a26-484d-9e46-3c1a0a14f05d",
+      "role": "USER",
+      "text": "Quiero un regalo para mi madre\nLe encanta la jardinería\nEs por su cumpleaños\nTengo un presupuesto de 40 euros",
+      "createdAt": "2026-08-04T22:00:48.467Z"
+    },
+    {
+      "id": "13593e42-38bc-4aea-9d72-0eeef52ac620",
+      "role": "RAI",
+      "text": "Perfecto: la ocasión es un cumpleaños, el presupuesto máximo es 40 € y tiene 40 años. Ya tengo información suficiente para empezar a preparar ideas. Ya puedo empezar a preparar ideas. Puedes seguir contándome detalles o pulsar «Mostrar propuestas» cuando quieras.",
+      "createdAt": "2026-08-04T22:00:54.912Z"
+    },
+    {
+      "id": "67b4d96b-a9a7-4e76-8e3a-89032c2fe161",
+      "role": "RAI",
+      "text": "Ya tengo preparadas 0 propuestas para este regalo.",
+      "createdAt": "2026-08-04T22:01:12.021Z"
+    }
+  ],
+  "createdAt": "2026-08-04T22:00:54.913Z",
+  "updatedAt": "2026-08-04T22:01:12.022Z"
+}

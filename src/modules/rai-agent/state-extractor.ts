@@ -26,6 +26,7 @@ function extractOutputText(response: any): string {
 const extractionInstructions = `Extrae únicamente datos explícitos del último mensaje del usuario para actualizar el estado de un asesor de regalos.
 Comprende español natural, abreviaturas y faltas ortográficas.
 No inventes ni completes datos ausentes.
+
 - recipientName: nombre de quien recibe el regalo.
 - recipientRelation: relación con el usuario, por ejemplo hermano, hija, amigo o pareja.
 - recipientAge: edad del destinatario, no la del usuario.
@@ -35,19 +36,19 @@ No inventes ni completes datos ausentes.
 Un valor null significa que el mensaje no aporta una actualización para ese campo.
 No interpretes nombres de productos como selección. No extraigas selectedProduct.`;
 
-export async function extractStatePatch(
-  client: ResponsesClient,
+function requestFor(
   model: string,
   message: string,
   currentState: unknown,
-): Promise<{ patch: RaiStatePatch; responseId?: string; usage?: unknown }> {
-  const response = await client.create({
+  maxOutputTokens: number,
+) {
+  return {
     model,
     instructions: extractionInstructions,
     input: `ESTADO ACTUAL:\n${JSON.stringify(currentState)}\n\nÚLTIMO MENSAJE:\n${message}`,
     store: false,
-    max_output_tokens: 180,
-    reasoning: { effort: "low" },
+    max_output_tokens: maxOutputTokens,
+    reasoning: { effort: "minimal" },
     text: {
       verbosity: "low",
       format: {
@@ -69,14 +70,45 @@ export async function extractStatePatch(
         },
       },
     },
-  });
+  };
+}
 
-  const raw = extractOutputText(response);
-  if (!raw) return { patch: {}, responseId: response.id, usage: response.usage };
-
+function parsePatch(raw: string): RaiStatePatch | undefined {
   try {
-    return { patch: JSON.parse(raw) as RaiStatePatch, responseId: response.id, usage: response.usage };
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed)
+      ? parsed as RaiStatePatch
+      : undefined;
   } catch {
-    return { patch: {}, responseId: response.id, usage: response.usage };
+    return undefined;
   }
+}
+
+export async function extractStatePatch(
+  client: ResponsesClient,
+  model: string,
+  message: string,
+  currentState: unknown,
+): Promise<{ patch: RaiStatePatch; responseId?: string; usage?: unknown }> {
+  let response = await client.create(
+    requestFor(model, message, currentState, 700),
+  );
+
+  let raw = extractOutputText(response);
+  let patch = raw ? parsePatch(raw) : undefined;
+
+  if (!patch) {
+    response = await client.create(
+      requestFor(model, message, currentState, 1400),
+    );
+
+    raw = extractOutputText(response);
+    patch = raw ? parsePatch(raw) : undefined;
+  }
+
+  return {
+    patch: patch ?? {},
+    responseId: response.id,
+    usage: response.usage,
+  };
 }

@@ -21,6 +21,21 @@ export async function jobRoutes(app: FastifyInstance): Promise<void> {
     return job;
   });
 
+  app.post<{ Params: { id: string } }>("/jobs/:id/pause", async (request, reply) => {
+    const job = await jobManager.pause(request.params.id);
+    if (!job) return reply.code(404).send({ error: "JOB_NOT_FOUND", message: "Trabajo no encontrado." });
+    return job;
+  });
+
+  app.post<{ Params: { id: string } }>("/jobs/:id/resume", async (request, reply) => {
+    const job = await jobManager.resume(request.params.id);
+    if (!job) return reply.code(404).send({ error: "JOB_NOT_FOUND", message: "Trabajo no encontrado." });
+    if (job.status !== "QUEUED" && job.status !== "RUNNING") {
+      return reply.code(409).send({ error: "JOB_NOT_PAUSED", message: "Solo se pueden reanudar trabajos pausados." });
+    }
+    return job;
+  });
+
   app.post<{ Params: { id: string } }>("/jobs/:id/cancel", async (request, reply) => {
     const job = await jobManager.cancel(request.params.id);
     if (!job) return reply.code(404).send({ error: "JOB_NOT_FOUND", message: "Trabajo no encontrado o no activo." });

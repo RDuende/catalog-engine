@@ -27,6 +27,7 @@ test("scores and explains a matching product", () => {
   assert.ok(result.score > 0);
   assert.ok(result.reasons.some((reason) => reason.includes("presupuesto")));
   assert.equal(result.warnings.length, 0);
+  assert.ok(result.factors.some((factor) => factor.ruleId === "budget" && factor.matched));
 });
 
 test("penalizes products outside budget", () => {
@@ -61,4 +62,13 @@ test("uses commercial memory to improve ranking", () => {
   ], { query: "botella ecológica", quantity: 100, currency: "EUR" });
   assert.equal(results[0]?.candidate.productId, "p-high");
   assert.ok(results[0]?.reasons.some((reason) => reason.includes("memoria comercial")));
+});
+
+
+test("exposes factors needed for explainability", () => {
+  const result = engine.evaluate({ ...base, unitPrice: 8 }, { query: "botella ecológica", budget: 4, quantity: 100, currency: "EUR", customizable: true });
+  const budget = result.factors.find((factor) => factor.ruleId === "budget");
+  assert.equal(budget?.matched, false);
+  assert.ok((budget?.points ?? 0) < 0);
+  assert.ok(Boolean(budget?.warning));
 });

@@ -1,0 +1,107 @@
+{
+  "generatedAt": "2026-08-06T16:12:38.817Z",
+  "modules": [
+    {
+      "id": "interest-brain",
+      "name": "Interest Brain",
+      "version": "1.0.0",
+      "category": "intelligence",
+      "description": "Normalización de intereses.",
+      "testScript": "npm run test:interest-brain",
+      "targetMs": 25
+    },
+    {
+      "id": "knowledge-brain",
+      "name": "Knowledge Brain",
+      "version": "1.0.0",
+      "category": "intelligence",
+      "description": "Clasificación contextual.",
+      "testScript": "npm run test:knowledge-brain",
+      "targetMs": 30
+    },
+    {
+      "id": "smart-catalog",
+      "name": "Smart Catalog",
+      "version": "1.0.0",
+      "category": "catalog",
+      "description": "Afinidad y ranking.",
+      "testScript": "npm run test:smart-catalog",
+      "targetMs": 40
+    },
+    {
+      "id": "catalog-interest-enrichment",
+      "name": "Catalog Enrichment",
+      "version": "1.0.0",
+      "category": "catalog",
+      "description": "Intereses canónicos.",
+      "testScript": "npm run test:catalog-interest-enrichment",
+      "targetMs": 50
+    },
+    {
+      "id": "product-brain-studio",
+      "name": "Product Brain Studio",
+      "version": "1.0.3",
+      "category": "catalog",
+      "description": "Rayos X del catálogo.",
+      "testScript": "npm run test:product-brain-studio"
+    },
+    {
+      "id": "catalog-media/image-resolver",
+      "name": "Image Resolver",
+      "version": "1.0.0",
+      "category": "infrastructure",
+      "description": "Deduplicación y ranking visual.",
+      "testScript": "npm run test:image-resolver",
+      "targetMs": 8
+    },
+    {
+      "id": "catalog-media/image-runtime",
+      "name": "Image Runtime",
+      "version": "1.0.0",
+      "category": "infrastructure",
+      "description": "Integración visual en runtime.",
+      "testScript": "npm run test:image-runtime"
+    },
+    {
+      "id": "composer-engine",
+      "name": "Composer Engine",
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "Composición de lotes.",
+      "testScript": "npm run test:composer-engine"
+    },
+    {
+      "id": "composer-v2",
+      "name": "Composer V2",
+      "version": "2.0.0",
+      "category": "creative",
+      "description": "Bundles, restricciones y narrativa.",
+      "testScript": "npm run test:composer-v2",
+      "targetMs": 75
+    },
+    {
+      "id": "admin-tools",
+      "name": "Engineering Console",
+      "version": "2.0.0",
+      "category": "infrastructure",
+      "description": "Casos, trazas y diagnósticos.",
+      "testScript": "npm run test:admin-tools"
+    },
+    {
+      "id": "journey-memory",
+      "name": "Journey Memory",
+      "version": "1.0.0",
+      "category": "conversation",
+      "description": "Memoria del Journey.",
+      "testScript": "npm run test:journey-memory"
+    },
+    {
+      "id": "memory-brain",
+      "name": "Memory Brain",
+      "version": "1.0.0",
+      "category": "conversation",
+      "description": "Memoria incremental.",
+      "testScript": "npm run test:memory-brain"
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+.proposalStudio {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f3f2ee;
+  color: #242420;
+  font-family: Inter, system-ui, sans-serif;
+}
+.proposalStudio__header,
+.proposalStudio__actions,
+.proposalStudio__detail > header,
+.proposalStudio__input header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.proposalStudio__header { margin-bottom: 18px; }
+.proposalStudio__header h1 { margin: 4px 0 6px; }
+.proposalStudio__header p {
+  margin: 0;
+  color: #77766f;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.proposalStudio__actions { flex-wrap: wrap; }
+.proposalStudio button,
+.proposalStudio a {
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background: white;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.proposalStudio__layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 16px;
+}
+.proposalStudio__input,
+.proposalStudio__workspace > section {
+  border: 1px solid #deddd7;
+  border-radius: 14px;
+  background: white;
+}
+.proposalStudio__input {
+  align-self: start;
+  padding: 16px;
+}
+.proposalStudio__input h2 { margin: 0; }
+.proposalStudio__input textarea {
+  width: 100%;
+  min-height: 700px;
+  box-sizing: border-box;
+  margin: 12px 0;
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 12px;
+  resize: vertical;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+}
+.proposalStudio__input > button {
+  width: 100%;
+  background: #242420;
+  color: white;
+}
+.proposalStudio__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+  border: 0 !important;
+  background: transparent !important;
+}
+.proposalStudio__metrics article {
+  border: 1px solid #deddd7;
+  border-radius: 11px;
+  padding: 12px;
+  background: white;
+}
+.proposalStudio__metrics span {
+  display: block;
+  color: #77766f;
+  font-size: 11px;
+}
+.proposalStudio__metrics strong { font-size: 24px; }
+.proposalStudio__cards {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+  border: 0 !important;
+  background: transparent !important;
+}
+.proposalStudio__cards button {
+  min-width: 190px;
+  text-align: left;
+}
+.proposalStudio__cards button.is-active {
+  border: 2px solid #242420;
+  background: #efeee8;
+}
+.proposalStudio__cards button > span {
+  display: block;
+  color: #77766f;
+  font-size: 11px;
+}
+.proposalStudio__cards button > strong {
+  display: block;
+  margin: 4px 0 8px;
+}
+.proposalStudio__cards button > div {
+  display: flex;
+  justify-content: space-between;
+}
+.proposalStudio__tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.proposalStudio__tabs button.is-active {
+  background: #242420;
+  color: white;
+}
+.proposalStudio__detail,
+.proposalStudio__compare,
+.proposalStudio__ranking,
+.proposalStudio__xray {
+  padding: 16px;
+}
+.proposalStudio__detail > header {
+  align-items: flex-start;
+}
+.proposalStudio__detail h2 { margin: 4px 0; }
+.proposalStudio__detail > header span {
+  color: #77766f;
+  font-size: 11px;
+}
+.proposalStudio__scoreHero {
+  min-width: 120px;
+  text-align: right;
+}
+.proposalStudio__scoreHero strong,
+.proposalStudio__scoreHero b {
+  display: block;
+  font-size: 27px;
+}
+.proposalStudio__scoreHero span,
+.proposalStudio__scoreHero small {
+  color: #77766f;
+}
+.proposalStudio__products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.proposalStudio__products article {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+  border: 1px solid #deddd7;
+  border-radius: 11px;
+  padding: 9px;
+}
+.proposalStudio__image {
+  display: grid;
+  min-height: 90px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f3f2ee;
+}
+.proposalStudio__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.proposalStudio__products h3 {
+  margin: 3px 0;
+  font-size: 15px;
+}
+.proposalStudio__products span,
+.proposalStudio__products small {
+  color: #77766f;
+  font-size: 11px;
+}
+.proposalStudio__scoreGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+.proposalStudio__scoreGrid article {
+  border-radius: 9px;
+  padding: 10px;
+  background: #efeee8;
+}
+.proposalStudio__scoreGrid span {
+  display: block;
+  font-size: 11px;
+}
+.proposalStudio__scoreGrid progress {
+  width: 100%;
+}
+.proposalStudio__scoreGrid strong {
+  display: block;
+}
+.proposalStudio__explanation,
+.proposalStudio__confidence {
+  margin-top: 14px;
+  border-top: 1px solid #ebeae4;
+  padding-top: 14px;
+}
+.proposalStudio__explanation > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.proposalStudio__confidence > article {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 9px 0;
+  border-bottom: 1px solid #ebeae4;
+}
+.proposalStudio__confidence b {
+  border-radius: 999px;
+  padding: 5px 7px;
+  text-align: center;
+}
+.proposalStudio__confidence b.is-positive {
+  background: #dff5df;
+}
+.proposalStudio__confidence b.is-negative {
+  background: #ffe0df;
+}
+.proposalStudio__confidence p { margin: 3px 0; }
+.proposalStudio table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.proposalStudio th,
+.proposalStudio td {
+  border-bottom: 1px solid #ebeae4;
+  padding: 9px;
+  text-align: left;
+  vertical-align: top;
+}
+.proposalStudio thead th {
+  position: sticky;
+  top: 0;
+  background: white;
+}
+.proposalStudio__compare,
+.proposalStudio__ranking {
+  overflow: auto;
+}
+.proposalStudio__xray article {
+  margin-bottom: 12px;
+}
+.proposalStudio pre {
+  max-height: 420px;
+  overflow: auto;
+  border-radius: 9px;
+  padding: 12px;
+  background: #20211e;
+  color: #edf0e7;
+  white-space: pre-wrap;
+  font: 11px/1.45 ui-monospace, Consolas, monospace;
+}
+.proposalStudio__error {
+  margin-bottom: 12px;
+  border: 1px solid #e3aaa7;
+  border-radius: 9px;
+  padding: 10px;
+  background: #fff0ef;
+}
+@media (max-width: 1100px) {
+  .proposalStudio__layout {
+    grid-template-columns: 1fr;
+  }
+  .proposalStudio__input textarea {
+    min-height: 380px;
+  }
+}
+@media (max-width: 760px) {
+  .proposalStudio {
+    padding: 12px;
+  }
+  .proposalStudio__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .proposalStudio__metrics,
+  .proposalStudio__scoreGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .proposalStudio__products {
+    grid-template-columns: 1fr;
+  }
+  .proposalStudio__explanation > div {
+    grid-template-columns: 1fr;
+  }
+}

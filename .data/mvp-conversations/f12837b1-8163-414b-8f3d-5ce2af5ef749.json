@@ -1,0 +1,108 @@
+{
+  "id": "f12837b1-8163-414b-8f3d-5ce2af5ef749",
+  "journeyId": "f65decb0-b492-412a-ad1c-313a85e8c7bc",
+  "journey": {
+    "id": "f65decb0-b492-412a-ad1c-313a85e8c7bc",
+    "type": "GIFT",
+    "status": "DISCOVERING",
+    "version": 7,
+    "sessionId": "f12837b1-8163-414b-8f3d-5ce2af5ef749",
+    "participants": [],
+    "facts": [
+      {
+        "key": "recipient.interests",
+        "value": [
+          "madera"
+        ],
+        "confidence": 0.92,
+        "source": "CONVERSATION",
+        "evidence": "le gusta la madera",
+        "createdAt": "2026-08-02T15:58:03.975Z",
+        "updatedAt": "2026-08-02T15:58:03.975Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:58:03.975Z",
+        "updatedAt": "2026-08-02T15:58:03.975Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:58:03.975Z",
+        "updatedAt": "2026-08-02T15:58:03.975Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.scope",
+          "profileVersion": "v1",
+          "score": 0,
+          "requiredScore": 0,
+          "recommendedScore": 100,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [],
+          "missingRequired": [
+            "gift.scope"
+          ],
+          "missingRecommended": [],
+          "requirements": [
+            {
+              "key": "gift.scope",
+              "label": "Tipo de búsqueda",
+              "level": "REQUIRED",
+              "weight": 100,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T15:58:03.975Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:58:03.975Z",
+        "updatedAt": "2026-08-02T15:58:03.975Z"
+      },
+      {
+        "key": "conversation.pending_fact",
+        "value": "gift.scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:58:03.975Z",
+        "updatedAt": "2026-08-02T15:58:03.975Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T15:58:03.974Z",
+    "updatedAt": "2026-08-02T15:58:03.975Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "717df65e-b14f-4e27-afcc-7aa67a5341f7",
+    "accessKeyHash": "fe2fb8918dd1df9f721cd22f4b3b5799b577b9e6a17d996671759c6ac3ccf152",
+    "createdAt": "2026-08-02T15:58:03.974Z"
+  },
+  "messages": [
+    {
+      "id": "83240fb6-c867-4fb7-94a2-ed58576799c9",
+      "role": "USER",
+      "text": "le gusta la madera",
+      "createdAt": "2026-08-02T15:58:03.974Z"
+    },
+    {
+      "id": "8de38101-514e-4769-8b1f-1a057ac17447",
+      "role": "RAI",
+      "text": "¡Perfecto, la madera puede dar mucho juego! ¿Buscas un regalo para alguien en particular?",
+      "createdAt": "2026-08-02T15:58:05.983Z"
+    }
+  ],
+  "createdAt": "2026-08-02T15:58:05.983Z",
+  "updatedAt": "2026-08-02T15:58:05.983Z"
+}

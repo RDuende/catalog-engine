@@ -1,0 +1,29 @@
+{
+  "id": "b388cc03-d6ed-4b40-9c05-e7358e54925c",
+  "type": "TEST",
+  "status": "COMPLETED",
+  "progress": {
+    "step": "completed",
+    "completed": 1,
+    "total": 1,
+    "percent": 100,
+    "message": "Pipeline completado"
+  },
+  "createdAt": "2026-08-02T20:25:59.628Z",
+  "metadata": {
+    "resumable": true,
+    "checkpoint": {
+      "step": "incremental-stage",
+      "completed": 1,
+      "total": 20,
+      "pausedAt": "2026-08-02T20:25:59.662Z"
+    },
+    "resumedAt": "2026-08-02T20:25:59.663Z",
+    "resumeCount": 1
+  },
+  "startedAt": "2026-08-02T20:25:59.629Z",
+  "finishedAt": "2026-08-02T20:25:59.977Z",
+  "result": {
+    "runs": 2
+  }
+}

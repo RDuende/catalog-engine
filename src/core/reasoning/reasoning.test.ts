@@ -15,6 +15,17 @@ const intent: ParsedIntent = {
   attributes: { emotion: ["agradecimiento"] },
   terms: ["foto", "profesora"], confidence: 0.95, warnings: [],
 };
+
+const explanation = {
+  headline: "Fixture de prueba",
+  confidence: 1,
+  strengths: [],
+  cautions: [],
+  matchedConstraints: [],
+  violatedConstraints: [],
+  rankingFactors: [],
+} as const;
+
 const solution: ResolvedSolution = {
   definition: { id: "teacher", name: "Detalle de agradecimiento para docente", recipients: ["profesora"], emotions: ["agradecimiento"] },
   score: 80, reasons: ["Adecuada"], criteria: {}, intent,
@@ -22,8 +33,8 @@ const solution: ResolvedSolution = {
 
 test("descarta candidatos que incumplen restricciones obligatorias", () => {
   const trace = new ReasoningEngine().reason({ intent, solution, candidates: [
-    { productId: "1", sku: null, name: "Marco personalizado profesora", slug: "marco", description: "Marco con foto", score: 70, unitPrice: 24, currency: "EUR", categories: ["Marcos"], knowledge: ["agradecimiento"], customizable: true, reasons: [] },
-    { productId: "2", sku: null, name: "Figura premium", slug: "figura", description: null, score: 90, unitPrice: 45, currency: "EUR", categories: [], knowledge: [], customizable: false, reasons: [] },
+    { productId: "1", sku: null, name: "Marco personalizado profesora", slug: "marco", description: "Marco con foto", score: 70, unitPrice: 24, currency: "EUR", categories: ["Marcos"], knowledge: ["agradecimiento"], customizable: true, reasons: [], explanation },
+    { productId: "2", sku: null, name: "Figura premium", slug: "figura", description: null, score: 90, unitPrice: 45, currency: "EUR", categories: [], knowledge: [], customizable: false, reasons: [], explanation },
   ]});
   assert.equal(trace.decisions[0]?.item.productId, "1");
   assert.equal(trace.decisions[0]?.eligible, true);
@@ -33,7 +44,7 @@ test("descarta candidatos que incumplen restricciones obligatorias", () => {
 });
 
 test("expone una traza auditable con restricciones y evidencias", () => {
-  const trace = new ReasoningEngine().reason({ intent, solution, candidates: [{ productId: "1", sku: "M1", name: "Marco profesora", slug: "marco", description: "Recuerdo de agradecimiento", score: 65, unitPrice: 20, currency: "EUR", categories: ["Regalos"], knowledge: ["profesora", "agradecimiento"], customizable: true, reasons: [] }] });
+  const trace = new ReasoningEngine().reason({ intent, solution, candidates: [{ productId: "1", sku: "M1", name: "Marco profesora", slug: "marco", description: "Recuerdo de agradecimiento", score: 65, unitPrice: 20, currency: "EUR", categories: ["Regalos"], knowledge: ["profesora", "agradecimiento"], customizable: true, reasons: [], explanation }] });
   assert.equal(trace.version, "1.0");
   assert.ok(trace.constraints.some((constraint) => constraint.code === "BUDGET"));
   assert.ok(trace.decisions[0]?.evidence.some((entry) => entry.code === "SOLUTION_AFFINITY"));

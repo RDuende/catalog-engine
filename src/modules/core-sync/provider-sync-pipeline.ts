@@ -8,6 +8,8 @@ import type { PipelineDefinition, PipelineStage } from "./core-sync-types.js";
 import { snapshotService, type SnapshotManifest } from "./snapshot-service.js";
 import { KnowledgeGraphBuilderService } from "../knowledge-graph-v2/knowledge-builder.service.js";
 import { PgKnowledgeBuilderRepository } from "../knowledge-graph-v2/knowledge-builder.repository.js";
+import { CatalogMediaService } from "../catalog-media/index.js";
+import { ProductBrainRepository } from "../product-brain/index.js";
 
 export interface ProviderSyncJobInput {
   provider: string;
@@ -20,6 +22,11 @@ export interface ProviderSyncJobInput {
   markMissingInactive?: boolean;
   batchSize?: number;
   buildKnowledge?: boolean;
+  classifyProducts?: boolean;
+  forceClassification?: boolean;
+  importMedia?: boolean;
+  forceMedia?: boolean;
+  mediaConcurrency?: number;
 }
 
 export interface ProviderSyncJobResult {
@@ -27,12 +34,23 @@ export interface ProviderSyncJobResult {
   jobId: string;
   sync: Record<string, unknown>;
   canonical?: unknown;
+  classification?: unknown;
   knowledge?: unknown;
+  media?: unknown;
   snapshot?: { directory: string; manifest: SnapshotManifest };
   startedAt: string;
   finishedAt: string;
   durationMs: number;
   metrics: { stages: unknown[]; productsPerSecond?: number };
+}
+
+function progressMessage(label: string, completed: number, total: number, startedAt: number): string {
+  const elapsedSeconds = Math.max(0.001, (Date.now() - startedAt) / 1000);
+  const rate = completed / elapsedSeconds;
+  const remaining = Math.max(0, total - completed);
+  const etaSeconds = rate > 0 ? Math.round(remaining / rate) : undefined;
+  const eta = etaSeconds === undefined ? "calculando" : etaSeconds < 60 ? `${etaSeconds}s` : `${Math.ceil(etaSeconds / 60)}min`;
+  return `${label}: ${completed}/${total} · ${rate.toFixed(2)}/s · ETA ${eta}`;
 }
 
 const startStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = {
@@ -87,6 +105,7 @@ const canonicalStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult>
     if (context.input.importCanonical === false) return;
     const products = context.data.get("products");
     if (!Array.isArray(products)) throw new Error("El pipeline no produjo una colección de productos normalizados.");
+    const startedAt = Date.now();
     const fullSync = !context.input.limit && !context.input.updatedSince;
     context.data.set("canonical", await importCanonicalProducts(context.input.provider, products, undefined, {
       batchSize: context.input.batchSize,
@@ -95,7 +114,49 @@ const canonicalStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult>
         step: "canonical-import",
         completed,
         total,
-        message: `Importados ${completed} de ${total} productos`,
+        message: progressMessage("Productos importados", completed, total, startedAt),
+      }),
+    }));
+  },
+};
+
+const classificationStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = {
+  name: "product-brain-classification",
+  async execute(context) {
+    if (context.input.importCanonical === false || context.input.classifyProducts === false) return;
+    const startedAt = Date.now();
+    const repository = new ProductBrainRepository();
+    context.data.set("classification", await repository.classify({
+      providerKey: context.input.provider,
+      limit: context.input.limit ?? 100_000,
+      force: context.input.forceClassification === true,
+      onProgress: (completed, total) => context.reportProgress({
+        step: "product-brain-classification",
+        completed,
+        total,
+        message: progressMessage("Productos clasificados", completed, total, startedAt),
+      }),
+    }));
+  },
+};
+
+const mediaStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = {
+  name: "local-media-sync",
+  async execute(context) {
+    if (context.input.importCanonical === false || context.input.importMedia === false) return;
+    if (context.input.provider !== "makito") return;
+    const startedAt = Date.now();
+    const service = new CatalogMediaService();
+    context.data.set("media", await service.sync({
+      providerKey: context.input.provider,
+      limit: context.input.limit ?? 100_000,
+      concurrency: context.input.mediaConcurrency,
+      force: context.input.forceMedia === true,
+      onProgress: (completed, total) => context.reportProgress({
+        step: "local-media-sync",
+        completed,
+        total,
+        message: progressMessage("Imágenes descargadas o comprobadas", completed, total, startedAt),
       }),
     }));
   },
@@ -108,14 +169,17 @@ const knowledgeStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult>
     const canonical = context.data.get("canonical") as { results?: Array<{ id: string }> } | undefined;
     const productIds = canonical?.results?.map(item => item.id).filter(Boolean) ?? [];
     if (!productIds.length) return;
+    const startedAt = Date.now();
     const builder = new KnowledgeGraphBuilderService(new PgKnowledgeBuilderRepository());
     context.data.set("knowledge", await builder.build({
       providerKey: context.input.provider,
       productIds,
       batchSize: context.input.batchSize,
       onProgress: (completed, total) => context.reportProgress({
-        step: "knowledge-graph-build", completed, total,
-        message: `Grafo construido para ${completed} de ${total} productos`,
+        step: "knowledge-graph-build",
+        completed,
+        total,
+        message: progressMessage("Grafo construido", completed, total, startedAt),
       }),
     }));
   },
@@ -131,25 +195,27 @@ const reportStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = 
       jobId: context.jobId,
       sync: (context.data.get("sync") as Record<string, unknown> | undefined) ?? {},
       canonical: context.data.get("canonical"),
+      classification: context.data.get("classification"),
       knowledge: context.data.get("knowledge"),
+      media: context.data.get("media"),
       startedAt,
       finishedAt,
       durationMs: Math.max(0, Date.parse(finishedAt) - Date.parse(startedAt)),
       metrics: { stages: (context.data.get("stageMetrics") as unknown[] | undefined) ?? [] },
     };
-    const productCount = Array.isArray(context.data.get("products")) ? (context.data.get("products") as unknown[]).length : 0;
+    const products = context.data.get("products");
+    const productCount = Array.isArray(products) ? products.length : 0;
     if (result.durationMs > 0) result.metrics.productsPerSecond = Number((productCount / (result.durationMs / 1000)).toFixed(2));
     const manifest = context.data.get("manifest") as SnapshotManifest | undefined;
     if (manifest) {
       await snapshotService.complete(context.input.provider, context.jobId, manifest, {
         sync: result.sync,
         canonical: result.canonical,
-        knowledge: context.data.get("knowledge"),
+        classification: result.classification,
+        knowledge: result.knowledge,
+        media: result.media,
       });
-      result.snapshot = {
-        directory: snapshotService.directory(context.input.provider, context.jobId),
-        manifest,
-      };
+      result.snapshot = { directory: snapshotService.directory(context.input.provider, context.jobId), manifest };
     }
     await snapshotService.writeReport(context.input.provider, context.jobId, result);
     context.data.set("cleanup", await snapshotService.cleanup(context.input.provider));
@@ -159,7 +225,7 @@ const reportStage: PipelineStage<ProviderSyncJobInput, ProviderSyncJobResult> = 
 
 export const providerSyncPipeline: PipelineDefinition<ProviderSyncJobInput, ProviderSyncJobResult> = {
   name: "provider-sync",
-  stages: [startStage, downloadStage, snapshotStage, canonicalStage, knowledgeStage, reportStage],
+  stages: [startStage, downloadStage, snapshotStage, canonicalStage, classificationStage, mediaStage, knowledgeStage, reportStage],
   async onError(context, error) {
     const manifest = context.data.get("manifest") as SnapshotManifest | undefined;
     if (manifest) await snapshotService.fail(context.input.provider, context.jobId, manifest, error);

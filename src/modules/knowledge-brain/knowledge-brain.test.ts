@@ -1,0 +1,9 @@
+import assert from "node:assert/strict";import test from "node:test";import { defaultKnowledgeBrain } from "./knowledge-brain.service.js";
+test("bateria electronica no es drums",()=>{const p=defaultKnowledgeBrain.analyze({text:"Power bank metalico con bateria de 5000mAh y USB-C"});assert.equal(p.features.includes("battery"),true);assert.equal(p.features.includes("usb"),true);assert.equal(p.materials.includes("metal"),true);assert.equal(p.interests.includes("drums"),false);});
+test("bateria musical es drums",()=>{const p=defaultKnowledgeBrain.analyze({text:"Set de bateria musical con baquetas, platillos y bombo"});assert.equal(p.interests.includes("drums"),true);assert.equal(p.features.includes("battery"),false);});
+test("metal material no es heavy metal",()=>{const p=defaultKnowledgeBrain.analyze({text:"Botella de acero inoxidable y metal"});assert.equal(p.materials.includes("metal"),true);assert.equal(p.interests.includes("heavy-metal"),false);});
+test("heavy metal musical se detecta",()=>{const p=defaultKnowledgeBrain.analyze({text:"Regalo para fan del heavy metal, rock y Metallica"});assert.equal(p.interests.includes("heavy-metal"),true);});
+test("manga corta no es manga",()=>{const p=defaultKnowledgeBrain.analyze({text:"Camiseta de manga corta"});assert.equal(p.interests.includes("manga"),false);assert.equal(p.objects.includes("shirt"),true);});
+test("manga japonesa es manga",()=>{const p=defaultKnowledgeBrain.analyze({text:"Le encanta el anime, el manga japones y Naruto"});assert.equal(p.interests.includes("manga"),true);});
+test("CAT catalogo no es cats",()=>{const p=defaultKnowledgeBrain.analyze({text:"CAT TEXTIL 2025 IBERIA C/PRECIO"});assert.equal(p.interests.includes("cats"),false);});
+test("cat lover si es cats",()=>{const p=defaultKnowledgeBrain.analyze({text:"Taza para una cat lover con huella de gato"});assert.equal(p.interests.includes("cats"),true);});

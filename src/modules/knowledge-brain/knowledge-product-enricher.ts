@@ -1,0 +1,5 @@
+import { defaultKnowledgeBrain } from "./knowledge-brain.service.js";
+import type { KnowledgeProfile } from "./knowledge-entity.types.js";
+export interface KnowledgeEnrichableProduct{readonly id:string;readonly name:string;readonly description?:string;readonly category?:string;readonly tags?:readonly string[];readonly productBrain?:Readonly<Record<string,unknown>>;readonly knowledgeProfile?:KnowledgeProfile;readonly [key:string]:unknown;}
+const strings=(v:unknown):readonly string[]=>typeof v==="string"?[v]:Array.isArray(v)?v.flatMap(strings):v&&typeof v==="object"?Object.values(v).flatMap(strings):[];
+export function enrichProductKnowledge<T extends KnowledgeEnrichableProduct>(product:T):T&{readonly knowledgeProfile:KnowledgeProfile}{const text=[product.name,product.description??"",product.category??"",...(product.tags??[]),...strings(product.productBrain)].join(" ");return Object.freeze({...product,knowledgeProfile:defaultKnowledgeBrain.analyze({text,existing:product.knowledgeProfile})});}

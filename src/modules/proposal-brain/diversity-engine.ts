@@ -1,0 +1,4 @@
+import type { CandidateScore } from "./proposal-brain.types.js";
+function signature(item:CandidateScore):string{const c=item.candidate;return[c.category??"",c.themes?.[0]??"",c.materials?.[0]??"",c.bundleRoles?.[0]??""].join("|").toLowerCase()}
+export function diverseSelection(ranked:readonly CandidateScore[],count:number):readonly CandidateScore[]{const selected:CandidateScore[]=[];const used=new Set<string>();for(const item of ranked){const key=signature(item);if(key&&used.has(key))continue;selected.push(item);if(key)used.add(key);if(selected.length>=count)break}if(selected.length<count){for(const item of ranked){if(selected.includes(item))continue;selected.push(item);if(selected.length>=count)break}}return Object.freeze(selected)}
+export function diversityScore(items:readonly CandidateScore[]):number{if(items.length<=1)return 1;return new Set(items.map(signature)).size/items.length}

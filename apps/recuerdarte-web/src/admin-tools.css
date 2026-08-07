@@ -1,0 +1,339 @@
+.engineeringConsole {
+  min-height: 100vh;
+  padding: 26px;
+  box-sizing: border-box;
+  background: #f2f1ed;
+  color: #242420;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.engineeringHeader,
+.toolHeader,
+.panelHeader,
+.primaryActions,
+.secondaryActions,
+.caseSave,
+.sidebarTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.engineeringHeader {
+  margin-bottom: 22px;
+}
+
+.engineeringHeader h1 {
+  margin: 4px 0 6px;
+}
+
+.engineeringHeader p,
+.toolHeader span,
+.panelHeader span {
+  margin: 0;
+  color: #77766f;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.engineeringHeader__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.engineeringConsole button,
+.engineeringConsole a,
+.engineeringConsole select,
+.engineeringConsole input {
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background: white;
+  color: inherit;
+  text-decoration: none;
+}
+
+.engineeringConsole button {
+  cursor: pointer;
+}
+
+.engineeringConsole button:hover,
+.engineeringConsole a:hover,
+.engineeringConsole button.is-active {
+  border-color: #242420;
+}
+
+.engineeringConsole button:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+
+.engineeringLayout {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.engineeringSidebar,
+.engineeringWorkspace,
+.engineeringPanel {
+  border: 1px solid #deddd7;
+  border-radius: 15px;
+  background: white;
+}
+
+.engineeringSidebar {
+  padding: 10px;
+  align-self: start;
+  max-height: calc(100vh - 160px);
+  overflow: auto;
+}
+
+.engineeringSidebar section + section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #ebeae4;
+}
+
+.engineeringSidebar h2 {
+  margin: 5px 6px 10px;
+  font-size: 14px;
+}
+
+.engineeringSidebar section > button {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.engineeringSidebar small {
+  color: #77766f;
+}
+
+.savedCase {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.savedCase > button:first-child {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.savedCase strong,
+.savedCase small {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.engineeringWorkspace {
+  padding: 20px;
+  overflow: hidden;
+}
+
+.toolHeader {
+  align-items: flex-start;
+}
+
+.toolHeader h2 {
+  margin: 5px 0;
+}
+
+.toolHeader p {
+  margin: 0;
+  color: #62615b;
+}
+
+.engineeringGrid,
+.engineeringLowerGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.engineeringPanel {
+  padding: 16px;
+  overflow: hidden;
+}
+
+.engineeringPanel h3 {
+  margin: 0;
+}
+
+.engineeringPanel textarea {
+  width: 100%;
+  min-height: 360px;
+  margin-top: 12px;
+  box-sizing: border-box;
+  resize: vertical;
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 12px;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+}
+
+.engineeringPanel pre {
+  min-height: 360px;
+  max-height: 520px;
+  overflow: auto;
+  border-radius: 9px;
+  padding: 13px;
+  background: #1f201d;
+  color: #eef0e8;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.primaryActions,
+.secondaryActions {
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.primaryActions button:first-child {
+  background: #242420;
+  color: white;
+}
+
+.caseSave {
+  margin-top: 10px;
+}
+
+.caseSave input {
+  flex: 1;
+  min-width: 0;
+}
+
+.testCommand {
+  display: block;
+  margin-top: 12px;
+  overflow: auto;
+  border-radius: 8px;
+  padding: 10px;
+  background: #f0efe9;
+}
+
+.runStatus {
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: #ecebe5;
+  font-size: 12px;
+}
+
+.runStatus--pass {
+  background: #dff5df;
+}
+
+.runStatus--fail {
+  background: #ffe0df;
+}
+
+.runStatus--not_runnable {
+  background: #fff0c9;
+}
+
+.traceList {
+  margin-top: 12px;
+}
+
+.traceList article {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #ebeae4;
+}
+
+.traceList article > span {
+  color: #77766f;
+  font-size: 11px;
+}
+
+.traceList div {
+  display: flex;
+  flex-direction: column;
+}
+
+.traceList small {
+  color: #8b8982;
+}
+
+.comparisonPanel {
+  margin-top: 16px;
+}
+
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.comparisonGrid pre {
+  min-height: 260px;
+}
+
+.differenceList {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 5px;
+  max-height: 280px;
+  overflow: auto;
+  border-radius: 9px;
+  padding: 12px;
+  background: #f3f2ed;
+}
+
+.differenceList code {
+  font-size: 11px;
+}
+
+.engineeringError {
+  margin-bottom: 14px;
+  border: 1px solid #e3aaa7;
+  border-radius: 9px;
+  padding: 11px;
+  background: #fff0ef;
+}
+
+.emptyCopy {
+  color: #77766f;
+}
+
+@media (max-width: 1050px) {
+  .engineeringLayout,
+  .engineeringGrid,
+  .engineeringLowerGrid,
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .engineeringSidebar {
+    max-height: none;
+  }
+
+  .engineeringHeader,
+  .toolHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .differenceList {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,11 @@
+import assert from "node:assert/strict";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import test from "node:test";
+import { FileMvpConversationRepository } from "./mvp-conversation.repository.js";
+import { MvpConversationService } from "./mvp-conversation.service.js";
+const principal={kind:"USER",id:"persistent-user"} as const;
+test("recupera una conversación después de crear otra instancia",async(t)=>{const directory=mkdtempSync(join(tmpdir(),"recuerdarte-v22-"));t.after(()=>rmSync(directory,{recursive:true,force:true}));const firstService=new MvpConversationService(new FileMvpConversationRepository(directory));const first=await firstService.continue("persistent-session",{message:"Quiero un regalo para mis gemelas de 7 años",now:"2026-08-02T09:00:00.000Z"},principal);const restarted=new MvpConversationService(new FileMvpConversationRepository(directory));assert.equal(restarted.get("persistent-session",principal)?.journeyId,first.session.journeyId);const second=await restarted.continue("persistent-session",{message:"Es para su cumpleaños y tengo 60 euros",now:"2026-08-02T09:01:00.000Z"},principal);assert.equal(second.result.status,"READY_FOR_PROPOSALS");});
+test("guarda owner y sesión en JSON",async(t)=>{const directory=mkdtempSync(join(tmpdir(),"recuerdarte-v22-json-"));t.after(()=>rmSync(directory,{recursive:true,force:true}));const service=new MvpConversationService(new FileMvpConversationRepository(directory));await service.continue("json-session",{message:"Quiero un regalo para mi madre",now:"2026-08-02T10:00:00.000Z"},principal);const persisted=JSON.parse(readFileSync(join(directory,"json-session.json"),"utf8")) as {owner:{id:string};messages:unknown[]};assert.equal(persisted.owner.id,"persistent-user");assert.equal(persisted.messages.length,2);});
+test("rechaza identificadores peligrosos",()=>{const directory=mkdtempSync(join(tmpdir(),"recuerdarte-v22-safe-"));try{const repository=new FileMvpConversationRepository(directory);assert.throws(()=>repository.get("../outside"),/caracteres no permitidos/);}finally{rmSync(directory,{recursive:true,force:true});}});

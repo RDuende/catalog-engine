@@ -1,0 +1,3036 @@
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+interface Scenario {
+  readonly id: string;
+  readonly group: string;
+  readonly title: string;
+  readonly objective: string;
+  readonly priority:
+    | "CRITICAL"
+    | "HIGH"
+    | "MEDIUM"
+    | "LOW";
+  readonly tags:
+    readonly string[];
+  readonly preconditions:
+    readonly string[];
+}
+
+interface Review {
+  readonly scenarioId: string;
+  readonly status:
+    | "PENDING"
+    | "REVIEWED_OK"
+    | "REVIEWED_ISSUE";
+  readonly note: string;
+  readonly updatedAt: string;
+}
+
+interface Check {
+  readonly label: string;
+  readonly pass: boolean;
+  readonly expected?: unknown;
+  readonly actual?: unknown;
+  readonly detail?: string;
+}
+
+interface Step {
+  readonly name: string;
+  readonly method: string;
+  readonly url: string;
+  readonly statusCode: number;
+  readonly durationMs: number;
+  readonly requestBody?: unknown;
+  readonly responseBody?: unknown;
+  readonly checks:
+    readonly Check[];
+}
+
+interface Result {
+  readonly id: string;
+  readonly group: string;
+  readonly title: string;
+  readonly status:
+    | "PASS"
+    | "FAIL"
+    | "ERROR"
+    | "NOT_RUN";
+  readonly startedAt: string;
+  readonly finishedAt: string;
+  readonly durationMs: number;
+  readonly checksPassed: number;
+  readonly checksFailed: number;
+  readonly steps:
+    readonly Step[];
+}
+
+interface ScenarioListResponse {
+  readonly scenarios:
+    readonly Scenario[];
+  readonly reviews:
+    Readonly<Record<string, Review>>;
+}
+
+type ChatRole = "RAI" | "USER" | "SYSTEM";
+
+interface ChatLine {
+  readonly role: ChatRole;
+  readonly text: string;
+}
+
+interface Presentation {
+  readonly intro?: readonly ChatLine[];
+  readonly expected: readonly string[];
+  readonly notes?: string;
+}
+
+interface ProductView {
+  readonly id?: string;
+  readonly name: string;
+  readonly price?: number;
+  readonly role?: string;
+  readonly imageUrl?: string;
+  readonly reasons: readonly string[];
+  readonly warnings: readonly string[];
+}
+
+interface ProposalView {
+  readonly title: string;
+  readonly subtitle?: string;
+  readonly story?: string;
+  readonly price?: number;
+  readonly products: readonly ProductView[];
+}
+
+interface BudgetView {
+  readonly target?: number;
+  readonly type:
+    | "TARGET"
+    | "HARD_MAX"
+    | "UNKNOWN";
+  readonly idealMin?: number;
+  readonly idealMax?: number;
+  readonly acceptableMin?: number;
+  readonly acceptableMax?: number;
+}
+
+const PRESENTATION:
+  Readonly<Record<string, Presentation>> = {
+  "INT-001": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "No sé qué regalarle a mi padre",
+      },
+    ],
+    expected: [
+      "Entender que el cliente necesita descubrir ideas.",
+      "No generar propuestas todavía.",
+      "Mantener abierto el proceso de descubrimiento.",
+    ],
+  },
+  "INT-002": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Hacer propuestas",
+      },
+    ],
+    expected: [
+      "Detectar una petición explícita de propuestas.",
+      "Abrir Proposal Gate.",
+      "Permitir que Proposal Brain se ejecute.",
+    ],
+  },
+  "INT-003": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Empezar de nuevo",
+      },
+    ],
+    expected: [
+      "Reiniciar sólo porque el usuario lo ha pedido explícitamente.",
+    ],
+  },
+  "INT-004": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "¿Cuánto cuesta esta taza?",
+      },
+    ],
+    expected: [
+      "Interpretarlo como consulta directa de precio.",
+      "No generar propuestas.",
+    ],
+  },
+  "INT-005": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "¿Está disponible esta taza?",
+      },
+    ],
+    expected: [
+      "Interpretarlo como consulta de disponibilidad.",
+    ],
+  },
+  "INT-006": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Quiero una taza con una foto",
+      },
+    ],
+    expected: [
+      "Entender que el usuario ya ha elegido el tipo de producto.",
+      "Entrar en flujo de personalización.",
+    ],
+  },
+  "EMO-001": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Quiero agradecerle todo lo que ha hecho por mí.",
+      },
+    ],
+    expected: [
+      "Detectar gratitud como emoción principal.",
+      "Asignar una confianza alta.",
+    ],
+  },
+  "EMO-002": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Quiero que se parta de risa.",
+      },
+    ],
+    expected: [
+      "Detectar humor como emoción principal.",
+    ],
+  },
+  "EMO-003": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Quiero pedirle perdón y hacer las paces.",
+      },
+    ],
+    expected: [
+      "Detectar reconciliación.",
+    ],
+  },
+  "EMO-004": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Quiero sorprenderlo, que no se lo espere.",
+      },
+    ],
+    expected: [
+      "Detectar sorpresa como objetivo emocional.",
+    ],
+  },
+  "INTV2-001": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Le encanta el fútbol.",
+      },
+    ],
+    expected: [
+      "Canonizar fútbol como football.",
+    ],
+  },
+  "INTV2-002": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Le encanta el monte y hacer rutas.",
+      },
+    ],
+    expected: [
+      "Detectar hiking.",
+      "Inferir nature y adventure con menor peso.",
+      "No poner una inferencia por encima del interés explícito.",
+    ],
+  },
+  "INTV2-003": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Le gusta la madera.",
+      },
+    ],
+    expected: [
+      "Mantener wood como interés principal.",
+    ],
+  },
+  "INTV2-004": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Le gustan mucho los barcos.",
+      },
+    ],
+    expected: [
+      "Detectar boats.",
+      "Inferir sea y sailing como secundarios.",
+    ],
+  },
+  "CONV-001": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Es para mi padre por su cumpleaños, le encanta el motocross y tengo 70 euros",
+      },
+    ],
+    expected: [
+      "Extraer padre, cumpleaños, motocross y 70 €.",
+      "Quedar listo para proponer.",
+      "No generar propuestas automáticamente.",
+    ],
+  },
+  "CONV-002": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Es para mi padre, por su cumpleaños, le gusta el motocross y tengo 70 euros",
+      },
+    ],
+    expected: [
+      "Conservar todos los datos.",
+      "Mostrar Hacer propuestas.",
+      "Mantener Proposal Gate cerrado.",
+    ],
+  },
+  "CONV-003": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Es para mis padres",
+      },
+    ],
+    expected: [
+      "Entender que son dos destinatarios.",
+      "Continuar preguntando por intereses.",
+    ],
+  },
+  "CONV-004": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Es para mi padre, por su cumpleaños, le gusta el motocross",
+      },
+      {
+        role: "RAI",
+        text:
+          "¿Qué presupuesto aproximado tienes?",
+      },
+      {
+        role: "USER",
+        text:
+          "60",
+      },
+    ],
+    expected: [
+      "Interpretar 60 como presupuesto por contexto.",
+      "Mantener padre, cumpleaños y motocross.",
+      "No generar propuestas todavía.",
+    ],
+  },
+  "CONV-005": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Es para mi padre, por su cumpleaños, le gusta el motocross y tengo 70 euros",
+      },
+      {
+        role: "RAI",
+        text:
+          "Ya tengo suficiente información. Puedes pedirme propuestas.",
+      },
+      {
+        role: "USER",
+        text:
+          "Hacer propuestas",
+      },
+    ],
+    expected: [
+      "Mantener el Conversation Graph.",
+      "Abrir Proposal Gate únicamente en el último turno.",
+      "Generar propuestas.",
+    ],
+  },
+  "MEM-001": {
+    intro: [
+      {
+        role: "SYSTEM",
+        text:
+          "Se guarda motocross, madera y presupuesto 70 € para un destinatario temporal de prueba.",
+      },
+    ],
+    expected: [
+      "Guardar la memoria.",
+      "Recuperarla después desde snapshot.",
+    ],
+  },
+  "AI-001": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "No sé qué regalarle a mi padre",
+      },
+    ],
+    expected: [
+      "Ejecutar el pipeline de descubrimiento.",
+      "Mantener Proposal Gate cerrado.",
+    ],
+  },
+  "AI-002": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Hacer propuestas",
+      },
+    ],
+    expected: [
+      "Ejecutar el pipeline completo.",
+      "Generar propuestas.",
+      "Devolver producto o lote seleccionado.",
+    ],
+  },
+  "AI-003": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "¿Cuánto cuesta esta taza?",
+      },
+    ],
+    expected: [
+      "Usar ruta directa.",
+      "No ejecutar Proposal Brain.",
+    ],
+  },
+  "AI-004": {
+    intro: [
+      {
+        role: "USER",
+        text:
+          "Empezar de nuevo",
+      },
+    ],
+    expected: [
+      "Reiniciar únicamente por petición explícita.",
+    ],
+  },
+};
+
+
+const MOCKUP_PRESENTATION:
+  Readonly<Record<string, Presentation>> = {
+  "MOCK-001": {
+    intro: [
+      { role: "USER", text: "Quiero un regalo personalizado usando una fotografía." },
+      { role: "SYSTEM", text: "La prueba usa una fotografía de referencia segura." },
+    ],
+    expected: [
+      "Generar una propuesta válida.",
+      "Aplicar la fotografía al producto.",
+      "Generar un mockup real cuando el endpoint esté conectado.",
+      "Mantener el producto sin deformaciones.",
+    ],
+  },
+  "MOCK-002": {
+    intro: [
+      { role: "USER", text: "Quiero que ponga “La mejor abuela del mundo”." },
+    ],
+    expected: [
+      "Componer el texto dentro del área imprimible.",
+      "Mantener legibilidad y márgenes.",
+      "Mostrar el mockup final.",
+    ],
+  },
+  "MOCK-003": {
+    intro: [
+      { role: "USER", text: "A mi padre le encanta el motocross. Haz algo especial." },
+    ],
+    expected: [
+      "Crear primero un diseño con IA.",
+      "Aplicar ese diseño al producto.",
+      "Mostrar el mockup resultante.",
+    ],
+  },
+  "MOCK-004": {
+    intro: [
+      { role: "USER", text: "Quiero usar esta foto y añadir una dedicatoria." },
+    ],
+    expected: [
+      "Combinar foto y texto en una sola composición.",
+      "Generar el mockup.",
+    ],
+  },
+  "MOCK-005": {
+    intro: [
+      { role: "USER", text: "Me gusta, pero haz el texto más pequeño y sube la foto." },
+    ],
+    expected: [
+      "Crear una V2 sin perder la propuesta.",
+      "Mantener el mismo producto y Journey.",
+    ],
+  },
+  "MOCK-006": {
+    intro: [
+      { role: "USER", text: "Me gusta el diseño, pero quiero verlo en una sudadera." },
+    ],
+    expected: [
+      "Reutilizar el diseño.",
+      "Cambiar sólo el soporte.",
+      "Generar un nuevo mockup.",
+    ],
+  },
+  "MOCK-007": {
+    intro: [
+      { role: "USER", text: "Quiero un lote completo personalizado." },
+    ],
+    expected: [
+      "Generar visuales de los componentes.",
+      "Generar una imagen final del lote como un único regalo.",
+    ],
+  },
+  "MOCK-008": {
+    intro: [
+      { role: "USER", text: "Quiero gastarme unos 90 € en el lote." },
+    ],
+    expected: [
+      "Tratar 90 € como precio objetivo.",
+      "Priorizar un total cercano a 81–99 €.",
+      "Generar visualización del lote.",
+    ],
+  },
+  "MOCK-009": {
+    intro: [
+      { role: "USER", text: "Quiero regalar dos camisetas para que él las personalice después." },
+    ],
+    expected: [
+      "Crear un bono/derecho de personalización.",
+      "No inventar una personalización final todavía.",
+      "Representar visualmente el regalo/bono.",
+    ],
+  },
+  "MOCK-010": {
+    intro: [
+      { role: "SYSTEM", text: "Se simula un fallo durante la generación del mockup." },
+    ],
+    expected: [
+      "Conservar la propuesta.",
+      "No reiniciar el Journey.",
+      "Permitir reintentar.",
+    ],
+  },
+  "MOCK-E2E-001": {
+    intro: [
+      { role: "USER", text: "Quiero un regalo para mi padre por su 60 cumpleaños." },
+      { role: "USER", text: "Le encanta el motocross y la madera." },
+      { role: "USER", text: "Quiero gastarme unos 90 € y me gustaría emocionarlo." },
+      { role: "USER", text: "Tengo una foto nuestra." },
+      { role: "USER", text: "Hacer propuestas" },
+    ],
+    expected: [
+      "Interpretar toda la conversación.",
+      "Generar una propuesta.",
+      "Crear el diseño visual.",
+      "Generar el mockup.",
+      "Generar la imagen final del regalo personalizado.",
+    ],
+  },
+};
+
+function downloadJson(
+  filename: string,
+  value: unknown,
+): void {
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          value,
+          null,
+          2,
+        ),
+      ],
+      {
+        type:
+          "application/json;charset=utf-8",
+      },
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const anchor =
+    document.createElement("a");
+
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
+function statusLabel(
+  status:
+    Result["status"] |
+    Review["status"] |
+    undefined,
+): string {
+  switch (status) {
+    case "PASS":
+      return "PASS";
+    case "FAIL":
+      return "FAIL";
+    case "ERROR":
+      return "ERROR";
+    case "REVIEWED_OK":
+      return "REVISADO OK";
+    case "REVIEWED_ISSUE":
+      return "INCIDENCIA";
+    case "PENDING":
+      return "PENDIENTE";
+    default:
+      return "SIN EJECUTAR";
+  }
+}
+
+function isRecord(
+  value: unknown,
+): value is Record<string, unknown> {
+  return (
+    Boolean(value) &&
+    typeof value === "object" &&
+    !Array.isArray(value)
+  );
+}
+
+function readNumber(
+  value: unknown,
+): number | undefined {
+  return typeof value === "number" &&
+    Number.isFinite(value)
+    ? value
+    : undefined;
+}
+
+function readString(
+  value: unknown,
+): string | undefined {
+  return typeof value === "string" &&
+    value.trim()
+    ? value
+    : undefined;
+}
+
+function findDeep(
+  value: unknown,
+  keys: readonly string[],
+): unknown[] {
+  const found:
+    unknown[] = [];
+
+  function visit(
+    current: unknown,
+  ): void {
+    if (
+      !current ||
+      typeof current !== "object"
+    ) {
+      return;
+    }
+
+    if (
+      Array.isArray(current)
+    ) {
+      for (const item of current) {
+        visit(item);
+      }
+      return;
+    }
+
+    const record =
+      current as
+        Record<string, unknown>;
+
+    for (const [key, item] of
+      Object.entries(record)) {
+      if (keys.includes(key)) {
+        found.push(item);
+      }
+
+      visit(item);
+    }
+  }
+
+  visit(value);
+
+  return found;
+}
+
+function collectImageUrls(
+  value: unknown,
+): readonly string[] {
+  const values =
+    findDeep(
+      value,
+      [
+        "imageUrl",
+        "mockupUrl",
+        "finalImageUrl",
+        "generatedImageUrl",
+        "previewUrl",
+        "thumbnailUrl",
+        "url",
+        "images",
+        "mockups",
+        "generatedImages",
+      ],
+    );
+
+  const urls:
+    string[] = [];
+
+  function add(
+    candidate: unknown,
+  ): void {
+    if (
+      typeof candidate === "string" &&
+      (
+        candidate.startsWith("/") ||
+        /^https?:\/\//iu.test(
+          candidate,
+        )
+      ) &&
+      (
+        /\.(png|jpe?g|webp|gif)(\?.*)?$/iu.test(
+          candidate,
+        ) ||
+        candidate.includes(
+          "/images/",
+        ) ||
+        candidate.includes(
+          "catalog-media",
+        ) ||
+        candidate.includes(
+          "mockup",
+        )
+      )
+    ) {
+      urls.push(candidate);
+    } else if (
+      Array.isArray(candidate)
+    ) {
+      for (const item of candidate) {
+        add(item);
+      }
+    }
+  }
+
+  for (const value of values) {
+    add(value);
+  }
+
+  return Object.freeze(
+    [...new Set(urls)],
+  );
+}
+
+function collectProducts(
+  value: unknown,
+): readonly ProductView[] {
+  const products:
+    ProductView[] = [];
+
+  function visit(
+    current: unknown,
+  ): void {
+    if (!isRecord(current)) {
+      if (Array.isArray(current)) {
+        for (const item of current) {
+          visit(item);
+        }
+      }
+      return;
+    }
+
+    const name =
+      readString(
+        current.name,
+      );
+
+    const price =
+      readNumber(
+        current.price,
+      ) ??
+      readNumber(
+        current.unitPrice,
+      ) ??
+      readNumber(
+        current.subtotal,
+      );
+
+    const id =
+      readString(
+        current.id,
+      ) ??
+      readString(
+        current.productId,
+      );
+
+    const role =
+      readString(
+        current.role,
+      );
+
+    const imageUrl =
+      readString(
+        current.imageUrl,
+      );
+
+    const reasons =
+      Array.isArray(
+        current.reasons,
+      )
+        ? current.reasons
+            .filter(
+              (
+                item,
+              ): item is string =>
+                typeof item ===
+                "string",
+            )
+        : [];
+
+    const warnings =
+      Array.isArray(
+        current.warnings,
+      )
+        ? current.warnings
+            .filter(
+              (
+                item,
+              ): item is string =>
+                typeof item ===
+                "string",
+            )
+        : [];
+
+    const looksLikeProduct =
+      Boolean(name) &&
+      (
+        "productId" in current ||
+        "sku" in current ||
+        "category" in current ||
+        "unitPrice" in current ||
+        "stock" in current ||
+        "canonicalInterests" in current ||
+        "personalizationAvailable" in
+          current
+      );
+
+    if (
+      looksLikeProduct &&
+      name
+    ) {
+      products.push({
+        ...(id
+          ? { id }
+          : {}),
+        name,
+        ...(price !== undefined
+          ? { price }
+          : {}),
+        ...(role
+          ? { role }
+          : {}),
+        ...(imageUrl
+          ? { imageUrl }
+          : {}),
+        reasons:
+          Object.freeze(
+            reasons,
+          ),
+        warnings:
+          Object.freeze(
+            warnings,
+          ),
+      });
+    }
+
+    for (const item of
+      Object.values(current)) {
+      if (
+        typeof item === "object" &&
+        item !== null
+      ) {
+        visit(item);
+      }
+    }
+  }
+
+  visit(value);
+
+  const unique =
+    new Map<string, ProductView>();
+
+  for (const product of products) {
+    const key =
+      product.id ??
+      `${product.name}|${product.price ?? ""}`;
+
+    if (!unique.has(key)) {
+      unique.set(
+        key,
+        product,
+      );
+    }
+  }
+
+  return Object.freeze(
+    [...unique.values()],
+  );
+}
+
+function collectProposal(
+  result:
+    Result | undefined,
+): ProposalView | undefined {
+  if (!result) {
+    return undefined;
+  }
+
+  const response =
+    result.steps.at(-1)
+      ?.responseBody;
+
+  if (!response) {
+    return undefined;
+  }
+
+  const titles =
+    findDeep(
+      response,
+      ["title"],
+    )
+      .map(readString)
+      .filter(
+        (
+          item,
+        ): item is string =>
+          Boolean(item),
+      );
+
+  const subtitles =
+    findDeep(
+      response,
+      ["subtitle"],
+    )
+      .map(readString)
+      .filter(
+        (
+          item,
+        ): item is string =>
+          Boolean(item),
+      );
+
+  const stories =
+    findDeep(
+      response,
+      ["story"],
+    )
+      .map(readString)
+      .filter(
+        (
+          item,
+        ): item is string =>
+          Boolean(item),
+      );
+
+  const products =
+    collectProducts(
+      response,
+    );
+
+  if (
+    !titles.length &&
+    !products.length
+  ) {
+    return undefined;
+  }
+
+  const total =
+    products.reduce<number>(
+      (sum, product) =>
+        sum +
+        (product.price ?? 0),
+      0,
+    );
+
+  return {
+    title:
+      titles[0] ??
+      "Propuesta seleccionada",
+    ...(subtitles[0]
+      ? {
+          subtitle:
+            subtitles[0],
+        }
+      : {}),
+    ...(stories[0]
+      ? {
+          story:
+            stories[0],
+        }
+      : {}),
+    ...(total > 0
+      ? { price: total }
+      : {}),
+    products,
+  };
+}
+
+function extractBudget(
+  result:
+    Result | undefined,
+): BudgetView {
+  if (!result) {
+    return {
+      type: "UNKNOWN",
+    };
+  }
+
+  const allResponses =
+    result.steps.map(
+      (step) =>
+        step.responseBody,
+    );
+
+  const allRequests =
+    result.steps.map(
+      (step) =>
+        step.requestBody,
+    );
+
+  const values =
+    [
+      ...findDeep(
+        allResponses,
+        [
+          "budget",
+          "targetPrice",
+          "priceTarget",
+          "maxBudget",
+          "maximumBudget",
+        ],
+      ),
+      ...findDeep(
+        allRequests,
+        [
+          "budget",
+          "targetPrice",
+          "priceTarget",
+          "maxBudget",
+          "maximumBudget",
+        ],
+      ),
+    ];
+
+  const target =
+    values
+      .map(readNumber)
+      .find(
+        (
+          value,
+        ): value is number =>
+          value !== undefined,
+      );
+
+  if (
+    target === undefined
+  ) {
+    return {
+      type: "UNKNOWN",
+    };
+  }
+
+  /*
+   * Human-review interpretation for current engine:
+   * until BudgetIntent is implemented in backend,
+   * a bare numeric budget is displayed as target spending.
+   */
+  return {
+    type: "TARGET",
+    target,
+    idealMin:
+      Math.round(
+        target * 0.9 * 100,
+      ) / 100,
+    idealMax:
+      Math.round(
+        target * 1.1 * 100,
+      ) / 100,
+    acceptableMin:
+      Math.round(
+        target * 0.7 * 100,
+      ) / 100,
+    acceptableMax:
+      Math.round(
+        target * 1.2 * 100,
+      ) / 100,
+  };
+}
+
+function inferredRaiLines(
+  result:
+    Result | undefined,
+): readonly ChatLine[] {
+  if (!result) {
+    return [];
+  }
+
+  const lines:
+    ChatLine[] = [];
+
+  for (const step of
+    result.steps) {
+    const response =
+      step.responseBody;
+
+    if (!response) {
+      continue;
+    }
+
+    const texts =
+      [
+        ...findDeep(
+          response,
+          [
+            "text",
+            "message",
+            "question",
+          ],
+        ),
+      ]
+        .map(
+          (item) =>
+            typeof item ===
+            "string"
+              ? item
+              : isRecord(
+                    item,
+                  ) &&
+                  typeof item.text ===
+                    "string"
+                ? item.text
+                : undefined,
+        )
+        .filter(
+          (
+            item,
+          ): item is string =>
+            Boolean(item),
+        );
+
+    for (const text of texts) {
+      if (
+        text.length > 3 &&
+        text.length < 500
+      ) {
+        lines.push({
+          role: "RAI",
+          text,
+        });
+      }
+    }
+  }
+
+  return Object.freeze(
+    [...new Map(
+      lines.map(
+        (line) => [
+          line.text,
+          line,
+        ],
+      ),
+    ).values()].slice(0, 8),
+  );
+}
+
+function expectedChecks(
+  presentation:
+    Presentation | undefined,
+  result:
+    Result | undefined,
+): readonly {
+  readonly text: string;
+  readonly pass?: boolean;
+}[] {
+  if (!presentation) {
+    return [];
+  }
+
+  if (!result) {
+    return presentation.expected.map(
+      (text) => ({
+        text,
+      }),
+    );
+  }
+
+  const flatChecks =
+    result.steps.flatMap(
+      (step) =>
+        step.checks,
+    );
+
+  return presentation.expected.map(
+    (text, index) => ({
+      text,
+      pass:
+        flatChecks[index]
+          ?.pass ??
+        result.status ===
+          "PASS",
+    }),
+  );
+}
+
+export function FunctionalTestConsoleApp() {
+  const [scenarios, setScenarios] =
+    useState<
+      readonly Scenario[]
+    >([]);
+
+  const [reviews, setReviews] =
+    useState<
+      Readonly<
+        Record<
+          string,
+          Review
+        >
+      >
+    >({});
+
+  const [results, setResults] =
+    useState<
+      Readonly<
+        Record<
+          string,
+          Result
+        >
+      >
+    >({});
+
+  const [selectedId, setSelectedId] =
+    useState<string>();
+
+  const [groupFilter, setGroupFilter] =
+    useState("ALL");
+
+  const [statusFilter, setStatusFilter] =
+    useState("ALL");
+
+  const [busy, setBusy] =
+    useState(false);
+
+  const [runningAll, setRunningAll] =
+    useState(false);
+
+  const [error, setError] =
+    useState<string>();
+
+  const [note, setNote] =
+    useState("");
+
+  const [showTechnical, setShowTechnical] =
+    useState(false);
+
+  const [mode, setMode] =
+    useState<
+      "AUTOMATIC" |
+      "MANUAL"
+    >("AUTOMATIC");
+
+  const [manualText, setManualText] =
+    useState("");
+
+  const [manualGraph, setManualGraph] =
+    useState<unknown>();
+
+  const [manualChat, setManualChat] =
+    useState<
+      readonly ChatLine[]
+    >([]);
+
+  const [manualRaw, setManualRaw] =
+    useState<
+      readonly unknown[]
+    >([]);
+
+  const [visualIssue, setVisualIssue] =
+    useState<string>("");
+
+  async function load(): Promise<void> {
+    setError(undefined);
+
+    try {
+      const response =
+        await fetch(
+          "/api/v1/functional-tests/scenarios",
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`,
+        );
+      }
+
+      const data =
+        await response.json() as
+          ScenarioListResponse;
+
+      setScenarios(
+        data.scenarios,
+      );
+
+      setReviews(
+        data.reviews,
+      );
+
+      if (
+        !selectedId &&
+        data.scenarios[0]
+      ) {
+        setSelectedId(
+          data.scenarios[0].id,
+        );
+      }
+    } catch (reason) {
+      setError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    }
+  }
+
+  useEffect(() => {
+    void load();
+  }, []);
+
+  const groups =
+    useMemo(
+      () => [
+        "ALL",
+        ...new Set(
+          scenarios.map(
+            (scenario) =>
+              scenario.group,
+          ),
+        ),
+      ],
+      [scenarios],
+    );
+
+  const visibleScenarios =
+    useMemo(
+      () =>
+        scenarios.filter(
+          (scenario) => {
+            if (
+              groupFilter !==
+                "ALL" &&
+              scenario.group !==
+                groupFilter
+            ) {
+              return false;
+            }
+
+            const result =
+              results[
+                scenario.id
+              ];
+
+            const review =
+              reviews[
+                scenario.id
+              ];
+
+            if (
+              statusFilter ===
+              "PASS"
+            ) {
+              return result?.status ===
+                "PASS";
+            }
+
+            if (
+              statusFilter ===
+              "FAIL"
+            ) {
+              return (
+                result?.status ===
+                  "FAIL" ||
+                result?.status ===
+                  "ERROR"
+              );
+            }
+
+            if (
+              statusFilter ===
+              "PENDING"
+            ) {
+              return (
+                !review ||
+                review.status ===
+                  "PENDING"
+              );
+            }
+
+            if (
+              statusFilter ===
+              "REVIEWED"
+            ) {
+              return (
+                review?.status ===
+                  "REVIEWED_OK" ||
+                review?.status ===
+                  "REVIEWED_ISSUE"
+              );
+            }
+
+            return true;
+          },
+        ),
+      [
+        scenarios,
+        results,
+        reviews,
+        groupFilter,
+        statusFilter,
+      ],
+    );
+
+  const selectedIndex =
+    selectedId
+      ? visibleScenarios.findIndex(
+          (scenario) =>
+            scenario.id ===
+            selectedId,
+        )
+      : -1;
+
+  const selected =
+    selectedId
+      ? scenarios.find(
+          (scenario) =>
+            scenario.id ===
+            selectedId,
+        )
+      : undefined;
+
+  const selectedResult =
+    selected
+      ? results[
+          selected.id
+        ]
+      : undefined;
+
+  const selectedReview =
+    selected
+      ? reviews[
+          selected.id
+        ]
+      : undefined;
+
+  const presentation =
+    selected
+      ? PRESENTATION[selected.id] ??
+        MOCKUP_PRESENTATION[selected.id]
+      : undefined;
+
+  const proposal =
+    collectProposal(
+      selectedResult,
+    );
+
+  const budget =
+    extractBudget(
+      selectedResult,
+    );
+
+  const imageUrls =
+    useMemo(
+      () =>
+        selectedResult
+          ? collectImageUrls(
+              selectedResult,
+            )
+          : [],
+      [selectedResult],
+    );
+
+  const raiLines =
+    useMemo(
+      () =>
+        inferredRaiLines(
+          selectedResult,
+        ),
+      [selectedResult],
+    );
+
+  const expected =
+    expectedChecks(
+      presentation,
+      selectedResult,
+    );
+
+  useEffect(() => {
+    setNote(
+      selectedReview?.note ??
+      "",
+    );
+
+    setShowTechnical(
+      false,
+    );
+
+    setVisualIssue(
+      "",
+    );
+  }, [
+    selectedId,
+    selectedReview?.note,
+  ]);
+
+  async function runScenario(
+    id: string,
+  ): Promise<void> {
+    setBusy(true);
+    setError(undefined);
+
+    try {
+      const response =
+        await fetch(
+          `/api/v1/functional-tests/run/${encodeURIComponent(id)}`,
+          {
+            method: "POST",
+          },
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`,
+        );
+      }
+
+      const result =
+        await response.json() as Result;
+
+      setResults(
+        (previous) => ({
+          ...previous,
+          [id]:
+            result,
+        }),
+      );
+    } catch (reason) {
+      setError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function runAll(): Promise<void> {
+    setRunningAll(true);
+    setError(undefined);
+
+    try {
+      const response =
+        await fetch(
+          "/api/v1/functional-tests/run-all",
+          {
+            method: "POST",
+          },
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`,
+        );
+      }
+
+      const data =
+        await response.json() as {
+          readonly results:
+            readonly Result[];
+        };
+
+      const mapped:
+        Record<string, Result> =
+        {};
+
+      for (
+        const result of
+        data.results
+      ) {
+        mapped[
+          result.id
+        ] =
+          result;
+      }
+
+      setResults(
+        mapped,
+      );
+    } catch (reason) {
+      setError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    } finally {
+      setRunningAll(false);
+    }
+  }
+
+  async function saveReview(
+    status:
+      Review["status"],
+  ): Promise<void> {
+    if (!selected) {
+      return;
+    }
+
+    setBusy(true);
+    setError(undefined);
+
+    const composedNote =
+      visualIssue
+        ? `${note}${note ? "\n\n" : ""}Incidencia visual: ${visualIssue}`
+        : note;
+
+    try {
+      const response =
+        await fetch(
+          `/api/v1/functional-tests/review/${encodeURIComponent(selected.id)}`,
+          {
+            method: "POST",
+            headers: {
+              "content-type":
+                "application/json",
+            },
+            body:
+              JSON.stringify({
+                status,
+                note:
+                  composedNote,
+              }),
+          },
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`,
+        );
+      }
+
+      const review =
+        await response.json() as Review;
+
+      setReviews(
+        (previous) => ({
+          ...previous,
+          [selected.id]:
+            review,
+        }),
+      );
+
+      setNote(
+        review.note,
+      );
+    } catch (reason) {
+      setError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function move(
+    delta: -1 | 1,
+  ): void {
+    if (
+      selectedIndex < 0
+    ) {
+      return;
+    }
+
+    const next =
+      visibleScenarios[
+        selectedIndex +
+        delta
+      ];
+
+    if (next) {
+      setSelectedId(
+        next.id,
+      );
+    }
+  }
+
+  async function sendManual(): Promise<void> {
+    const text =
+      manualText.trim();
+
+    if (!text) {
+      return;
+    }
+
+    setBusy(true);
+    setError(undefined);
+
+    setManualChat(
+      (previous) => [
+        ...previous,
+        {
+          role: "USER",
+          text,
+        },
+      ],
+    );
+
+    setManualText("");
+
+    try {
+      const response =
+        await fetch(
+          "/api/v2/conversation/process-natural",
+          {
+            method: "POST",
+            headers: {
+              "content-type":
+                "application/json",
+            },
+            body:
+              JSON.stringify({
+                ...(manualGraph
+                  ? {
+                      graph:
+                        manualGraph,
+                    }
+                  : {}),
+                message: text,
+              }),
+          },
+        );
+
+      const body =
+        await response.json() as
+          unknown;
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`,
+        );
+      }
+
+      setManualRaw(
+        (previous) => [
+          ...previous,
+          body,
+        ],
+      );
+
+      if (
+        isRecord(body) &&
+        "graph" in body
+      ) {
+        setManualGraph(
+          body.graph,
+        );
+      }
+
+      const candidates =
+        findDeep(
+          body,
+          [
+            "text",
+            "message",
+          ],
+        )
+          .map(
+            (value) =>
+              typeof value ===
+                "string"
+                ? value
+                : undefined,
+          )
+          .filter(
+            (
+              value,
+            ): value is string =>
+              Boolean(value),
+          );
+
+      const raiText =
+        candidates.find(
+          (value) =>
+            value.length >
+              3 &&
+            value.length <
+              500,
+        ) ??
+        (
+          isRecord(body) &&
+          isRecord(
+            body.decision,
+          ) &&
+          typeof body.decision
+            .text ===
+            "string"
+            ? body.decision.text
+            : "Respuesta recibida. Consulta Rayos X para ver el detalle."
+        );
+
+      setManualChat(
+        (previous) => [
+          ...previous,
+          {
+            role: "RAI",
+            text:
+              raiText,
+          },
+        ],
+      );
+    } catch (reason) {
+      setError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function resetManual(): void {
+    setManualGraph(
+      undefined,
+    );
+    setManualChat([]);
+    setManualRaw([]);
+    setManualText("");
+  }
+
+  const passCount =
+    Object.values(results)
+      .filter(
+        (result) =>
+          result.status ===
+          "PASS",
+      ).length;
+
+  const failCount =
+    Object.values(results)
+      .filter(
+        (result) =>
+          result.status ===
+            "FAIL" ||
+          result.status ===
+            "ERROR",
+      ).length;
+
+  const reviewedCount =
+    Object.values(reviews)
+      .filter(
+        (review) =>
+          review.status ===
+            "REVIEWED_OK" ||
+          review.status ===
+            "REVIEWED_ISSUE",
+      ).length;
+
+  return (
+    <main className="humanTests">
+      <header className="humanTests__header">
+        <div>
+          <p>
+            RecuerdArte · Human Review
+          </p>
+          <h1>
+            Functional Test Console V2
+          </h1>
+          <span>
+            Prueba Rai como cliente: conversación, regalo, imágenes y resultado final.
+          </span>
+        </div>
+
+        <div className="humanTests__headerActions">
+          <button
+            type="button"
+            className={
+              mode ===
+              "AUTOMATIC"
+                ? "is-primary"
+                : ""
+            }
+            onClick={() =>
+              setMode(
+                "AUTOMATIC",
+              )
+            }
+          >
+            Pruebas guiadas
+          </button>
+
+          <button
+            type="button"
+            className={
+              mode ===
+              "MANUAL"
+                ? "is-primary"
+                : ""
+            }
+            onClick={() =>
+              setMode(
+                "MANUAL",
+              )
+            }
+          >
+            Probar como cliente
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              downloadJson(
+                `functional-review-${new Date().toISOString().replace(/[:.]/gu, "-")}.json`,
+                {
+                  generatedAt:
+                    new Date().toISOString(),
+                  scenarios,
+                  results,
+                  reviews,
+                  manualChat,
+                  manualRaw,
+                },
+              )
+            }
+          >
+            Exportar revisión
+          </button>
+        </div>
+      </header>
+
+      {error ? (
+        <div className="humanTests__error">
+          {error}
+        </div>
+      ) : null}
+
+      {mode === "MANUAL" ? (
+        <section className="manualTest">
+          <header>
+            <div>
+              <span>
+                MODO MANUAL
+              </span>
+              <h2>
+                Habla con Rai como si fueras un cliente
+              </h2>
+              <p>
+                El Conversation Graph se mantiene entre mensajes. Puedes cambiar de idea, dar sólo un número, corregir presupuesto o pedir propuestas.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={
+                resetManual
+              }
+            >
+              Reiniciar prueba manual
+            </button>
+          </header>
+
+          <div className="manualTest__layout">
+            <section className="humanChat humanChat--large">
+              <div className="humanChat__messages">
+                {manualChat.length ? (
+                  manualChat.map(
+                    (
+                      line,
+                      index,
+                    ) => (
+                      <div
+                        key={`${line.role}-${index}`}
+                        className={`humanChat__bubble humanChat__bubble--${line.role.toLowerCase()}`}
+                      >
+                        <span>
+                          {line.role ===
+                          "USER"
+                            ? "Tú"
+                            : line.role ===
+                                "RAI"
+                              ? "Rai"
+                              : "Sistema"}
+                        </span>
+                        <p>
+                          {
+                            line.text
+                          }
+                        </p>
+                      </div>
+                    ),
+                  )
+                ) : (
+                  <div className="humanChat__empty">
+                    Escribe el primer mensaje. Por ejemplo: “Quiero un regalo para mi padre”.
+                  </div>
+                )}
+              </div>
+
+              <div className="humanChat__composer">
+                <input
+                  value={
+                    manualText
+                  }
+                  placeholder="Escribe como cliente…"
+                  onChange={(event) =>
+                    setManualText(
+                      event.target.value,
+                    )
+                  }
+                  onKeyDown={(event) => {
+                    if (
+                      event.key ===
+                      "Enter"
+                    ) {
+                      void sendManual();
+                    }
+                  }}
+                />
+
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() =>
+                    void sendManual()
+                  }
+                >
+                  Enviar
+                </button>
+              </div>
+            </section>
+
+            <aside className="manualTest__tips">
+              <h3>
+                Cosas que conviene probar
+              </h3>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setManualText(
+                    "Quiero un regalo para mi padre",
+                  )
+                }
+              >
+                Destinatario
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setManualText(
+                    "Le encanta el motocross y la madera",
+                  )
+                }
+              >
+                Intereses
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setManualText(
+                    "Unos 90 euros",
+                  )
+                }
+              >
+                Precio objetivo
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setManualText(
+                    "Como máximo 90 euros",
+                  )
+                }
+              >
+                Precio máximo
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setManualText(
+                    "Hacer propuestas",
+                  )
+                }
+              >
+                Proposal Gate
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setManualText(
+                    "No me convence, quiero algo más emotivo",
+                  )
+                }
+              >
+                Cambio de criterio
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setShowTechnical(
+                    !showTechnical,
+                  )
+                }
+              >
+                {showTechnical
+                  ? "Ocultar Rayos X"
+                  : "Ver Rayos X"}
+              </button>
+            </aside>
+          </div>
+
+          {showTechnical ? (
+            <section className="humanTests__technical">
+              <h3>
+                Rayos X de la prueba manual
+              </h3>
+              <pre>
+                {JSON.stringify(
+                  {
+                    graph:
+                      manualGraph,
+                    responses:
+                      manualRaw,
+                  },
+                  null,
+                  2,
+                )}
+              </pre>
+            </section>
+          ) : null}
+        </section>
+      ) : (
+        <>
+          <section className="humanTests__metrics">
+            <article>
+              <span>
+                Escenarios
+              </span>
+              <strong>
+                {
+                  scenarios.length
+                }
+              </strong>
+            </article>
+
+            <article>
+              <span>
+                Automáticamente correctos
+              </span>
+              <strong>
+                {passCount}
+              </strong>
+            </article>
+
+            <article>
+              <span>
+                Con fallos
+              </span>
+              <strong>
+                {failCount}
+              </strong>
+            </article>
+
+            <article>
+              <span>
+                Revisados por ti
+              </span>
+              <strong>
+                {reviewedCount}
+              </strong>
+            </article>
+          </section>
+
+          <div className="humanTests__layout">
+            <aside className="humanTests__sidebar">
+              <div className="humanTests__filters">
+                <select
+                  value={
+                    groupFilter
+                  }
+                  onChange={(event) =>
+                    setGroupFilter(
+                      event.target.value,
+                    )
+                  }
+                >
+                  {groups.map(
+                    (group) => (
+                      <option
+                        key={group}
+                        value={group}
+                      >
+                        {group}
+                      </option>
+                    ),
+                  )}
+                </select>
+
+                <select
+                  value={
+                    statusFilter
+                  }
+                  onChange={(event) =>
+                    setStatusFilter(
+                      event.target.value,
+                    )
+                  }
+                >
+                  <option value="ALL">
+                    Todas
+                  </option>
+                  <option value="PASS">
+                    PASS
+                  </option>
+                  <option value="FAIL">
+                    FAIL / ERROR
+                  </option>
+                  <option value="PENDING">
+                    Pendientes de revisar
+                  </option>
+                  <option value="REVIEWED">
+                    Ya revisadas
+                  </option>
+                </select>
+              </div>
+
+              <div className="humanTests__scenarioList">
+                {visibleScenarios.map(
+                  (
+                    scenario,
+                    index,
+                  ) => {
+                    const result =
+                      results[
+                        scenario.id
+                      ];
+
+                    const review =
+                      reviews[
+                        scenario.id
+                      ];
+
+                    return (
+                      <button
+                        type="button"
+                        key={
+                          scenario.id
+                        }
+                        className={
+                          selectedId ===
+                          scenario.id
+                            ? "is-active"
+                            : ""
+                        }
+                        onClick={() =>
+                          setSelectedId(
+                            scenario.id,
+                          )
+                        }
+                      >
+                        <span>
+                          {index + 1}
+                        </span>
+
+                        <div>
+                          <small>
+                            {
+                              scenario.id
+                            }
+                          </small>
+                          <strong>
+                            {
+                              scenario.title
+                            }
+                          </strong>
+                          <em>
+                            {statusLabel(
+                              result
+                                ?.status,
+                            )}
+                            {review
+                              ? ` · ${statusLabel(review.status)}`
+                              : ""}
+                          </em>
+                        </div>
+                      </button>
+                    );
+                  },
+                )}
+              </div>
+
+              <button
+                type="button"
+                className="humanTests__runAll"
+                disabled={
+                  runningAll ||
+                  busy
+                }
+                onClick={() =>
+                  void runAll()
+                }
+              >
+                {runningAll
+                  ? "Ejecutando toda la batería…"
+                  : "Ejecutar todas automáticamente"}
+              </button>
+            </aside>
+
+            <section className="humanTests__workspace">
+              {selected ? (
+                <>
+                  <header className="humanTests__caseHeader">
+                    <div>
+                      <span>
+                        PRUEBA{" "}
+                        {selectedIndex +
+                          1}{" "}
+                        /{" "}
+                        {
+                          visibleScenarios.length
+                        }
+                      </span>
+
+                      <h2>
+                        {
+                          selected.title
+                        }
+                      </h2>
+
+                      <p>
+                        {
+                          selected.objective
+                        }
+                      </p>
+                    </div>
+
+                    <div>
+                      <button
+                        type="button"
+                        disabled={
+                          selectedIndex <=
+                            0 ||
+                          busy
+                        }
+                        onClick={() =>
+                          move(-1)
+                        }
+                      >
+                        ← Anterior
+                      </button>
+
+                      <button
+                        type="button"
+                        className="is-primary"
+                        disabled={busy}
+                        onClick={() =>
+                          void runScenario(
+                            selected.id,
+                          )
+                        }
+                      >
+                        {busy
+                          ? "Ejecutando…"
+                          : "▶ Ejecutar esta prueba"}
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={
+                          selectedIndex <
+                            0 ||
+                          selectedIndex >=
+                            visibleScenarios.length -
+                              1 ||
+                          busy
+                        }
+                        onClick={() =>
+                          move(1)
+                        }
+                      >
+                        Siguiente →
+                      </button>
+                    </div>
+                  </header>
+
+                  <section className="humanTests__twoColumns">
+                    <article className="humanCard">
+                      <header>
+                        <span>
+                          CONVERSACIÓN
+                        </span>
+                        <h3>
+                          Lo que ve el cliente
+                        </h3>
+                      </header>
+
+                      <div className="humanChat">
+                        {(
+                          presentation
+                            ?.intro ??
+                          []
+                        ).map(
+                          (
+                            line,
+                            index,
+                          ) => (
+                            <div
+                              key={`${line.role}-${index}`}
+                              className={`humanChat__bubble humanChat__bubble--${line.role.toLowerCase()}`}
+                            >
+                              <span>
+                                {line.role ===
+                                "USER"
+                                  ? "Cliente"
+                                  : line.role ===
+                                      "RAI"
+                                    ? "Rai"
+                                    : "Sistema"}
+                              </span>
+                              <p>
+                                {
+                                  line.text
+                                }
+                              </p>
+                            </div>
+                          ),
+                        )}
+
+                        {selectedResult &&
+                        raiLines.length ? (
+                          <div className="humanChat__actual">
+                            <small>
+                              Respuestas detectadas en la ejecución
+                            </small>
+                            {raiLines.map(
+                              (
+                                line,
+                                index,
+                              ) => (
+                                <div
+                                  key={`actual-${index}`}
+                                  className="humanChat__bubble humanChat__bubble--rai"
+                                >
+                                  <span>
+                                    Rai
+                                  </span>
+                                  <p>
+                                    {
+                                      line.text
+                                    }
+                                  </p>
+                                </div>
+                              ),
+                            )}
+                          </div>
+                        ) : null}
+                      </div>
+                    </article>
+
+                    <article className="humanCard">
+                      <header>
+                        <span>
+                          QUÉ DEBE OCURRIR
+                        </span>
+                        <h3>
+                          Resultado esperado
+                        </h3>
+                      </header>
+
+                      <div className="humanExpected">
+                        {expected.map(
+                          (
+                            item,
+                            index,
+                          ) => (
+                            <div
+                              key={`${item.text}-${index}`}
+                              className={
+                                item.pass ===
+                                undefined
+                                  ? ""
+                                  : item.pass
+                                    ? "is-pass"
+                                    : "is-fail"
+                              }
+                            >
+                              <b>
+                                {item.pass ===
+                                undefined
+                                  ? "○"
+                                  : item.pass
+                                    ? "✓"
+                                    : "✕"}
+                              </b>
+                              <span>
+                                {
+                                  item.text
+                                }
+                              </span>
+                            </div>
+                          ),
+                        )}
+                      </div>
+
+                      <div className="humanAutoResult">
+                        <span>
+                          Resultado automático
+                        </span>
+                        <strong
+                          className={
+                            selectedResult
+                              ?.status ===
+                            "PASS"
+                              ? "is-pass"
+                              : selectedResult
+                                  ? "is-fail"
+                                  : ""
+                          }
+                        >
+                          {selectedResult
+                            ? statusLabel(
+                                selectedResult.status,
+                              )
+                            : "SIN EJECUTAR"}
+                        </strong>
+                      </div>
+                    </article>
+                  </section>
+
+                  {budget.target !==
+                  undefined ? (
+                    <section className="humanCard humanBudget">
+                      <header>
+                        <span>
+                          PRECIO
+                        </span>
+                        <h3>
+                          Cómo está interpretando Rai el gasto
+                        </h3>
+                      </header>
+
+                      <div className="humanBudget__grid">
+                        <article>
+                          <span>
+                            Objetivo
+                          </span>
+                          <strong>
+                            {
+                              budget.target
+                            }{" "}
+                            €
+                          </strong>
+                        </article>
+
+                        <article>
+                          <span>
+                            Rango ideal
+                          </span>
+                          <strong>
+                            {
+                              budget.idealMin
+                            }{" "}
+                            –{" "}
+                            {
+                              budget.idealMax
+                            }{" "}
+                            €
+                          </strong>
+                        </article>
+
+                        <article>
+                          <span>
+                            Rango aceptable
+                          </span>
+                          <strong>
+                            {
+                              budget.acceptableMin
+                            }{" "}
+                            –{" "}
+                            {
+                              budget.acceptableMax
+                            }{" "}
+                            €
+                          </strong>
+                        </article>
+
+                        <article>
+                          <span>
+                            Tipo
+                          </span>
+                          <strong>
+                            {budget.type ===
+                            "TARGET"
+                              ? "PRECIO OBJETIVO"
+                              : budget.type}
+                          </strong>
+                        </article>
+                      </div>
+
+                      <p className="humanBudget__note">
+                        Esta visualización ya usa la nueva lógica de revisión (±10% ideal y hasta -30% / +20% aceptable). La lógica definitiva de BudgetIntent debe integrarse también en backend para que el ranking use estos rangos.
+                      </p>
+                    </section>
+                  ) : null}
+
+                  <section className="humanCard">
+                    <header>
+                      <span>
+                        REGALO FINAL
+                      </span>
+                      <h3>
+                        Producto o lote seleccionado
+                      </h3>
+                    </header>
+
+                    {proposal ? (
+                      <div className="giftProposal">
+                        <div className="giftProposal__intro">
+                          <div>
+                            <h2>
+                              {
+                                proposal.title
+                              }
+                            </h2>
+
+                            {proposal.subtitle ? (
+                              <p>
+                                {
+                                  proposal.subtitle
+                                }
+                              </p>
+                            ) : null}
+
+                            {proposal.story ? (
+                              <blockquote>
+                                {
+                                  proposal.story
+                                }
+                              </blockquote>
+                            ) : null}
+                          </div>
+
+                          {proposal.price !==
+                          undefined ? (
+                            <strong>
+                              {
+                                proposal.price.toFixed(
+                                  2,
+                                )
+                              }{" "}
+                              €
+                            </strong>
+                          ) : null}
+                        </div>
+
+                        <div className="giftProposal__products">
+                          {proposal.products.map(
+                            (
+                              product,
+                              index,
+                            ) => (
+                              <article
+                                key={`${product.id ?? product.name}-${index}`}
+                              >
+                                <div className="giftProposal__image">
+                                  {product.imageUrl ? (
+                                    <img
+                                      src={
+                                        product.imageUrl
+                                      }
+                                      alt={
+                                        product.name
+                                      }
+                                    />
+                                  ) : (
+                                    <span>
+                                      Sin imagen
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div>
+                                  <small>
+                                    {product.role ??
+                                      `Artículo ${index + 1}`}
+                                  </small>
+                                  <h4>
+                                    {
+                                      product.name
+                                    }
+                                  </h4>
+
+                                  {product.price !==
+                                  undefined ? (
+                                    <strong>
+                                      {
+                                        product.price.toFixed(
+                                          2,
+                                        )
+                                      }{" "}
+                                      €
+                                    </strong>
+                                  ) : null}
+
+                                  {product.reasons.length ? (
+                                    <ul>
+                                      {product.reasons.map(
+                                        (
+                                          reason,
+                                        ) => (
+                                          <li
+                                            key={
+                                              reason
+                                            }
+                                          >
+                                            {
+                                              reason
+                                            }
+                                          </li>
+                                        ),
+                                      )}
+                                    </ul>
+                                  ) : null}
+                                </div>
+                              </article>
+                            ),
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="humanPlaceholder">
+                        {selectedResult
+                          ? "Esta prueba no ha devuelto todavía una ficha de producto/lote reconocible."
+                          : "Ejecuta la prueba. Si genera una propuesta, aquí aparecerá la ficha del producto o lote."}
+                      </div>
+                    )}
+                  </section>
+
+                  <section className="humanCard visualReview">
+                    <header>
+                      <span>
+                        PROCESO VISUAL
+                      </span>
+                      <h3>
+                        Imágenes, mockups y resultado final
+                      </h3>
+                    </header>
+
+                    {imageUrls.length ? (
+                      <div className="visualReview__gallery">
+                        {imageUrls.map(
+                          (
+                            url,
+                            index,
+                          ) => (
+                            <figure
+                              key={
+                                url
+                              }
+                            >
+                              <div>
+                                <img
+                                  src={
+                                    url
+                                  }
+                                  alt={`Imagen de prueba ${index + 1}`}
+                                />
+                              </div>
+                              <figcaption>
+                                {index ===
+                                imageUrls.length -
+                                  1
+                                  ? "Resultado visual más reciente"
+                                  : `Imagen ${index + 1}`}
+                              </figcaption>
+                            </figure>
+                          ),
+                        )}
+                      </div>
+                    ) : (
+                      <div className="humanPlaceholder humanPlaceholder--visual">
+                        <strong>
+                          Todavía no hay imágenes generadas en esta prueba.
+                        </strong>
+                        <p>
+                          Cuando Image/Mockup Pipeline devuelva imageUrl, generatedImageUrl, mockupUrl, finalImageUrl o galerías, aparecerán aquí automáticamente.
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="visualReview__checks">
+                      <span>
+                        Revisión visual:
+                      </span>
+
+                      {[
+                        "Correcto",
+                        "Diseño mal colocado",
+                        "Escala incorrecta",
+                        "Producto deformado",
+                        "Imagen incorrecta",
+                        "Baja calidad",
+                        "Falta una imagen",
+                        "Imágenes duplicadas",
+                      ].map(
+                        (issue) => (
+                          <button
+                            type="button"
+                            key={
+                              issue
+                            }
+                            className={
+                              visualIssue ===
+                              issue
+                                ? "is-selected"
+                                : ""
+                            }
+                            onClick={() =>
+                              setVisualIssue(
+                                issue,
+                              )
+                            }
+                          >
+                            {
+                              issue
+                            }
+                          </button>
+                        ),
+                      )}
+                    </div>
+                  </section>
+
+                  <section className="humanCard humanReview">
+                    <header>
+                      <div>
+                        <span>
+                          TU REVISIÓN
+                        </span>
+                        <h3>
+                          ¿El comportamiento de Rai es correcto?
+                        </h3>
+                      </div>
+
+                      <strong>
+                        {statusLabel(
+                          selectedReview
+                            ?.status,
+                        )}
+                      </strong>
+                    </header>
+
+                    <textarea
+                      value={note}
+                      placeholder="Escribe aquí lo que te llame la atención. No necesitas usar términos técnicos."
+                      onChange={(event) =>
+                        setNote(
+                          event.target.value,
+                        )
+                      }
+                    />
+
+                    <div className="humanReview__actions">
+                      <button
+                        type="button"
+                        className="is-success"
+                        disabled={busy}
+                        onClick={() =>
+                          void saveReview(
+                            "REVIEWED_OK",
+                          )
+                        }
+                      >
+                        ✓ Todo correcto
+                      </button>
+
+                      <button
+                        type="button"
+                        className="is-danger"
+                        disabled={busy}
+                        onClick={() =>
+                          void saveReview(
+                            "REVIEWED_ISSUE",
+                          )
+                        }
+                      >
+                        ! Hay una incidencia
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={busy}
+                        onClick={() =>
+                          void saveReview(
+                            "PENDING",
+                          )
+                        }
+                      >
+                        Dejar pendiente
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setShowTechnical(
+                            !showTechnical,
+                          )
+                        }
+                      >
+                        {showTechnical
+                          ? "Ocultar Rayos X"
+                          : "Ver detalles técnicos"}
+                      </button>
+                    </div>
+                  </section>
+
+                  {showTechnical &&
+                  selectedResult ? (
+                    <section className="humanTests__technical">
+                      <h3>
+                        Rayos X
+                      </h3>
+
+                      {selectedResult.steps.map(
+                        (
+                          step,
+                          index,
+                        ) => (
+                          <details
+                            key={`${step.name}-${index}`}
+                          >
+                            <summary>
+                              Paso{" "}
+                              {index +
+                                1}{" "}
+                              ·{" "}
+                              {
+                                step.name
+                              }{" "}
+                              · HTTP{" "}
+                              {
+                                step.statusCode
+                              }
+                            </summary>
+
+                            <div className="humanTests__jsonPair">
+                              <div>
+                                <h4>
+                                  Request
+                                </h4>
+                                <pre>
+                                  {JSON.stringify(
+                                    step.requestBody ??
+                                      null,
+                                    null,
+                                    2,
+                                  )}
+                                </pre>
+                              </div>
+
+                              <div>
+                                <h4>
+                                  Response
+                                </h4>
+                                <pre>
+                                  {JSON.stringify(
+                                    step.responseBody ??
+                                      null,
+                                    null,
+                                    2,
+                                  )}
+                                </pre>
+                              </div>
+                            </div>
+                          </details>
+                        ),
+                      )}
+                    </section>
+                  ) : null}
+                </>
+              ) : (
+                <p>
+                  Cargando pruebas…
+                </p>
+              )}
+            </section>
+          </div>
+        </>
+      )}
+    </main>
+  );
+}

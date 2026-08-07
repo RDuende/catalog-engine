@@ -75,6 +75,47 @@ function extractNumber(pattern: RegExp, value: string): number | undefined {
   return Number.isFinite(parsed) ? parsed : undefined;
 }
 
+const EXPLICIT_INTEREST_PATTERNS: readonly {
+  readonly value: string;
+  readonly pattern: RegExp;
+}[] = Object.freeze([
+  { value: "motocross", pattern: /\bmotocross\b/i },
+  { value: "fútbol", pattern: /\b(?:futbol|fútbol)\b/i },
+  { value: "madera", pattern: /\bmadera\b/i },
+  { value: "barcos", pattern: /\b(?:barco|barcos|navegacion|navegación)\b/i },
+  { value: "monte", pattern: /\b(?:monte|senderismo|rutas?)\b/i },
+  { value: "motos", pattern: /\b(?:moto|motos|motocicleta|motocicletas)\b/i },
+  { value: "coches", pattern: /\b(?:coche|coches|automovil|automóvil)\b/i },
+  { value: "música", pattern: /\b(?:musica|música)\b/i },
+  { value: "viajes", pattern: /\b(?:viaje|viajes|viajar)\b/i },
+]);
+
+function mergeExplicitInterestsIntoState(
+  state: RaiConversationState,
+  message: string,
+): RaiConversationState {
+  const interests = [...(state.interests ?? [])];
+  const known = new Set(interests.map((item) => normalize(item)));
+
+  for (const entry of EXPLICIT_INTEREST_PATTERNS) {
+    if (!entry.pattern.test(message)) continue;
+
+    const key = normalize(entry.value);
+    if (known.has(key)) continue;
+
+    interests.push(entry.value);
+    known.add(key);
+  }
+
+  return {
+    ...state,
+    interests,
+    personalization: {
+      ...state.personalization,
+    },
+  };
+}
+
 function mergeMessageIntoState(state: RaiConversationState, message: string): RaiConversationState {
   const next: RaiConversationState = {
     ...state,
@@ -82,7 +123,10 @@ function mergeMessageIntoState(state: RaiConversationState, message: string): Ra
   };
   const plain = normalize(message);
 
-  const budget = extractNumber(/(?:presupuesto|hasta|unos?|de)?\s*(\d+(?:[.,]\d{1,2})?)\s*€/i, message);
+  const budget = extractNumber(
+    /(?:presupuesto|hasta|unos?|de|sobre|aproximadamente)?\s*(\d+(?:[.,]\d{1,2})?)\s*(?:€|euros?)/i,
+    message,
+  );
   if (budget != null) next.budget = budget;
 
   const age = extractNumber(/(?:de|tiene|cumple)\s+(\d{1,3})\s*(?:anos|años)/i, plain);
@@ -122,7 +166,7 @@ function mergeMessageIntoState(state: RaiConversationState, message: string): Ra
   else if (/graduacion/i.test(plain)) next.occasion = "graduación";
   else if (/boda/i.test(plain)) next.occasion = "boda";
 
-  return next;
+  return mergeExplicitInterestsIntoState(next, message);
 }
 
 function mergeExtractedPatch(state: RaiConversationState, patch: RaiStatePatch): RaiConversationState {
@@ -166,7 +210,6 @@ function selectCandidateFromMessage(message: string, candidates: ProductCandidat
 
   const plain = normalize(message).trim();
 
-  // Selección ordinal explícita: «la segunda», «opción 3», etc.
   const ordinalMatch = plain.match(/\b(?:opcion\s*)?(1|2|3|primero|primera|segundo|segunda|tercero|tercera)\b/i);
   if (ordinalMatch) {
     const ordinal = ordinalMatch[1] ?? "";
@@ -176,8 +219,6 @@ function selectCandidateFromMessage(message: string, candidates: ProductCandidat
     return candidates[index];
   }
 
-  // Una coincidencia temática («cumpleaños») nunca constituye una elección.
-  // Exigimos una expresión explícita de selección antes de buscar el producto citado.
   if (!SELECTION_CUE.test(plain)) return undefined;
 
   const messageWords = plain
@@ -205,7 +246,6 @@ function shouldSearchCatalog(session: RaiSession, message: string): boolean {
   if (session.state.selectedProduct) return false;
   return session.lastCandidates.length === 0 || message.length > 20;
 }
-
 
 function nextMissingField(state: RaiConversationState): "recipient" | "occasion" | "budget" | "personalization" | null {
   if (!state.recipient && !state.recipientName) return "recipient";
@@ -350,20 +390,66 @@ export class RaiAgentService {
         instructions,
         input,
         store: true,
-        max_output_tokens: 350,
-        reasoning: { effort: "low" },
+        max_output_tokens: 1200,
+        reasoning: { effort: "minimal" },
         text: { verbosity: "low" },
       };
       if (session.previousResponseId) request.previous_response_id = session.previousResponseId;
 
-      mark("openai_request_started", { round: 0, model: env.openAiModel, candidateCount: products.length });
-      const response: any = await this.client.create(request);
-      mark("openai_response_received", {
-        round: 0, responseId: response.id, outputTypes: (response.output ?? []).map((item: any) => item.type),
+      mark("openai_request_started", {
+        round: 0,
+        model: env.openAiModel,
+        candidateCount: products.length,
       });
 
-      const reply = extractOutputText(response);
-      if (!reply) throw new Error("OpenAI devolvió una respuesta sin texto visible.");
+      let response: any = await this.client.create(request);
+
+      mark("openai_response_received", {
+        round: 0,
+        responseId: response.id,
+        outputTypes: (response.output ?? []).map((item: any) => item.type),
+        usage: response.usage ?? null,
+      });
+
+      let reply = extractOutputText(response);
+
+      if (!reply) {
+        mark("openai_empty_text_retry", {
+          responseId: response.id,
+          outputTypes: (response.output ?? []).map((item: any) => item.type),
+          usage: response.usage ?? null,
+        });
+
+        const retryRequest: Record<string, unknown> = {
+          ...request,
+          max_output_tokens: 2200,
+          reasoning: { effort: "minimal" },
+        };
+
+        delete retryRequest.previous_response_id;
+
+        mark("openai_request_started", {
+          round: 1,
+          model: env.openAiModel,
+          candidateCount: products.length,
+          reason: "empty_visible_output",
+        });
+
+        response = await this.client.create(retryRequest);
+
+        mark("openai_response_received", {
+          round: 1,
+          responseId: response.id,
+          outputTypes: (response.output ?? []).map((item: any) => item.type),
+          usage: response.usage ?? null,
+        });
+
+        reply = extractOutputText(response);
+      }
+
+      if (!reply) {
+        throw new Error("OpenAI devolvió una respuesta sin texto visible después del reintento.");
+      }
 
       sessions.set(sessionId, {
         previousResponseId: response.id,

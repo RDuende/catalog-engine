@@ -1,0 +1,25 @@
+{
+  "id": "60d51acb-d9cf-4e39-84d0-b5bb7ed3d877",
+  "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+  "status": "DRAFT",
+  "lines": [
+    {
+      "productId": "canvas-30x40",
+      "sku": "DEC-CAN-3040",
+      "name": "Lienzo 30 × 40 cm",
+      "quantity": 1,
+      "unitPrice": 29,
+      "lineTotal": 29,
+      "currency": "EUR"
+    }
+  ],
+  "totals": {
+    "subtotal": 29,
+    "shipping": 4.95,
+    "tax": 0,
+    "total": 33.95,
+    "currency": "EUR"
+  },
+  "createdAt": "2026-08-02T16:59:46.942Z",
+  "updatedAt": "2026-08-02T16:59:46.942Z"
+}

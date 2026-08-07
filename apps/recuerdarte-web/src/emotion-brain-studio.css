@@ -1,0 +1,190 @@
+.emotionStudio {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f3f2ee;
+  color: #242420;
+  font-family: Inter, system-ui, sans-serif;
+}
+.emotionStudio__header,
+.emotionStudio__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.emotionStudio__header {
+  margin-bottom: 18px;
+}
+.emotionStudio__header h1 {
+  margin: 4px 0 6px;
+}
+.emotionStudio__header p {
+  margin: 0;
+  color: #77766f;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.emotionStudio__actions {
+  flex-wrap: wrap;
+}
+.emotionStudio button,
+.emotionStudio a {
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background: white;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.emotionStudio__layout {
+  display: grid;
+  grid-template-columns: 350px minmax(0, 1fr);
+  gap: 16px;
+}
+.emotionStudio__input,
+.emotionStudio__workspace > section {
+  border: 1px solid #deddd7;
+  border-radius: 14px;
+  background: white;
+}
+.emotionStudio__input {
+  align-self: start;
+  padding: 16px;
+}
+.emotionStudio__input textarea {
+  width: 100%;
+  min-height: 620px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 12px;
+  resize: vertical;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+}
+.emotionStudio__summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+  border: 0 !important;
+  background: transparent !important;
+}
+.emotionStudio__summary article {
+  border: 1px solid #deddd7;
+  border-radius: 11px;
+  padding: 12px;
+  background: white;
+}
+.emotionStudio__summary span {
+  display: block;
+  color: #77766f;
+  font-size: 11px;
+}
+.emotionStudio__summary strong {
+  font-size: 18px;
+}
+.emotionStudio__decision,
+.emotionStudio__weights,
+.emotionStudio__evidence,
+.emotionStudio__matrix,
+.emotionStudio__xray {
+  margin-bottom: 12px;
+  padding: 16px;
+}
+.emotionStudio__decision {
+  background: #e9f5e8 !important;
+}
+.emotionStudio__weights,
+.emotionStudio__matrix {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+}
+.emotionStudio__weights h2,
+.emotionStudio__matrix h2 {
+  grid-column: 1 / -1;
+}
+.emotionStudio__weights article,
+.emotionStudio__matrix article {
+  border-radius: 9px;
+  padding: 10px;
+  background: #efeee8;
+}
+.emotionStudio__weights span,
+.emotionStudio__matrix span {
+  display: block;
+  font-size: 11px;
+}
+.emotionStudio progress {
+  width: 100%;
+}
+.emotionStudio__evidence article {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #ebeae4;
+  padding: 10px 0;
+}
+.emotionStudio__evidence span {
+  color: #77766f;
+  font-size: 11px;
+}
+.emotionStudio__evidence p {
+  margin: 4px 0 0;
+}
+.emotionStudio__xray > article {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #ebeae4;
+}
+.emotionStudio__xray > article > span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: #242420;
+  color: white;
+}
+.emotionStudio pre {
+  max-height: 420px;
+  overflow: auto;
+  border-radius: 9px;
+  padding: 12px;
+  background: #20211e;
+  color: #edf0e7;
+  white-space: pre-wrap;
+  font: 11px/1.45 ui-monospace, Consolas, monospace;
+}
+.emotionStudio__error {
+  margin-bottom: 12px;
+  border: 1px solid #e3aaa7;
+  border-radius: 9px;
+  padding: 10px;
+  background: #fff0ef;
+}
+@media (max-width: 1000px) {
+  .emotionStudio__layout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .emotionStudio {
+    padding: 12px;
+  }
+  .emotionStudio__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .emotionStudio__summary,
+  .emotionStudio__weights,
+  .emotionStudio__matrix {
+    grid-template-columns: 1fr 1fr;
+  }
+}

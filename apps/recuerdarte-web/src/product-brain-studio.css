@@ -1,0 +1,523 @@
+.pbs {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f3f2ee;
+  color: #242420;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.pbsHeader,
+.pbsSearch,
+.pbsProductHeader,
+.pbsTabs,
+.pbsHeader__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pbsHeader {
+  margin-bottom: 20px;
+}
+
+.pbsHeader h1 {
+  margin: 4px 0 6px;
+}
+
+.pbsHeader p,
+.pbsProductHeader p {
+  margin: 0;
+  color: #77766f;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.pbsHeader__actions {
+  flex-wrap: wrap;
+}
+
+.pbs button,
+.pbs a,
+.pbs input {
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background: white;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pbs button {
+  cursor: pointer;
+}
+
+.pbs button:hover,
+.pbs a:hover,
+.pbs button.is-active {
+  border-color: #242420;
+}
+
+.pbsStats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.pbsStats article {
+  border: 1px solid #deddd7;
+  border-radius: 12px;
+  padding: 14px;
+  background: white;
+}
+
+.pbsStats span {
+  display: block;
+  color: #77766f;
+  font-size: 12px;
+}
+
+.pbsStats strong {
+  font-size: 25px;
+}
+
+.pbsSearch {
+  justify-content: flex-start;
+  margin-bottom: 15px;
+  border: 1px solid #deddd7;
+  border-radius: 12px;
+  padding: 10px;
+  background: white;
+}
+
+.pbsSearch > input:first-child {
+  flex: 1;
+  min-width: 220px;
+}
+
+.pbsSearch label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.pbsLayout {
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr) 270px;
+  gap: 14px;
+}
+
+.pbsResults,
+.pbsDetail,
+.pbsCoverage {
+  border: 1px solid #deddd7;
+  border-radius: 14px;
+  background: white;
+  overflow: hidden;
+}
+
+.pbsResults {
+  max-height: calc(100vh - 260px);
+  overflow: auto;
+}
+
+.pbsResults header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 12px;
+  background: white;
+  border-bottom: 1px solid #ebeae4;
+}
+
+.pbsResults button {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #ebeae4;
+  text-align: left;
+}
+
+.pbsResults button.is-active {
+  background: #efeee8;
+}
+
+.pbsResults span,
+.pbsResults small {
+  color: #77766f;
+  font-size: 11px;
+}
+
+.pbsDetail {
+  padding: 18px;
+}
+
+.pbsProductHeader {
+  align-items: flex-start;
+}
+
+.pbsProductHeader h2 {
+  margin: 5px 0;
+}
+
+.pbsProductHeader > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.pbsTabs {
+  justify-content: flex-start;
+  margin: 18px 0;
+  border-bottom: 1px solid #deddd7;
+}
+
+.pbsTabs button {
+  border: 0;
+  border-radius: 0;
+}
+
+.pbsTabs button.is-active {
+  border-bottom: 2px solid #242420;
+}
+
+.pbsProfileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.pbsProfileGrid section {
+  border: 1px solid #e3e2dc;
+  border-radius: 11px;
+  padding: 13px;
+}
+
+.pbsProfileGrid h3,
+.pbsCoverage h2,
+.pbsCoverage h3 {
+  margin-top: 0;
+}
+
+.pbsChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pbsChips span {
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: #ecebe5;
+  font-size: 12px;
+}
+
+.pbsWarnings {
+  grid-column: 1 / -1;
+}
+
+.pbsWarnings article {
+  margin-top: 7px;
+  border-left: 3px solid #d7b258;
+  padding: 7px 10px;
+  background: #fff8e3;
+}
+
+.pbsWarnings article p {
+  margin: 4px 0 0;
+}
+
+.pbsCodeView pre,
+.pbsXray pre {
+  max-height: 520px;
+  overflow: auto;
+  border-radius: 9px;
+  padding: 12px;
+  background: #1f201d;
+  color: #eef0e8;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.pbsXray > article {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 10px;
+}
+
+.pbsXray > article > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pbsXray > article > div span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: #242420;
+  color: white;
+}
+
+.pbsXray > article > div i {
+  flex: 1;
+  width: 1px;
+  background: #cfcec7;
+}
+
+.pbsXray > article > section {
+  margin-bottom: 12px;
+  border: 1px solid #e0dfd9;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.pbsXray header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pbsXray h3 {
+  margin: 0;
+}
+
+.pbsXray b {
+  border-radius: 999px;
+  padding: 5px 8px;
+  font-size: 11px;
+}
+
+.pbsXray b.PASS {
+  background: #dff5df;
+}
+
+.pbsXray b.WARNING {
+  background: #fff0c9;
+}
+
+.pbsCoverage {
+  align-self: start;
+  max-height: calc(100vh - 260px);
+  overflow: auto;
+  padding: 14px;
+}
+
+.pbsCoverage section {
+  margin-bottom: 18px;
+}
+
+.pbsCoverage section div {
+  display: grid;
+  grid-template-columns: 95px 1fr 35px;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 7px;
+  font-size: 12px;
+}
+
+.pbsCoverage progress {
+  width: 100%;
+}
+
+.pbsCoverage small {
+  word-break: break-all;
+  color: #77766f;
+}
+
+.pbsError {
+  margin-bottom: 12px;
+  border: 1px solid #e3aaa7;
+  border-radius: 9px;
+  padding: 10px;
+  background: #fff0ef;
+}
+
+.pbsEmpty {
+  padding: 50px;
+  text-align: center;
+  color: #77766f;
+}
+
+@media (max-width: 1200px) {
+  .pbsLayout {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+
+  .pbsCoverage {
+    grid-column: 1 / -1;
+    max-height: none;
+  }
+}
+
+@media (max-width: 820px) {
+  .pbs {
+    padding: 12px;
+  }
+
+  .pbsHeader,
+  .pbsSearch,
+  .pbsProductHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .pbsStats,
+  .pbsLayout,
+  .pbsProfileGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .pbsResults {
+    max-height: 350px;
+  }
+
+  .pbsWarnings {
+    grid-column: auto;
+  }
+}
+
+
+.pbsGallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 92px;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.pbsGallery__main {
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid #deddd7;
+  border-radius: 12px;
+  background:
+    linear-gradient(45deg, #f2f1ec 25%, transparent 25%),
+    linear-gradient(-45deg, #f2f1ec 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f2f1ec 75%),
+    linear-gradient(-45deg, transparent 75%, #f2f1ec 75%);
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  background-size: 16px 16px;
+}
+
+.pbsGallery__main img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  background: white;
+}
+
+.pbsGallery__empty {
+  color: #77766f;
+  font-size: 14px;
+}
+
+.pbsGallery__thumbs {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+.pbsGallery__thumbs button {
+  width: 100%;
+  height: 78px;
+  padding: 3px;
+  overflow: hidden;
+  background: white;
+}
+
+.pbsGallery__thumbs button.is-active {
+  border: 2px solid #242420;
+}
+
+.pbsGallery__thumbs img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 820px) {
+  .pbsGallery {
+    grid-template-columns: 1fr;
+  }
+
+  .pbsGallery__main {
+    min-height: 260px;
+  }
+
+  .pbsGallery__thumbs {
+    display: flex;
+    max-height: none;
+    overflow-x: auto;
+  }
+
+  .pbsGallery__thumbs button {
+    min-width: 82px;
+  }
+}
+
+
+.pbsGallery__empty {
+  display: grid;
+  gap: 7px;
+  max-width: 320px;
+  padding: 30px;
+  text-align: center;
+}
+
+.pbsGallery__empty strong {
+  color: #3f3e39;
+}
+
+.pbsGallery__empty span {
+  color: #77766f;
+  font-size: 12px;
+}
+
+.pbsImageDiagnostics {
+  margin-bottom: 16px;
+  border: 1px solid #deddd7;
+  border-radius: 10px;
+  padding: 14px;
+  background: white;
+}
+.pbsImageDiagnostics > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+.pbsImageDiagnostics > div span {
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: #ecebe5;
+  font-size: 12px;
+}
+.pbsImageDiagnostics table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.pbsImageDiagnostics th,
+.pbsImageDiagnostics td {
+  border-bottom: 1px solid #ebeae4;
+  padding: 7px;
+  text-align: left;
+}

@@ -7,6 +7,9 @@ import { JobStore, jobStore } from "./job-store.js";
 interface InternalJob<TResult = unknown> {
   record: JobRecord<TResult>;
   controller: AbortController;
+  pipeline: PipelineDefinition<unknown, unknown>;
+  input: unknown;
+  runGeneration: number;
   run: () => Promise<void>;
 }
 
@@ -43,13 +46,16 @@ export class JobManager {
       status: "QUEUED",
       progress: { step: "queued", completed: 0, total: pipeline.stages.length, percent: 0 },
       createdAt: new Date().toISOString(),
-      metadata: options.metadata ?? {},
+      metadata: { ...(options.metadata ?? {}), resumable: true },
     };
 
     const internal: InternalJob<TResult> = {
       record,
       controller,
-      run: async () => this.executeJob(pipeline, options.input, internal),
+      pipeline: pipeline as PipelineDefinition<unknown, unknown>,
+      input: options.input,
+      runGeneration: 0,
+      run: async () => this.executeJob(pipeline, options.input, internal, 0, controller),
     };
     this.jobs.set(id, internal as InternalJob);
     void this.store.save(record).catch(() => undefined);
@@ -74,6 +80,56 @@ export class JobManager {
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
       .slice(0, limit)
       .map(job => structuredClone(job));
+  }
+
+
+  async pause(id: string): Promise<JobRecord | undefined> {
+    const job = this.jobs.get(id);
+    if (!job || ["COMPLETED", "FAILED", "CANCELLED", "PAUSED"].includes(job.record.status)) {
+      return job ? structuredClone(job.record) : undefined;
+    }
+    job.record.metadata = {
+      ...job.record.metadata,
+      checkpoint: {
+        step: job.record.progress.step,
+        completed: job.record.progress.completed,
+        total: job.record.progress.total,
+        pausedAt: new Date().toISOString(),
+      },
+    };
+    job.record.status = "PAUSED";
+    job.record.progress.message = "Importación pausada. Al reanudar se comprobarán y omitirán los elementos ya completados.";
+    const queueIndex = this.queue.indexOf(id);
+    if (queueIndex >= 0) this.queue.splice(queueIndex, 1);
+    job.controller.abort();
+    await this.events.emit("JobPaused", { checkpoint: job.record.metadata.checkpoint }, id);
+    await this.store.save(job.record);
+    return structuredClone(job.record);
+  }
+
+  async resume(id: string): Promise<JobRecord | undefined> {
+    const job = this.jobs.get(id);
+    if (!job || job.record.status !== "PAUSED") return job ? structuredClone(job.record) : undefined;
+    job.controller = new AbortController();
+    job.runGeneration += 1;
+    job.record.status = "QUEUED";
+    job.record.finishedAt = undefined;
+    job.record.progress.message = "Reanudación en cola. El pipeline es incremental y omitirá productos, clasificaciones e imágenes ya completados.";
+    job.record.metadata = {
+      ...job.record.metadata,
+      resumedAt: new Date().toISOString(),
+      resumeCount: Number(job.record.metadata.resumeCount ?? 0) + 1,
+    };
+    const pipeline = job.pipeline;
+    const input = job.input;
+    const generation = job.runGeneration;
+    const controller = job.controller;
+    job.run = async () => this.executeJob(pipeline, input, job, generation, controller);
+    this.queue.push(id);
+    await this.events.emit("JobResumed", { resumeCount: job.record.metadata.resumeCount }, id);
+    await this.store.save(job.record);
+    queueMicrotask(() => void this.drain());
+    return structuredClone(job.record);
   }
 
   async cancel(id: string): Promise<JobRecord | undefined> {
@@ -108,10 +164,12 @@ export class JobManager {
     pipeline: PipelineDefinition<TInput, TResult>,
     input: TInput,
     job: InternalJob<TResult>,
+    generation: number,
+    controller: AbortController,
   ): Promise<void> {
     const id = job.record.id;
     job.record.status = "RUNNING";
-    job.record.startedAt = new Date().toISOString();
+    job.record.startedAt ??= new Date().toISOString();
     await this.events.emit("JobStarted", { type: job.record.type, provider: job.record.provider }, id);
     await this.store.save(job.record);
 
@@ -119,13 +177,21 @@ export class JobManager {
       jobId: id,
       input,
       data: new Map<string, unknown>(),
-      signal: job.controller.signal,
-      reportProgress: progress => this.updateProgress(job.record, progress),
+      signal: controller.signal,
+      reportProgress: progress => {
+        if (job.runGeneration === generation && job.record.status === "RUNNING") {
+          this.updateProgress(job.record, progress);
+        }
+      },
     };
 
     try {
       const result = await this.pipelineEngine.execute(pipeline, context);
-      if (!job.controller.signal.aborted) {
+      if (
+        !controller.signal.aborted &&
+        job.runGeneration === generation &&
+        job.record.status === "RUNNING"
+      ) {
         const completedRecord: JobRecord<TResult> = {
           ...structuredClone(job.record),
           result,
@@ -137,7 +203,11 @@ export class JobManager {
         job.record = completedRecord;
       }
     } catch (error) {
-      if (!job.controller.signal.aborted) {
+      if (
+        !controller.signal.aborted &&
+        job.runGeneration === generation &&
+        job.record.status === "RUNNING"
+      ) {
         const failure = {
           name: error instanceof Error ? error.name : "Error",
           message: error instanceof Error ? error.message : String(error),

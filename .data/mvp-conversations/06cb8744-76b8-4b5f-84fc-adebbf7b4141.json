@@ -1,0 +1,124 @@
+{
+  "id": "06cb8744-76b8-4b5f-84fc-adebbf7b4141",
+  "journeyId": "008cdf26-89e2-4a0e-8570-407027927b85",
+  "journey": {
+    "id": "008cdf26-89e2-4a0e-8570-407027927b85",
+    "type": "GIFT",
+    "status": "DISCOVERING",
+    "version": 9,
+    "sessionId": "06cb8744-76b8-4b5f-84fc-adebbf7b4141",
+    "participants": [],
+    "facts": [
+      {
+        "key": "recipient.relationship",
+        "value": "sibling",
+        "confidence": 0.95,
+        "source": "CONVERSATION",
+        "evidence": "sibling",
+        "createdAt": "2026-08-02T15:41:14.272Z",
+        "updatedAt": "2026-08-02T15:41:14.272Z"
+      },
+      {
+        "key": "occasion.type",
+        "value": "wedding",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "wedding",
+        "createdAt": "2026-08-02T15:41:14.272Z",
+        "updatedAt": "2026-08-02T15:41:14.272Z"
+      },
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T15:41:14.272Z",
+        "updatedAt": "2026-08-02T15:41:14.272Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:41:14.272Z",
+        "updatedAt": "2026-08-02T15:41:14.272Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.67,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:41:14.272Z",
+        "updatedAt": "2026-08-02T15:41:14.272Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.scope",
+          "profileVersion": "v1",
+          "score": 0,
+          "requiredScore": 0,
+          "recommendedScore": 100,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [],
+          "missingRequired": [
+            "gift.scope"
+          ],
+          "missingRecommended": [],
+          "requirements": [
+            {
+              "key": "gift.scope",
+              "label": "Tipo de búsqueda",
+              "level": "REQUIRED",
+              "weight": 100,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T15:41:14.273Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:41:14.273Z",
+        "updatedAt": "2026-08-02T15:41:14.273Z"
+      },
+      {
+        "key": "conversation.pending_fact",
+        "value": "gift.scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:41:14.273Z",
+        "updatedAt": "2026-08-02T15:41:14.273Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T15:41:14.271Z",
+    "updatedAt": "2026-08-02T15:41:14.273Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "9d63d1de-770e-4309-bafc-cde29defec88",
+    "accessKeyHash": "9a092780ac5d512b9c5d34f1dbf2e0de3428895d754a23f9cce7e6de858d911a",
+    "createdAt": "2026-08-02T15:41:14.270Z"
+  },
+  "messages": [
+    {
+      "id": "8149f2cd-6782-4e84-9a0f-c098c3b14e7b",
+      "role": "USER",
+      "text": "una regalo para la boda demi hermano",
+      "createdAt": "2026-08-02T15:41:14.270Z"
+    },
+    {
+      "id": "4b385646-9910-475b-8326-e22d5eacd750",
+      "role": "RAI",
+      "text": "¿Buscas una idea de regalo genérica o quieres crear algo para alguien en particular?",
+      "createdAt": "2026-08-02T15:41:14.273Z"
+    }
+  ],
+  "createdAt": "2026-08-02T15:41:14.273Z",
+  "updatedAt": "2026-08-02T15:41:14.273Z"
+}

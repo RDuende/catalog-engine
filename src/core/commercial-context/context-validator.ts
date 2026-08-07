@@ -2,7 +2,7 @@ import type { CommercialContext, CommercialContextField } from "./commercial-con
 import type { ContextPatch } from "./context-patch.js";
 
 const numericFields = new Set<CommercialContextField>(["quantity", "budget"]);
-const booleanFields = new Set<CommercialContextField>(["sustainability", "customizable"]);
+const booleanFields = new Set<CommercialContextField>(["sustainability", "customizable", "personalizationRequested"]);
 
 export function normalizePatchValue(patch: ContextPatch): string | number | boolean | null | undefined {
   if (patch.operation === "UNSET") return null;
@@ -28,5 +28,6 @@ export function isCommercialContext(value: unknown): value is CommercialContext 
   if (context.budget !== undefined && (typeof context.budget !== "number" || !Number.isFinite(context.budget) || context.budget < 0)) return false;
   if (context.sustainability !== undefined && typeof context.sustainability !== "boolean") return false;
   if (context.customizable !== undefined && typeof context.customizable !== "boolean") return false;
+  if (context.personalizationRequested !== undefined && typeof context.personalizationRequested !== "boolean") return false;
   return true;
 }

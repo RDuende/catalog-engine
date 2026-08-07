@@ -1,0 +1,1839 @@
+{
+  "id": "8c7e37f3-b8a6-4921-9dcb-85e504aacf5a",
+  "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+  "journey": {
+    "id": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+    "type": "GIFT",
+    "status": "PROPOSING",
+    "version": 42,
+    "sessionId": "8c7e37f3-b8a6-4921-9dcb-85e504aacf5a",
+    "participants": [
+      {
+        "id": "37efa7dd-bc03-4532-bf77-7087150d285e",
+        "role": "RECIPIENT",
+        "age": 9,
+        "relationship": "son",
+        "preferences": {},
+        "facts": {},
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:20:46.525Z"
+      }
+    ],
+    "facts": [
+      {
+        "id": "75dce923-372e-426c-b485-478c70c86cca",
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "son",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:20:46.525Z"
+      },
+      {
+        "id": "99a7ca80-a460-4a5a-85bd-3f3b1f2919b4",
+        "key": "recipient.relationship",
+        "value": "son",
+        "confidence": 0.95,
+        "source": "CONVERSATION",
+        "evidence": "son",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:20:46.525Z"
+      },
+      {
+        "id": "46369893-eafe-4d20-a79f-3b18f6daa46e",
+        "key": "recipient.age",
+        "value": 9,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "de 9 anos",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:20:46.525Z"
+      },
+      {
+        "id": "ef590d47-ecec-4681-b28a-0dadae6f19cb",
+        "key": "occasion.type",
+        "value": "communion",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "communion",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:20:46.525Z"
+      },
+      {
+        "id": "a0b4148d-0f9b-42da-9bab-f56caab36de8",
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:20:46.525Z"
+      },
+      {
+        "id": "e13ecdd3-715a-4b8b-a712-c608350d457f",
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "un regalo para la comunión de mi hijo de 9 años",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:20:46.525Z"
+      },
+      {
+        "id": "0f2df445-fad5-49fd-8d50-3ec6cac18ec6",
+        "key": "discovery.last_extractor_version",
+        "value": "v2.0.0-gift-model-memory",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "CONFIRMED",
+        "history": [],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:21:43.910Z"
+      },
+      {
+        "id": "d1ba375e-b6ac-4050-8bac-b7ba000e0cca",
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": 0.89,
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:02.126Z"
+          }
+        ],
+        "createdAt": "2026-08-02T22:20:46.525Z",
+        "updatedAt": "2026-08-02T22:21:43.910Z"
+      },
+      {
+        "id": "4d2dffc4-b9d1-4261-8325-921ab7ee209b",
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 90,
+          "requiredScore": 100,
+          "recommendedScore": 71.43,
+          "requiredComplete": true,
+          "readyForInspiration": true,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship",
+            "occasion.type",
+            "recipient.age",
+            "recipient.interests"
+          ],
+          "missingRequired": [],
+          "missingRecommended": [
+            "budget.max"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.95,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": true,
+              "confidence": 0.88,
+              "source": "FACT"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T22:21:43.910Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:20:46.526Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:20:46.526Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.personal.discovery",
+              "profileVersion": "v1",
+              "score": 80,
+              "requiredScore": 100,
+              "recommendedScore": 42.86,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "recipient.count",
+                "recipient.relationship",
+                "occasion.type",
+                "recipient.age"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [
+                "budget.max",
+                "recipient.interests"
+              ],
+              "requirements": [
+                {
+                  "key": "recipient.count",
+                  "label": "Número de destinatarios",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.relationship",
+                  "label": "Relación con el destinatario",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 0.95,
+                  "source": "FACT"
+                },
+                {
+                  "key": "occasion.type",
+                  "label": "Ocasión",
+                  "level": "REQUIRED",
+                  "weight": 25,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.age",
+                  "label": "Edad del destinatario",
+                  "level": "RECOMMENDED",
+                  "weight": 15,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "budget.max",
+                  "label": "Presupuesto máximo",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "recipient.interests",
+                  "label": "Intereses o aficiones",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "minimumConfidence": 0.5,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:20:46.526Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:02.128Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:21:02.128Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:02.128Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.personal.discovery",
+              "profileVersion": "v1",
+              "score": 90,
+              "requiredScore": 100,
+              "recommendedScore": 71.43,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "recipient.count",
+                "recipient.relationship",
+                "occasion.type",
+                "recipient.age",
+                "recipient.interests"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [
+                "budget.max"
+              ],
+              "requirements": [
+                {
+                  "key": "recipient.count",
+                  "label": "Número de destinatarios",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.relationship",
+                  "label": "Relación con el destinatario",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 0.95,
+                  "source": "FACT"
+                },
+                {
+                  "key": "occasion.type",
+                  "label": "Ocasión",
+                  "level": "REQUIRED",
+                  "weight": 25,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.age",
+                  "label": "Edad del destinatario",
+                  "level": "RECOMMENDED",
+                  "weight": 15,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "budget.max",
+                  "label": "Presupuesto máximo",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "recipient.interests",
+                  "label": "Intereses o aficiones",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "minimumConfidence": 0.5,
+                  "satisfied": true,
+                  "confidence": 0.88,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:21:02.128Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:12.373Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:21:12.373Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:12.373Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.personal.discovery",
+              "profileVersion": "v1",
+              "score": 90,
+              "requiredScore": 100,
+              "recommendedScore": 71.43,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "recipient.count",
+                "recipient.relationship",
+                "occasion.type",
+                "recipient.age",
+                "recipient.interests"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [
+                "budget.max"
+              ],
+              "requirements": [
+                {
+                  "key": "recipient.count",
+                  "label": "Número de destinatarios",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.relationship",
+                  "label": "Relación con el destinatario",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 0.95,
+                  "source": "FACT"
+                },
+                {
+                  "key": "occasion.type",
+                  "label": "Ocasión",
+                  "level": "REQUIRED",
+                  "weight": 25,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.age",
+                  "label": "Edad del destinatario",
+                  "level": "RECOMMENDED",
+                  "weight": 15,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "budget.max",
+                  "label": "Presupuesto máximo",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "recipient.interests",
+                  "label": "Intereses o aficiones",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "minimumConfidence": 0.5,
+                  "satisfied": true,
+                  "confidence": 0.88,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:21:12.373Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:33.340Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:21:33.340Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:33.340Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.personal.discovery",
+              "profileVersion": "v1",
+              "score": 90,
+              "requiredScore": 100,
+              "recommendedScore": 71.43,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "recipient.count",
+                "recipient.relationship",
+                "occasion.type",
+                "recipient.age",
+                "recipient.interests"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [
+                "budget.max"
+              ],
+              "requirements": [
+                {
+                  "key": "recipient.count",
+                  "label": "Número de destinatarios",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.relationship",
+                  "label": "Relación con el destinatario",
+                  "level": "REQUIRED",
+                  "weight": 20,
+                  "satisfied": true,
+                  "confidence": 0.95,
+                  "source": "FACT"
+                },
+                {
+                  "key": "occasion.type",
+                  "label": "Ocasión",
+                  "level": "REQUIRED",
+                  "weight": 25,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                },
+                {
+                  "key": "recipient.age",
+                  "label": "Edad del destinatario",
+                  "level": "RECOMMENDED",
+                  "weight": 15,
+                  "satisfied": true,
+                  "confidence": 1,
+                  "source": "FACT"
+                },
+                {
+                  "key": "budget.max",
+                  "label": "Presupuesto máximo",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "satisfied": false,
+                  "confidence": 0,
+                  "source": "MISSING"
+                },
+                {
+                  "key": "recipient.interests",
+                  "label": "Intereses o aficiones",
+                  "level": "RECOMMENDED",
+                  "weight": 10,
+                  "minimumConfidence": 0.5,
+                  "satisfied": true,
+                  "confidence": 0.88,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:21:33.340Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:43.910Z"
+          },
+          {
+            "value": {
+              "profileId": "gift.scope",
+              "profileVersion": "v1",
+              "score": 100,
+              "requiredScore": 100,
+              "recommendedScore": 100,
+              "requiredComplete": true,
+              "readyForInspiration": true,
+              "satisfiedKeys": [
+                "gift.scope"
+              ],
+              "missingRequired": [],
+              "missingRecommended": [],
+              "requirements": [
+                {
+                  "key": "gift.scope",
+                  "label": "Tipo de búsqueda",
+                  "level": "REQUIRED",
+                  "weight": 100,
+                  "satisfied": true,
+                  "confidence": 0.98,
+                  "source": "FACT"
+                }
+              ],
+              "evaluatedAt": "2026-08-02T22:21:43.910Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:43.910Z"
+          }
+        ],
+        "createdAt": "2026-08-02T22:20:46.526Z",
+        "updatedAt": "2026-08-02T22:21:43.910Z"
+      },
+      {
+        "id": "e551b77f-26b8-4a1b-bee4-62c4f89c297c",
+        "key": "journey.gift_model",
+        "value": {
+          "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+          "recipient": {
+            "count": 1,
+            "age": 9,
+            "relationship": "son",
+            "interests": [
+              "football",
+              "music"
+            ],
+            "personality": []
+          },
+          "occasion": {
+            "type": "communion"
+          },
+          "budget": {
+            "currency": "EUR"
+          },
+          "personalization": {},
+          "style": [],
+          "constraints": {},
+          "quality": {
+            "score": 80,
+            "requiredComplete": true,
+            "missing": [
+              "budget.max"
+            ]
+          },
+          "generatedAt": "2026-08-02T22:21:43.910Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "status": "UPDATED",
+        "history": [
+          {
+            "value": {
+              "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+              "recipient": {
+                "count": 1,
+                "age": 9,
+                "relationship": "son",
+                "interests": [],
+                "personality": []
+              },
+              "occasion": {
+                "type": "communion"
+              },
+              "budget": {
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 60,
+                "requiredComplete": true,
+                "missing": [
+                  "budget.max",
+                  "recipient.interests"
+                ]
+              },
+              "generatedAt": "2026-08-02T22:20:46.527Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:02.129Z"
+          },
+          {
+            "value": {
+              "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+              "recipient": {
+                "count": 1,
+                "age": 9,
+                "relationship": "son",
+                "interests": [
+                  "football",
+                  "music"
+                ],
+                "personality": []
+              },
+              "occasion": {
+                "type": "communion"
+              },
+              "budget": {
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 80,
+                "requiredComplete": true,
+                "missing": [
+                  "budget.max"
+                ]
+              },
+              "generatedAt": "2026-08-02T22:21:02.129Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:12.374Z"
+          },
+          {
+            "value": {
+              "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+              "recipient": {
+                "count": 1,
+                "age": 9,
+                "relationship": "son",
+                "interests": [
+                  "football",
+                  "music"
+                ],
+                "personality": []
+              },
+              "occasion": {
+                "type": "communion"
+              },
+              "budget": {
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 80,
+                "requiredComplete": true,
+                "missing": [
+                  "budget.max"
+                ]
+              },
+              "generatedAt": "2026-08-02T22:21:12.374Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:33.340Z"
+          },
+          {
+            "value": {
+              "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+              "recipient": {
+                "count": 1,
+                "age": 9,
+                "relationship": "son",
+                "interests": [
+                  "football",
+                  "music"
+                ],
+                "personality": []
+              },
+              "occasion": {
+                "type": "communion"
+              },
+              "budget": {
+                "currency": "EUR"
+              },
+              "personalization": {},
+              "style": [],
+              "constraints": {},
+              "quality": {
+                "score": 80,
+                "requiredComplete": true,
+                "missing": [
+                  "budget.max"
+                ]
+              },
+              "generatedAt": "2026-08-02T22:21:33.340Z"
+            },
+            "confidence": 1,
+            "source": "SYSTEM",
+            "changedAt": "2026-08-02T22:21:43.910Z"
+          }
+        ],
+        "createdAt": "2026-08-02T22:20:46.527Z",
+        "updatedAt": "2026-08-02T22:21:43.910Z"
+      },
+      {
+        "id": "5a84052e-4247-4408-8613-38fb23763a1c",
+        "key": "recipient.interests",
+        "value": [
+          "football",
+          "music"
+        ],
+        "confidence": 0.88,
+        "source": "CONVERSATION",
+        "evidence": "futbol y música",
+        "status": "DETECTED",
+        "history": [],
+        "createdAt": "2026-08-02T22:21:02.126Z",
+        "updatedAt": "2026-08-02T22:21:02.126Z"
+      }
+    ],
+    "artifacts": [
+      {
+        "id": "58db51d1-756e-4cd7-af12-95ac265754bd",
+        "type": "CREATIVE_BRIEF",
+        "version": 1,
+        "status": "READY",
+        "title": "Creative Brief v1",
+        "data": {
+          "brief": {
+            "id": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+            "specificationVersion": "v1",
+            "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+            "journeyVersion": 36,
+            "version": 1,
+            "status": "READY",
+            "objective": "Crear un regalo personalizado y memorable para una persona especial para communion.",
+            "audience": [
+              {
+                "participantId": "37efa7dd-bc03-4532-bf77-7087150d285e",
+                "role": "RECIPIENT",
+                "age": 9,
+                "relationship": "son",
+                "interests": [
+                  "football",
+                  "music"
+                ]
+              }
+            ],
+            "occasion": "communion",
+            "emotionalGoals": [
+              "SURPRISE",
+              "FUN"
+            ],
+            "themes": [
+              "football",
+              "music"
+            ],
+            "narrativeStyle": "ADVENTURE",
+            "visualStyle": "COLORFUL_ILLUSTRATION",
+            "constraints": [
+              {
+                "id": "audience.minors",
+                "kind": "AUDIENCE",
+                "description": "El contenido y los productos deben ser apropiados para menores.",
+                "blocking": true
+              }
+            ],
+            "pendingFacts": [],
+            "sources": [
+              {
+                "field": "audience",
+                "source": "PARTICIPANT",
+                "confidence": 1,
+                "reason": "Derivado de participantes RECIPIENT del Journey."
+              },
+              {
+                "field": "objective",
+                "source": "RULE",
+                "confidence": 0.9,
+                "reason": "Construido con audiencia y ocasión conocidas."
+              },
+              {
+                "field": "emotionalGoals",
+                "source": "RULE",
+                "confidence": 0.78,
+                "reason": "Inferidos de la ocasión, número y edad de destinatarios."
+              },
+              {
+                "field": "narrativeStyle",
+                "source": "RULE",
+                "confidence": 0.86,
+                "reason": "Inferido de temas e intereses."
+              },
+              {
+                "field": "visualStyle",
+                "source": "RULE",
+                "confidence": 0.86,
+                "reason": "Inferido de temas y edad de la audiencia."
+              },
+              {
+                "field": "occasion",
+                "factKey": "occasion.type",
+                "source": "CONVERSATION",
+                "confidence": 0.98,
+                "reason": "Hecho confirmado en el Journey."
+              },
+              {
+                "field": "themes",
+                "factKey": "recipient.interests",
+                "source": "CONVERSATION",
+                "confidence": 0.9,
+                "reason": "Temas derivados de intereses declarados."
+              }
+            ],
+            "validation": {
+              "valid": true,
+              "issues": []
+            },
+            "createdAt": "2026-08-02T22:21:43.912Z"
+          }
+        },
+        "createdAt": "2026-08-02T22:21:43.912Z"
+      },
+      {
+        "id": "e0218109-e050-4a81-a4a4-c6d26c642c2f",
+        "type": "STORY",
+        "version": 1,
+        "status": "READY",
+        "title": "Story Concepts v1",
+        "data": {
+          "storySet": {
+            "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story-set:1",
+            "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+            "journeyVersion": 36,
+            "briefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+            "briefVersion": 1,
+            "version": 1,
+            "concepts": [
+              {
+                "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:1",
+                "version": 1,
+                "status": "READY",
+                "briefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "briefVersion": 1,
+                "title": "El poder que siempre estuvo dentro",
+                "logline": "la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo.",
+                "premise": "En un universo inspirado en football, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                "emotionalPromise": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "centralConflict": "Cada protagonista intenta resolver la misión sola y descubre que ninguna habilidad está completa por separado.",
+                "resolution": "Al unir sus poderes, completan el emblema, salvan su mundo y comprenden que siempre forman el mejor equipo.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "37efa7dd-bc03-4532-bf77-7087150d285e",
+                    "name": "Protagonista 1",
+                    "description": "Tiene una habilidad única que se completa con la de la otra protagonista.",
+                    "definingTrait": "football"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "emblema dividido que se une",
+                  "poderes de colores complementarios",
+                  "pose final de equipo"
+                ],
+                "differentiators": [
+                  "Cada destinataria conserva identidad propia",
+                  "La imagen se completa al estar juntas",
+                  "Fácil de materializar en dos productos conectados"
+                ],
+                "narrativeStyle": "ADVENTURE",
+                "visualStyle": "COLORFUL_ILLUSTRATION",
+                "themes": [
+                  "football",
+                  "music"
+                ],
+                "emotionalGoals": [
+                  "SURPRISE",
+                  "FUN"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.912Z"
+              },
+              {
+                "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:2",
+                "version": 1,
+                "status": "READY",
+                "briefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "briefVersion": 1,
+                "title": "La misión de la guardiana",
+                "logline": "la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo.",
+                "premise": "El día de communion, una señal oculta abre la puerta a un reino de football. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                "emotionalPromise": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "centralConflict": "Una sombra intenta borrar los momentos compartidos y deja el reino sin color.",
+                "resolution": "Las guardianas recuperan los recuerdos, devuelven el color al reino y guardan uno nuevo: el de su propia aventura.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "37efa7dd-bc03-4532-bf77-7087150d285e",
+                    "name": "Protagonista 1",
+                    "description": "Forma parte de un equipo inseparable con una misión compartida.",
+                    "definingTrait": "football"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "portal de cumpleaños",
+                  "mapa de recuerdos",
+                  "reino que recupera el color"
+                ],
+                "differentiators": [
+                  "Integra la ocasión dentro de la historia",
+                  "Permite ampliar el universo en futuras celebraciones",
+                  "Funciona como cuento, póster o puzle"
+                ],
+                "narrativeStyle": "ADVENTURE",
+                "visualStyle": "COLORFUL_ILLUSTRATION",
+                "themes": [
+                  "football",
+                  "music"
+                ],
+                "emotionalGoals": [
+                  "SURPRISE",
+                  "FUN"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.912Z"
+              },
+              {
+                "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:3",
+                "version": 1,
+                "status": "READY",
+                "briefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "briefVersion": 1,
+                "title": "Creadora de su propio universo",
+                "logline": "la protagonista no reciben una aventura terminada: tienen el poder de elegir cómo nace y evoluciona su mundo.",
+                "premise": "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en football, hasta formar un universo completamente suyo.",
+                "emotionalPromise": "Hacer que el proceso de crear juntas sea tan memorable como el regalo final.",
+                "centralConflict": "El universo empieza a desordenarse porque cada idea tira en una dirección distinta.",
+                "resolution": "Las protagonistas aprenden a combinar sus ideas y crean un mundo donde todas tienen un lugar.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "37efa7dd-bc03-4532-bf77-7087150d285e",
+                    "name": "Protagonista 1",
+                    "description": "Puede imaginar y transformar el mundo con sus propias decisiones.",
+                    "definingTrait": "football"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "libro o portal en blanco",
+                  "escenarios que cambian con cada elección",
+                  "firma final de las creadoras"
+                ],
+                "differentiators": [
+                  "Experiencia participativa",
+                  "Ideal para bono de personalización",
+                  "Genera múltiples artefactos desde una misma historia"
+                ],
+                "narrativeStyle": "ADVENTURE",
+                "visualStyle": "COLORFUL_ILLUSTRATION",
+                "themes": [
+                  "football",
+                  "music"
+                ],
+                "emotionalGoals": [
+                  "SURPRISE",
+                  "FUN"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.912Z"
+              }
+            ],
+            "createdAt": "2026-08-02T22:21:43.912Z"
+          }
+        },
+        "createdAt": "2026-08-02T22:21:43.912Z"
+      },
+      {
+        "id": "bf5398b4-a551-40b1-aca1-7b78b32f491e",
+        "type": "IMAGE",
+        "version": 1,
+        "status": "READY",
+        "title": "Image Briefs v1",
+        "data": {
+          "imageBriefSet": {
+            "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story-set:1:image-brief-set:1",
+            "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+            "journeyVersion": 36,
+            "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+            "creativeBriefVersion": 1,
+            "storySetId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story-set:1",
+            "storySetVersion": 1,
+            "version": 1,
+            "briefs": [
+              {
+                "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:1:image-brief:1",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+                "journeyVersion": 36,
+                "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:1",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — El poder que siempre estuvo dentro",
+                "scene": "En un universo inspirado en football, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                "emotionalIntent": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "visualStyle": "COLORFUL_ILLUSTRATION",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "37efa7dd-bc03-4532-bf77-7087150d285e",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Tiene una habilidad única que se completa con la de la otra protagonista.",
+                    "visualTraits": [
+                      "football"
+                    ],
+                    "participantId": "37efa7dd-bc03-4532-bf77-7087150d285e"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "GROUP",
+                  "camera": "LOW_ANGLE",
+                  "focalPoint": "emblema dividido que se une",
+                  "foreground": [
+                    "emblema dividido que se une",
+                    "poderes de colores complementarios"
+                  ],
+                  "background": [
+                    "En un universo inspirado en football, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                    "pose final de equipo"
+                  ],
+                  "balance": "SYMMETRIC"
+                },
+                "palette": {
+                  "mood": "alegre, enérgico y luminoso",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "emblema dividido que se une",
+                  "poderes de colores complementarios",
+                  "pose final de equipo",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "El poder que siempre estuvo dentro. la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo.. Protagonistas: 9 años. Tema: football, music. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Celebrar que ser diferentes hace más fuerte el vínculo que las une.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.913Z"
+              },
+              {
+                "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:2:image-brief:2",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+                "journeyVersion": 36,
+                "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:2",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — La misión de la guardiana",
+                "scene": "El día de communion, una señal oculta abre la puerta a un reino de football. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                "emotionalIntent": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "visualStyle": "COLORFUL_ILLUSTRATION",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "37efa7dd-bc03-4532-bf77-7087150d285e",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Forma parte de un equipo inseparable con una misión compartida.",
+                    "visualTraits": [
+                      "football"
+                    ],
+                    "participantId": "37efa7dd-bc03-4532-bf77-7087150d285e"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "FULL_BODY",
+                  "camera": "EYE_LEVEL",
+                  "focalPoint": "portal de cumpleaños",
+                  "foreground": [
+                    "portal de cumpleaños",
+                    "mapa de recuerdos"
+                  ],
+                  "background": [
+                    "El día de communion, una señal oculta abre la puerta a un reino de football. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                    "reino que recupera el color"
+                  ],
+                  "balance": "DYNAMIC"
+                },
+                "palette": {
+                  "mood": "alegre, enérgico y luminoso",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "portal de cumpleaños",
+                  "mapa de recuerdos",
+                  "reino que recupera el color",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "La misión de la guardiana. la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo.. Protagonistas: 9 años. Tema: football, music. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.913Z"
+              },
+              {
+                "id": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:3:image-brief:3",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+                "journeyVersion": 36,
+                "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:3",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — Creadora de su propio universo",
+                "scene": "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en football, hasta formar un universo completamente suyo.",
+                "emotionalIntent": "Hacer que el proceso de crear juntas sea tan memorable como el regalo final.",
+                "visualStyle": "COLORFUL_ILLUSTRATION",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "37efa7dd-bc03-4532-bf77-7087150d285e",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Puede imaginar y transformar el mundo con sus propias decisiones.",
+                    "visualTraits": [
+                      "football"
+                    ],
+                    "participantId": "37efa7dd-bc03-4532-bf77-7087150d285e"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "FULL_BODY",
+                  "camera": "EYE_LEVEL",
+                  "focalPoint": "libro o portal en blanco",
+                  "foreground": [
+                    "libro o portal en blanco",
+                    "escenarios que cambian con cada elección"
+                  ],
+                  "background": [
+                    "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en football, hasta formar un universo completamente suyo.",
+                    "firma final de las creadoras"
+                  ],
+                  "balance": "DYNAMIC"
+                },
+                "palette": {
+                  "mood": "alegre, enérgico y luminoso",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "libro o portal en blanco",
+                  "escenarios que cambian con cada elección",
+                  "firma final de las creadoras",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "Creadora de su propio universo. la protagonista no reciben una aventura terminada: tienen el poder de elegir cómo nace y evoluciona su mundo.. Protagonistas: 9 años. Tema: football, music. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Hacer que el proceso de crear juntas sea tan memorable como el regalo final.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.913Z"
+              }
+            ],
+            "createdAt": "2026-08-02T22:21:43.913Z"
+          }
+        },
+        "createdAt": "2026-08-02T22:21:43.913Z"
+      },
+      {
+        "id": "934e9157-7b03-41ce-9b24-a16558f0acf8",
+        "type": "PROPOSAL",
+        "version": 1,
+        "status": "READY",
+        "title": "Solution Set v1",
+        "data": {
+          "solutionSet": {
+            "id": "52e270a2-fba4-4e9e-92fb-5e6a147075f9",
+            "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+            "journeyVersion": 36,
+            "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+            "creativeBriefVersion": 1,
+            "storySetId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story-set:1",
+            "storySetVersion": 1,
+            "imageBriefSetId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story-set:1:image-brief-set:1",
+            "imageBriefSetVersion": 1,
+            "version": 1,
+            "solutions": [
+              {
+                "id": "6afd13a8-3aea-4b1e-abca-f68dec29c2d0",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+                "journeyVersion": 36,
+                "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:1",
+                "storyConceptVersion": 1,
+                "imageBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:1:image-brief:1",
+                "imageBriefVersion": 1,
+                "title": "El poder que siempre estuvo dentro",
+                "description": "la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo. La propuesta materializa la historia en productos que pueden disfrutarse juntas.",
+                "emotionalPromise": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "products": [
+                  {
+                    "productId": "twin-shirts",
+                    "sku": "TXT-TWIN-001",
+                    "name": "Camiseta coordinada",
+                    "category": "TEXTILE",
+                    "quantity": 2,
+                    "unitPrice": 19,
+                    "totalPrice": 38,
+                    "currency": "EUR",
+                    "role": "PRIMARY",
+                    "reason": "Es la materialización principal de la historia."
+                  },
+                  {
+                    "productId": "personalized-poster",
+                    "sku": "DEC-A3-001",
+                    "name": "Lámina personalizada A3",
+                    "category": "DECORATION",
+                    "quantity": 1,
+                    "unitPrice": 18,
+                    "totalPrice": 18,
+                    "currency": "EUR",
+                    "role": "COMPLEMENT",
+                    "reason": "Refuerza la experiencia y conserva el mismo universo visual."
+                  }
+                ],
+                "subtotal": 56,
+                "total": 56,
+                "currency": "EUR",
+                "withinBudget": true,
+                "score": 89.5,
+                "reasons": [
+                  "No existe un presupuesto máximo; la solución permanece elegible.",
+                  "Todos los productos están disponibles y son adecuados para la audiencia.",
+                  "2 de 2 productos admiten el estilo COLORFUL_ILLUSTRATION.",
+                  "La selección cubre 2 de 2 objetivos emocionales del brief."
+                ],
+                "warnings": [
+                  "Presupuesto no definido."
+                ],
+                "policyResults": [
+                  {
+                    "policyId": "budget",
+                    "passed": true,
+                    "score": 0.7,
+                    "reasons": [
+                      "No existe un presupuesto máximo; la solución permanece elegible."
+                    ],
+                    "warnings": [
+                      "Presupuesto no definido."
+                    ]
+                  },
+                  {
+                    "policyId": "product-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "Todos los productos están disponibles y son adecuados para la audiencia."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "visual-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "2 de 2 productos admiten el estilo COLORFUL_ILLUSTRATION."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "emotion",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "La selección cubre 2 de 2 objetivos emocionales del brief."
+                    ],
+                    "warnings": []
+                  }
+                ],
+                "engineId": "deterministic-solution-engine",
+                "engineVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.914Z"
+              },
+              {
+                "id": "69de1442-8750-4aab-8db5-81df9760304d",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+                "journeyVersion": 36,
+                "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:2",
+                "storyConceptVersion": 1,
+                "imageBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:2:image-brief:2",
+                "imageBriefVersion": 1,
+                "title": "La misión de la guardiana",
+                "description": "la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo. La propuesta materializa la historia en productos que pueden disfrutarse juntas.",
+                "emotionalPromise": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "products": [
+                  {
+                    "productId": "personalized-puzzle",
+                    "sku": "PUZ-120-001",
+                    "name": "Puzle personalizado 120 piezas",
+                    "category": "PUZZLE",
+                    "quantity": 1,
+                    "unitPrice": 24,
+                    "totalPrice": 24,
+                    "currency": "EUR",
+                    "role": "PRIMARY",
+                    "reason": "Es la materialización principal de la historia."
+                  },
+                  {
+                    "productId": "mini-story-book",
+                    "sku": "BOK-A5-001",
+                    "name": "Mini cuento personalizado",
+                    "category": "BOOK",
+                    "quantity": 1,
+                    "unitPrice": 28,
+                    "totalPrice": 28,
+                    "currency": "EUR",
+                    "role": "COMPLEMENT",
+                    "reason": "Refuerza la experiencia y conserva el mismo universo visual."
+                  }
+                ],
+                "subtotal": 52,
+                "total": 52,
+                "currency": "EUR",
+                "withinBudget": true,
+                "score": 89.5,
+                "reasons": [
+                  "No existe un presupuesto máximo; la solución permanece elegible.",
+                  "Todos los productos están disponibles y son adecuados para la audiencia.",
+                  "2 de 2 productos admiten el estilo COLORFUL_ILLUSTRATION.",
+                  "La selección cubre 2 de 2 objetivos emocionales del brief."
+                ],
+                "warnings": [
+                  "Presupuesto no definido."
+                ],
+                "policyResults": [
+                  {
+                    "policyId": "budget",
+                    "passed": true,
+                    "score": 0.7,
+                    "reasons": [
+                      "No existe un presupuesto máximo; la solución permanece elegible."
+                    ],
+                    "warnings": [
+                      "Presupuesto no definido."
+                    ]
+                  },
+                  {
+                    "policyId": "product-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "Todos los productos están disponibles y son adecuados para la audiencia."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "visual-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "2 de 2 productos admiten el estilo COLORFUL_ILLUSTRATION."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "emotion",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "La selección cubre 2 de 2 objetivos emocionales del brief."
+                    ],
+                    "warnings": []
+                  }
+                ],
+                "engineId": "deterministic-solution-engine",
+                "engineVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.914Z"
+              },
+              {
+                "id": "7c819bf6-3583-490f-bc43-c8e8baac2efa",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "23bd7714-0f0b-4094-9c4d-537f399ee61a",
+                "journeyVersion": 36,
+                "creativeBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:3",
+                "storyConceptVersion": 1,
+                "imageBriefId": "2434e5a2-d29d-4d76-9680-a7f190e03450:story:3:image-brief:3",
+                "imageBriefVersion": 1,
+                "title": "Creadora de su propio universo",
+                "description": "la protagonista no reciben una aventura terminada: tienen el poder de elegir cómo nace y evoluciona su mundo. La propuesta materializa la historia en productos que pueden disfrutarse juntas.",
+                "emotionalPromise": "Hacer que el proceso de crear juntas sea tan memorable como el regalo final.",
+                "products": [
+                  {
+                    "productId": "twin-bottles",
+                    "sku": "DRK-TWIN-001",
+                    "name": "Botella personalizada",
+                    "category": "DRINKWARE",
+                    "quantity": 2,
+                    "unitPrice": 15,
+                    "totalPrice": 30,
+                    "currency": "EUR",
+                    "role": "PRIMARY",
+                    "reason": "Es la materialización principal de la historia."
+                  },
+                  {
+                    "productId": "personalized-poster",
+                    "sku": "DEC-A3-001",
+                    "name": "Lámina personalizada A3",
+                    "category": "DECORATION",
+                    "quantity": 1,
+                    "unitPrice": 18,
+                    "totalPrice": 18,
+                    "currency": "EUR",
+                    "role": "COMPLEMENT",
+                    "reason": "Refuerza la experiencia y conserva el mismo universo visual."
+                  }
+                ],
+                "subtotal": 48,
+                "total": 48,
+                "currency": "EUR",
+                "withinBudget": true,
+                "score": 77,
+                "reasons": [
+                  "No existe un presupuesto máximo; la solución permanece elegible.",
+                  "Todos los productos están disponibles y son adecuados para la audiencia.",
+                  "2 de 2 productos admiten el estilo COLORFUL_ILLUSTRATION.",
+                  "La selección cubre 1 de 2 objetivos emocionales del brief."
+                ],
+                "warnings": [
+                  "Presupuesto no definido."
+                ],
+                "policyResults": [
+                  {
+                    "policyId": "budget",
+                    "passed": true,
+                    "score": 0.7,
+                    "reasons": [
+                      "No existe un presupuesto máximo; la solución permanece elegible."
+                    ],
+                    "warnings": [
+                      "Presupuesto no definido."
+                    ]
+                  },
+                  {
+                    "policyId": "product-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "Todos los productos están disponibles y son adecuados para la audiencia."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "visual-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "2 de 2 productos admiten el estilo COLORFUL_ILLUSTRATION."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "emotion",
+                    "passed": true,
+                    "score": 0.5,
+                    "reasons": [
+                      "La selección cubre 1 de 2 objetivos emocionales del brief."
+                    ],
+                    "warnings": []
+                  }
+                ],
+                "engineId": "deterministic-solution-engine",
+                "engineVersion": "v1",
+                "createdAt": "2026-08-02T22:21:43.914Z"
+              }
+            ],
+            "rejectedCandidates": 0,
+            "createdAt": "2026-08-02T22:21:43.914Z"
+          }
+        },
+        "createdAt": "2026-08-02T22:21:43.914Z"
+      }
+    ],
+    "metadata": {},
+    "createdAt": "2026-08-02T22:20:46.520Z",
+    "updatedAt": "2026-08-02T22:21:43.914Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "27d113cd-a759-4c1b-991e-d6813fd3ed00",
+    "accessKeyHash": "ac4ede88001b213fa6a58ec0e87f37b99fa81b30d1fb0b022893d98a4661fa49",
+    "createdAt": "2026-08-02T22:20:46.519Z"
+  },
+  "messages": [
+    {
+      "id": "5402fb8e-2820-432a-8bcc-04df640efa3d",
+      "role": "USER",
+      "text": "un regalo para la comunión de mi hijo de 9 años",
+      "createdAt": "2026-08-02T22:20:46.520Z"
+    },
+    {
+      "id": "00997f6a-0b2c-4cee-ac60-44ff84bfe89d",
+      "role": "RAI",
+      "text": "¡Qué ocasión tan especial! ¿Qué aficiones o intereses tiene tu hijo?",
+      "createdAt": "2026-08-02T22:20:49.280Z"
+    },
+    {
+      "id": "43361b3b-a930-4cc9-a04b-2274cd554ecd",
+      "role": "USER",
+      "text": "futbol y música",
+      "createdAt": "2026-08-02T22:21:02.122Z"
+    },
+    {
+      "id": "3163f6cc-be13-448a-a328-4d50f14cc780",
+      "role": "RAI",
+      "text": "¡Genial, fútbol y música dan mucho juego! ¿Qué presupuesto máximo tienes en mente?",
+      "createdAt": "2026-08-02T22:21:04.546Z"
+    },
+    {
+      "id": "7473dbe4-2cc5-4c8b-acba-98d124dbbd81",
+      "role": "USER",
+      "text": "90",
+      "createdAt": "2026-08-02T22:21:12.370Z"
+    },
+    {
+      "id": "8e7fd38a-cdc1-447e-b6d5-2051ebc66657",
+      "role": "RAI",
+      "text": "Perfecto, contamos con un presupuesto máximo de 90 €. ¿Cómo describirías su personalidad?",
+      "createdAt": "2026-08-02T22:21:16.266Z"
+    },
+    {
+      "id": "342908cf-3659-43f7-801a-21f1974e81df",
+      "role": "USER",
+      "text": "extrovertido y quiere ser el centro de atención",
+      "createdAt": "2026-08-02T22:21:33.338Z"
+    },
+    {
+      "id": "99c49f9a-4a9f-48f4-9298-30e6f356900f",
+      "role": "RAI",
+      "text": "¡Perfecto! Buscaremos algo divertido y llamativo, muy acorde con él. ¿Qué te gustaría que le transmitiera el regalo?",
+      "createdAt": "2026-08-02T22:21:37.058Z"
+    },
+    {
+      "id": "5f079f7b-a20d-4369-ba66-fb54312bf618",
+      "role": "RAI",
+      "text": "Ya tengo preparadas tres propuestas para este regalo.",
+      "createdAt": "2026-08-02T22:21:43.915Z"
+    }
+  ],
+  "createdAt": "2026-08-02T22:20:49.280Z",
+  "updatedAt": "2026-08-02T22:21:43.916Z"
+}

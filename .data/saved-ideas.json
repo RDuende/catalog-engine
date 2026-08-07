@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "owners": [
+    {
+      "id": "guest:aac272be-fb15-41db-85cc-3a04c4c1a4c5",
+      "source": "GUEST",
+      "externalId": "aac272be-fb15-41db-85cc-3a04c4c1a4c5"
+    }
+  ],
+  "collections": []
+}

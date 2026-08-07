@@ -1,0 +1,106 @@
+{
+  "id": "f255d061-c82e-4e05-b71c-3c641b3f5ed0",
+  "journeyId": "a315629f-cc41-45fd-83ac-f906654fd236",
+  "journey": {
+    "id": "a315629f-cc41-45fd-83ac-f906654fd236",
+    "type": "GIFT",
+    "status": "DISCOVERING",
+    "version": 7,
+    "sessionId": "f255d061-c82e-4e05-b71c-3c641b3f5ed0",
+    "participants": [],
+    "facts": [
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T15:33:31.766Z",
+        "updatedAt": "2026-08-02T15:33:31.766Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:33:31.766Z",
+        "updatedAt": "2026-08-02T15:33:31.766Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.56,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:33:31.766Z",
+        "updatedAt": "2026-08-02T15:33:31.766Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.scope",
+          "profileVersion": "v1",
+          "score": 0,
+          "requiredScore": 0,
+          "recommendedScore": 100,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [],
+          "missingRequired": [
+            "gift.scope"
+          ],
+          "missingRecommended": [],
+          "requirements": [
+            {
+              "key": "gift.scope",
+              "label": "Tipo de búsqueda",
+              "level": "REQUIRED",
+              "weight": 100,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T15:33:31.766Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:33:31.766Z",
+        "updatedAt": "2026-08-02T15:33:31.766Z"
+      },
+      {
+        "key": "conversation.pending_fact",
+        "value": "gift.scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:33:31.766Z",
+        "updatedAt": "2026-08-02T15:33:31.766Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T15:33:31.764Z",
+    "updatedAt": "2026-08-02T15:33:31.766Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "3ed1996e-1bef-4f25-b1d9-717169451f12",
+    "accessKeyHash": "e4fb5d331a77498046f4ff7c13a6a48a1d5322be29b31a77ec86bfc8e69d6c46",
+    "createdAt": "2026-08-02T15:33:31.764Z"
+  },
+  "messages": [
+    {
+      "id": "8b542e9a-d7d5-439a-8590-7976d386cc79",
+      "role": "USER",
+      "text": "un regalo",
+      "createdAt": "2026-08-02T15:33:31.764Z"
+    },
+    {
+      "id": "0b885257-679e-4a0d-9499-277939ecc96a",
+      "role": "RAI",
+      "text": "¿Buscas una idea de regalo genérica o quieres crear algo para alguien en particular?",
+      "createdAt": "2026-08-02T15:33:31.766Z"
+    }
+  ],
+  "createdAt": "2026-08-02T15:33:31.767Z",
+  "updatedAt": "2026-08-02T15:33:31.767Z"
+}

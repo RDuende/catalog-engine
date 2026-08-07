@@ -1,0 +1,205 @@
+{
+  "id": "0bf49925-cf64-41fd-ae5f-789318ce911b",
+  "journeyId": "3f82ac79-ac9e-4f45-b176-6f3b6a5592a0",
+  "journey": {
+    "id": "3f82ac79-ac9e-4f45-b176-6f3b6a5592a0",
+    "type": "GIFT",
+    "status": "READY_FOR_INSPIRATION",
+    "version": 14,
+    "sessionId": "0bf49925-cf64-41fd-ae5f-789318ce911b",
+    "participants": [
+      {
+        "id": "f0c4843e-b13a-4c2c-b069-63be15220cee",
+        "role": "RECIPIENT",
+        "relationship": "parent",
+        "preferences": {},
+        "facts": {},
+        "createdAt": "2026-08-02T15:11:22.066Z",
+        "updatedAt": "2026-08-02T15:11:22.066Z"
+      },
+      {
+        "id": "47c902f5-ae2c-477c-95c3-7f2766a732f4",
+        "role": "RECIPIENT",
+        "relationship": "parent",
+        "preferences": {},
+        "facts": {},
+        "createdAt": "2026-08-02T15:11:22.066Z",
+        "updatedAt": "2026-08-02T15:11:22.066Z"
+      }
+    ],
+    "facts": [
+      {
+        "key": "recipient.count",
+        "value": 2,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "parent",
+        "createdAt": "2026-08-02T15:11:22.066Z",
+        "updatedAt": "2026-08-02T15:11:22.066Z"
+      },
+      {
+        "key": "recipient.relationship",
+        "value": "parent",
+        "confidence": 0.95,
+        "source": "CONVERSATION",
+        "evidence": "parent",
+        "createdAt": "2026-08-02T15:11:22.066Z",
+        "updatedAt": "2026-08-02T15:11:22.066Z"
+      },
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T15:11:22.066Z",
+        "updatedAt": "2026-08-02T15:11:22.066Z"
+      },
+      {
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "un regalo para mis padres",
+        "createdAt": "2026-08-02T15:11:22.066Z",
+        "updatedAt": "2026-08-02T15:11:22.066Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.6-gift-scope-discovery-v1",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:11:22.066Z",
+        "updatedAt": "2026-08-02T15:11:22.066Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.67,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:11:22.067Z",
+        "updatedAt": "2026-08-02T15:11:22.067Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 40,
+          "requiredScore": 61.54,
+          "recommendedScore": 0,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship"
+          ],
+          "missingRequired": [
+            "occasion.type"
+          ],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.95,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T15:11:22.067Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:11:22.067Z",
+        "updatedAt": "2026-08-02T15:11:22.067Z"
+      },
+      {
+        "key": "conversation.pending_fact",
+        "value": "occasion.type",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:11:22.067Z",
+        "updatedAt": "2026-08-02T15:11:22.067Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T15:11:22.064Z",
+    "updatedAt": "2026-08-02T15:11:22.067Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "83c12d24-7df8-46dc-9457-2e3016339841",
+    "accessKeyHash": "79191a17af82e8c48d814358490aa55bace25364cfc82806f5ab521884a0e299",
+    "createdAt": "2026-08-02T15:11:22.064Z"
+  },
+  "messages": [
+    {
+      "id": "23bd5f64-6e25-4d43-a73f-f3e34f9f037b",
+      "role": "USER",
+      "text": "un regalo para mis padres",
+      "createdAt": "2026-08-02T15:11:22.064Z"
+    },
+    {
+      "id": "08d7b1d4-b458-4153-8011-9a3d2743d8c6",
+      "role": "RAI",
+      "text": "¿Qué vais a celebrar?",
+      "createdAt": "2026-08-02T15:11:22.068Z"
+    }
+  ],
+  "createdAt": "2026-08-02T15:11:22.068Z",
+  "updatedAt": "2026-08-02T15:11:22.068Z"
+}

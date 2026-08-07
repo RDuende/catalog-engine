@@ -7,7 +7,7 @@ import type { RecommendationCandidate, RecommendationContext } from "./engine/re
 import { createCoreRecommendationRules } from "./rules/core.rules.js";
 import { loadRecommendationConfig } from "./recommendation.config.js";
 import { PgRecommendationRepository, type RecommendationProductRecord, type RecommendationRepository } from "./recommendation.repository.js";
-import type { RecommendationEventPublisher, RecommendationRequest, RecommendationResponse, RecommendationItemResult } from "./recommendation.types.js";
+import type { RecommendationEventPublisher, RecommendationRequest, RecommendationResponse, RecommendationItemResult, RecommendationConstraintEvidence } from "./recommendation.types.js";
 import type { CommercialMemoryRecorder } from "../commercial-memory/commercial-memory.types.js";
 
 export interface RecommendationServiceOptions {
@@ -81,9 +81,13 @@ export class RecommendationService {
 
     const scoringStarted = performance.now();
     const activeEngine = new RecommendationEngine(createCoreRecommendationRules().filter((rule) => pipeline.rules.includes(rule.id)));
-    const evaluations = activeEngine.rank(candidates, context, candidates.length || limit)
-      .filter((evaluation) => request.budget === undefined || (evaluation.candidate.unitPrice !== null && evaluation.candidate.unitPrice <= request.budget))
-      .slice(0, limit);
+    const rankedEvaluations = activeEngine.rank(candidates, context, candidates.length || limit);
+    const candidatesWithValidPrice = candidates.filter((candidate) => candidate.unitPrice !== null).length;
+    const candidatesMissingPrice = candidates.length - candidatesWithValidPrice;
+    const candidatesOverBudget = request.budget === undefined ? 0 : candidates.filter((candidate) => candidate.unitPrice !== null && candidate.unitPrice > request.budget!).length;
+    const eligibleEvaluations = rankedEvaluations.filter((evaluation) => request.budget === undefined || (evaluation.candidate.unitPrice !== null && evaluation.candidate.unitPrice <= request.budget));
+    const evaluations = eligibleEvaluations.slice(0, limit);
+    const discardedEvaluations = rankedEvaluations.filter((evaluation) => !eligibleEvaluations.includes(evaluation));
 
     const items: RecommendationItemResult[] = evaluations.map((evaluation) => {
       const record = recordById.get(evaluation.candidate.productId)!;
@@ -105,7 +109,7 @@ export class RecommendationService {
         reasons: [...semanticItem.reasons, ...evaluation.reasons],
         warnings: evaluation.warnings,
         matchedEntities: semanticItem.matchedEntities,
-        explanation: { headline: `${evaluation.score + Math.round(semanticItem.score)} puntos de adecuación`, strengths: [...semanticItem.reasons, ...evaluation.reasons].slice(0,5), cautions: evaluation.warnings.slice(0,3) },
+        explanation: buildExplanation(evaluation, semanticItem.score, semanticItem.reasons),
         ...(request.debug ? { factors: evaluation.factors, semanticScore: semanticItem.score } : {}),
       };
     }).sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, "es"));
@@ -117,10 +121,20 @@ export class RecommendationService {
       pipeline: pipelineKey,
       totalCandidates: semantic.diagnostics.candidatesEvaluated,
       elapsedMs: Math.round((performance.now() - startedAt) * 100) / 100,
-      metrics: { retrievalMs: Math.round(retrievalMs*100)/100, scoringMs: Math.round(scoringMs*100)/100, candidatesRetrieved: semantic.recommendations.length, candidatesScored: candidates.length, rulesEvaluated: candidates.length * pipeline.rules.length, discardedByBudget: Math.max(0, candidates.length - evaluations.length) },
+      metrics: { retrievalMs: Math.round(retrievalMs*100)/100, scoringMs: Math.round(scoringMs*100)/100, candidatesRetrieved: semantic.recommendations.length, candidatesScored: candidates.length, rulesEvaluated: candidates.length * pipeline.rules.length, discardedByBudget: discardedEvaluations.length, candidatesWithValidPrice, candidatesMissingPrice, candidatesOverBudget },
       interpreted: semantic.interpreted,
       diagnostics: semantic.diagnostics,
       items,
+      analysis: {
+        returned: items.length,
+        discarded: Math.max(0, rankedEvaluations.length - evaluations.length),
+        discardedAlternatives: discardedEvaluations.slice(0, 5).map((evaluation) => ({
+          productId: evaluation.candidate.productId,
+          name: evaluation.candidate.name,
+          score: evaluation.score,
+          reasons: evaluation.warnings.length ? evaluation.warnings.slice(0, 3) : ["No alcanzó los criterios finales de selección."],
+        })),
+      },
     };
 
     if (this.memory) {
@@ -155,28 +169,47 @@ function toCandidate(record: RecommendationProductRecord, semantic: SemanticReco
 }
 
 function extractPrice(record: RecommendationProductRecord, quantity: number, currency: string): number | null {
-  const roots = [record.metadata, record.attributes];
-  for (const root of roots) {
-    for (const key of ["unitPrice", "price", "salePrice", "retailPrice", "precio", "precioVenta"]) {
-      const value = numberFrom(root[key]);
-      if (value !== null) return value;
-    }
-    const prices = root.prices;
-    if (Array.isArray(prices)) {
-      const valid = prices
-        .filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object" && !Array.isArray(item))
-        .filter((item) => !item.currency || String(item.currency).toUpperCase() === currency)
-        .filter((item) => (numberFrom(item.minQuantity) ?? 1) <= quantity && (numberFrom(item.maxQuantity) ?? Number.MAX_SAFE_INTEGER) >= quantity)
-        .map((item) => numberFrom(item.amount ?? item.price ?? item.unitPrice))
-        .filter((value): value is number => value !== null);
-      if (valid.length) return Math.min(...valid);
+  const candidates: number[] = [];
+  const visited = new Set<unknown>();
+  for (const root of [record.metadata, record.attributes]) collectPriceCandidates(root, quantity, currency, candidates, visited, 0);
+  return candidates.length ? Math.min(...candidates) : null;
+}
+
+function collectPriceCandidates(value: unknown, quantity: number, currency: string, out: number[], visited: Set<unknown>, depth: number): void {
+  if (depth > 7 || value === null || value === undefined) return;
+  if (typeof value !== "object") return;
+  if (visited.has(value)) return;
+  visited.add(value);
+  if (Array.isArray(value)) {
+    for (const item of value) collectPriceCandidates(item, quantity, currency, out, visited, depth + 1);
+    return;
+  }
+  const object = value as Record<string, unknown>;
+  const objectCurrency = typeof object.currency === "string" ? object.currency.toUpperCase() : undefined;
+  if (!objectCurrency || objectCurrency === currency) {
+    const min = numberFrom(object.minQuantity ?? object.minQty ?? object.from ?? object.quantityFrom ?? object.qtyFrom) ?? 1;
+    const max = numberFrom(object.maxQuantity ?? object.maxQty ?? object.to ?? object.quantityTo ?? object.qtyTo) ?? Number.MAX_SAFE_INTEGER;
+    if (quantity >= min && quantity <= max) {
+      for (const [key, raw] of Object.entries(object)) {
+        if (/^(?:unit_?price|price|sale_?price|retail_?price|net_?price|base_?price|cost_?price|precio|precio_?venta|pvp|amount|value)$/i.test(key)) {
+          const parsed = numberFrom(raw);
+          if (parsed !== null && parsed > 0) out.push(parsed);
+        }
+      }
     }
   }
-  return null;
+  for (const child of Object.values(object)) collectPriceCandidates(child, quantity, currency, out, visited, depth + 1);
 }
 
 function numberFrom(value: unknown): number | null {
-  const parsed = typeof value === "number" ? value : typeof value === "string" ? Number(value.replace(",", ".")) : NaN;
+  if (typeof value === "number") return Number.isFinite(value) ? value : null;
+  if (typeof value !== "string") return null;
+  const cleaned = value.trim().replace(/[^0-9,.-]/g, "");
+  if (!cleaned) return null;
+  const normalized = cleaned.includes(",") && cleaned.includes(".")
+    ? (cleaned.lastIndexOf(",") > cleaned.lastIndexOf(".") ? cleaned.replace(/\./g, "").replace(",", ".") : cleaned.replace(/,/g, ""))
+    : cleaned.replace(",", ".");
+  const parsed = Number(normalized);
   return Number.isFinite(parsed) ? parsed : null;
 }
 
@@ -194,4 +227,29 @@ function slugify(value: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "") || "producto";
+}
+
+function buildExplanation(evaluation: import("./engine/recommendation-core.types.js").RecommendationEvaluation, semanticScore: number, semanticReasons: readonly string[]) {
+  const constraints: RecommendationConstraintEvidence[] = evaluation.factors.map((factor) => ({
+    key: factor.ruleId,
+    label: factor.category,
+    status: factor.matched ? "MATCHED" : (factor.warning || factor.points < 0 ? "VIOLATED" : "NEUTRAL"),
+    points: factor.points,
+    reason: factor.reason,
+    warning: factor.warning,
+  }));
+  const matchedConstraints = constraints.filter((item) => item.status === "MATCHED");
+  const violatedConstraints = constraints.filter((item) => item.status === "VIOLATED");
+  const positive = evaluation.factors.filter((factor) => factor.points > 0).reduce((sum, factor) => sum + factor.points, 0) + Math.max(0, semanticScore);
+  const negative = Math.abs(evaluation.factors.filter((factor) => factor.points < 0).reduce((sum, factor) => sum + factor.points, 0));
+  const confidence = Math.max(0, Math.min(1, Math.round((positive / Math.max(1, positive + negative + 20)) * 100) / 100));
+  return {
+    headline: `${evaluation.score + Math.round(semanticScore)} puntos de adecuación`,
+    confidence,
+    strengths: [...semanticReasons, ...evaluation.reasons].slice(0, 6),
+    cautions: evaluation.warnings.slice(0, 4),
+    matchedConstraints,
+    violatedConstraints,
+    rankingFactors: evaluation.factors.map((factor) => ({ ruleId: factor.ruleId, category: factor.category, points: factor.points, weight: factor.weight ?? 1, matched: factor.matched })),
+  };
 }

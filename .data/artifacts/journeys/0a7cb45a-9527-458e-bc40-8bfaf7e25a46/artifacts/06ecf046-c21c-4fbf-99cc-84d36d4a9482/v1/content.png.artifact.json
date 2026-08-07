@@ -1,0 +1,13 @@
+{
+  "journeyId": "0a7cb45a-9527-458e-bc40-8bfaf7e25a46",
+  "artifactId": "06ecf046-c21c-4fbf-99cc-84d36d4a9482",
+  "version": 1,
+  "fileName": "d21cde01-720c-4f41-be1c-9e02547152be-story-2-image-brief-2.png",
+  "relativePath": "journeys/0a7cb45a-9527-458e-bc40-8bfaf7e25a46/artifacts/06ecf046-c21c-4fbf-99cc-84d36d4a9482/v1/content.png",
+  "absolutePath": "C:\\catalog-engine\\.data\\artifacts\\journeys\\0a7cb45a-9527-458e-bc40-8bfaf7e25a46\\artifacts\\06ecf046-c21c-4fbf-99cc-84d36d4a9482\\v1\\content.png",
+  "uri": "/api/v1/artifacts/content/journeys%2F0a7cb45a-9527-458e-bc40-8bfaf7e25a46%2Fartifacts%2F06ecf046-c21c-4fbf-99cc-84d36d4a9482%2Fv1%2Fcontent.png",
+  "sizeBytes": 1675419,
+  "checksum": "e4f43ec20f4d17bdf04e2eca3cf19ca0e9ca800861ff7e76b2a63a341f5ebecc",
+  "mimeType": "image/png",
+  "createdAt": "2026-08-02T16:45:57.978Z"
+}

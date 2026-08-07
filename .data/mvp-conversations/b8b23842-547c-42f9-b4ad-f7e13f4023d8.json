@@ -1,0 +1,170 @@
+{
+  "id": "b8b23842-547c-42f9-b4ad-f7e13f4023d8",
+  "journeyId": "a70e9ab0-ee42-484f-9237-27adaf915b63",
+  "journey": {
+    "id": "a70e9ab0-ee42-484f-9237-27adaf915b63",
+    "type": "GIFT",
+    "status": "DISCOVERING",
+    "version": 8,
+    "sessionId": "b8b23842-547c-42f9-b4ad-f7e13f4023d8",
+    "participants": [
+      {
+        "id": "96cf6fd3-719f-4f1b-900f-9fd4f6765d24",
+        "role": "RECIPIENT",
+        "relationship": "grandparent",
+        "preferences": {},
+        "facts": {},
+        "createdAt": "2026-08-02T09:56:55.327Z",
+        "updatedAt": "2026-08-02T09:56:55.327Z"
+      }
+    ],
+    "facts": [
+      {
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "grandparent",
+        "createdAt": "2026-08-02T09:56:55.327Z",
+        "updatedAt": "2026-08-02T09:56:55.327Z"
+      },
+      {
+        "key": "recipient.relationship",
+        "value": "grandparent",
+        "confidence": 0.95,
+        "source": "CONVERSATION",
+        "evidence": "grandparent",
+        "createdAt": "2026-08-02T09:56:55.327Z",
+        "updatedAt": "2026-08-02T09:56:55.327Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.2-discovery-rules-v1",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:56:55.327Z",
+        "updatedAt": "2026-08-02T09:56:55.327Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.56,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:56:55.327Z",
+        "updatedAt": "2026-08-02T09:56:55.327Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.discovery",
+          "profileVersion": "v1",
+          "score": 40,
+          "requiredScore": 61.54,
+          "recommendedScore": 0,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship"
+          ],
+          "missingRequired": [
+            "occasion.type"
+          ],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.95,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T09:56:55.327Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T09:56:55.327Z",
+        "updatedAt": "2026-08-02T09:56:55.327Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T09:56:55.326Z",
+    "updatedAt": "2026-08-02T09:56:55.327Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "3891a06a-b1b4-4a91-979d-545a9c737ede",
+    "accessKeyHash": "2697ac26bb302d1f3e6d692d2796af1684f1e36202227dbcbeb9de63b57d7f9b",
+    "createdAt": "2026-08-02T09:56:55.326Z"
+  },
+  "messages": [
+    {
+      "id": "77963ef1-1b38-4c2b-9378-db7aaec5705d",
+      "role": "USER",
+      "text": "para mi abuela",
+      "createdAt": "2026-08-02T09:56:55.326Z"
+    },
+    {
+      "id": "d5750094-a876-4991-9833-4f738f824b1c",
+      "role": "RAI",
+      "text": "¿Qué vais a celebrar?",
+      "createdAt": "2026-08-02T09:56:55.328Z"
+    }
+  ],
+  "createdAt": "2026-08-02T09:56:55.328Z",
+  "updatedAt": "2026-08-02T09:56:55.328Z"
+}

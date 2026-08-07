@@ -1,0 +1,205 @@
+.giftBrainStudio {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #f3f2ee;
+  color: #242420;
+  font-family: Inter, system-ui, sans-serif;
+}
+.giftBrainStudio__header,
+.giftBrainStudio__actions,
+.giftBrainStudio__panel header,
+.giftBrainStudio__simulationDetail header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.giftBrainStudio__header {
+  margin-bottom: 18px;
+}
+.giftBrainStudio__header h1 {
+  margin: 4px 0 6px;
+}
+.giftBrainStudio__header p {
+  margin: 0;
+  color: #77766f;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.giftBrainStudio__actions {
+  flex-wrap: wrap;
+}
+.giftBrainStudio button,
+.giftBrainStudio a {
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background: white;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.giftBrainStudio__layout {
+  display: grid;
+  grid-template-columns: 370px minmax(0, 1fr);
+  gap: 16px;
+}
+.giftBrainStudio__panel,
+.giftBrainStudio__workspace > section {
+  border: 1px solid #deddd7;
+  border-radius: 14px;
+  padding: 16px;
+  background: white;
+}
+.giftBrainStudio__panel {
+  align-self: start;
+}
+.giftBrainStudio__panel h2 {
+  margin: 0;
+}
+.giftBrainStudio__panel textarea {
+  width: 100%;
+  min-height: 620px;
+  margin: 12px 0;
+  box-sizing: border-box;
+  border: 1px solid #cfcec7;
+  border-radius: 9px;
+  padding: 12px;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+  resize: vertical;
+}
+.giftBrainStudio__panel > button {
+  width: 100%;
+  background: #242420;
+  color: white;
+}
+.giftBrainStudio__summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.giftBrainStudio__summary article {
+  border-radius: 10px;
+  padding: 12px;
+  background: #efeee8;
+}
+.giftBrainStudio__summary span,
+.giftBrainStudio__decision span,
+.giftBrainStudio__nextQuestion span {
+  display: block;
+  color: #77766f;
+  font-size: 11px;
+}
+.giftBrainStudio__nextQuestion {
+  margin-bottom: 14px;
+  background: #fff8e3 !important;
+}
+.giftBrainStudio__decision {
+  margin-bottom: 14px;
+  background: #e9f5e8 !important;
+}
+.giftBrainStudio__decision h2 {
+  margin: 5px 0;
+}
+.giftBrainStudio__simulations {
+  margin-bottom: 14px;
+}
+.giftBrainStudio__simulationTabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+.giftBrainStudio__simulationTabs button {
+  min-width: 180px;
+  text-align: left;
+}
+.giftBrainStudio__simulationTabs button.is-active {
+  border: 2px solid #242420;
+  background: #efeee8;
+}
+.giftBrainStudio__simulationTabs span {
+  display: block;
+  color: #77766f;
+}
+.giftBrainStudio__simulationDetail {
+  border: 1px solid #deddd7;
+  border-radius: 10px;
+  padding: 14px;
+}
+.giftBrainStudio__simulationDetail h3 {
+  margin: 4px 0;
+}
+.giftBrainStudio__scores {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0;
+}
+.giftBrainStudio__scores div {
+  display: grid;
+  grid-template-columns: 120px 1fr 45px;
+  align-items: center;
+  gap: 8px;
+}
+.giftBrainStudio__scores progress {
+  width: 100%;
+}
+.giftBrainStudio__xray > article {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ebeae4;
+}
+.giftBrainStudio__xray > article > span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: #242420;
+  color: white;
+}
+.giftBrainStudio__xray p {
+  margin: 4px 0;
+}
+.giftBrainStudio pre {
+  max-height: 360px;
+  overflow: auto;
+  border-radius: 8px;
+  padding: 10px;
+  background: #20211e;
+  color: #edf0e7;
+  font: 11px/1.5 ui-monospace, Consolas, monospace;
+  white-space: pre-wrap;
+}
+.giftBrainStudio__error {
+  margin-bottom: 12px;
+  border: 1px solid #e3aaa7;
+  border-radius: 9px;
+  padding: 10px;
+  background: #fff0ef;
+}
+@media (max-width: 1000px) {
+  .giftBrainStudio__layout {
+    grid-template-columns: 1fr;
+  }
+  .giftBrainStudio__panel textarea {
+    min-height: 360px;
+  }
+}
+@media (max-width: 700px) {
+  .giftBrainStudio {
+    padding: 12px;
+  }
+  .giftBrainStudio__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .giftBrainStudio__summary {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,28 @@
+{"at":"2026-08-02T21:39:52.803Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"QUEUED","progress":{"step":"queued","completed":0,"total":1,"percent":0}}
+{"at":"2026-08-02T21:39:52.828Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"queued","completed":0,"total":1,"percent":0}}
+{"at":"2026-08-02T21:39:52.830Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"PAUSED","progress":{"step":"queued","completed":0,"total":1,"percent":0,"message":"Importación pausada. Al reanudar se comprobarán y omitirán los elementos ya completados."}}
+{"at":"2026-08-02T21:39:52.831Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"QUEUED","progress":{"step":"queued","completed":0,"total":1,"percent":0,"message":"Reanudación en cola. El pipeline es incremental y omitirá productos, clasificaciones e imágenes ya completados."}}
+{"at":"2026-08-02T21:39:52.833Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"queued","completed":0,"total":1,"percent":0,"message":"Reanudación en cola. El pipeline es incremental y omitirá productos, clasificaciones e imágenes ya completados."}}
+{"at":"2026-08-02T21:39:52.835Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":0,"total":1,"message":"Ejecutando incremental-stage","percent":0}}
+{"at":"2026-08-02T21:39:52.836Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":0,"total":20,"percent":0}}
+{"at":"2026-08-02T21:39:52.848Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":1,"total":20,"percent":5}}
+{"at":"2026-08-02T21:39:52.864Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":2,"total":20,"percent":10}}
+{"at":"2026-08-02T21:39:52.879Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":3,"total":20,"percent":15}}
+{"at":"2026-08-02T21:39:52.895Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":4,"total":20,"percent":20}}
+{"at":"2026-08-02T21:39:52.911Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":5,"total":20,"percent":25}}
+{"at":"2026-08-02T21:39:52.926Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":6,"total":20,"percent":30}}
+{"at":"2026-08-02T21:39:52.943Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":7,"total":20,"percent":35}}
+{"at":"2026-08-02T21:39:52.958Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":8,"total":20,"percent":40}}
+{"at":"2026-08-02T21:39:52.974Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":9,"total":20,"percent":45}}
+{"at":"2026-08-02T21:39:53.013Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":10,"total":20,"percent":50}}
+{"at":"2026-08-02T21:39:53.014Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":11,"total":20,"percent":55}}
+{"at":"2026-08-02T21:39:53.015Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":12,"total":20,"percent":60}}
+{"at":"2026-08-02T21:39:53.022Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":13,"total":20,"percent":65}}
+{"at":"2026-08-02T21:39:53.030Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":14,"total":20,"percent":70}}
+{"at":"2026-08-02T21:39:53.038Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":15,"total":20,"percent":75}}
+{"at":"2026-08-02T21:39:53.055Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":16,"total":20,"percent":80}}
+{"at":"2026-08-02T21:39:53.070Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":17,"total":20,"percent":85}}
+{"at":"2026-08-02T21:39:53.087Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":18,"total":20,"percent":90}}
+{"at":"2026-08-02T21:39:53.102Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"incremental-stage","completed":19,"total":20,"percent":95}}
+{"at":"2026-08-02T21:39:53.110Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"RUNNING","progress":{"step":"completed","completed":1,"total":1,"percent":100,"message":"Pipeline completado"}}
+{"at":"2026-08-02T21:39:53.111Z","jobId":"9e85f513-392b-4d6f-b6fb-acc8d189fd98","status":"COMPLETED","progress":{"step":"completed","completed":1,"total":1,"percent":100,"message":"Pipeline completado"}}

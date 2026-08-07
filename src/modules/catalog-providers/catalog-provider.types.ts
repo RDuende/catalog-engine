@@ -1,0 +1,7 @@
+export type CatalogProviderStatus = "ACTIVE" | "INACTIVE" | "ERROR" | "DRAFT";
+export type CatalogProviderAuthType = "NONE" | "BASIC" | "BEARER" | "OAUTH2" | "API_KEY";
+export interface CatalogProviderCapabilities { products:boolean; categories:boolean; media:boolean; prices:boolean; stock:boolean; documents:boolean; videos:boolean; }
+export interface CatalogProviderImportPolicy { automatic:boolean; schedule:string; batchSize:number; mediaConcurrency:number; createSnapshot:boolean; classifyProductBrain:boolean; downloadMedia:boolean; generateThumbnails:boolean; markMissingInactive:boolean; updatePrices:boolean; updateStock:boolean; }
+export interface CatalogProviderCredentials { authType:CatalogProviderAuthType; username?:string; password?:string; token?:string; apiKey?:string; clientId?:string; clientSecret?:string; }
+export interface CatalogProviderRecord { id:string; key:string; name:string; description:string; status:CatalogProviderStatus; baseUrl:string; currency:string; language:string; taxPercent:number; defaultMarginPercent:number; credentials:CatalogProviderCredentials; capabilities:CatalogProviderCapabilities; importPolicy:CatalogProviderImportPolicy; productCount:number; activeProductCount:number; mediaCount:number; lastSyncAt?:string; lastSyncStatus?:"COMPLETED"|"FAILED"|"RUNNING"; lastError?:string; createdAt:string; updatedAt:string; }
+export type CatalogProviderInput = Omit<CatalogProviderRecord,"id"|"productCount"|"activeProductCount"|"mediaCount"|"createdAt"|"updatedAt"|"lastSyncAt"|"lastSyncStatus"|"lastError">;

@@ -13,7 +13,7 @@ class MemoryRepo {
 test("records recommendation runs and feedback", async () => {
   const repo = new MemoryRepo();
   const service = new CommercialMemoryService(repo as any);
-  const runId = await service.recordRecommendation({ query:"eco" } as any, { query:"eco",profile:"eco",pipeline:"eco",totalCandidates:1,elapsedMs:1,metrics:{} as any,interpreted:{} as any,diagnostics:{} as any,items:[] });
+  const runId = await service.recordRecommendation({ query:"eco" } as any, { query:"eco",profile:"eco",pipeline:"eco",totalCandidates:1,elapsedMs:1,metrics:{} as any,interpreted:{} as any,diagnostics:{} as any,items:[],analysis:{ returned:0, discarded:0, discardedAlternatives:[] } });
   await service.recordFeedback({ runId, productId:"22222222-2222-4222-8222-222222222222", eventType:"ACCEPTED" });
   assert.equal(repo.runs,1); assert.equal(repo.feedback,1);
 });

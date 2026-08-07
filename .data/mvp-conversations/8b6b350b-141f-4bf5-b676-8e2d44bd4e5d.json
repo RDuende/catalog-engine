@@ -1,0 +1,187 @@
+{
+  "id": "8b6b350b-141f-4bf5-b676-8e2d44bd4e5d",
+  "journeyId": "9404d062-a54c-48d8-81f2-c888163af9c6",
+  "journey": {
+    "id": "9404d062-a54c-48d8-81f2-c888163af9c6",
+    "type": "GIFT",
+    "status": "READY_FOR_INSPIRATION",
+    "version": 12,
+    "sessionId": "8b6b350b-141f-4bf5-b676-8e2d44bd4e5d",
+    "participants": [
+      {
+        "id": "32d2ddec-5936-4268-b5c6-aac6e40691ec",
+        "role": "RECIPIENT",
+        "relationship": "sibling",
+        "preferences": {},
+        "facts": {},
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      }
+    ],
+    "facts": [
+      {
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "sibling",
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      },
+      {
+        "key": "recipient.relationship",
+        "value": "sibling",
+        "confidence": 0.95,
+        "source": "CONVERSATION",
+        "evidence": "sibling",
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      },
+      {
+        "key": "occasion.type",
+        "value": "wedding",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "wedding",
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      },
+      {
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "para la boda de mi hermana",
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.67,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 65,
+          "requiredScore": 100,
+          "recommendedScore": 0,
+          "requiredComplete": true,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship",
+            "occasion.type"
+          ],
+          "missingRequired": [],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.95,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T15:53:07.966Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T15:53:07.966Z",
+        "updatedAt": "2026-08-02T15:53:07.966Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T15:53:07.965Z",
+    "updatedAt": "2026-08-02T15:53:07.966Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "f9cca1af-f19f-4298-b5f9-eb9f1501890c",
+    "accessKeyHash": "92244c3f561f31e90d68fc3c498721b827952f75e6e30293d14c814e536323de",
+    "createdAt": "2026-08-02T15:53:07.965Z"
+  },
+  "messages": [
+    {
+      "id": "a83725cb-cd8f-458b-b916-14e38333929b",
+      "role": "USER",
+      "text": "para la boda de mi hermana",
+      "createdAt": "2026-08-02T15:53:07.965Z"
+    },
+    {
+      "id": "14dbded5-a375-4b70-9dde-29e2b0f5c70c",
+      "role": "RAI",
+      "text": "¡Qué ocasión tan especial! ¿Qué aficiones o gustos tiene tu hermana?",
+      "createdAt": "2026-08-02T15:53:11.885Z"
+    }
+  ],
+  "createdAt": "2026-08-02T15:53:11.885Z",
+  "updatedAt": "2026-08-02T15:53:11.885Z"
+}

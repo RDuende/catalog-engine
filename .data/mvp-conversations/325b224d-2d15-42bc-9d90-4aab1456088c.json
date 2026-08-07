@@ -1,0 +1,1062 @@
+{
+  "id": "325b224d-2d15-42bc-9d90-4aab1456088c",
+  "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+  "journey": {
+    "id": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+    "type": "GIFT",
+    "status": "PROPOSING",
+    "version": 55,
+    "sessionId": "325b224d-2d15-42bc-9d90-4aab1456088c",
+    "participants": [
+      {
+        "id": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+        "role": "RECIPIENT",
+        "relationship": "son",
+        "preferences": {},
+        "facts": {},
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:56:11.341Z"
+      }
+    ],
+    "facts": [
+      {
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "son",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:56:11.341Z"
+      },
+      {
+        "key": "recipient.relationship",
+        "value": "son",
+        "confidence": 0.95,
+        "source": "CONVERSATION",
+        "evidence": "son",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:56:11.341Z"
+      },
+      {
+        "key": "occasion.type",
+        "value": "communion",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "communion",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:56:11.341Z"
+      },
+      {
+        "key": "journey.intent",
+        "value": "create_gift",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "regalo",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:56:11.341Z"
+      },
+      {
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "un regalo de comunión para el hijo de mi vecino",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:56:11.341Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:57:52.156Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:57:52.156Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 65,
+          "requiredScore": 100,
+          "recommendedScore": 0,
+          "requiredComplete": true,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship",
+            "occasion.type"
+          ],
+          "missingRequired": [],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.95,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T16:57:52.156Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T16:56:11.341Z",
+        "updatedAt": "2026-08-02T16:57:52.156Z"
+      }
+    ],
+    "artifacts": [
+      {
+        "id": "63c850fa-de32-4afb-acb4-93ed580947ef",
+        "type": "CREATIVE_BRIEF",
+        "version": 1,
+        "status": "READY",
+        "title": "Creative Brief v1",
+        "data": {
+          "brief": {
+            "id": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+            "specificationVersion": "v1",
+            "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+            "journeyVersion": 49,
+            "version": 1,
+            "status": "READY",
+            "objective": "Crear un regalo personalizado y memorable para una persona especial para communion.",
+            "audience": [
+              {
+                "participantId": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+                "role": "RECIPIENT",
+                "relationship": "son",
+                "interests": []
+              }
+            ],
+            "occasion": "communion",
+            "emotionalGoals": [
+              "SURPRISE"
+            ],
+            "themes": [],
+            "narrativeStyle": "EMOTIONAL",
+            "visualStyle": "UNSPECIFIED",
+            "constraints": [
+              {
+                "id": "missing.recipient.interests",
+                "kind": "MISSING_DATA",
+                "description": "Falta el dato recipient.interests.",
+                "blocking": false
+              }
+            ],
+            "pendingFacts": [
+              "recipient.interests"
+            ],
+            "sources": [
+              {
+                "field": "audience",
+                "source": "PARTICIPANT",
+                "confidence": 1,
+                "reason": "Derivado de participantes RECIPIENT del Journey."
+              },
+              {
+                "field": "objective",
+                "source": "RULE",
+                "confidence": 0.9,
+                "reason": "Construido con audiencia y ocasión conocidas."
+              },
+              {
+                "field": "emotionalGoals",
+                "source": "RULE",
+                "confidence": 0.78,
+                "reason": "Inferidos de la ocasión, número y edad de destinatarios."
+              },
+              {
+                "field": "narrativeStyle",
+                "source": "RULE",
+                "confidence": 0.62,
+                "reason": "Inferido de temas e intereses."
+              },
+              {
+                "field": "visualStyle",
+                "source": "RULE",
+                "confidence": 0.62,
+                "reason": "Inferido de temas y edad de la audiencia."
+              },
+              {
+                "field": "occasion",
+                "factKey": "occasion.type",
+                "source": "CONVERSATION",
+                "confidence": 0.98,
+                "reason": "Hecho confirmado en el Journey."
+              }
+            ],
+            "validation": {
+              "valid": true,
+              "issues": [
+                {
+                  "code": "THEME_RECOMMENDED",
+                  "field": "themes",
+                  "severity": "WARNING",
+                  "message": "Un tema creativo concreto ayudará a diferenciar las propuestas."
+                }
+              ]
+            },
+            "createdAt": "2026-08-02T16:57:52.157Z"
+          }
+        },
+        "createdAt": "2026-08-02T16:57:52.157Z"
+      },
+      {
+        "id": "e1620251-75b6-4602-8735-b502be53dfdf",
+        "type": "STORY",
+        "version": 1,
+        "status": "READY",
+        "title": "Story Concepts v1",
+        "data": {
+          "storySet": {
+            "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story-set:1",
+            "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+            "journeyVersion": 49,
+            "briefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+            "briefVersion": 1,
+            "version": 1,
+            "concepts": [
+              {
+                "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:1",
+                "version": 1,
+                "status": "READY",
+                "briefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "briefVersion": 1,
+                "title": "El poder que siempre estuvo dentro",
+                "logline": "la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo.",
+                "premise": "En un universo inspirado en un mundo creado especialmente para ellas, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                "emotionalPromise": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "centralConflict": "Cada protagonista intenta resolver la misión sola y descubre que ninguna habilidad está completa por separado.",
+                "resolution": "Al unir sus poderes, completan el emblema, salvan su mundo y comprenden que siempre forman el mejor equipo.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+                    "name": "Protagonista 1",
+                    "description": "Tiene una habilidad única que se completa con la de la otra protagonista.",
+                    "definingTrait": "talento complementario"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "emblema dividido que se une",
+                  "poderes de colores complementarios",
+                  "pose final de equipo"
+                ],
+                "differentiators": [
+                  "Cada destinataria conserva identidad propia",
+                  "La imagen se completa al estar juntas",
+                  "Fácil de materializar en dos productos conectados"
+                ],
+                "narrativeStyle": "EMOTIONAL",
+                "visualStyle": "UNSPECIFIED",
+                "themes": [],
+                "emotionalGoals": [
+                  "SURPRISE"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.157Z"
+              },
+              {
+                "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:2",
+                "version": 1,
+                "status": "READY",
+                "briefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "briefVersion": 1,
+                "title": "La misión de la guardiana",
+                "logline": "la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo.",
+                "premise": "El día de communion, una señal oculta abre la puerta a un reino de un mundo creado especialmente para ellas. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                "emotionalPromise": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "centralConflict": "Una sombra intenta borrar los momentos compartidos y deja el reino sin color.",
+                "resolution": "Las guardianas recuperan los recuerdos, devuelven el color al reino y guardan uno nuevo: el de su propia aventura.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+                    "name": "Protagonista 1",
+                    "description": "Forma parte de un equipo inseparable con una misión compartida.",
+                    "definingTrait": "valentía"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "portal de cumpleaños",
+                  "mapa de recuerdos",
+                  "reino que recupera el color"
+                ],
+                "differentiators": [
+                  "Integra la ocasión dentro de la historia",
+                  "Permite ampliar el universo en futuras celebraciones",
+                  "Funciona como cuento, póster o puzle"
+                ],
+                "narrativeStyle": "EMOTIONAL",
+                "visualStyle": "UNSPECIFIED",
+                "themes": [],
+                "emotionalGoals": [
+                  "SURPRISE"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.157Z"
+              },
+              {
+                "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:3",
+                "version": 1,
+                "status": "READY",
+                "briefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "briefVersion": 1,
+                "title": "Creadora de su propio universo",
+                "logline": "la protagonista no reciben una aventura terminada: tienen el poder de elegir cómo nace y evoluciona su mundo.",
+                "premise": "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en un mundo creado especialmente para ellas, hasta formar un universo completamente suyo.",
+                "emotionalPromise": "Hacer que el proceso de crear juntas sea tan memorable como el regalo final.",
+                "centralConflict": "El universo empieza a desordenarse porque cada idea tira en una dirección distinta.",
+                "resolution": "Las protagonistas aprenden a combinar sus ideas y crean un mundo donde todas tienen un lugar.",
+                "characters": [
+                  {
+                    "role": "PROTAGONIST",
+                    "participantId": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+                    "name": "Protagonista 1",
+                    "description": "Puede imaginar y transformar el mundo con sus propias decisiones.",
+                    "definingTrait": "valentía"
+                  },
+                  {
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "definingTrait": "unión"
+                  }
+                ],
+                "visualHooks": [
+                  "libro o portal en blanco",
+                  "escenarios que cambian con cada elección",
+                  "firma final de las creadoras"
+                ],
+                "differentiators": [
+                  "Experiencia participativa",
+                  "Ideal para bono de personalización",
+                  "Genera múltiples artefactos desde una misma historia"
+                ],
+                "narrativeStyle": "EMOTIONAL",
+                "visualStyle": "UNSPECIFIED",
+                "themes": [],
+                "emotionalGoals": [
+                  "SURPRISE"
+                ],
+                "generatorId": "deterministic-story-concepts",
+                "generatorVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.157Z"
+              }
+            ],
+            "createdAt": "2026-08-02T16:57:52.157Z"
+          }
+        },
+        "createdAt": "2026-08-02T16:57:52.157Z"
+      },
+      {
+        "id": "9efd4eb7-0cfa-45de-86cf-d3d828b36bf3",
+        "type": "IMAGE",
+        "version": 1,
+        "status": "READY",
+        "title": "Image Briefs v1",
+        "data": {
+          "imageBriefSet": {
+            "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story-set:1:image-brief-set:1",
+            "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+            "journeyVersion": 49,
+            "creativeBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+            "creativeBriefVersion": 1,
+            "storySetId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story-set:1",
+            "storySetVersion": 1,
+            "version": 1,
+            "briefs": [
+              {
+                "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:1:image-brief:1",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+                "journeyVersion": 49,
+                "creativeBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:1",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — El poder que siempre estuvo dentro",
+                "scene": "En un universo inspirado en un mundo creado especialmente para ellas, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                "emotionalIntent": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "visualStyle": "UNSPECIFIED",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Tiene una habilidad única que se completa con la de la otra protagonista.",
+                    "visualTraits": [
+                      "talento complementario"
+                    ],
+                    "participantId": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "GROUP",
+                  "camera": "LOW_ANGLE",
+                  "focalPoint": "emblema dividido que se une",
+                  "foreground": [
+                    "emblema dividido que se une",
+                    "poderes de colores complementarios"
+                  ],
+                  "background": [
+                    "En un universo inspirado en un mundo creado especialmente para ellas, cada protagonista recibe una habilidad diferente. Una amenaza separa las piezas de un emblema y solo podrán recuperarlas combinando sus talentos.",
+                    "pose final de equipo"
+                  ],
+                  "balance": "SYMMETRIC"
+                },
+                "palette": {
+                  "mood": "cálido y emocionante",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "emblema dividido que se une",
+                  "poderes de colores complementarios",
+                  "pose final de equipo",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "El poder que siempre estuvo dentro. la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo.. Protagonistas: años. Tema: personalizado. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Celebrar que ser diferentes hace más fuerte el vínculo que las une.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.158Z"
+              },
+              {
+                "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:2:image-brief:2",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+                "journeyVersion": 49,
+                "creativeBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:2",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — La misión de la guardiana",
+                "scene": "El día de communion, una señal oculta abre la puerta a un reino de un mundo creado especialmente para ellas. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                "emotionalIntent": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "visualStyle": "UNSPECIFIED",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Forma parte de un equipo inseparable con una misión compartida.",
+                    "visualTraits": [
+                      "valentía"
+                    ],
+                    "participantId": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "FULL_BODY",
+                  "camera": "EYE_LEVEL",
+                  "focalPoint": "portal de cumpleaños",
+                  "foreground": [
+                    "portal de cumpleaños",
+                    "mapa de recuerdos"
+                  ],
+                  "background": [
+                    "El día de communion, una señal oculta abre la puerta a un reino de un mundo creado especialmente para ellas. Allí, las protagonistas se convierten en guardianas de los recuerdos felices.",
+                    "reino que recupera el color"
+                  ],
+                  "balance": "DYNAMIC"
+                },
+                "palette": {
+                  "mood": "cálido y emocionante",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "portal de cumpleaños",
+                  "mapa de recuerdos",
+                  "reino que recupera el color",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "La misión de la guardiana. la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo.. Protagonistas: años. Tema: personalizado. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.158Z"
+              },
+              {
+                "id": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:3:image-brief:3",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+                "journeyVersion": 49,
+                "creativeBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:3",
+                "storyConceptVersion": 1,
+                "purpose": "CONCEPT",
+                "title": "Dirección visual — Creadora de su propio universo",
+                "scene": "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en un mundo creado especialmente para ellas, hasta formar un universo completamente suyo.",
+                "emotionalIntent": "Hacer que el proceso de crear juntas sea tan memorable como el regalo final.",
+                "visualStyle": "UNSPECIFIED",
+                "aspectRatio": "1:1",
+                "subjects": [
+                  {
+                    "id": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b",
+                    "role": "PRIMARY",
+                    "name": "Protagonista 1",
+                    "description": "Puede imaginar y transformar el mundo con sus propias decisiones.",
+                    "visualTraits": [
+                      "valentía"
+                    ],
+                    "participantId": "b9f7e8e2-cf90-4d03-ad35-d86ac7f91f7b"
+                  },
+                  {
+                    "id": "subject-2",
+                    "role": "SYMBOL",
+                    "name": "El vínculo",
+                    "description": "Un símbolo que solo se completa cuando las protagonistas colaboran.",
+                    "visualTraits": [
+                      "unión"
+                    ]
+                  }
+                ],
+                "composition": {
+                  "framing": "FULL_BODY",
+                  "camera": "EYE_LEVEL",
+                  "focalPoint": "libro o portal en blanco",
+                  "foreground": [
+                    "libro o portal en blanco",
+                    "escenarios que cambian con cada elección"
+                  ],
+                  "background": [
+                    "Un libro en blanco responde a las decisiones de las protagonistas. Cada elección crea personajes, lugares y poderes inspirados en un mundo creado especialmente para ellas, hasta formar un universo completamente suyo.",
+                    "firma final de las creadoras"
+                  ],
+                  "balance": "DYNAMIC"
+                },
+                "palette": {
+                  "mood": "cálido y emocionante",
+                  "colors": [
+                    "azul cielo",
+                    "coral",
+                    "dorado suave",
+                    "verde menta"
+                  ],
+                  "contrast": "MEDIUM"
+                },
+                "requiredElements": [
+                  "libro o portal en blanco",
+                  "escenarios que cambian con cada elección",
+                  "firma final de las creadoras",
+                  "Protagonista 1"
+                ],
+                "forbiddenElements": [
+                  "texto ilegible o integrado en la imagen",
+                  "personajes duplicados",
+                  "rasgos infantiles de bebé",
+                  "marcas comerciales o personajes protegidos",
+                  "violencia o elementos inquietantes"
+                ],
+                "textPolicy": "NO_TEXT",
+                "productionNotes": [
+                  "Mantener zonas limpias para adaptar el arte a camiseta, póster o puzzle.",
+                  "Conservar separación suficiente entre elementos para recorte y composición."
+                ],
+                "promptSeed": "Creadora de su propio universo. la protagonista no reciben una aventura terminada: tienen el poder de elegir cómo nace y evoluciona su mundo.. Protagonistas: años. Tema: personalizado. Estilo: ilustración colorida, formas claras, acabado amable. Emoción: Hacer que el proceso de crear juntas sea tan memorable como el regalo final.. Composición clara, personajes diferenciados y conectados, sin texto integrado.",
+                "builderId": "deterministic-image-brief",
+                "builderVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.158Z"
+              }
+            ],
+            "createdAt": "2026-08-02T16:57:52.158Z"
+          }
+        },
+        "createdAt": "2026-08-02T16:57:52.158Z"
+      },
+      {
+        "id": "1ac1de2a-9be9-4b48-b16d-d4afb9e4299e",
+        "type": "PROPOSAL",
+        "version": 1,
+        "status": "READY",
+        "title": "Solution Set v1",
+        "data": {
+          "solutionSet": {
+            "id": "f527e1b3-6cea-457a-b8a7-94a92036a51f",
+            "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+            "journeyVersion": 49,
+            "creativeBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+            "creativeBriefVersion": 1,
+            "storySetId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story-set:1",
+            "storySetVersion": 1,
+            "imageBriefSetId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story-set:1:image-brief-set:1",
+            "imageBriefSetVersion": 1,
+            "version": 1,
+            "solutions": [
+              {
+                "id": "8875b163-e19e-4481-8d3a-d02cb0c297d9",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+                "journeyVersion": 49,
+                "creativeBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:1",
+                "storyConceptVersion": 1,
+                "imageBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:1:image-brief:1",
+                "imageBriefVersion": 1,
+                "title": "El poder que siempre estuvo dentro",
+                "description": "la protagonista descubren que su mayor poder aparece cuando confían y actúan en equipo. La propuesta materializa la historia en productos que pueden disfrutarse juntas.",
+                "emotionalPromise": "Celebrar que ser diferentes hace más fuerte el vínculo que las une.",
+                "products": [
+                  {
+                    "productId": "twin-shirts",
+                    "sku": "TXT-TWIN-001",
+                    "name": "Camiseta coordinada",
+                    "category": "TEXTILE",
+                    "quantity": 2,
+                    "unitPrice": 19,
+                    "totalPrice": 38,
+                    "currency": "EUR",
+                    "role": "PRIMARY",
+                    "reason": "Es la materialización principal de la historia."
+                  },
+                  {
+                    "productId": "personalized-poster",
+                    "sku": "DEC-A3-001",
+                    "name": "Lámina personalizada A3",
+                    "category": "DECORATION",
+                    "quantity": 1,
+                    "unitPrice": 18,
+                    "totalPrice": 18,
+                    "currency": "EUR",
+                    "role": "COMPLEMENT",
+                    "reason": "Refuerza la experiencia y conserva el mismo universo visual."
+                  }
+                ],
+                "subtotal": 56,
+                "total": 56,
+                "currency": "EUR",
+                "withinBudget": true,
+                "score": 74.5,
+                "reasons": [
+                  "No existe un presupuesto máximo; la solución permanece elegible.",
+                  "Todos los productos están disponibles y son adecuados para la audiencia.",
+                  "0 de 2 productos admiten el estilo UNSPECIFIED.",
+                  "La selección cubre 1 de 1 objetivos emocionales del brief."
+                ],
+                "warnings": [
+                  "Presupuesto no definido.",
+                  "Algún producto podría requerir adaptar la dirección visual."
+                ],
+                "policyResults": [
+                  {
+                    "policyId": "budget",
+                    "passed": true,
+                    "score": 0.7,
+                    "reasons": [
+                      "No existe un presupuesto máximo; la solución permanece elegible."
+                    ],
+                    "warnings": [
+                      "Presupuesto no definido."
+                    ]
+                  },
+                  {
+                    "policyId": "product-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "Todos los productos están disponibles y son adecuados para la audiencia."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "visual-compatibility",
+                    "passed": false,
+                    "score": 0,
+                    "reasons": [
+                      "0 de 2 productos admiten el estilo UNSPECIFIED."
+                    ],
+                    "warnings": [
+                      "Algún producto podría requerir adaptar la dirección visual."
+                    ]
+                  },
+                  {
+                    "policyId": "emotion",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "La selección cubre 1 de 1 objetivos emocionales del brief."
+                    ],
+                    "warnings": []
+                  }
+                ],
+                "engineId": "deterministic-solution-engine",
+                "engineVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.159Z"
+              },
+              {
+                "id": "e667d04b-2964-44f1-949a-07e9705fbdfa",
+                "version": 1,
+                "status": "READY",
+                "journeyId": "4d37fd05-cde3-40ad-bee6-a2f88fe1c537",
+                "journeyVersion": 49,
+                "creativeBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3",
+                "creativeBriefVersion": 1,
+                "storyConceptId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:2",
+                "storyConceptVersion": 1,
+                "imageBriefId": "212e8802-b318-4cbd-87a6-69decd9b04e3:story:2:image-brief:2",
+                "imageBriefVersion": 1,
+                "title": "La misión de la guardiana",
+                "description": "la protagonista reciben una misión secreta durante la celebración y deben proteger el recuerdo más valioso de su mundo. La propuesta materializa la historia en productos que pueden disfrutarse juntas.",
+                "emotionalPromise": "Convertir la ocasión en el comienzo de una aventura que podrán recordar y continuar.",
+                "products": [
+                  {
+                    "productId": "personalized-puzzle",
+                    "sku": "PUZ-120-001",
+                    "name": "Puzle personalizado 120 piezas",
+                    "category": "PUZZLE",
+                    "quantity": 1,
+                    "unitPrice": 24,
+                    "totalPrice": 24,
+                    "currency": "EUR",
+                    "role": "PRIMARY",
+                    "reason": "Es la materialización principal de la historia."
+                  },
+                  {
+                    "productId": "mini-story-book",
+                    "sku": "BOK-A5-001",
+                    "name": "Mini cuento personalizado",
+                    "category": "BOOK",
+                    "quantity": 1,
+                    "unitPrice": 28,
+                    "totalPrice": 28,
+                    "currency": "EUR",
+                    "role": "COMPLEMENT",
+                    "reason": "Refuerza la experiencia y conserva el mismo universo visual."
+                  }
+                ],
+                "subtotal": 52,
+                "total": 52,
+                "currency": "EUR",
+                "withinBudget": true,
+                "score": 74.5,
+                "reasons": [
+                  "No existe un presupuesto máximo; la solución permanece elegible.",
+                  "Todos los productos están disponibles y son adecuados para la audiencia.",
+                  "0 de 2 productos admiten el estilo UNSPECIFIED.",
+                  "La selección cubre 1 de 1 objetivos emocionales del brief."
+                ],
+                "warnings": [
+                  "Presupuesto no definido.",
+                  "Algún producto podría requerir adaptar la dirección visual."
+                ],
+                "policyResults": [
+                  {
+                    "policyId": "budget",
+                    "passed": true,
+                    "score": 0.7,
+                    "reasons": [
+                      "No existe un presupuesto máximo; la solución permanece elegible."
+                    ],
+                    "warnings": [
+                      "Presupuesto no definido."
+                    ]
+                  },
+                  {
+                    "policyId": "product-compatibility",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "Todos los productos están disponibles y son adecuados para la audiencia."
+                    ],
+                    "warnings": []
+                  },
+                  {
+                    "policyId": "visual-compatibility",
+                    "passed": false,
+                    "score": 0,
+                    "reasons": [
+                      "0 de 2 productos admiten el estilo UNSPECIFIED."
+                    ],
+                    "warnings": [
+                      "Algún producto podría requerir adaptar la dirección visual."
+                    ]
+                  },
+                  {
+                    "policyId": "emotion",
+                    "passed": true,
+                    "score": 1,
+                    "reasons": [
+                      "La selección cubre 1 de 1 objetivos emocionales del brief."
+                    ],
+                    "warnings": []
+                  }
+                ],
+                "engineId": "deterministic-solution-engine",
+                "engineVersion": "v1",
+                "createdAt": "2026-08-02T16:57:52.159Z"
+              }
+            ],
+            "rejectedCandidates": 1,
+            "createdAt": "2026-08-02T16:57:52.159Z"
+          }
+        },
+        "createdAt": "2026-08-02T16:57:52.159Z"
+      }
+    ],
+    "metadata": {},
+    "createdAt": "2026-08-02T16:56:11.339Z",
+    "updatedAt": "2026-08-02T16:57:52.159Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "f2eff273-bfe8-4418-8534-091d5d11bf84",
+    "accessKeyHash": "af2989e7414c95d16a8ad75b590bdaf98516bde9b58cf083699b47797e6811fc",
+    "createdAt": "2026-08-02T16:56:11.338Z"
+  },
+  "messages": [
+    {
+      "id": "963ba62c-ce94-4ec4-beaf-ed753c10c72c",
+      "role": "USER",
+      "text": "un regalo de comunión para el hijo de mi vecino",
+      "createdAt": "2026-08-02T16:56:11.339Z"
+    },
+    {
+      "id": "15f2bacb-ad15-491b-bd1b-ae3205976163",
+      "role": "RAI",
+      "text": "¡Qué detalle! ¿Qué edad tiene aproximadamente?",
+      "createdAt": "2026-08-02T16:56:14.417Z"
+    },
+    {
+      "id": "40d74761-01bb-4c00-b9b7-270fd1b8dfc0",
+      "role": "USER",
+      "text": "12",
+      "createdAt": "2026-08-02T16:56:21.750Z"
+    },
+    {
+      "id": "63f89271-f03c-41be-9bde-20ad03a2fb3c",
+      "role": "RAI",
+      "text": "Perfecto, tiene 12 años. ¿Qué aficiones o intereses tiene?",
+      "createdAt": "2026-08-02T16:56:23.754Z"
+    },
+    {
+      "id": "32dac4cb-23e0-43ed-ac0b-3c8c7ea948c6",
+      "role": "USER",
+      "text": "futbol",
+      "createdAt": "2026-08-02T16:56:29.460Z"
+    },
+    {
+      "id": "c7dd6933-70bb-4de6-b9c7-8867017e0a5f",
+      "role": "RAI",
+      "text": "¡Genial, le gusta el fútbol! ¿Qué presupuesto aproximado tienes?",
+      "createdAt": "2026-08-02T16:56:32.845Z"
+    },
+    {
+      "id": "cc61f581-f682-4613-ac4b-61252d73f340",
+      "role": "USER",
+      "text": "50 €",
+      "createdAt": "2026-08-02T16:56:40.569Z"
+    },
+    {
+      "id": "24f0e6fc-1db2-47a4-a278-f0d25688357c",
+      "role": "RAI",
+      "text": "Perfecto, hasta 50 €. ¿Tiene algún equipo o jugador de fútbol favorito?",
+      "createdAt": "2026-08-02T16:56:44.619Z"
+    },
+    {
+      "id": "101a1753-ae1b-4ea3-a039-c9117a0b8fae",
+      "role": "USER",
+      "text": "FC Cartagena",
+      "createdAt": "2026-08-02T16:56:58.060Z"
+    },
+    {
+      "id": "55e4f4ca-c34a-454c-bb73-728e2ca048d7",
+      "role": "RAI",
+      "text": "¡Perfecto, es seguidor del FC Cartagena! ¿Prefieres un regalo útil o un recuerdo más emotivo de su comunión?",
+      "createdAt": "2026-08-02T16:57:02.027Z"
+    },
+    {
+      "id": "b2d97390-6988-49f4-9ddb-0e6a84c73567",
+      "role": "USER",
+      "text": "recuerdo",
+      "createdAt": "2026-08-02T16:57:09.340Z"
+    },
+    {
+      "id": "924d0ac5-11ab-4127-b076-f7dc3ecaefd2",
+      "role": "RAI",
+      "text": "¿Te gustaría que el recuerdo llevara una dedicatoria especial por su comunión?",
+      "createdAt": "2026-08-02T16:57:13.291Z"
+    },
+    {
+      "id": "36357350-5c5e-4e82-a81a-578a1480047d",
+      "role": "USER",
+      "text": "sí",
+      "createdAt": "2026-08-02T16:57:18.402Z"
+    },
+    {
+      "id": "ffc124e7-fc09-4b89-92bb-b04d1df22e94",
+      "role": "RAI",
+      "text": "¿Qué te gustaría transmitirle en la dedicatoria?",
+      "createdAt": "2026-08-02T16:57:20.562Z"
+    },
+    {
+      "id": "c22d4704-5888-4ec6-8600-31b56dc6ed36",
+      "role": "USER",
+      "text": "que siempre nos acordaremos de él",
+      "createdAt": "2026-08-02T16:57:35.798Z"
+    },
+    {
+      "id": "ed44110f-6fa9-434a-829e-9ac169b20177",
+      "role": "RAI",
+      "text": "Qué mensaje tan bonito: «Siempre nos acordaremos de ti». ¿Tienes alguna foto suya para personalizar el recuerdo?",
+      "createdAt": "2026-08-02T16:57:38.482Z"
+    },
+    {
+      "id": "d446714d-bd76-40df-8c9b-0ce089562772",
+      "role": "USER",
+      "text": "sí",
+      "createdAt": "2026-08-02T16:57:45.259Z"
+    },
+    {
+      "id": "65fedcc0-a82a-43a1-aa59-5d38f4568820",
+      "role": "RAI",
+      "text": "Perfecto, podremos usar esa foto para personalizar el recuerdo. ¿Quieres que te muestre propuestas?",
+      "createdAt": "2026-08-02T16:57:48.215Z"
+    },
+    {
+      "id": "23f8efd5-ab6d-427f-8915-ab2f3cbffb0f",
+      "role": "RAI",
+      "text": "Ya tengo preparadas tres propuestas para este regalo.",
+      "createdAt": "2026-08-02T16:57:52.159Z"
+    }
+  ],
+  "createdAt": "2026-08-02T16:56:14.417Z",
+  "updatedAt": "2026-08-02T16:57:52.159Z"
+}

@@ -18,6 +18,10 @@ class HandlerRegistry<T extends RuntimeHandler> {
   list(): readonly string[] {
     return [...this.handlers.keys()].sort();
   }
+
+  values(): readonly T[] {
+    return [...this.handlers.values()];
+  }
 }
 
 export class SkillRegistry extends HandlerRegistry<RuntimeSkill> {}

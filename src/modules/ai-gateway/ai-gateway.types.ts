@@ -1,4 +1,4 @@
-import type { CommercialContext, CommercialContextField, ContextPatch } from "../../core/commercial-context/index.js";
+import type { CommercialContextField, ContextPatch } from "../../core/commercial-context/index.js";
 
 export type AIProviderName = "openai" | "mock";
 
@@ -39,19 +39,11 @@ export interface AIProvider {
   structured<T>(request: StructuredAIRequest<T>): Promise<StructuredAIResult<T>>;
 }
 
+export type {
+  ConversationExtractRequest,
+  ConversationIntent,
+  ConversationUnderstanding,
+} from "../../ai/conversation/conversation.types.js";
+
 export type ConversationPatchField = CommercialContextField;
 export type ConversationPatch = ContextPatch;
-
-export interface ConversationUnderstanding {
-  readonly intent: "GREETING" | "DISCOVER" | "RECOMMEND" | "COMPARE" | "PROPOSAL" | "CORRECT" | "CONFIRM" | "OTHER";
-  readonly patches: readonly ConversationPatch[];
-  readonly missingFields: readonly ConversationPatchField[];
-  readonly nextQuestion: string | null;
-  readonly userFacingReply: string;
-  readonly confidence: number;
-}
-
-export interface ConversationExtractRequest {
-  readonly message: string;
-  readonly context?: CommercialContext;
-}

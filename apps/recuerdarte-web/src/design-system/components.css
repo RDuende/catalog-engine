@@ -1,0 +1,65 @@
+.ra-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ra-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--ra-radius-md);
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  font-size: var(--ra-text-sm);
+  transition: transform var(--ra-duration-fast) var(--ra-ease-standard),
+    background var(--ra-duration-fast) var(--ra-ease-standard),
+    border-color var(--ra-duration-fast) var(--ra-ease-standard),
+    opacity var(--ra-duration-fast) var(--ra-ease-standard);
+}
+.ra-button:hover:not(:disabled) { transform: translateY(-1px); }
+.ra-button:active:not(:disabled) { transform: translateY(0); }
+.ra-button:disabled { opacity: 0.45; }
+.ra-button--primary { background: var(--ra-color-primary-strong); color: white; }
+:root[data-theme="dark"] .ra-button--primary { color: #211925; }
+.ra-button--secondary {
+  background: color-mix(in srgb, var(--ra-color-surface-solid) 72%, transparent);
+  color: var(--ra-color-ink);
+  border-color: var(--ra-color-border);
+}
+.ra-button--ghost { background: transparent; color: var(--ra-color-muted); border-color: var(--ra-color-border); }
+.ra-button--pill { border-radius: var(--ra-radius-pill); min-height: 36px; padding: 0.45rem 0.85rem; }
+.ra-button--compact { min-height: 34px; padding: 0.4rem 0.7rem; font-size: var(--ra-text-xs); }
+
+.ra-icon-button {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--ra-color-border);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ra-color-surface-solid) 72%, transparent);
+  color: var(--ra-color-ink);
+  transition: transform var(--ra-duration-fast) var(--ra-ease-standard), border-color var(--ra-duration-fast) var(--ra-ease-standard);
+}
+.ra-icon-button:hover:not(:disabled) { transform: translateY(-1px); border-color: color-mix(in srgb, var(--ra-color-primary) 45%, var(--ra-color-border)); }
+
+.ra-surface {
+  border: 1px solid var(--ra-color-border);
+  border-radius: var(--ra-radius-xl);
+  background: var(--ra-color-surface);
+  box-shadow: var(--ra-shadow-md);
+  backdrop-filter: blur(14px);
+}
+
+.ra-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ra-space-2);
+  border-radius: var(--ra-radius-pill);
+  padding: 0.35rem 0.65rem;
+  background: var(--ra-color-primary-soft);
+  color: var(--ra-color-primary);
+  font-size: var(--ra-text-xs);
+  font-weight: 700;
+}
+
+.ra-stack { display: flex; flex-direction: column; gap: var(--ra-space-4); }
+.ra-cluster { display: flex; align-items: center; gap: var(--ra-space-3); flex-wrap: wrap; }

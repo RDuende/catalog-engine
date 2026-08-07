@@ -1,0 +1,213 @@
+{
+  "id": "08945b9e-3a80-46f2-a1f4-d1689c6a1579",
+  "journeyId": "c0cc06e9-8b81-490b-a9ad-18415febf167",
+  "journey": {
+    "id": "c0cc06e9-8b81-490b-a9ad-18415febf167",
+    "type": "GIFT",
+    "status": "READY_FOR_INSPIRATION",
+    "version": 30,
+    "sessionId": "08945b9e-3a80-46f2-a1f4-d1689c6a1579",
+    "participants": [],
+    "facts": [
+      {
+        "key": "recipient.relationship",
+        "value": "friend",
+        "confidence": 0.98,
+        "source": "CONVERSATION",
+        "evidence": "el amigo invisible",
+        "createdAt": "2026-08-02T16:53:51.655Z",
+        "updatedAt": "2026-08-02T16:54:36.561Z"
+      },
+      {
+        "key": "discovery.last_extractor_version",
+        "value": "v1.2.7-possessive-recipient-scope",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T16:53:51.655Z",
+        "updatedAt": "2026-08-02T16:54:36.561Z"
+      },
+      {
+        "key": "discovery.last_confidence",
+        "value": 0.45,
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T16:53:51.655Z",
+        "updatedAt": "2026-08-02T16:54:36.561Z"
+      },
+      {
+        "key": "journey.completeness",
+        "value": {
+          "profileId": "gift.personal.discovery",
+          "profileVersion": "v1",
+          "score": 40,
+          "requiredScore": 61.54,
+          "recommendedScore": 0,
+          "requiredComplete": false,
+          "readyForInspiration": false,
+          "satisfiedKeys": [
+            "recipient.count",
+            "recipient.relationship"
+          ],
+          "missingRequired": [
+            "occasion.type"
+          ],
+          "missingRecommended": [
+            "recipient.age",
+            "budget.max",
+            "recipient.interests"
+          ],
+          "requirements": [
+            {
+              "key": "recipient.count",
+              "label": "Número de destinatarios",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 1,
+              "source": "FACT"
+            },
+            {
+              "key": "recipient.relationship",
+              "label": "Relación con el destinatario",
+              "level": "REQUIRED",
+              "weight": 20,
+              "satisfied": true,
+              "confidence": 0.98,
+              "source": "FACT"
+            },
+            {
+              "key": "occasion.type",
+              "label": "Ocasión",
+              "level": "REQUIRED",
+              "weight": 25,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.age",
+              "label": "Edad del destinatario",
+              "level": "RECOMMENDED",
+              "weight": 15,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "budget.max",
+              "label": "Presupuesto máximo",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            },
+            {
+              "key": "recipient.interests",
+              "label": "Intereses o aficiones",
+              "level": "RECOMMENDED",
+              "weight": 10,
+              "minimumConfidence": 0.5,
+              "satisfied": false,
+              "confidence": 0,
+              "source": "MISSING"
+            }
+          ],
+          "evaluatedAt": "2026-08-02T16:54:36.561Z"
+        },
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T16:53:51.655Z",
+        "updatedAt": "2026-08-02T16:54:36.561Z"
+      },
+      {
+        "key": "conversation.pending_fact",
+        "value": "occasion.type",
+        "confidence": 1,
+        "source": "SYSTEM",
+        "createdAt": "2026-08-02T16:53:51.655Z",
+        "updatedAt": "2026-08-02T16:54:36.561Z"
+      },
+      {
+        "key": "gift.scope",
+        "value": "personal",
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "el amigo invisible",
+        "createdAt": "2026-08-02T16:54:16.412Z",
+        "updatedAt": "2026-08-02T16:54:36.561Z"
+      },
+      {
+        "key": "recipient.count",
+        "value": 1,
+        "confidence": 1,
+        "source": "CONVERSATION",
+        "evidence": "1",
+        "createdAt": "2026-08-02T16:54:24.740Z",
+        "updatedAt": "2026-08-02T16:54:24.740Z"
+      }
+    ],
+    "artifacts": [],
+    "metadata": {},
+    "createdAt": "2026-08-02T16:53:51.654Z",
+    "updatedAt": "2026-08-02T16:54:36.561Z"
+  },
+  "owner": {
+    "kind": "GUEST",
+    "id": "8f8a6bf0-493a-4e51-9a5e-04892c3cde80",
+    "accessKeyHash": "e2ca4dbf672c7b4c60c942ded926b0be72e5c332c3f0f84bc332ef412769e1ea",
+    "createdAt": "2026-08-02T16:53:51.654Z"
+  },
+  "messages": [
+    {
+      "id": "0fdca0ee-fa84-49ee-abe3-2f7d975b1315",
+      "role": "USER",
+      "text": "una taza personalizada para una compañera de trabajo",
+      "createdAt": "2026-08-02T16:53:51.654Z"
+    },
+    {
+      "id": "a76c3a72-f086-41a0-94f8-df3a4cd998cc",
+      "role": "RAI",
+      "text": "¡Buena idea! ¿Para qué ocasión quieres regalarle la taza?",
+      "createdAt": "2026-08-02T16:53:54.955Z"
+    },
+    {
+      "id": "55c0183d-08ed-47d0-a64e-c53cae61a1ec",
+      "role": "USER",
+      "text": "una compañera de trabajo",
+      "createdAt": "2026-08-02T16:54:16.411Z"
+    },
+    {
+      "id": "2f7c743b-567b-4dc5-bd06-c5e2069b2ea0",
+      "role": "RAI",
+      "text": "Entendido, es para una compañera de trabajo. ¿Qué motivo quieres celebrar con el regalo?",
+      "createdAt": "2026-08-02T16:54:21.258Z"
+    },
+    {
+      "id": "84a7df98-59b7-4749-a30c-57715f4bbd23",
+      "role": "USER",
+      "text": "1",
+      "createdAt": "2026-08-02T16:54:24.739Z"
+    },
+    {
+      "id": "85c42ef8-10a2-42fb-b1c8-7305ec20542a",
+      "role": "RAI",
+      "text": "No he entendido qué significa «1». ¿Es por cumpleaños, despedida, agradecimiento u otra ocasión?",
+      "createdAt": "2026-08-02T16:54:28.733Z"
+    },
+    {
+      "id": "1564d9fe-17e2-4975-851d-d7a6ea172adc",
+      "role": "USER",
+      "text": "el amigo invisible",
+      "createdAt": "2026-08-02T16:54:36.561Z"
+    },
+    {
+      "id": "f966bce2-bd35-4168-a3dc-0283af4c1525",
+      "role": "RAI",
+      "text": "Perfecto, es para el amigo invisible. ¿Qué gustos o aficiones tiene tu compañera?",
+      "createdAt": "2026-08-02T16:54:41.022Z"
+    }
+  ],
+  "createdAt": "2026-08-02T16:53:54.955Z",
+  "updatedAt": "2026-08-02T16:54:41.023Z"
+}
