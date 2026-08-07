@@ -57,7 +57,7 @@ function installFunctionalVisualImageRepair(): void {
                 : "image/png";
 
         image.src =
-          `data:${mime};base64,${raw}`;
+          \`data:\${mime};base64,\${raw}\`;
       }
     }
   };
@@ -805,22 +805,20 @@ function findDeep(
 function collectImageUrls(
   value: unknown,
 ): readonly string[] {
-  /*
-   * The functional result contains whole Rai responses. Those responses
-   * include product galleries and every Makito variant image. They are
-   * catalog evidence, NOT generated visual evidence.
-   *
-   * Only collect actual generated/mockup artifacts here.
-   */
   const values =
     findDeep(
       value,
       [
+        "imageUrl",
         "mockupUrl",
         "finalImageUrl",
         "generatedImageUrl",
         "previewUrl",
-        "dataUrl",
+        "thumbnailUrl",
+        "url",
+        "images",
+        "mockups",
+        "generatedImages",
       ],
     );
 
@@ -831,109 +829,45 @@ function collectImageUrls(
     candidate: unknown,
   ): void {
     if (
-      typeof candidate !==
-      "string"
-    ) {
-      return;
-    }
-
-    const normalized =
-      candidate.trim();
-
-    if (!normalized) {
-      return;
-    }
-
-    if (
-      normalized.startsWith(
-        "data:image/",
+      typeof candidate === "string" &&
+      (
+        candidate.startsWith("/") ||
+        /^https?:\/\//iu.test(
+          candidate,
+        )
+      ) &&
+      (
+        /\.(png|jpe?g|webp|gif)(\?.*)?$/iu.test(
+          candidate,
+        ) ||
+        candidate.includes(
+          "/images/",
+        ) ||
+        candidate.includes(
+          "catalog-media",
+        ) ||
+        candidate.includes(
+          "mockup",
+        )
       )
     ) {
-      urls.push(normalized);
-      return;
-    }
-
-    const isUrl =
-      normalized.startsWith("/") ||
-      /^https?:\/\//iu.test(
-        normalized,
-      );
-
-    if (!isUrl) {
-      return;
-    }
-
-    const isImage =
-      /\.(png|jpe?g|webp|gif|svg)(\?.*)?$/iu.test(
-        normalized,
-      ) ||
-      normalized.includes(
-        "/images/",
-      ) ||
-      normalized.includes(
-        "catalog-media",
-      );
-
-    if (isImage) {
-      urls.push(normalized);
-    }
-  }
-
-  for (const candidate of values) {
-    add(candidate);
-  }
-
-  /*
-   * Normally MOCK-003 has two visual artifacts:
-   * generated design + final mockup.
-   * Keep a small safety ceiling so a malformed response can never render
-   * hundreds of tiles again.
-   */
-  return Object.freeze(
-    [...new Set(urls)]
-      .slice(-4),
-  );
-}
-
-function functionalProductImageSrc(
-  product: ProductView,
-): string | undefined {
-  const source =
-    product.imageUrl?.trim();
-
-  if (!source) {
-    return undefined;
-  }
-
-  /*
-   * Makito asset URLs are provider resources and may need OAuth.
-   * Product Brain Studio already exposes an authenticated/local image proxy.
-   */
-  if (
-    /^https?:\/\/apis\.makito\.es\/catalog\/assets\//iu.test(
-      source,
-    )
-  ) {
-    const productId = product.id;
-
-    if (
-      productId === undefined ||
-      productId === null ||
-      productId === ""
+      urls.push(candidate);
+    } else if (
+      Array.isArray(candidate)
     ) {
-      return source;
+      for (const item of candidate) {
+        add(item);
+      }
     }
-
-    return (
-      "/api/v1/product-brain-studio/products/" +
-      encodeURIComponent(
-        productId,
-      ) +
-      "/images/0"
-    );
   }
 
-  return source;
+  for (const value of values) {
+    add(value);
+  }
+
+  return Object.freeze(
+    [...new Set(urls)],
+  );
 }
 
 function collectProducts(
@@ -2874,7 +2808,9 @@ export function FunctionalTestConsoleApp() {
                                 <div className="giftProposal__image">
                                   {product.imageUrl ? (
                                     <img
-                                      src={functionalProductImageSrc(product)}
+                                      src={
+                                        product.imageUrl
+                                      }
                                       alt={
                                         product.name
                                       }
@@ -3196,4 +3132,3 @@ export function FunctionalTestConsoleApp() {
     </main>
   );
 }
-

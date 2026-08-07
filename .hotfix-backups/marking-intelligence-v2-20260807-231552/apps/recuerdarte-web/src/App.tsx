@@ -8,8 +8,6 @@ import { CommercialOperationsApp } from "./CommercialOperationsApp";
 import { PlatformStatisticsApp } from "./PlatformStatisticsApp";
 import { CatalogImportAdminApp } from "./CatalogImportAdminApp";
 import { CatalogIntelligenceApp } from "./CatalogIntelligenceApp";
-import { MarkingGeometryAdminApp } from "./MarkingGeometryAdminApp";
-import { ProductMarkingAdminApp } from "./ProductMarkingAdminApp";
 import { ProductBrainStudioApp } from "./ProductBrainStudioApp";
 import { ProposalStudioApp } from "./ProposalStudioApp";
 import AdminToolsApp from "./AdminToolsApp";
@@ -408,31 +406,7 @@ export function App() {
   if (window.location.pathname.startsWith("/admin/intelligence-runtime")) return <BrainIntelligenceStudioApp />;
   if (window.location.pathname.startsWith("/admin/interest-brain-v2")) return <InterestBrainStudioApp />;
   if (window.location.pathname.startsWith("/admin/functional-tests")) return <FunctionalTestConsoleApp />;
-  if (window.location.pathname === "/admin" || window.location.pathname === "/admin/") return (
-    <>
-      <AdminDashboardApp />
-      <a
-        href="/admin/products"
-        title="Administrar productos, imágenes y áreas de marcaje"
-        style={{
-          position: "fixed",
-          right: 24,
-          bottom: 24,
-          zIndex: 1000,
-          textDecoration: "none",
-          background: "#4a5c3a",
-          color: "#fff",
-          borderRadius: 999,
-          padding: "12px 17px",
-          boxShadow: "0 10px 30px rgba(0,0,0,.22)",
-          fontWeight: 800,
-          fontFamily: "Inter,system-ui,sans-serif"
-        }}
-      >
-        📦 Productos y marcaje
-      </a>
-    </>
-  );
+  if (window.location.pathname === "/admin" || window.location.pathname === "/admin/") return <AdminDashboardApp />;
   if (window.location.pathname.startsWith("/admin/providers")) return <CatalogProvidersApp />;
   if (window.location.pathname.startsWith("/admin/ai-lab")) return <AiLaboratoryApp />;
   if (window.location.pathname.startsWith("/admin/intelligence-center")) return <IntelligenceCenterApp />;
@@ -440,8 +414,6 @@ export function App() {
   if (window.location.pathname.startsWith("/admin/settings")) return <PlatformSettingsApp />;
   if (window.location.pathname.startsWith("/admin/statistics")) return <PlatformStatisticsApp />;
   if (window.location.pathname.startsWith("/admin/catalog-imports")) return <CatalogImportAdminApp />;
-  if (window.location.pathname.startsWith("/admin/products")) return <ProductMarkingAdminApp />;
-  if (window.location.pathname.startsWith("/admin/marking-geometry")) return <MarkingGeometryAdminApp />;
   if (window.location.pathname.startsWith("/admin/catalog-intelligence")) return <CatalogIntelligenceApp />;
   if (window.location.pathname.startsWith("/admin/product-brain-studio")) return <ProductBrainStudioApp />;
   if (window.location.pathname.startsWith("/admin/proposal-studio")) return <ProposalStudioApp />;

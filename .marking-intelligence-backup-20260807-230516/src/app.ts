@@ -1,4 +1,3 @@
-import { markingIntelligenceRoutes } from "./modules/marking-intelligence/index.js"; // MARKING_INTELLIGENCE_V1
 import Fastify, { type FastifyError } from "fastify";
 import { env } from "./config/env.js";
 import { CATALOG_ENGINE_NAME, CATALOG_ENGINE_VERSION } from "./version.js";
@@ -226,6 +225,5 @@ export function buildApp() {
   void app.register(interestBrainV2Routes);
   void app.register(functionalTestConsoleRoutes);
 
-  app.register(markingIntelligenceRoutes, { prefix: "/api/v1" }); // MARKING_INTELLIGENCE_V1
   return app;
 }

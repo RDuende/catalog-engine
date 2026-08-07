@@ -1,0 +1,13 @@
+{
+  "journeyId": "functional-mock003-1786130082320",
+  "artifactId": "c08a6a52-3535-4293-b3bf-95cb5d5814b5",
+  "version": 1,
+  "fileName": "undefined.png",
+  "relativePath": "journeys/functional-mock003-1786130082320/artifacts/c08a6a52-3535-4293-b3bf-95cb5d5814b5/v1/content.png",
+  "absolutePath": "C:\\catalog-engine\\.data\\artifacts\\journeys\\functional-mock003-1786130082320\\artifacts\\c08a6a52-3535-4293-b3bf-95cb5d5814b5\\v1\\content.png",
+  "uri": "/api/v1/artifacts/content/journeys%2Ffunctional-mock003-1786130082320%2Fartifacts%2Fc08a6a52-3535-4293-b3bf-95cb5d5814b5%2Fv1%2Fcontent.png",
+  "sizeBytes": 1783937,
+  "checksum": "1e1e6479ee6fd12bc0bde8bf3a57b42aeebf432fed04fa0b9172bd56f7352159",
+  "mimeType": "image/png",
+  "createdAt": "2026-08-07T19:15:42.572Z"
+}

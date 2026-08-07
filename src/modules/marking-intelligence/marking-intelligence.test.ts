@@ -1,0 +1,5 @@
+import assert from "node:assert/strict"; import test from "node:test";
+import { parseMakitoTechniqueList,mapMakitoPrintConfigProduct } from "./makito-marking.mapper.js"; import { normalizeMarkingTechnique } from "./marking-technique.normalizer.js";
+test("normaliza técnicas conocidas",()=>{assert.equal(normalizeMarkingTechnique("DTF UV").code,"DTF_UV");assert.equal(normalizeMarkingTechnique("Grabación Láser").code,"LASER")});
+test("parsea códigos Makito sin inventar su significado",()=>{const x=parseMakitoTechniqueList("100316(6),100500(1),100400");assert.deepEqual(x.map(t=>[t.providerCode,t.providerParameter,t.code]),[["100316",6,"OTHER"],["100500",1,"OTHER"],["100400",undefined,"OTHER"]])});
+test("mapea áreas Makito con tamaño máximo por técnica",()=>{const p=mapMakitoPrintConfigProduct({id:"14184",areas:[{id:"A3",position:"3572",image:"https://example/A3.jpg",width:280,height:400,techniques:"100316(6),100600(8)"}]});assert.ok(p);assert.equal(p?.providerProductId,"14184");assert.equal(p?.areas[0]?.maxWidthMm,280);assert.equal(p?.areas[0]?.techniques[1]?.maxHeightMm,400);assert.equal(p?.areas[0]?.markingPreviewImageUrl,"https://example/A3.jpg")});

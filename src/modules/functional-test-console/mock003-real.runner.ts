@@ -287,7 +287,7 @@ async function waitTask(
       await app
         .inject()
         .get(
-          `/api/v1/tasks/\${encodeURIComponent(taskId)}`,
+          `/api/v1/tasks/${encodeURIComponent(taskId)}`,
         )
         .end();
 
@@ -412,7 +412,7 @@ async function waitTask(
         method:
           "GET" as const,
         url:
-          `/api/v1/tasks/\${taskId}`,
+          `/api/v1/tasks/${taskId}`,
         statusCode,
         durationMs:
           performance.now() -
@@ -617,6 +617,204 @@ async function imageDataUrl(
   });
 }
 
+
+function functionalProductPreviewDataUrl(
+  label = "Producto personalizable",
+): string {
+  const safe =
+    label
+      .replace(/[<>&"]/g, "")
+      .slice(0, 52);
+
+  const svg =
+    `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+      <rect width="900" height="900" rx="56" fill="#f4f1ea"/>
+      <rect x="190" y="255" width="520" height="395" rx="34" fill="#ffffff" stroke="#d7d0c4" stroke-width="12"/>
+      <path d="M450 255v395M190 365h520" stroke="#d7d0c4" stroke-width="12"/>
+      <path d="M450 255c-88-8-151-55-127-109 24-54 127-23 127 109Zm0 0c88-8 151-55 127-109-24-54-127-23-127 109Z"
+        fill="none" stroke="#8c8274" stroke-width="18" stroke-linecap="round"/>
+      <text x="450" y="742" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="35" font-weight="700" fill="#2f2c28">${safe}</text>
+      <text x="450" y="790" text-anchor="middle" font-family="Arial, sans-serif"
+        font-size="24" fill="#756d63">Vista de producto para prueba funcional</text>
+    </svg>`;
+
+  return (
+    "data:image/svg+xml;base64," +
+    Buffer.from(
+      svg,
+      "utf8",
+    ).toString(
+      "base64",
+    )
+  );
+}
+
+
+function deepProductWithRealImage(
+  value: unknown,
+): {
+  readonly id: string;
+  readonly imageUrl: string;
+  readonly name?: string;
+} | undefined {
+  const visited =
+    new Set<unknown>();
+
+  function validImage(
+    candidate: unknown,
+  ): string | undefined {
+    if (
+      typeof candidate !== "string"
+    ) {
+      return undefined;
+    }
+
+    const clean =
+      candidate.trim();
+
+    if (!clean) {
+      return undefined;
+    }
+
+    if (
+      clean.startsWith("data:image/") ||
+      clean.startsWith("/") ||
+      /^https?:\/\//iu.test(clean)
+    ) {
+      return clean;
+    }
+
+    return undefined;
+  }
+
+  function visit(
+    current: unknown,
+  ):
+    | {
+        readonly id: string;
+        readonly imageUrl: string;
+        readonly name?: string;
+      }
+    | undefined {
+    if (
+      current == null ||
+      typeof current !== "object"
+    ) {
+      return undefined;
+    }
+
+    if (visited.has(current)) {
+      return undefined;
+    }
+
+    visited.add(current);
+
+    if (Array.isArray(current)) {
+      for (const item of current) {
+        const found =
+          visit(item);
+
+        if (found) {
+          return found;
+        }
+      }
+
+      return undefined;
+    }
+
+    const record =
+      current as Record<string, unknown>;
+
+    const id =
+      typeof record.id === "string"
+        ? record.id.trim()
+        : typeof record.productId === "string"
+          ? record.productId.trim()
+          : "";
+
+    let imageUrl =
+      validImage(
+        record.imageUrl,
+      ) ??
+      validImage(
+        record.thumbnailUrl,
+      ) ??
+      validImage(
+        record.previewUrl,
+      );
+
+    if (
+      !imageUrl &&
+      Array.isArray(
+        record.images,
+      )
+    ) {
+      for (const image of record.images) {
+        imageUrl =
+          validImage(image);
+
+        if (imageUrl) {
+          break;
+        }
+
+        if (
+          image &&
+          typeof image === "object" &&
+          !Array.isArray(image)
+        ) {
+          const imageRecord =
+            image as Record<string, unknown>;
+
+          imageUrl =
+            validImage(
+              imageRecord.url,
+            ) ??
+            validImage(
+              imageRecord.imageUrl,
+            );
+
+          if (imageUrl) {
+            break;
+          }
+        }
+      }
+    }
+
+    if (
+      id &&
+      imageUrl
+    ) {
+      return {
+        id,
+        imageUrl,
+        ...(typeof record.name === "string"
+          ? {
+              name:
+                record.name,
+            }
+          : {}),
+      };
+    }
+
+    for (
+      const nested
+      of Object.values(record)
+    ) {
+      const found =
+        visit(nested);
+
+      if (found) {
+        return found;
+      }
+    }
+
+    return undefined;
+  }
+
+  return visit(value);
+}
+
 export async function runMock003Real(
   app: FastifyInstance,
 ): Promise<FunctionalTestScenarioResult> {
@@ -695,37 +893,61 @@ export async function runMock003Real(
         ]),
       );
 
-    const productId =
-      deepProductId(
-        second.responseBody,
-      );
+    const realProduct =
+  deepProductWithRealImage(
+    second.responseBody,
+  );
 
-    steps.push(
-      appendChecks(
-        second,
-        Object.freeze([
-          check(
-            "Rai devuelve un producto real seleccionable",
-            Boolean(productId),
-            true,
-            Boolean(productId),
-            productId
-              ? `productId=${productId}`
-              : "No se encontró un producto con id en la respuesta.",
-          ),
-        ]),
+const productId =
+  realProduct?.id;
+
+const productImageUrl =
+  realProduct?.imageUrl;
+
+steps.push(
+  appendChecks(
+    second,
+    Object.freeze([
+      check(
+        "Rai devuelve un producto real seleccionable",
+        Boolean(productId),
+        true,
+        Boolean(productId),
+        productId
+          ? `productId=${productId}`
+          : "No se encontró un producto con id en la respuesta.",
       ),
-    );
+      check(
+        "El producto seleccionado tiene imagen real de catálogo",
+        Boolean(
+          productImageUrl,
+        ),
+        true,
+        Boolean(
+          productImageUrl,
+        ),
+        productImageUrl
+          ? realProduct?.name
+            ? `${realProduct.name} · ${productImageUrl}`
+            : productImageUrl
+          : "MOCK-003 exige producto real con imagen; no se utilizará placeholder.",
+      ),
+    ]),
+  ),
+);
 
-    if (!productId) {
-      return finish(
-        startedAt,
-        started,
-        steps,
-      );
-    }
+if (
+  !productId ||
+  !productImageUrl
+) {
+  return finish(
+    startedAt,
+    started,
+    steps,
+  );
+}
 
-    const selection =
+const selection =
       await post(
         app,
         "3 · Seleccionar producto",
@@ -736,7 +958,9 @@ export async function runMock003Real(
         Object.freeze({
           sessionId,
           productId,
-        }),
+            modelImageUrl:
+        productImageUrl,
+    }),
         Object.freeze([
           200,
         ]),

@@ -53,51 +53,9 @@ export async function raiRoutes(app: FastifyInstance): Promise<void> {
     try {
       const state = raiAgent.getSessionState(request.body.sessionId);
       if (!state?.selectedProduct) return reply.code(400).send({ status: "mockup_error", message: "Primero selecciona un modelo." });
-      // MOCK003_REAL_PRODUCT_BASE_V3: resolve the selected catalogue image through our own image proxy.
-      // Makito asset URLs are protected; passing them directly to visual-commerce can
-      // make the image edit fail and silently fall back to the generic SVG template.
-      let mockupProductImageUrl =
-        state.selectedModelImageUrl ??
-        state.selectedProduct.imageUrl ??
-        undefined;
-
-      const selectedProductId = state.selectedProduct.id;
-      if (selectedProductId && mockupProductImageUrl) {
-        const isMakitoProtected = /^https:\/\/apis\.makito\.es\//iu.test(mockupProductImageUrl);
-        if (isMakitoProtected) {
-          const proxied = await app.inject({
-            method: "GET",
-            url: "/api/v1/product-brain-studio/products/" +
-              encodeURIComponent(selectedProductId) +
-              "/images/0",
-          });
-
-          if (proxied.statusCode < 200 || proxied.statusCode >= 300) {
-            throw new Error(
-              "No se pudo cargar la imagen real del producto seleccionado (HTTP " +
-                proxied.statusCode + "). Se cancela el mockup para no usar una plantilla genérica.",
-            );
-          }
-
-          const contentTypeHeader = proxied.headers["content-type"];
-          const contentType = Array.isArray(contentTypeHeader)
-            ? contentTypeHeader[0]
-            : contentTypeHeader;
-          if (!contentType || !contentType.startsWith("image/")) {
-            throw new Error(
-              "El proxy del producto no devolvió una imagen válida. Se cancela el mockup para evitar un falso PASS.",
-            );
-          }
-
-          mockupProductImageUrl =
-            "data:" + contentType.split(";")[0] + ";base64," +
-            proxied.rawPayload.toString("base64");
-        }
-      }
-
       const mockup = await generateProductMockup({
         productName: state.selectedProduct.name,
-        productImageUrl: mockupProductImageUrl,
+        productImageUrl: state.selectedProduct.imageUrl,
         customerImageDataUrl: request.body.imageDataUrl,
         text: request.body.text ?? state.personalization.text,
         style: state.personalization.style,

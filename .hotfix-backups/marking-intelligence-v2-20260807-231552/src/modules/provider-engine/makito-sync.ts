@@ -1,4 +1,3 @@
-import { mapMakitoPrintConfigProduct } from "../marking-intelligence/makito-marking.mapper.js"; // MAKITO_MARKING_V2_IMPORT
 import type { NormalizedProduct } from "../import-engine/import.types.js";
 import { MakitoProviderAdapter } from "./makito-provider.js";
 import { asArray, asNumber, asString, firstValue } from "./provider-utils.js";

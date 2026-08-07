@@ -1,129 +1,264 @@
-import { prisma } from "../../lib/prisma.js";
+import {
+  defaultProductBrainStudioRepository,
+} from "../product-brain-studio/product-brain-studio.repository.js";
 
-export type ProductSearchArgs = {
-  query?: string;
-  maxBudget?: number;
-  occasion?: string;
-  recipient?: string;
-  age?: number;
-  personalization?: string[];
-  limit?: number;
+type SearchProductsArgs = {
+  readonly query?: string;
+  readonly maxBudget?: number;
+  readonly limit?: number;
+  readonly personalization?: readonly string[];
 };
 
-function tokens(value: string | undefined): string[] {
-  return (value ?? "")
+export type RaiProductCandidate = {
+  readonly id: string;
+  readonly sku?: string;
+  readonly name: string;
+  readonly description?: string;
+  readonly price: number;
+  readonly currency: "EUR";
+  readonly customizable: boolean;
+  readonly categories: readonly string[];
+  readonly occasions: readonly string[];
+  readonly audiences: readonly string[];
+  readonly customizations: readonly string[];
+  readonly imageUrl?: string;
+  readonly images: readonly string[];
+  readonly score: number;
+};
+
+function normalize(value: string): string {
+  return value
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .split(/[^a-z0-9]+/)
-    .filter((part) => part.length >= 3)
-    .slice(0, 12);
+    .toLocaleLowerCase("es-ES");
 }
 
-export async function searchProducts(args: ProductSearchArgs) {
-  const words = tokens([args.query, args.occasion, args.recipient, ...(args.personalization ?? [])].filter(Boolean).join(" "));
-  const limit = Math.min(Math.max(args.limit ?? 8, 1), 20);
-  const or = words.flatMap((word) => [
-    { name: { contains: word, mode: "insensitive" as const } },
-    { shortDescription: { contains: word, mode: "insensitive" as const } },
-    { description: { contains: word, mode: "insensitive" as const } },
-    { aiDescription: { contains: word, mode: "insensitive" as const } },
-    { searchDocument: { contains: word, mode: "insensitive" as const } },
+function tokens(values: readonly string[]): readonly string[] {
+  return Object.freeze([
+    ...new Set(
+      values
+        .flatMap((value) =>
+          normalize(value).split(/[^a-z0-9]+/u),
+        )
+        .filter((word) => word.length >= 3),
+    ),
+  ]);
+}
+
+function record(value: unknown): Readonly<Record<string, unknown>> {
+  return value &&
+    typeof value === "object" &&
+    !Array.isArray(value)
+    ? value as Readonly<Record<string, unknown>>
+    : {};
+}
+
+function numberValue(value: unknown): number | undefined {
+  return typeof value === "number" && Number.isFinite(value)
+    ? value
+    : undefined;
+}
+
+function booleanValue(value: unknown): boolean | undefined {
+  return typeof value === "boolean"
+    ? value
+    : undefined;
+}
+
+function isDemoSku(sku: string | undefined): boolean {
+  return Boolean(
+    sku &&
+    /^DEMO-/iu.test(sku),
+  );
+}
+
+function browserImage(
+  values: readonly string[],
+): string | undefined {
+  return (
+    values.find((value) =>
+      value.startsWith("/api/v1/catalog-media/"),
+    ) ??
+    values.find((value) =>
+      value.startsWith("/catalog-media/"),
+    ) ??
+    values.find((value) =>
+      /^https?:\/\//iu.test(value),
+    ) ??
+    values.find((value) =>
+      value.startsWith("data:image/"),
+    ) ??
+    values.find((value) =>
+      value.startsWith("/") &&
+      /\.(?:avif|gif|jpe?g|png|svg|webp)(?:[?#].*)?$/iu.test(value),
+    )
+  );
+}
+
+function browserImages(
+  values: readonly string[],
+): readonly string[] {
+  return Object.freeze([
+    ...new Set(
+      values.filter((value) =>
+        value.startsWith("/api/v1/catalog-media/") ||
+        value.startsWith("/catalog-media/") ||
+        /^https?:\/\//iu.test(value) ||
+        value.startsWith("data:image/") ||
+        (
+          value.startsWith("/") &&
+          /\.(?:avif|gif|jpe?g|png|svg|webp)(?:[?#].*)?$/iu.test(value)
+        ),
+      ),
+    ),
+  ]);
+}
+
+function personalizationScore(
+  productBrain: Readonly<Record<string, unknown>>,
+): number {
+  return numberValue(productBrain.personalizationScore) ?? 0;
+}
+
+function giftScore(
+  productBrain: Readonly<Record<string, unknown>>,
+): number {
+  return numberValue(productBrain.giftSuitabilityScore) ?? 0;
+}
+
+function productScore(
+  haystack: string,
+  queryWords: readonly string[],
+  hasImage: boolean,
+  personalizable: boolean,
+  brain: Readonly<Record<string, unknown>>,
+): number {
+  let score = 0;
+
+  for (const word of queryWords) {
+    if (haystack.includes(word)) {
+      score += 14;
+    }
+  }
+
+  if (hasImage) score += 32;
+  if (personalizable) score += 22;
+
+  score += personalizationScore(brain) * 18;
+  score += giftScore(brain) * 14;
+
+  return Math.round(score * 100) / 100;
+}
+
+export async function searchProducts(
+  args: SearchProductsArgs,
+): Promise<RaiProductCandidate[]> {
+  const products =
+    await defaultProductBrainStudioRepository.products();
+
+  const queryWords = tokens([
+    args.query ?? "",
+    ...(args.personalization ?? []),
   ]);
 
-  const products = await prisma.product.findMany({
-    where: {
-      status: "ACTIVE",
-      ...(or.length ? { OR: or } : {}),
-    },
-    take: Math.max(limit * 3, 20),
-    orderBy: [
-      { featured: "desc" },
-      { recommendationScore: "desc" },
-      { popularityScore: "desc" },
-    ],
-    include: {
-      prices: {
-        where: { type: { in: ["RETAIL", "SALE"] }, currency: "EUR", minQuantity: 1 },
-        orderBy: [{ type: "desc" }, { amount: "asc" }],
-        take: 3,
-      },
-      categories: { include: { category: true } },
-      occasions: { include: { occasion: true } },
-      audiences: { include: { audience: true } },
-      customizations: { include: { customization: true } },
-      media: {
-        where: { media: { type: "IMAGE" } },
-        include: { media: true },
-        orderBy: { position: "asc" },
-        take: 8,
-      },
-    },
-  });
+  const candidates =
+    products
+      .filter((product) =>
+        !isDemoSku(product.sku),
+      )
+      .map((product) => {
+        const raw = record(product.raw);
+        const brain = record(product.productBrain);
+        const images = browserImages(product.images);
 
-  return products
-    .map((product) => {
-      const price = product.prices.map((item) => Number(item.amount)).find(Number.isFinite);
-      return {
-        id: product.id,
-        sku: product.sku,
-        name: product.name,
-        description: product.aiDescription ?? product.shortDescription ?? product.description,
-        price,
-        currency: "EUR",
-        customizable: product.customizable,
-        categories: product.categories.map((item) => item.category.name),
-        occasions: product.occasions.map((item) => item.occasion.name),
-        audiences: product.audiences.map((item) => item.audience.name),
-        customizations: product.customizations.map((item) => item.customization.name),
-        imageUrl: product.media[0]?.media.url ?? null,
-        images: product.media.map((item) => item.media.url),
-        score: Number(product.recommendationScore),
-      };
-    })
-    .filter((product) => args.maxBudget == null || product.price == null || product.price <= args.maxBudget)
-    .slice(0, limit);
-}
+        const imageUrl = browserImage([
+          ...(product.primaryImage ? [product.primaryImage] : []),
+          ...images,
+        ]);
 
-export async function getProduct(productId: string) {
-  const product = await prisma.product.findUnique({
-    where: { id: productId },
-    include: {
-      prices: { where: { currency: "EUR" }, orderBy: { amount: "asc" } },
-      categories: { include: { category: true } },
-      occasions: { include: { occasion: true } },
-      audiences: { include: { audience: true } },
-      customizations: { include: { customization: true } },
-      media: { include: { media: true }, orderBy: { position: "asc" } },
-      variants: { where: { status: "ACTIVE" }, take: 20 },
-    },
-  });
-  if (!product) return { found: false };
-  return {
-    found: true,
-    product: {
-      id: product.id,
-      sku: product.sku,
-      name: product.name,
-      description: product.aiDescription ?? product.description ?? product.shortDescription,
-      customizable: product.customizable,
-      prices: product.prices.map((price) => ({ type: price.type, amount: Number(price.amount), currency: price.currency })),
-      categories: product.categories.map((item) => item.category.name),
-      occasions: product.occasions.map((item) => item.occasion.name),
-      audiences: product.audiences.map((item) => item.audience.name),
-      customizations: product.customizations.map((item) => item.customization.name),
-      images: product.media
-        .filter((item) => item.media.type === "IMAGE")
-        .map((item) => item.media.url),
-      variants: product.variants.map((variant) => ({ id: variant.id, sku: variant.sku, name: variant.name })),
-    },
-  };
-}
+        const price = product.price ?? 0;
 
-export async function catalogStats() {
-  const [activeProducts, customizableProducts] = await Promise.all([
-    prisma.product.count({ where: { status: "ACTIVE" } }),
-    prisma.product.count({ where: { status: "ACTIVE", customizable: true } }),
-  ]);
-  return { activeProducts, customizableProducts, currency: "EUR" };
+        const explicitCustomizable =
+          booleanValue(raw.customizable);
+
+        const customizations =
+          Object.freeze([
+            ...new Set([
+              ...product.techniques,
+              ...(Array.isArray(raw.customizations)
+                ? raw.customizations.filter(
+                    (item): item is string =>
+                      typeof item === "string",
+                  )
+                : []),
+            ]),
+          ]);
+
+        const customizable =
+          explicitCustomizable ??
+          (
+            personalizationScore(brain) >= 0.5 ||
+            customizations.length > 0
+          );
+
+        const haystack =
+          normalize([
+            product.name,
+            product.description ?? "",
+            product.category ?? "",
+            ...product.tags,
+            ...product.canonicalInterests,
+            ...product.materials,
+            ...product.techniques,
+            ...product.themes,
+            ...product.roles,
+          ].join(" "));
+
+        return {
+          id: product.id,
+          ...(product.sku ? { sku: product.sku } : {}),
+          name: product.name,
+          ...(product.description
+            ? { description: product.description }
+            : {}),
+          price,
+          currency: "EUR" as const,
+          customizable,
+          categories: Object.freeze(
+            product.category ? [product.category] : [],
+          ),
+          occasions: Object.freeze(product.themes),
+          audiences: Object.freeze([]),
+          customizations,
+          ...(imageUrl ? { imageUrl } : {}),
+          images,
+          score: productScore(
+            haystack,
+            queryWords,
+            Boolean(imageUrl),
+            customizable,
+            brain,
+          ),
+        } satisfies RaiProductCandidate;
+      })
+      .filter((product) => Boolean(product.imageUrl))
+      .filter((product) =>
+        args.maxBudget == null ||
+        product.price <= 0 ||
+        product.price <= args.maxBudget,
+      )
+      .sort((left, right) =>
+        right.score - left.score,
+      );
+
+  const limit =
+    Math.max(
+      1,
+      Math.min(
+        args.limit ?? 8,
+        50,
+      ),
+    );
+
+  return candidates.slice(0, limit);
 }

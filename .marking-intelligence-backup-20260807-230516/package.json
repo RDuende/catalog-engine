@@ -252,8 +252,7 @@
     "test:intelligence-runtime": "tsx --test src/modules/brain-orchestrator/brain-orchestrator-intelligence.test.ts",
     "test:interest-brain-v2": "tsx --test src/modules/interest-brain-v2/*.test.ts",
     "test:functional-console": "tsx --test src/modules/functional-test-console/*.test.ts",
-    "verify:foundation": "node scripts/foundation/verify-foundation.mjs",
-    "test:marking-intelligence": "tsx --test src/modules/marking-intelligence/*.test.ts"
+    "verify:foundation": "node scripts/foundation/verify-foundation.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.0.0",

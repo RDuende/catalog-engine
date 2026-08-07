@@ -1,0 +1,273 @@
+{
+  "status": "imported",
+  "provider": "makito",
+  "source": "print-config+print-price-list",
+  "printConfigProducts": 6981,
+  "importedProducts": 6981,
+  "areas": 15789,
+  "techniqueOccurrences": 27345,
+  "officialCatalogTechniques": 138,
+  "usedTechniqueCodes": 108,
+  "officialMatchedCodes": 102,
+  "missingOfficialCodes": [
+    "100114(1)100400(1)",
+    "100311",
+    "10060281)",
+    "100836",
+    "100837",
+    "100998"
+  ],
+  "officialOccurrences": 27338,
+  "normalizedOccurrences": 25422,
+  "otherOccurrences": 1923,
+  "officialCatalogFile": "C:\\catalog-engine\\storage\\marking-intelligence\\makito-official-techniques.json",
+  "kroper": {
+    "productId": "makito:14855",
+    "providerProductId": "14855",
+    "areas": [
+      {
+        "id": "makito-14855-A1",
+        "name": "Área A1",
+        "providerAreaId": "A1",
+        "providerPositionId": "892",
+        "markingPreviewImageUrl": "https://apis.makito.es/print-config/assets/14855/prod_previsualizacio/4855-A1.jpg",
+        "baseImageUrl": "https://apis.makito.es/print-config/assets/14855/prod_previsualizacio/4855-A1.jpg",
+        "maxWidthMm": 70,
+        "maxHeightMm": 10,
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "techniques": [
+          {
+            "id": "94e9604e-13da-4555-a709-b4eae158fb53",
+            "code": "PAD_PRINTING",
+            "name": "Tampografía E",
+            "providerCode": "100115",
+            "providerParameter": 4,
+            "source": "PROVIDER",
+            "providerRaw": {
+              "printConfig": "100115(4)",
+              "printPriceList": {
+                "id": "100115",
+                "code": "E",
+                "category": "TAMPOGRAFÍA E",
+                "terms": "Para cada cambio de color con idéntico marcaje que no supere el mínimo de imprsión se cobrará el coste del trabajo mínimo por color.",
+                "prices": {
+                  "currency": "€",
+                  "minPrice": 40,
+                  "setupFee": 30,
+                  "additionalSetupFee": 15,
+                  "tiers": [
+                    {
+                      "threshold": "250",
+                      "type": "UNIT",
+                      "price": 0.42,
+                      "additionalPrice": 0.2
+                    },
+                    {
+                      "threshold": "500",
+                      "type": "UNIT",
+                      "price": 0.35,
+                      "additionalPrice": 0.17
+                    },
+                    {
+                      "threshold": "2000",
+                      "type": "UNIT",
+                      "price": 0.285,
+                      "additionalPrice": 0.145
+                    },
+                    {
+                      "threshold": "5000",
+                      "type": "UNIT",
+                      "price": 0.235,
+                      "additionalPrice": 0.13
+                    },
+                    {
+                      "threshold": "10000",
+                      "type": "UNIT",
+                      "price": 0.195,
+                      "additionalPrice": 0.12
+                    }
+                  ]
+                }
+              }
+            },
+            "maxWidthMm": 70,
+            "maxHeightMm": 10,
+            "providerVariantCode": "E",
+            "providerCategory": "TAMPOGRAFÍA E",
+            "providerFamily": "TAMPOGRAFIA",
+            "providerOfficial": true,
+            "officialConfidence": 1,
+            "pricing": {
+              "currency": "€",
+              "minPrice": 40,
+              "setupFee": 30,
+              "additionalSetupFee": 15,
+              "tiers": [
+                {
+                  "threshold": "250",
+                  "type": "UNIT",
+                  "price": 0.42,
+                  "additionalPrice": 0.2
+                },
+                {
+                  "threshold": "500",
+                  "type": "UNIT",
+                  "price": 0.35,
+                  "additionalPrice": 0.17
+                },
+                {
+                  "threshold": "2000",
+                  "type": "UNIT",
+                  "price": 0.285,
+                  "additionalPrice": 0.145
+                },
+                {
+                  "threshold": "5000",
+                  "type": "UNIT",
+                  "price": 0.235,
+                  "additionalPrice": 0.13
+                },
+                {
+                  "threshold": "10000",
+                  "type": "UNIT",
+                  "price": 0.195,
+                  "additionalPrice": 0.12
+                }
+              ]
+            },
+            "notes": "Para cada cambio de color con idéntico marcaje que no supere el mínimo de imprsión se cobrará el coste del trabajo mínimo por color."
+          }
+        ],
+        "source": "PROVIDER",
+        "providerRaw": {
+          "id": "A1",
+          "position": "892",
+          "image": "https://apis.makito.es/print-config/assets/14855/prod_previsualizacio/4855-A1.jpg",
+          "width": 70,
+          "height": 10,
+          "techniques": "100115(4)"
+        }
+      },
+      {
+        "id": "makito-14855-A2",
+        "name": "Área A2",
+        "providerAreaId": "A2",
+        "providerPositionId": "892",
+        "markingPreviewImageUrl": "https://apis.makito.es/print-config/assets/14855/prod_previsualizacio1/4855-A2.jpg",
+        "baseImageUrl": "https://apis.makito.es/print-config/assets/14855/prod_previsualizacio1/4855-A2.jpg",
+        "maxWidthMm": 20,
+        "maxHeightMm": 10,
+        "placement": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "techniques": [
+          {
+            "id": "64ba64c6-052a-47a1-adee-e90b26f52839",
+            "code": "LASER",
+            "name": "Grabación Laser 1",
+            "providerCode": "100400",
+            "source": "PROVIDER",
+            "providerRaw": {
+              "printConfig": "100400",
+              "printPriceList": {
+                "id": "100400",
+                "code": "L1",
+                "category": "GRABACIÓN LASER 1",
+                "terms": "PERSONALIZACIÓN \"NOMBRE A NOMBRE\" MÁS LOGO: 0,65 €/Ud. PROGRAMACIÓN Y CLICHÉ 60 €.",
+                "prices": {
+                  "currency": "€",
+                  "minPrice": 30,
+                  "setupFee": 20,
+                  "tiers": [
+                    {
+                      "threshold": "250",
+                      "type": "UNIT",
+                      "price": 0.4
+                    },
+                    {
+                      "threshold": "500",
+                      "type": "UNIT",
+                      "price": 0.35
+                    },
+                    {
+                      "threshold": "2000",
+                      "type": "UNIT",
+                      "price": 0.3
+                    },
+                    {
+                      "threshold": "5000",
+                      "type": "UNIT",
+                      "price": 0.25
+                    },
+                    {
+                      "threshold": "10000",
+                      "type": "UNIT",
+                      "price": 0.22
+                    }
+                  ]
+                }
+              }
+            },
+            "maxWidthMm": 20,
+            "maxHeightMm": 10,
+            "providerVariantCode": "L1",
+            "providerCategory": "GRABACIÓN LASER 1",
+            "providerFamily": "GRABACION_LASER",
+            "providerOfficial": true,
+            "officialConfidence": 1,
+            "pricing": {
+              "currency": "€",
+              "minPrice": 30,
+              "setupFee": 20,
+              "tiers": [
+                {
+                  "threshold": "250",
+                  "type": "UNIT",
+                  "price": 0.4
+                },
+                {
+                  "threshold": "500",
+                  "type": "UNIT",
+                  "price": 0.35
+                },
+                {
+                  "threshold": "2000",
+                  "type": "UNIT",
+                  "price": 0.3
+                },
+                {
+                  "threshold": "5000",
+                  "type": "UNIT",
+                  "price": 0.25
+                },
+                {
+                  "threshold": "10000",
+                  "type": "UNIT",
+                  "price": 0.22
+                }
+              ]
+            },
+            "notes": "PERSONALIZACIÓN \"NOMBRE A NOMBRE\" MÁS LOGO: 0,65 €/Ud. PROGRAMACIÓN Y CLICHÉ 60 €."
+          }
+        ],
+        "source": "PROVIDER",
+        "providerRaw": {
+          "id": "A2",
+          "position": "892",
+          "image": "https://apis.makito.es/print-config/assets/14855/prod_previsualizacio1/4855-A2.jpg",
+          "width": 20,
+          "height": 10,
+          "techniques": "100400"
+        }
+      }
+    ]
+  }
+}
