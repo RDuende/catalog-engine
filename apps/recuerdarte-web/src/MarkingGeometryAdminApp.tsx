@@ -232,6 +232,25 @@ export function MarkingGeometryAdminApp() {
 
   return (
     <main style={{ minHeight: "100vh", background: "#f5f4ef", color: "#252820", padding: 24, fontFamily: "Inter, system-ui, sans-serif" }}>
+      <a
+        href={`/admin/products?productId=${encodeURIComponent(productId)}`}
+        style={{
+          position: "fixed",
+          left: 18,
+          bottom: 18,
+          zIndex: 20,
+          background: "#fff",
+          border: "1px solid #d8d6ce",
+          borderRadius: 999,
+          padding: "9px 13px",
+          color: "#252820",
+          textDecoration: "none",
+          fontWeight: 700,
+          boxShadow: "0 8px 24px rgba(0,0,0,.08)",
+        }}
+      >
+        ← Volver a productos
+      </a>
       <div style={{ maxWidth: 1500, margin: "0 auto" }}>
         <header style={{ display: "flex", justifyContent: "space-between", alignItems: "end", gap: 20, marginBottom: 22 }}>
           <div>

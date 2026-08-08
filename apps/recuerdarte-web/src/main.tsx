@@ -37,3 +37,7 @@ import "./brain-intelligence-studio.css";
 import "./interest-brain-studio.css";
 
 import "./functional-test-console.css";
+
+import "./product-admin.css";
+
+import "./admin-shell.css";

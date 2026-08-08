@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "settings": {
+    "currency": "EUR",
+    "taxPercent": 21,
+    "pricesIncludeTax": false,
+    "defaultWeightKg": 0.5,
+    "packagingCost": 1.5,
+    "paymentFeePercent": 0,
+    "minimumOrderAmount": 0,
+    "safetyProductionDays": 1,
+    "cutOffHour": 14,
+    "updatedAt": "2026-08-08T07:22:10.301Z"
+  },
+  "margins": [
+    {
+      "id": "22ec7cb8-8d11-43f6-8ecc-8c0724c5a15b",
+      "name": "Margen general",
+      "scope": "GLOBAL",
+      "mode": "PERCENT_ON_COST",
+      "value": 35,
+      "minimumMarginPercent": 20,
+      "minimumMarginAmount": 3,
+      "active": true,
+      "priority": 100,
+      "createdAt": "2026-08-08T07:22:10.301Z",
+      "updatedAt": "2026-08-08T07:22:10.301Z"
+    }
+  ],
+  "production": [
+    {
+      "id": "c3d87aa8-63bc-4112-8e26-119fddcf8bda",
+      "name": "Producción general",
+      "scope": "GLOBAL",
+      "preparationDays": 1,
+      "productionDays": 3,
+      "qualityControlDays": 1,
+      "extraDays": 0,
+      "businessDaysOnly": true,
+      "active": true,
+      "priority": 100,
+      "createdAt": "2026-08-08T07:22:10.301Z",
+      "updatedAt": "2026-08-08T07:22:10.301Z"
+    }
+  ],
+  "shippingZones": [
+    {
+      "id": "spain-peninsula",
+      "name": "España peninsular",
+      "countries": [
+        "ES"
+      ],
+      "postalCodePrefixes": [],
+      "active": true
+    }
+  ],
+  "shippingMethods": [
+    {
+      "id": "04507ce5-5af9-4f5a-8cf9-10c74c864d11",
+      "name": "Envío estándar",
+      "carrier": "Pendiente de configurar",
+      "zoneId": "spain-peninsula",
+      "mode": "FLAT",
+      "basePrice": 5.95,
+      "pricePerKg": 0,
+      "freeFromOrderValue": 60,
+      "minDeliveryDays": 1,
+      "maxDeliveryDays": 3,
+      "trackingAvailable": true,
+      "active": true,
+      "priority": 100
+    }
+  ]
+}

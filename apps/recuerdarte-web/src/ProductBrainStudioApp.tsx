@@ -158,8 +158,13 @@ function productImageUrl(
 }
 
 export function ProductBrainStudioApp() {
+  const initialProductId =
+    new URLSearchParams(window.location.search)
+      .get("productId") ??
+    "";
+
   const [query, setQuery] =
-    useState("");
+    useState(initialProductId);
   const [warningsOnly, setWarningsOnly] =
     useState(false);
   const [orphanOnly, setOrphanOnly] =
@@ -340,6 +345,13 @@ export function ProductBrainStudioApp() {
       setBusy(false);
     }
   }
+
+  useEffect(() => {
+    if (!initialProductId) return;
+
+    setSelectedId(initialProductId);
+    void loadDetail(initialProductId);
+  }, []);
 
   useEffect(() => {
     void Promise.all([

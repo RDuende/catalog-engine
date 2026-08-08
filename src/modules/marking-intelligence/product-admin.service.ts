@@ -461,21 +461,40 @@ function productBase(
     roles: Object.freeze(brainRoles(brain)),
     tags: Object.freeze(tagsOf(product)),
     brainStatus: brainStatus(brain),
+    classificationConfidence:
+      typeof brain?.classificationConfidence === "number"
+        ? brain.classificationConfidence
+        : typeof brain?.classification_confidence === "number"
+          ? brain.classification_confidence
+          : undefined,
     personalization: personalizationOf(brain, { ...product, ...(canonical ?? {}) } as CatalogProduct),
     productBrainSource: brain ? "CANONICAL_PRODUCT_BRAINS" : "NONE",
   };
 }
 
+function wantedValues(wanted: string | undefined): readonly string[] {
+  if (!wanted) return Object.freeze([]);
+  return Object.freeze(
+    wanted
+      .split("\u001f")
+      .map((value) => value.trim())
+      .filter(Boolean),
+  );
+}
+
 function matchChoice(actual: string | undefined, wanted: string | undefined): boolean {
-  if (!wanted) return true;
+  const targets = wantedValues(wanted);
+  if (!targets.length) return true;
   if (!actual) return false;
-  return normalize(actual) === normalize(wanted);
+  const normalized = normalize(actual);
+  return targets.some((target) => normalize(target) === normalized);
 }
 
 function matchArray(actual: readonly string[], wanted: string | undefined): boolean {
-  if (!wanted) return true;
-  const target = normalize(wanted);
-  return actual.some((value) => normalize(value) === target);
+  const targets = wantedValues(wanted);
+  if (!targets.length) return true;
+  const normalizedActual = new Set(actual.map(normalize));
+  return targets.some((target) => normalizedActual.has(normalize(target)));
 }
 
 function placementIsCalibrated(area: {
@@ -587,6 +606,9 @@ async function loadAdminDatabaseStats(): Promise<{
   storedBrains: number;
   canonicalProducts: number;
   joinedProducts: number;
+  ready: number;
+  reviewRequired: number;
+  genericObjects: number;
 }> {
   const pool = canonicalPool();
 
@@ -603,7 +625,25 @@ async function loadAdminDatabaseStats(): Promise<{
         FROM canonical_products p
         INNER JOIN canonical_product_brains b
           ON b.product_id = p.id
-      ) AS joined_products
+      ) AS joined_products,
+
+      (
+        SELECT count(*)::int
+        FROM canonical_product_brains
+        WHERE brain->>'status' = 'READY'
+      ) AS ready,
+
+      (
+        SELECT count(*)::int
+        FROM canonical_product_brains
+        WHERE brain->>'status' = 'REVIEW_REQUIRED'
+      ) AS review_required,
+
+      (
+        SELECT count(*)::int
+        FROM canonical_product_brains
+        WHERE brain->>'objectType' = 'generic_object'
+      ) AS generic_objects
   `);
 
   const row = result.rows[0] ?? {};
@@ -612,6 +652,9 @@ async function loadAdminDatabaseStats(): Promise<{
     storedBrains: Number(row.stored_brains ?? 0),
     canonicalProducts: Number(row.canonical_products ?? 0),
     joinedProducts: Number(row.joined_products ?? 0),
+    ready: Number(row.ready ?? 0),
+    reviewRequired: Number(row.review_required ?? 0),
+    genericObjects: Number(row.generic_objects ?? 0),
   };
 }
 
@@ -626,6 +669,22 @@ export async function getAdminProductFilterOptions() {
   const catalogTechniques = new Set<string>();
   const brainStatuses = new Set<string>();
   const personalizations = new Set<string>();
+
+  const objectTypeCounts = new Map<string, number>();
+  const materialCounts = new Map<string, number>();
+  const categoryCounts = new Map<string, number>();
+  const interestCounts = new Map<string, number>();
+  const techniqueCounts = new Map<string, number>();
+  const brainStatusCounts = new Map<string, number>();
+  const personalizationCounts = new Map<string, number>();
+
+  const increment = (map: Map<string, number>, value: string) => {
+    map.set(value, (map.get(value) ?? 0) + 1);
+  };
+
+  let missingPrimaryImage = 0;
+
+  const overrides = await readOverrides();
 
   for (const product of catalog.products) {
     const brain = brainForProduct(product, brains);
@@ -657,13 +716,44 @@ export async function getAdminProductFilterOptions() {
 
     const base = productBase(product, brain, canonical);
 
-    if (base.objectType) objectTypes.add(base.objectType);
-    for (const value of base.materials) materials.add(value);
-    for (const value of base.categories) categories.add(value);
-    for (const value of base.interests) interests.add(value);
-    for (const value of base.catalogTechniques) catalogTechniques.add(value);
+    if (base.objectType) {
+      objectTypes.add(base.objectType);
+      increment(objectTypeCounts, base.objectType);
+    }
+
+    for (const value of base.materials) {
+      materials.add(value);
+      increment(materialCounts, value);
+    }
+
+    for (const value of base.categories) {
+      categories.add(value);
+      increment(categoryCounts, value);
+    }
+
+    for (const value of base.interests) {
+      interests.add(value);
+      increment(interestCounts, value);
+    }
+
+    for (const value of base.catalogTechniques) {
+      catalogTechniques.add(value);
+      increment(techniqueCounts, value);
+    }
+
     brainStatuses.add(base.brainStatus);
+    increment(brainStatusCounts, base.brainStatus);
+
     personalizations.add(base.personalization);
+    increment(personalizationCounts, base.personalization);
+
+    const override = base.productId
+      ? overrides.products[base.productId]
+      : undefined;
+
+    if (!(override?.primaryImageUrl || base.images[0])) {
+      missingPrimaryImage += 1;
+    }
   }
 
   // Official marking techniques are sourced from the persisted Makito catalog when available.
@@ -686,9 +776,37 @@ export async function getAdminProductFilterOptions() {
   const alphabetical = (values: Iterable<string>) =>
     [...values].sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
 
+  const facet = (values: Iterable<string>, counts: ReadonlyMap<string, number>) =>
+    Object.freeze(
+      alphabetical(values).map((value) =>
+        Object.freeze({
+          value,
+          count: counts.get(value) ?? 0,
+        }),
+      ),
+    );
+
+  const databaseStats = await loadAdminDatabaseStats();
+
   return Object.freeze({
     status: "ok",
-    productBrain: Object.freeze(await loadAdminDatabaseStats()),
+    productBrain: Object.freeze(databaseStats),
+    quickStats: Object.freeze({
+      totalProducts: catalog.products.length,
+      ready: databaseStats.ready,
+      reviewRequired: databaseStats.reviewRequired,
+      genericObjects: databaseStats.genericObjects,
+      missingPrimaryImage,
+    }),
+    facets: Object.freeze({
+      objectTypes: facet(objectTypes, objectTypeCounts),
+      materials: facet(materials, materialCounts),
+      categories: facet(categories, categoryCounts),
+      interests: facet(interests, interestCounts),
+      techniques: facet(catalogTechniques, techniqueCounts),
+      brainStatuses: facet(brainStatuses, brainStatusCounts),
+      personalizations: facet(personalizations, personalizationCounts),
+    }),
     objectTypes: Object.freeze(alphabetical(objectTypes)),
     techniques: Object.freeze(
       alphabetical(new Set([...catalogTechniques, ...officialTechniques])),
@@ -722,9 +840,21 @@ export async function listAdminProducts(input: AdminProductFilters) {
 
   const prefiltered = catalog.products.filter((product) => {
     const brain = brainForProduct(product, brains);
-    const canonical = canonicalFields.get(str((product as Obj).id) ?? "") ??
-      canonicalFields.get(str(product.externalId) ?? "") ??
-      canonicalFields.get(str(product.supplierReference) ?? "");
+
+    const externalId =
+      str(product.externalId) ??
+      str(product.supplierReference);
+
+    const sku = str(product.sku);
+
+    const canonical =
+      canonicalFields.get(str((product as Obj).id) ?? "") ??
+      canonicalFields.get(externalId ?? "") ??
+      canonicalFields.get(sku ?? "") ??
+      canonicalFields.get(externalId ? `makito:${externalId}` : "") ??
+      canonicalFields.get(externalId ? `makito:external:${externalId}` : "") ??
+      canonicalFields.get(sku ? `makito:sku:${sku}` : "");
+
     const base = productBase(product, brain, canonical);
 
     if (q) {

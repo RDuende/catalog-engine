@@ -1,5 +1,42 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
+type Facet = { value: string; count: number };
+
+type FilterOptions = {
+  productBrain: {
+    storedBrains: number;
+    canonicalProducts: number;
+    joinedProducts: number;
+    ready: number;
+    reviewRequired: number;
+    genericObjects: number;
+  };
+  quickStats: {
+    totalProducts: number;
+    ready: number;
+    reviewRequired: number;
+    genericObjects: number;
+    missingPrimaryImage: number;
+  };
+  facets?: {
+    objectTypes: Facet[];
+    techniques: Facet[];
+    materials: Facet[];
+    categories: Facet[];
+    interests: Facet[];
+    brainStatuses: Facet[];
+    personalizations: Facet[];
+  };
+  objectTypes: string[];
+  techniques: string[];
+  materials: string[];
+  categories: string[];
+  interests: string[];
+  brainStatuses: string[];
+  personalizations: string[];
+  markingStatuses: string[];
+};
+
 type ProductListItem = {
   productId?: string;
   externalId?: string;
@@ -13,7 +50,9 @@ type ProductListItem = {
   materials: readonly string[];
   catalogTechniques: readonly string[];
   interests: readonly string[];
+  roles?: readonly string[];
   brainStatus: string;
+  classificationConfidence?: number;
   personalization: string;
   marking: {
     areas: number;
@@ -30,17 +69,6 @@ type ProductListResponse = {
   limit: number;
   pages: number;
   items: ProductListItem[];
-};
-
-type FilterOptions = {
-  objectTypes: string[];
-  techniques: string[];
-  materials: string[];
-  categories: string[];
-  interests: string[];
-  brainStatuses: string[];
-  personalizations: string[];
-  markingStatuses: string[];
 };
 
 type Area = {
@@ -62,52 +90,60 @@ type Area = {
 
 type ProductDetail = {
   status: string;
-  product: {
-    productId?: string;
-    externalId?: string;
-    sku?: string;
-    name: string;
-    description?: string;
-    primaryImageUrl?: string;
-    images: readonly string[];
-    objectType?: string;
-    categories: readonly string[];
-    materials: readonly string[];
-    catalogTechniques: readonly string[];
-    interests: readonly string[];
-    brainStatus: string;
-    personalization: string;
-  };
+  product: Omit<ProductListItem, "marking">;
   marking?: { areas: Area[] };
 };
 
 type Filters = {
-  objectType: string;
-  technique: string;
-  material: string;
-  category: string;
-  interest: string;
+  objectType: string[];
+  technique: string[];
+  material: string[];
+  category: string[];
+  interest: string[];
   marking: string;
-  brainStatus: string;
-  personalization: string;
+  brainStatus: string[];
+  personalization: string[];
   imageStatus: string;
   sort: string;
 };
 
+const API = "/api/v1";
+const SEP = "\u001f";
+
 const EMPTY_FILTERS: Filters = {
-  objectType: "",
-  technique: "",
-  material: "",
-  category: "",
-  interest: "",
+  objectType: [],
+  technique: [],
+  material: [],
+  category: [],
+  interest: [],
   marking: "",
-  brainStatus: "",
-  personalization: "",
+  brainStatus: [],
+  personalization: [],
   imageStatus: "",
   sort: "name_asc",
 };
 
-const API = "/api/v1";
+const MARKING_LABELS: Record<string, string> = {
+  WITH_AREAS: "Con áreas de marcaje",
+  WITHOUT_AREAS: "Sin áreas de marcaje",
+  PENDING_POSITION: "Áreas pendientes de posicionar",
+  FULLY_POSITIONED: "Todas las áreas posicionadas",
+  ONE_AREA: "1 área",
+  TWO_AREAS: "2 áreas",
+  THREE_PLUS: "3 o más áreas",
+};
+
+const BRAIN_LABELS: Record<string, string> = {
+  READY: "Listo",
+  REVIEW_REQUIRED: "Necesita revisión",
+  UNKNOWN: "Sin clasificar",
+};
+
+const PERSONALIZATION_LABELS: Record<string, string> = {
+  GENERIC_PERSONALIZABLE: "Genérico altamente personalizable",
+  PERSONALIZABLE: "Personalizable",
+  UNKNOWN: "Sin determinar",
+};
 
 function imgProxy(productId: string, index: number) {
   return `${API}/marking-intelligence/admin-products/${encodeURIComponent(productId)}/images/${index}`;
@@ -117,71 +153,84 @@ function areaImageProxy(productId: string, areaId: string) {
   return `${API}/marking-intelligence/products/${encodeURIComponent(productId)}/areas/${encodeURIComponent(areaId)}/image`;
 }
 
-function labelMarking(value: string) {
-  const map: Record<string, string> = {
-    WITH_AREAS: "Con áreas de marcaje",
-    WITHOUT_AREAS: "Sin áreas de marcaje",
-    PENDING_POSITION: "Área pendiente de posicionar",
-    FULLY_POSITIONED: "Todas las áreas posicionadas",
-    ONE_AREA: "1 área",
-    TWO_AREAS: "2 áreas",
-    THREE_PLUS: "3 o más áreas",
-  };
-  return map[value] ?? value;
+function humanObjectType(value?: string) {
+  if (!value) return "Sin clasificar";
+  if (value === "generic_object") return "Objeto genérico";
+  return value.replaceAll("_", " ");
 }
 
-function labelBrain(value: string) {
-  const map: Record<string, string> = {
-    READY: "Listo",
-    REVIEW_REQUIRED: "Necesita revisión",
-    UNKNOWN: "Sin clasificar",
-  };
-  return map[value] ?? value;
+function pct(value?: number) {
+  if (typeof value !== "number") return "—";
+  return `${Math.round(value * 100)}%`;
 }
 
-function labelPersonalization(value: string) {
-  const map: Record<string, string> = {
-    GENERIC_PERSONALIZABLE: "Genérico altamente personalizable",
-    PERSONALIZABLE: "Personalizable",
-    UNKNOWN: "Sin determinar",
-  };
-  return map[value] ?? value;
+function facetOptions(
+  values: readonly string[],
+  facets: readonly Facet[] | undefined,
+): Facet[] {
+  if (facets?.length) return [...facets];
+  return values.map((value) => ({ value, count: 0 }));
 }
 
-function FilterSelect(props: {
+function MultiFilter(props: {
   label: string;
-  value: string;
-  options: readonly string[];
-  onChange: (value: string) => void;
+  values: readonly string[];
+  options: readonly Facet[];
+  onChange: (values: string[]) => void;
   render?: (value: string) => string;
 }) {
+  const selected = new Set(props.values);
+
   return (
-    <label style={{ display: "grid", gap: 4, minWidth: 160 }}>
-      <span style={{ fontSize: 11, fontWeight: 800, opacity: .58, textTransform: "uppercase", letterSpacing: ".06em" }}>
-        {props.label}
-      </span>
+    <div className="paFilter">
+      <span className="paFilter__label">{props.label}</span>
       <select
-        value={props.value}
-        onChange={(event) => props.onChange(event.target.value)}
-        style={{ padding: "9px 10px", borderRadius: 9, border: "1px solid #d8d6ce", background: "white", font: "inherit", maxWidth: 260 }}
+        value=""
+        onChange={(event) => {
+          const value = event.target.value;
+          if (!value || selected.has(value)) return;
+          props.onChange([...props.values, value]);
+        }}
       >
-        <option value="">Todos</option>
-        {props.options.map((option) => (
-          <option key={option} value={option}>{props.render ? props.render(option) : option}</option>
-        ))}
+        <option value="">Añadir filtro…</option>
+        {props.options
+          .filter((item) => !selected.has(item.value))
+          .map((item) => (
+            <option key={item.value} value={item.value}>
+              {props.render ? props.render(item.value) : item.value}
+              {item.count ? ` (${item.count})` : ""}
+            </option>
+          ))}
       </select>
-    </label>
+      {props.values.length > 0 && (
+        <div className="paMiniChips">
+          {props.values.map((value) => (
+            <button
+              key={value}
+              type="button"
+              className="paMiniChip"
+              onClick={() => props.onChange(props.values.filter((item) => item !== value))}
+            >
+              {props.render ? props.render(value) : value} ×
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
 export function ProductMarkingAdminApp() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const initialProductId = searchParams.get("productId") ?? undefined;
+
   const [q, setQ] = useState("");
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
   const [options, setOptions] = useState<FilterOptions>();
-  const [showMore, setShowMore] = useState(false);
   const [list, setList] = useState<ProductListResponse>();
   const [detail, setDetail] = useState<ProductDetail>();
   const [selectedId, setSelectedId] = useState<string>();
+  const [showMore, setShowMore] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
   const [notice, setNotice] = useState<string>();
@@ -191,17 +240,13 @@ export function ProductMarkingAdminApp() {
   }
 
   async function loadOptions() {
-    try {
-      const response = await fetch(`${API}/marking-intelligence/admin-products/filter-options`);
-      const json = await response.json() as FilterOptions & { message?: string };
-      if (!response.ok) throw new Error(json.message ?? `HTTP ${response.status}`);
-      setOptions(json);
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : String(cause));
-    }
+    const response = await fetch(`${API}/marking-intelligence/admin-products/filter-options`);
+    const json = await response.json() as FilterOptions & { message?: string };
+    if (!response.ok) throw new Error(json.message ?? `HTTP ${response.status}`);
+    setOptions(json);
   }
 
-  async function loadList(search = q, page = 1, state = filters) {
+  async function loadList(search = q, page = 1, current = filters) {
     setBusy(true);
     setError(undefined);
 
@@ -211,8 +256,25 @@ export function ProductMarkingAdminApp() {
       params.set("page", String(page));
       params.set("limit", "30");
 
-      for (const [key, value] of Object.entries(state)) {
-        if (value) params.set(key, value);
+      const entries: Array<[keyof Filters, Filters[keyof Filters]]> = [
+        ["objectType", current.objectType],
+        ["technique", current.technique],
+        ["material", current.material],
+        ["category", current.category],
+        ["interest", current.interest],
+        ["marking", current.marking],
+        ["brainStatus", current.brainStatus],
+        ["personalization", current.personalization],
+        ["imageStatus", current.imageStatus],
+        ["sort", current.sort],
+      ];
+
+      for (const [key, value] of entries) {
+        if (Array.isArray(value)) {
+          if (value.length) params.set(key, value.join(SEP));
+        } else if (value) {
+          params.set(key, value);
+        }
       }
 
       const response = await fetch(
@@ -277,173 +339,243 @@ export function ProductMarkingAdminApp() {
     }
   }
 
+  function clearFilters() {
+    setQ("");
+    setFilters(EMPTY_FILTERS);
+    void loadList("", 1, EMPTY_FILTERS);
+  }
+
+  function quickFilter(next: Partial<Filters>) {
+    const merged: Filters = { ...EMPTY_FILTERS, ...next };
+    setFilters(merged);
+    setQ("");
+    void loadList("", 1, merged);
+  }
+
   function submit(event: FormEvent) {
     event.preventDefault();
     void loadList(q, 1, filters);
   }
 
-  function clearFilters() {
-    setFilters(EMPTY_FILTERS);
-    setQ("");
-    void loadList("", 1, EMPTY_FILTERS);
-  }
-
   useEffect(() => {
-    void Promise.all([loadOptions(), loadList("", 1, EMPTY_FILTERS)]);
+    void Promise.all([loadOptions(), loadList("", 1, EMPTY_FILTERS)])
+      .then(() => {
+        if (initialProductId) void loadDetail(initialProductId);
+      })
+      .catch((cause) => setError(cause instanceof Error ? cause.message : String(cause)));
   }, []);
 
-  const selectedImages = detail?.product.images ?? [];
-  const currentPrimaryIndex = useMemo(() => {
+  const images = detail?.product.images ?? [];
+  const primaryIndex = useMemo(() => {
     const current = detail?.product.primaryImageUrl;
-    return current ? selectedImages.indexOf(current) : -1;
-  }, [detail, selectedImages]);
+    return current ? images.indexOf(current) : -1;
+  }, [detail, images]);
 
-  const activeFilters = [
-    q ? `Búsqueda: ${q}` : "",
-    filters.objectType ? `Objeto: ${filters.objectType}` : "",
-    filters.technique ? `Técnica: ${filters.technique}` : "",
-    filters.material ? `Material: ${filters.material}` : "",
-    filters.category ? `Categoría: ${filters.category}` : "",
-    filters.interest ? `Interés: ${filters.interest}` : "",
-    filters.marking ? labelMarking(filters.marking) : "",
-    filters.brainStatus ? `Product Brain: ${labelBrain(filters.brainStatus)}` : "",
-    filters.personalization ? labelPersonalization(filters.personalization) : "",
-    filters.imageStatus ? (filters.imageStatus === "WITH_PRIMARY" ? "Con imagen principal" : "Sin imagen principal") : "",
-  ].filter(Boolean);
+  const activeCount =
+    filters.objectType.length +
+    filters.technique.length +
+    filters.material.length +
+    filters.category.length +
+    filters.interest.length +
+    filters.brainStatus.length +
+    filters.personalization.length +
+    Number(Boolean(filters.marking)) +
+    Number(Boolean(filters.imageStatus)) +
+    Number(Boolean(q.trim()));
+
+  const quick = options?.quickStats;
 
   return (
-    <main style={{ minHeight: "100vh", background: "#f4f3ee", color: "#252820", fontFamily: "Inter,system-ui,sans-serif", padding: 24 }}>
-      <div style={{ maxWidth: 1580, margin: "0 auto" }}>
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "end", gap: 18, marginBottom: 20 }}>
+    <main className="pa">
+      <div className="paShell">
+        <header className="paHeader">
           <div>
-            <div style={{ fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", opacity: .55 }}>
-              RecuerdArte · Administración
-            </div>
-            <h1 style={{ margin: "5px 0", fontSize: 34 }}>Productos y marcaje</h1>
-            <p style={{ margin: 0, opacity: .68 }}>
-              Catálogo, Product Brain, imagen principal, técnicas y áreas de personalización.
+            <span className="paEyebrow">RecuerdArte · Administración</span>
+            <h1>Productos y marcaje</h1>
+            <p>
+              Catálogo, Product Brain, imágenes, técnicas y áreas de personalización.
             </p>
           </div>
-          <a href="/admin" style={{ color: "inherit", fontWeight: 700 }}>← Administración</a>
+          <div className="paHeader__actions">
+            <a className="paButton paButton--secondary" href="/admin">← Administración</a>
+            <a className="paButton paButton--secondary" href="/admin/product-brain-studio">
+              Product Brain Studio
+            </a>
+          </div>
         </header>
 
-        <form
-          onSubmit={submit}
-          style={{ background: "white", padding: 16, borderRadius: 18, marginBottom: 16, boxShadow: "0 8px 28px rgba(0,0,0,.04)" }}
-        >
-          <div style={{ display: "flex", gap: 8, marginBottom: 13 }}>
+        <section className="paStats">
+          <button type="button" onClick={() => quickFilter({})}>
+            <span>Productos</span><strong>{quick?.totalProducts ?? "…"}</strong><small>Catálogo Makito</small>
+          </button>
+          <button type="button" onClick={() => quickFilter({ brainStatus: ["READY"] })}>
+            <span>Listos</span><strong>{quick?.ready ?? "…"}</strong><small>Product Brain READY</small>
+          </button>
+          <button type="button" onClick={() => quickFilter({ brainStatus: ["REVIEW_REQUIRED"] })}>
+            <span>Revisar</span><strong>{quick?.reviewRequired ?? "…"}</strong><small>Product Brain</small>
+          </button>
+          <button type="button" onClick={() => quickFilter({ objectType: ["generic_object"] })}>
+            <span>Objeto genérico</span><strong>{quick?.genericObjects ?? "…"}</strong><small>Clasificación pendiente</small>
+          </button>
+          <button type="button" onClick={() => quickFilter({ imageStatus: "WITHOUT_PRIMARY" })}>
+            <span>Sin imagen</span><strong>{quick?.missingPrimaryImage ?? "…"}</strong><small>Imagen principal</small>
+          </button>
+          <button type="button" onClick={() => quickFilter({ marking: "PENDING_POSITION", sort: "pending_desc" })}>
+            <span>Marcaje</span><strong>→</strong><small>Áreas pendientes de posicionar</small>
+          </button>
+        </section>
+
+        <form className="paFilters" onSubmit={submit}>
+          <div className="paSearchRow">
             <input
               value={q}
               onChange={(event) => setQ(event.target.value)}
-              placeholder="Buscar nombre, SKU, objeto, material, técnica, interés..."
-              style={{ flex: 1, padding: "11px 13px", borderRadius: 10, border: "1px solid #d7d6cf", font: "inherit" }}
+              placeholder="Buscar nombre, SKU, referencia, objeto, material, técnica o interés…"
             />
-            <button type="submit" disabled={busy} style={{ border: 0, borderRadius: 10, background: "#252820", color: "white", padding: "0 18px", fontWeight: 800 }}>
-              Aplicar
-            </button>
-            <button type="button" onClick={clearFilters} style={{ border: "1px solid #d7d6cf", borderRadius: 10, background: "white", padding: "0 14px", fontWeight: 700 }}>
-              Limpiar
+            <button className="paButton paButton--primary" disabled={busy}>Aplicar filtros</button>
+            <button className="paButton paButton--secondary" type="button" onClick={clearFilters}>
+              Limpiar {activeCount ? `(${activeCount})` : ""}
             </button>
           </div>
 
-          <div style={{ display: "flex", gap: 10, alignItems: "end", flexWrap: "wrap" }}>
-            <FilterSelect label="Tipo de objeto" value={filters.objectType} options={options?.objectTypes ?? []} onChange={(value) => setFilter("objectType", value)} />
-            <FilterSelect label="Técnica" value={filters.technique} options={options?.techniques ?? []} onChange={(value) => setFilter("technique", value)} />
-            <FilterSelect label="Material" value={filters.material} options={options?.materials ?? []} onChange={(value) => setFilter("material", value)} />
-            <FilterSelect label="Estado marcaje" value={filters.marking} options={options?.markingStatuses ?? []} render={labelMarking} onChange={(value) => setFilter("marking", value)} />
-
+          <div className="paFilterGrid">
+            <MultiFilter
+              label="Tipo de objeto"
+              values={filters.objectType}
+              options={facetOptions(options?.objectTypes ?? [], options?.facets?.objectTypes)}
+              onChange={(value) => setFilter("objectType", value)}
+              render={humanObjectType}
+            />
+            <MultiFilter
+              label="Técnica"
+              values={filters.technique}
+              options={facetOptions(options?.techniques ?? [], options?.facets?.techniques)}
+              onChange={(value) => setFilter("technique", value)}
+            />
+            <MultiFilter
+              label="Material"
+              values={filters.material}
+              options={facetOptions(options?.materials ?? [], options?.facets?.materials)}
+              onChange={(value) => setFilter("material", value)}
+            />
+            <label className="paFilter">
+              <span className="paFilter__label">Estado de marcaje</span>
+              <select value={filters.marking} onChange={(e) => setFilter("marking", e.target.value)}>
+                <option value="">Todos</option>
+                {(options?.markingStatuses ?? []).map((value) => (
+                  <option key={value} value={value}>{MARKING_LABELS[value] ?? value}</option>
+                ))}
+              </select>
+            </label>
             <button
+              className="paButton paButton--more"
               type="button"
               onClick={() => setShowMore((value) => !value)}
-              style={{ padding: "9px 13px", borderRadius: 9, border: "1px solid #d8d6ce", background: "#f5f4ef", fontWeight: 800 }}
             >
               {showMore ? "Menos filtros" : "Más filtros"}
             </button>
           </div>
 
           {showMore && (
-            <div style={{ display: "flex", gap: 10, alignItems: "end", flexWrap: "wrap", marginTop: 12, paddingTop: 12, borderTop: "1px solid #eee" }}>
-              <FilterSelect label="Categoría" value={filters.category} options={options?.categories ?? []} onChange={(value) => setFilter("category", value)} />
-              <FilterSelect label="Interés / temática" value={filters.interest} options={options?.interests ?? []} onChange={(value) => setFilter("interest", value)} />
-              <FilterSelect label="Product Brain" value={filters.brainStatus} options={options?.brainStatuses ?? []} render={labelBrain} onChange={(value) => setFilter("brainStatus", value)} />
-              <FilterSelect label="Personalización" value={filters.personalization} options={options?.personalizations ?? []} render={labelPersonalization} onChange={(value) => setFilter("personalization", value)} />
-              <FilterSelect label="Imagen principal" value={filters.imageStatus} options={["WITH_PRIMARY", "WITHOUT_PRIMARY"]} render={(value) => value === "WITH_PRIMARY" ? "Con imagen principal" : "Sin imagen principal"} onChange={(value) => setFilter("imageStatus", value)} />
-              <FilterSelect label="Ordenar" value={filters.sort} options={["name_asc", "name_desc", "sku_asc", "areas_desc", "pending_desc"]} render={(value) => ({
-                name_asc: "Nombre A-Z",
-                name_desc: "Nombre Z-A",
-                sku_asc: "Referencia",
-                areas_desc: "Más áreas de marcaje",
-                pending_desc: "Más áreas pendientes",
-              }[value] ?? value)} onChange={(value) => setFilter("sort", value)} />
-            </div>
-          )}
-
-          {activeFilters.length > 0 && (
-            <div style={{ display: "flex", gap: 7, flexWrap: "wrap", marginTop: 13 }}>
-              {activeFilters.map((filter) => (
-                <span key={filter} style={{ background: "#edf0e9", color: "#4a5c3a", borderRadius: 999, padding: "5px 9px", fontSize: 12, fontWeight: 700 }}>
-                  {filter}
-                </span>
-              ))}
+            <div className="paFilterGrid paFilterGrid--more">
+              <MultiFilter
+                label="Categoría"
+                values={filters.category}
+                options={facetOptions(options?.categories ?? [], options?.facets?.categories)}
+                onChange={(value) => setFilter("category", value)}
+              />
+              <MultiFilter
+                label="Interés / temática"
+                values={filters.interest}
+                options={facetOptions(options?.interests ?? [], options?.facets?.interests)}
+                onChange={(value) => setFilter("interest", value)}
+              />
+              <MultiFilter
+                label="Product Brain"
+                values={filters.brainStatus}
+                options={facetOptions(options?.brainStatuses ?? [], options?.facets?.brainStatuses)}
+                onChange={(value) => setFilter("brainStatus", value)}
+                render={(value) => BRAIN_LABELS[value] ?? value}
+              />
+              <MultiFilter
+                label="Personalización"
+                values={filters.personalization}
+                options={facetOptions(options?.personalizations ?? [], options?.facets?.personalizations)}
+                onChange={(value) => setFilter("personalization", value)}
+                render={(value) => PERSONALIZATION_LABELS[value] ?? value}
+              />
+              <label className="paFilter">
+                <span className="paFilter__label">Imagen principal</span>
+                <select value={filters.imageStatus} onChange={(e) => setFilter("imageStatus", e.target.value)}>
+                  <option value="">Todas</option>
+                  <option value="WITH_PRIMARY">Con imagen principal</option>
+                  <option value="WITHOUT_PRIMARY">Sin imagen principal</option>
+                </select>
+              </label>
+              <label className="paFilter">
+                <span className="paFilter__label">Ordenar</span>
+                <select value={filters.sort} onChange={(e) => setFilter("sort", e.target.value)}>
+                  <option value="name_asc">Nombre A–Z</option>
+                  <option value="name_desc">Nombre Z–A</option>
+                  <option value="sku_asc">Referencia</option>
+                  <option value="areas_desc">Más áreas de marcaje</option>
+                  <option value="pending_desc">Más áreas pendientes</option>
+                </select>
+              </label>
             </div>
           )}
         </form>
 
-        <div style={{ display: "grid", gridTemplateColumns: detail ? "430px minmax(0,1fr)" : "1fr", gap: 20 }}>
-          <section style={{ background: "white", borderRadius: 18, padding: 16, boxShadow: "0 8px 28px rgba(0,0,0,.05)", minWidth: 0 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, opacity: .65, marginBottom: 10 }}>
+        <div className={`paWorkspace ${detail ? "paWorkspace--detail" : ""}`}>
+          <section className="paListPanel">
+            <div className="paListHeader">
               <strong>{list?.total ?? 0} productos</strong>
               <span>Página {list?.page ?? 1} / {list?.pages ?? 1}</span>
             </div>
 
-            <div style={{ display: "grid", gap: 8, maxHeight: "calc(100vh - 340px)", overflow: "auto", paddingRight: 3 }}>
+            <div className="paProductList">
               {list?.items.map((product) => {
                 const id = product.productId;
-                const index = product.primaryImageUrl ? product.images.indexOf(product.primaryImageUrl) : 0;
+                const imageIndex =
+                  product.primaryImageUrl
+                    ? Math.max(0, product.images.indexOf(product.primaryImageUrl))
+                    : 0;
 
                 return (
                   <button
+                    className={`paProduct ${selectedId === id ? "is-selected" : ""}`}
                     type="button"
                     key={id ?? `${product.sku}-${product.name}`}
                     disabled={!id}
                     onClick={() => id && void loadDetail(id)}
-                    style={{
-                      width: "100%",
-                      display: "grid",
-                      gridTemplateColumns: "76px minmax(0,1fr)",
-                      gap: 12,
-                      alignItems: "center",
-                      textAlign: "left",
-                      border: selectedId === id ? "2px solid #4a5c3a" : "1px solid #e3e1da",
-                      background: selectedId === id ? "#f1f4ed" : "white",
-                      borderRadius: 13,
-                      padding: 9,
-                      cursor: id ? "pointer" : "default",
-                    }}
                   >
-                    <div style={{ width: 76, height: 76, borderRadius: 10, overflow: "hidden", background: "#eee" }}>
-                      {id && product.images.length ? (
-                        <img src={imgProxy(id, Math.max(0, index))} alt={product.name} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                      ) : null}
+                    <div className="paProduct__image">
+                      {id && product.images.length > 0 ? (
+                        <img src={imgProxy(id, imageIndex)} alt={product.name} />
+                      ) : <span>Sin imagen</span>}
                     </div>
-                    <div style={{ minWidth: 0 }}>
-                      <strong style={{ display: "block", fontSize: 15 }}>{product.name}</strong>
-                      <span style={{ fontSize: 12, opacity: .6 }}>Ref. {product.sku ?? product.externalId ?? "—"} · Makito</span>
-                      {product.objectType && <div style={{ fontSize: 12, marginTop: 3 }}>Objeto: <strong>{product.objectType}</strong></div>}
-                      <div style={{ marginTop: 6, display: "flex", gap: 6, flexWrap: "wrap", fontSize: 11 }}>
-                        <span style={{ padding: "3px 7px", borderRadius: 999, background: "#efeee7" }}>{product.marking.areas} áreas</span>
+
+                    <div className="paProduct__body">
+                      <div className="paProduct__top">
+                        <strong>{product.name}</strong>
+                        <span>{pct(product.classificationConfidence)}</span>
+                      </div>
+                      <small>Ref. {product.sku ?? product.externalId ?? "—"} · Makito</small>
+                      <div className="paProduct__object">
+                        {humanObjectType(product.objectType)}
+                      </div>
+                      <div className="paBadges">
+                        <span className={`paBadge ${product.brainStatus === "READY" ? "paBadge--ok" : "paBadge--warn"}`}>
+                          {BRAIN_LABELS[product.brainStatus] ?? product.brainStatus}
+                        </span>
+                        <span className="paBadge">{product.marking.areas} áreas</span>
                         {product.marking.pending > 0 ? (
-                          <span style={{ padding: "3px 7px", borderRadius: 999, background: "#fff1d6", color: "#8b5c00" }}>
-                            {product.marking.pending} pendiente{product.marking.pending === 1 ? "" : "s"} de posicionar
+                          <span className="paBadge paBadge--warn">
+                            {product.marking.pending} pendiente{product.marking.pending === 1 ? "" : "s"}
                           </span>
                         ) : product.marking.areas > 0 ? (
-                          <span style={{ padding: "3px 7px", borderRadius: 999, background: "#e8f3e5", color: "#376c2d" }}>
-                            Áreas posicionadas
-                          </span>
+                          <span className="paBadge paBadge--ok">Posicionadas</span>
                         ) : null}
-                        <span style={{ padding: "3px 7px", borderRadius: 999, background: product.brainStatus === "READY" ? "#e8f3e5" : "#f3eeee" }}>
-                          {labelBrain(product.brainStatus)}
-                        </span>
                       </div>
                     </div>
                   </button>
@@ -452,113 +584,177 @@ export function ProductMarkingAdminApp() {
             </div>
 
             {list && list.pages > 1 && (
-              <div style={{ display: "flex", justifyContent: "space-between", marginTop: 12 }}>
-                <button type="button" disabled={busy || list.page <= 1} onClick={() => void loadList(q, list.page - 1, filters)}>← Anterior</button>
-                <button type="button" disabled={busy || list.page >= list.pages} onClick={() => void loadList(q, list.page + 1, filters)}>Siguiente →</button>
+              <div className="paPager">
+                <button
+                  type="button"
+                  disabled={busy || list.page <= 1}
+                  onClick={() => void loadList(q, list.page - 1, filters)}
+                >
+                  ← Anterior
+                </button>
+                <span>{list.page} / {list.pages}</span>
+                <button
+                  type="button"
+                  disabled={busy || list.page >= list.pages}
+                  onClick={() => void loadList(q, list.page + 1, filters)}
+                >
+                  Siguiente →
+                </button>
               </div>
             )}
           </section>
 
-          {detail && (
-            <section style={{ display: "grid", gap: 18, minWidth: 0 }}>
-              <article style={{ background: "white", borderRadius: 18, padding: 20, boxShadow: "0 8px 28px rgba(0,0,0,.05)" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", gap: 18, alignItems: "start" }}>
+          {detail ? (
+            <section className="paDetail">
+              <article className="paCard">
+                <div className="paDetailHeader">
                   <div>
-                    <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: ".11em", opacity: .5 }}>Ficha de producto</div>
-                    <h2 style={{ margin: "5px 0 3px", fontSize: 28 }}>{detail.product.name}</h2>
-                    <div style={{ opacity: .62 }}>SKU {detail.product.sku ?? "—"} · Makito ID {detail.product.externalId ?? "—"}</div>
+                    <span className="paEyebrow">Ficha administrativa</span>
+                    <h2>{detail.product.name}</h2>
+                    <p>SKU {detail.product.sku ?? "—"} · Makito ID {detail.product.externalId ?? "—"}</p>
                   </div>
-                  <button type="button" onClick={() => { setDetail(undefined); setSelectedId(undefined); }}>Cerrar ficha</button>
+                  <div className="paDetailHeader__actions">
+                    <a
+                      className="paButton paButton--secondary"
+                      href={`/admin/product-brain-studio?productId=${encodeURIComponent(detail.product.sku ?? detail.product.externalId ?? detail.product.productId ?? "")}`}
+                    >
+                      Editar Product Brain
+                    </a>
+                    <button
+                      className="paButton paButton--secondary"
+                      type="button"
+                      onClick={() => { setDetail(undefined); setSelectedId(undefined); }}
+                    >
+                      Cerrar
+                    </button>
+                  </div>
                 </div>
 
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 14 }}>
-                  {detail.product.objectType && <span style={{ background: "#efeee7", borderRadius: 999, padding: "5px 9px" }}>Objeto: {detail.product.objectType}</span>}
-                  <span style={{ background: "#efeee7", borderRadius: 999, padding: "5px 9px" }}>Product Brain: {labelBrain(detail.product.brainStatus)}</span>
-                  <span style={{ background: "#efeee7", borderRadius: 999, padding: "5px 9px" }}>{labelPersonalization(detail.product.personalization)}</span>
-                  {detail.product.materials.slice(0, 4).map((value) => <span key={value} style={{ background: "#efeee7", borderRadius: 999, padding: "5px 9px" }}>{value}</span>)}
+                <div className="paInfoGrid">
+                  <div><span>Objeto</span><strong>{humanObjectType(detail.product.objectType)}</strong></div>
+                  <div><span>Product Brain</span><strong>{BRAIN_LABELS[detail.product.brainStatus] ?? detail.product.brainStatus}</strong></div>
+                  <div><span>Confianza</span><strong>{pct(detail.product.classificationConfidence)}</strong></div>
+                  <div><span>Personalización</span><strong>{PERSONALIZATION_LABELS[detail.product.personalization] ?? detail.product.personalization}</strong></div>
                 </div>
 
-                <h3 style={{ marginTop: 24 }}>Imagen principal</h3>
-                <p style={{ opacity: .65, marginTop: -7 }}>Selecciona independientemente la imagen comercial que debe representar el producto.</p>
-
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: 12 }}>
-                  {selectedImages.map((url, index) => {
-                    const active = index === currentPrimaryIndex;
-                    return (
-                      <button
-                        type="button"
-                        key={`${url}-${index}`}
-                        onClick={() => void setPrimaryImage(url)}
-                        style={{ position: "relative", border: active ? "3px solid #4a5c3a" : "1px solid #ddd", borderRadius: 12, padding: 7, background: "white", cursor: "pointer" }}
-                      >
-                        <img src={imgProxy(detail.product.productId!, index)} alt={`Imagen ${index + 1}`} style={{ width: "100%", aspectRatio: "1/1", objectFit: "contain", display: "block" }} />
-                        {active && <span style={{ position: "absolute", left: 7, top: 7, padding: "4px 7px", borderRadius: 999, background: "#4a5c3a", color: "white", fontSize: 11, fontWeight: 800 }}>★ Principal</span>}
-                      </button>
-                    );
-                  })}
+                <div className="paMetadata">
+                  {detail.product.materials.length > 0 && (
+                    <div><strong>Materiales:</strong> {detail.product.materials.join(" · ")}</div>
+                  )}
+                  {detail.product.interests.length > 0 && (
+                    <div><strong>Intereses:</strong> {detail.product.interests.join(" · ")}</div>
+                  )}
+                  {detail.product.categories.length > 0 && (
+                    <details>
+                      <summary>Categorías ({detail.product.categories.length})</summary>
+                      <div>{detail.product.categories.join(" · ")}</div>
+                    </details>
+                  )}
                 </div>
+
+                <div className="paSectionTitle">
+                  <div>
+                    <h3>Imagen principal</h3>
+                    <p>Se elige independientemente del área de marcaje.</p>
+                  </div>
+                </div>
+
+                {images.length > 0 ? (
+                  <div className="paGallery">
+                    {images.map((url, index) => {
+                      const active = index === primaryIndex;
+                      return (
+                        <button
+                          type="button"
+                          className={`paGalleryItem ${active ? "is-primary" : ""}`}
+                          key={`${url}-${index}`}
+                          onClick={() => void setPrimaryImage(url)}
+                        >
+                          <img
+                            src={imgProxy(detail.product.productId!, index)}
+                            alt={`Imagen ${index + 1}`}
+                          />
+                          {active && <span>★ Principal</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="paEmpty">Este producto no tiene imágenes disponibles.</div>
+                )}
               </article>
 
-              <article style={{ background: "white", borderRadius: 18, padding: 20, boxShadow: "0 8px 28px rgba(0,0,0,.05)" }}>
-                <h3 style={{ fontSize: 22, margin: "0 0 4px" }}>Marcaje y personalización</h3>
-                <p style={{ opacity: .65, marginTop: 0 }}>Áreas oficiales del proveedor, técnica disponible y tamaño máximo de impresión.</p>
+              <article className="paCard">
+                <div className="paSectionTitle">
+                  <div>
+                    <h3>Marcaje y personalización</h3>
+                    <p>Técnicas, medidas máximas y posición visual de cada área.</p>
+                  </div>
+                </div>
 
                 {detail.marking?.areas.length ? (
-                  <div style={{ display: "grid", gap: 14 }}>
+                  <div className="paAreas">
                     {detail.marking.areas.map((area) => (
-                      <div key={area.areaId} style={{ display: "grid", gridTemplateColumns: "180px minmax(0,1fr) auto", gap: 16, border: "1px solid #e2e0d9", borderRadius: 14, padding: 12, alignItems: "center" }}>
-                        <div style={{ width: 180, height: 130, borderRadius: 10, overflow: "hidden", background: "#eee" }}>
-                          <img src={areaImageProxy(detail.product.productId!, area.areaId)} alt={`Marcaje ${area.name}`} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                      <div className="paArea" key={area.areaId}>
+                        <div className="paArea__image">
+                          <img
+                            src={areaImageProxy(detail.product.productId!, area.areaId)}
+                            alt={`Marcaje ${area.name}`}
+                          />
                         </div>
-
-                        <div>
-                          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                            <strong style={{ fontSize: 18 }}>{area.name}</strong>
-                            <span style={{
-                              fontSize: 11,
-                              borderRadius: 999,
-                              padding: "4px 8px",
-                              background: area.geometryStatus === "CALIBRATED" ? "#e7f2e4" : "#fff1d6",
-                              color: area.geometryStatus === "CALIBRATED" ? "#376c2d" : "#8b5c00",
-                            }}>
-                              {area.geometryStatus === "CALIBRATED" ? "Área posicionada" : "Área pendiente de posicionar"}
+                        <div className="paArea__body">
+                          <div className="paArea__title">
+                            <strong>{area.name}</strong>
+                            <span className={`paBadge ${area.geometryStatus === "CALIBRATED" ? "paBadge--ok" : "paBadge--warn"}`}>
+                              {area.geometryStatus === "CALIBRATED"
+                                ? "Área posicionada"
+                                : "Área pendiente de posicionar"}
                             </span>
                           </div>
-
-                          <div style={{ marginTop: 5, fontSize: 14 }}>Máximo: <strong>{area.maxWidthMm ?? "?"} × {area.maxHeightMm ?? "?"} mm</strong></div>
-                          <div style={{ marginTop: 8 }}>
+                          <p>
+                            Máximo: <strong>{area.maxWidthMm ?? "?"} × {area.maxHeightMm ?? "?"} mm</strong>
+                          </p>
+                          <div className="paTechniques">
                             {area.techniques.map((technique) => (
-                              <div key={`${technique.providerCode}-${technique.code}`} style={{ marginBottom: 4 }}>
+                              <span key={`${technique.providerCode}-${technique.code}`}>
                                 <strong>{technique.name}</strong>
-                                <span style={{ marginLeft: 7, fontSize: 12, opacity: .55 }}>
-                                  {technique.providerVariantCode ? `${technique.providerVariantCode} · ` : ""}
-                                  {technique.providerCode ?? technique.code}
-                                </span>
-                              </div>
+                                {technique.providerVariantCode ? ` · ${technique.providerVariantCode}` : ""}
+                                {technique.providerOfficial ? " · oficial" : ""}
+                              </span>
                             ))}
                           </div>
                         </div>
-
                         <a
+                          className="paButton paButton--primary"
                           href={`/admin/marking-geometry?productId=${encodeURIComponent(detail.product.productId!)}&areaId=${encodeURIComponent(area.areaId)}`}
-                          style={{ textDecoration: "none", background: "#252820", color: "white", borderRadius: 10, padding: "11px 14px", fontWeight: 800, whiteSpace: "nowrap" }}
                         >
-                          Posicionar área →
+                          {area.geometryStatus === "CALIBRATED" ? "Revisar posición →" : "Posicionar área →"}
                         </a>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div style={{ padding: 24, borderRadius: 12, background: "#f4f3ee" }}>Este producto no tiene áreas de marcaje importadas.</div>
+                  <div className="paEmpty">
+                    Este producto no tiene áreas de marcaje importadas.
+                  </div>
                 )}
               </article>
 
-              {notice && <div style={{ color: "#376c2d", fontWeight: 700 }}>{notice}</div>}
+              {notice && <div className="paNotice">{notice}</div>}
+            </section>
+          ) : (
+            <section className="paWelcome">
+              <strong>Selecciona un producto</strong>
+              <p>
+                Aquí podrás revisar su clasificación, elegir la imagen principal
+                y administrar todas sus áreas y técnicas de marcaje.
+              </p>
             </section>
           )}
         </div>
 
-        {error && <div style={{ marginTop: 15, color: "#a72828", fontWeight: 700 }}>{error}</div>}
+        {busy && <div className="paBusy">Actualizando catálogo…</div>}
+        {error && <div className="paError">{error}</div>}
       </div>
     </main>
   );

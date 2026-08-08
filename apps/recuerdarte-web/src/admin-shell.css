@@ -1,0 +1,53 @@
+
+:root{
+  --ra-admin-accent:#5f6fdb;
+  --ra-admin-accent-soft:#eef0ff;
+  --ra-admin-accent-border:#dfe2ff;
+  --ra-admin-bg:#f5f7fb;
+  --ra-admin-panel:#fff;
+  --ra-admin-border:#e4e8ef;
+  --ra-admin-text:#25313a;
+  --ra-admin-muted:#75808a;
+  --ra-admin-sidebar:#172331;
+  --ra-admin-sidebar-2:#101a25;
+}
+.raAdmin{
+  min-height:100vh;background:var(--ra-admin-bg);color:var(--ra-admin-text);
+  font-family:"Arial Rounded MT Bold","Arial Rounded MT",Arial,sans-serif;
+}
+.raAdmin--principal{--ra-admin-accent:#6070d8;--ra-admin-accent-soft:#eef0ff;--ra-admin-accent-border:#dfe2ff}
+.raAdmin--catalogo{--ra-admin-accent:#1688c9;--ra-admin-accent-soft:#eaf7fd;--ra-admin-accent-border:#ccebf8}
+.raAdmin--inteligencia{--ra-admin-accent:#7555c7;--ra-admin-accent-soft:#f3edff;--ra-admin-accent-border:#e4d8ff}
+.raAdmin--studios{--ra-admin-accent:#d26b9b;--ra-admin-accent-soft:#fff0f6;--ra-admin-accent-border:#f7d7e6}
+.raAdmin--operaciones{--ra-admin-accent:#e58b32;--ra-admin-accent-soft:#fff5e8;--ra-admin-accent-border:#f7dfbd}
+.raAdmin--sistema{--ra-admin-accent:#278b75;--ra-admin-accent-soft:#eaf8f4;--ra-admin-accent-border:#ccece4}
+.raAdminSidebar{position:fixed;inset:0 auto 0 0;width:286px;background:linear-gradient(180deg,var(--ra-admin-sidebar),var(--ra-admin-sidebar-2));color:#fff;z-index:1000;display:flex;flex-direction:column;box-shadow:8px 0 30px rgba(10,20,30,.10)}
+.raAdminBrand{min-height:84px;display:flex;align-items:center;gap:13px;padding:0 18px;border-bottom:1px solid rgba(255,255,255,.09)}
+.raAdminBrand__mark{width:54px;height:54px;border-radius:15px;background:#fff;display:grid;place-items:center;text-decoration:none;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.16)}
+.raAdminBrand__mark img{width:48px;height:48px;object-fit:contain;display:block}
+.raAdminBrand>div{display:grid;gap:2px}.raAdminBrand strong{font-size:16px}.raAdminBrand span{font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase}
+.raAdminSidebar__close{display:none;margin-left:auto;border:0;background:none;color:#fff;font-size:26px}
+.raAdminNav{flex:1;overflow:auto;padding:15px 11px 20px;scrollbar-width:thin}
+.raAdminNavGroup{margin-bottom:7px}.raAdminNavGroup summary{list-style:none;cursor:pointer;padding:9px 10px 7px;color:rgba(255,255,255,.43);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.11em}
+.raAdminNavGroup summary::-webkit-details-marker{display:none}.raAdminNavGroup summary:after{content:"+";float:right;color:rgba(255,255,255,.3);font-size:13px}.raAdminNavGroup[open] summary:after{content:"−"}
+.raAdminNavGroup__items{display:grid;gap:3px}.raAdminNavItem{min-height:43px;display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:11px;color:rgba(255,255,255,.76);text-decoration:none;transition:.14s ease}
+.raAdminNavItem:hover{background:rgba(255,255,255,.07);color:#fff}.raAdminNavItem.is-active{background:color-mix(in srgb,var(--ra-admin-accent) 28%,transparent);color:#fff;box-shadow:inset 3px 0 0 var(--ra-admin-accent)}
+.raAdminNavItem__indicator{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);flex:0 0 auto}.raAdminNavItem.is-active .raAdminNavItem__indicator{background:var(--ra-admin-accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--ra-admin-accent) 18%,transparent)}
+.raAdminNavItem__text{min-width:0;display:grid;gap:1px}.raAdminNavItem__text strong{font-size:12.5px;font-weight:700}.raAdminNavItem__text small{font-family:Arial,sans-serif;font-size:10px;color:rgba(255,255,255,.39);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.raAdminNavItem.is-active small{color:rgba(255,255,255,.62)}
+.raAdminSidebar__footer{height:52px;border-top:1px solid rgba(255,255,255,.08);padding:0 18px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.48);font-size:10px;text-transform:uppercase;letter-spacing:.06em}
+.raAdminStatusDot{width:7px;height:7px;border-radius:50%;background:#55c48a;box-shadow:0 0 0 4px rgba(85,196,138,.10)}
+.raAdminMain{min-height:100vh;margin-left:286px}.raAdminTopbar{height:64px;position:sticky;top:0;z-index:800;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--ra-admin-border);display:flex;align-items:center;justify-content:space-between;padding:0 26px}
+.raAdminTopbar__left,.raAdminTopbar__right{display:flex;align-items:center;gap:15px}.raAdminMenuButton{display:none}.raAdminBreadcrumb{display:flex;align-items:center;gap:7px;font-family:Arial,sans-serif;font-size:11px;color:#969fa8}.raAdminBreadcrumb a{color:#68737d;text-decoration:none}.raAdminBreadcrumb strong{color:var(--ra-admin-accent);font-family:"Arial Rounded MT Bold","Arial Rounded MT",Arial,sans-serif}
+.raAdminTopAction{border:1px solid var(--ra-admin-border);background:#fff;color:#46525c;text-decoration:none;border-radius:10px;padding:8px 11px;font-size:11px;font-weight:700}.raAdminTopAction:hover{border-color:var(--ra-admin-accent);color:var(--ra-admin-accent)}
+.raAdminAvatar{width:32px;height:32px;border-radius:50%;background:var(--ra-admin-accent);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:800}
+.raAdminPageHeading{display:flex;align-items:center;justify-content:space-between;padding:24px 28px 14px;border-left:4px solid var(--ra-admin-accent);margin:18px 20px 0;background:linear-gradient(90deg,var(--ra-admin-accent-soft),rgba(255,255,255,.55));border-radius:0 16px 16px 0}
+.raAdminPageHeading span{font-family:Arial,sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ra-admin-accent);font-weight:800}.raAdminPageHeading h1{margin:4px 0 0;font-size:26px;letter-spacing:-.02em}
+.raAdminHeadingTools{display:flex;align-items:center;gap:14px}.raAdminHeadingLogo{width:116px;height:54px;object-fit:contain;opacity:.92}
+.raAdminEnvironment{font-size:9px;letter-spacing:.12em;font-weight:900;color:var(--ra-admin-accent);background:#fff;border:1px solid var(--ra-admin-accent-border);border-radius:999px;padding:6px 9px}
+.raAdminContent{padding:18px 20px 28px}.raAdminContent>.pa,.raAdminContent>main.pa{min-height:auto;background:transparent!important;padding:0!important}.raAdminContent .paShell{max-width:none}.raAdminContent>.adminDashboard,.raAdminContent>[class*="Admin"]{max-width:none}
+.raAdminContent button,.raAdminContent input,.raAdminContent select,.raAdminContent textarea{font-family:Arial,sans-serif}
+.raAdminContent h1,.raAdminContent h2,.raAdminContent h3,.raAdminContent h4,.raAdminContent .adminServiceCard h2{font-family:"Arial Rounded MT Bold","Arial Rounded MT",Arial,sans-serif}
+.raAdminContent a{--section-accent:var(--ra-admin-accent)}
+.raAdminBackdrop{display:none}
+@media(max-width:980px){.raAdminSidebar{transform:translateX(-100%);transition:transform .18s ease}.raAdminSidebar.is-open{transform:translateX(0)}.raAdminSidebar__close{display:block}.raAdminBackdrop{display:block;position:fixed;inset:0;background:rgba(12,17,24,.45);border:0;z-index:900}.raAdminMain{margin-left:0}.raAdminMenuButton{display:grid;place-items:center;border:1px solid var(--ra-admin-border);background:#fff;border-radius:8px;width:34px;height:34px}.raAdminPageHeading{margin:14px 12px 0;padding-left:18px;padding-right:18px}.raAdminTopbar{padding:0 15px}.raAdminContent{padding:14px 12px 22px}}
+@media(max-width:640px){.raAdminBreadcrumb span:not(:last-child){display:none}.raAdminBreadcrumb>a{display:none}.raAdminTopAction{display:none}.raAdminPageHeading{padding-top:17px}.raAdminPageHeading h1{font-size:21px}.raAdminHeadingLogo{width:76px;height:38px}}

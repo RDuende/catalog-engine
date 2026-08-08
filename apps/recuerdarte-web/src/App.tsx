@@ -39,6 +39,7 @@ import { IntentBrainStudioApp } from "./IntentBrainStudioApp";
 import { BrainIntelligenceStudioApp } from "./BrainIntelligenceStudioApp";
 import { InterestBrainStudioApp } from "./InterestBrainStudioApp";
 import { FunctionalTestConsoleApp } from "./FunctionalTestConsoleApp";
+import { AdminShell } from "./AdminShell";
 type ChatItem = { readonly id: string; readonly role: "user" | "rai"; readonly text: string };
 type ArtifactGroup = Record<string, readonly Record<string, unknown>[]>;
 type StageKey = "conversation" | "story" | "image" | "gift" | "purchase";
@@ -396,56 +397,32 @@ function loadSavedSession(): { sessionId?: string; journeyId?: string; credentia
 }
 
 export function App() {
-  if (window.location.pathname.startsWith("/admin/marking")) return <MarkingStudioApp />; // MARKING_STUDIO_V1
-  if (window.location.pathname.startsWith("/admin/platform-health")) return <PlatformHealthApp />;
-  if (window.location.pathname.startsWith("/admin/gift-brain")) return <GiftBrainStudioApp />;
-  if (window.location.pathname.startsWith("/admin/proposal-brain")) return <ProposalBrainStudioApp />;
-  if (window.location.pathname.startsWith("/admin/brain-orchestrator")) return <BrainOrchestratorStudioApp />;
-  if (window.location.pathname.startsWith("/admin/conversation-studio")) return <ConversationStudioApp />;
-  if (window.location.pathname.startsWith("/admin/memory-brain")) return <MemoryBrainStudioApp />;
-  if (window.location.pathname.startsWith("/admin/emotion-brain")) return <EmotionBrainStudioApp />;
-  if (window.location.pathname.startsWith("/admin/intent-brain")) return <IntentBrainStudioApp />;
-  if (window.location.pathname.startsWith("/admin/intelligence-runtime")) return <BrainIntelligenceStudioApp />;
-  if (window.location.pathname.startsWith("/admin/interest-brain-v2")) return <InterestBrainStudioApp />;
-  if (window.location.pathname.startsWith("/admin/functional-tests")) return <FunctionalTestConsoleApp />;
-  if (window.location.pathname === "/admin" || window.location.pathname === "/admin/") return (
-    <>
-      <AdminDashboardApp />
-      <a
-        href="/admin/products"
-        title="Administrar productos, imágenes y áreas de marcaje"
-        style={{
-          position: "fixed",
-          right: 24,
-          bottom: 24,
-          zIndex: 1000,
-          textDecoration: "none",
-          background: "#4a5c3a",
-          color: "#fff",
-          borderRadius: 999,
-          padding: "12px 17px",
-          boxShadow: "0 10px 30px rgba(0,0,0,.22)",
-          fontWeight: 800,
-          fontFamily: "Inter,system-ui,sans-serif"
-        }}
-      >
-        📦 Productos y marcaje
-      </a>
-    </>
-  );
-  if (window.location.pathname.startsWith("/admin/providers")) return <CatalogProvidersApp />;
-  if (window.location.pathname.startsWith("/admin/ai-lab")) return <AiLaboratoryApp />;
-  if (window.location.pathname.startsWith("/admin/intelligence-center")) return <IntelligenceCenterApp />;
-  if (window.location.pathname.startsWith("/admin/commercial-operations")) return <CommercialOperationsApp />;
-  if (window.location.pathname.startsWith("/admin/settings")) return <PlatformSettingsApp />;
-  if (window.location.pathname.startsWith("/admin/statistics")) return <PlatformStatisticsApp />;
-  if (window.location.pathname.startsWith("/admin/catalog-imports")) return <CatalogImportAdminApp />;
-  if (window.location.pathname.startsWith("/admin/products")) return <ProductMarkingAdminApp />;
-  if (window.location.pathname.startsWith("/admin/marking-geometry")) return <MarkingGeometryAdminApp />;
-  if (window.location.pathname.startsWith("/admin/catalog-intelligence")) return <CatalogIntelligenceApp />;
-  if (window.location.pathname.startsWith("/admin/product-brain-studio")) return <ProductBrainStudioApp />;
-  if (window.location.pathname.startsWith("/admin/proposal-studio")) return <ProposalStudioApp />;
-  if (window.location.pathname.startsWith("/admin/tools")) return <AdminToolsApp />;
+  if (window.location.pathname.startsWith("/admin/marking") && !window.location.pathname.startsWith("/admin/marking-geometry")) return <AdminShell><MarkingStudioApp /></AdminShell>; // MARKING_STUDIO_V1
+  if (window.location.pathname.startsWith("/admin/platform-health")) return <AdminShell><PlatformHealthApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/gift-brain")) return <AdminShell><GiftBrainStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/proposal-brain")) return <AdminShell><ProposalBrainStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/brain-orchestrator")) return <AdminShell><BrainOrchestratorStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/conversation-studio")) return <AdminShell><ConversationStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/memory-brain")) return <AdminShell><MemoryBrainStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/emotion-brain")) return <AdminShell><EmotionBrainStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/intent-brain")) return <AdminShell><IntentBrainStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/intelligence-runtime")) return <AdminShell><BrainIntelligenceStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/interest-brain-v2")) return <AdminShell><InterestBrainStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/functional-tests")) return <AdminShell><FunctionalTestConsoleApp /></AdminShell>;
+  if (window.location.pathname === "/admin" || window.location.pathname === "/admin/") return <AdminShell><AdminDashboardApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/providers")) return <AdminShell><CatalogProvidersApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/ai-lab")) return <AdminShell><AiLaboratoryApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/intelligence-center")) return <AdminShell><IntelligenceCenterApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/commercial-operations")) return <AdminShell><CommercialOperationsApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/settings")) return <AdminShell><PlatformSettingsApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/statistics")) return <AdminShell><PlatformStatisticsApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/catalog-imports")) return <AdminShell><CatalogImportAdminApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/products")) return <AdminShell><ProductMarkingAdminApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/marking-geometry")) return <AdminShell><MarkingGeometryAdminApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/catalog-intelligence")) return <AdminShell><CatalogIntelligenceApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/product-brain-studio")) return <AdminShell><ProductBrainStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/proposal-studio")) return <AdminShell><ProposalStudioApp /></AdminShell>;
+  if (window.location.pathname.startsWith("/admin/tools")) return <AdminShell><AdminToolsApp /></AdminShell>;
   const saved = useMemo(loadSavedSession, []);
   const savedWorkspace = useMemo(loadWorkspace, []);
   const client = useMemo(
